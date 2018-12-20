@@ -198,7 +198,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.body[data-v-19a9cccc]{\r\n    background: red;\r\n    width: 350px;\r\n    height: 600px;\n}\r\n\r\n", ""]);
 
 // exports
 
