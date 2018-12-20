@@ -3731,7 +3731,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.name[data-v-6e0e32e8]{\n    font-size: 14px;\n    font-weight: 300;\n    color: #00afec;\n}\n", ""]);
 
 // exports
 
@@ -49843,9 +49843,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    REGISTER\n")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("p", { staticClass: "name" }, [_vm._v("SIGN UP")])])
+  }
+]
 render._withStripped = true
 
 
