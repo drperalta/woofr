@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 import Index from '../components/Index/Index'
 import Login from '../components/Index/Partials/Login'
-import Register from '../components/Index/Partials/Register'
+import SignUp from '../components/Index/Partials/SignUp'
 
 let router = new VueRouter({
 
@@ -18,7 +18,7 @@ let router = new VueRouter({
                     path: 'login', component: Login
                 },
                 {
-                    path: 'register', component: Register
+                    path: 'signup', component: SignUp
                 }
             ]
         }
