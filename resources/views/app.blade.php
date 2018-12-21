@@ -7,10 +7,10 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Advent+Pro" rel="stylesheet">
 
     </head>
-    <body>
+    <body style="margin: 0;">
         <div id="app">
             <App></App>
         </div>
