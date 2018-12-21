@@ -41877,6 +41877,18 @@ exports.staticRenderFns = staticRenderFns;
 
 /***/ }),
 
+/***/ "./node_modules/iview/dist/locale/en-US.js":
+/*!*************************************************!*\
+  !*** ./node_modules/iview/dist/locale/en-US.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t(__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js")):undefined}("undefined"!=typeof self?self:this,function(e){return function(e){var t={};function o(r){if(t[r])return t[r].exports;var n=t[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,o),n.l=!0,n.exports}return o.m=e,o.c=t,o.d=function(e,t,r){o.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="/dist/locale/",o(o.s=6)}([function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e){r||void 0!==window.iview&&("langs"in iview||(iview.langs={}),iview.langs[e.i.locale]=e)};var r=function(e){return e&&e.__esModule?e:{default:e}}(o(1)).default.prototype.$isServer},function(t,o){t.exports=e},,,,,function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r={i:{locale:"en-US",select:{placeholder:"Select",noMatch:"No matching data",loading:"Loading"},table:{noDataText:"No Data",noFilteredDataText:"No filter data",confirmFilter:"Confirm",resetFilter:"Reset",clearFilter:"All"},datepicker:{selectDate:"Select date",selectTime:"Select time",startTime:"Start Time",endTime:"End Time",clear:"Clear",ok:"OK",datePanelLabel:"[mmmm] [yyyy]",month:"Month",month1:"January",month2:"February",month3:"March",month4:"April",month5:"May",month6:"June",month7:"July",month8:"August",month9:"September",month10:"October",month11:"November",month12:"December",year:"Year",weekStartDay:"0",weeks:{sun:"Sun",mon:"Mon",tue:"Tue",wed:"Wed",thu:"Thu",fri:"Fri",sat:"Sat"},months:{m1:"Jan",m2:"Feb",m3:"Mar",m4:"Apr",m5:"May",m6:"Jun",m7:"Jul",m8:"Aug",m9:"Sep",m10:"Oct",m11:"Nov",m12:"Dec"}},transfer:{titles:{source:"Source",target:"Target"},filterPlaceholder:"Search here",notFoundText:"Not Found"},modal:{okText:"OK",cancelText:"Cancel"},poptip:{okText:"OK",cancelText:"Cancel"},page:{prev:"Previous Page",next:"Next Page",total:"Total",item:"item",items:"items",prev5:"Previous 5 Pages",next5:"Next 5 Pages",page:"/page",goto:"Goto",p:""},rate:{star:"Star",stars:"Stars"},time:{before:" ago",after:" after",just:"just now",seconds:" seconds",minutes:" minutes",hours:" hours",days:" days"},tree:{emptyText:"No Data"}}};(0,function(e){return e&&e.__esModule?e:{default:e}}(o(0)).default)(r),t.default=r}])});
+//# sourceMappingURL=en-US.js.map
+
+/***/ }),
+
 /***/ "./node_modules/iview/dist/styles/fonts/ionicons.svg?v=3.0.0":
 /*!*******************************************************************!*\
   !*** ./node_modules/iview/dist/styles/fonts/ionicons.svg?v=3.0.0 ***!
@@ -57279,12 +57291,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var iview__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(iview__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var iview_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! iview/dist/styles/iview.css */ "./node_modules/iview/dist/styles/iview.css");
 /* harmony import */ var iview_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(iview_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var iview_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! iview/dist/locale/en-US */ "./node_modules/iview/dist/locale/en-US.js");
+/* harmony import */ var iview_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(iview_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4__);
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
 
 
-Vue.use(iview__WEBPACK_IMPORTED_MODULE_2___default.a);
+
+Vue.use(iview__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  locale: iview_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4___default.a
+});
 var app = new Vue({
   el: '#app',
   components: {
