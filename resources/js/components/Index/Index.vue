@@ -1,14 +1,14 @@
 <template>
-    <div class="center">
+    <div class="index">
+        <div class="center">
+            <!-- LOGO -->
+            <img class="logo" src="../../../img/woofr-logo.png" alt="">
 
-        <!-- LOGO -->
-        <img class="logo" src="../../../img/woofr-logo.png" alt="">
-
-        <!-- BODY -->
-        <div class="body">
-            <router-view></router-view>
+            <!-- BODY -->
+            <div class="body">
+                <router-view></router-view>
+            </div>
         </div>
-
     </div>
 </template>
 
@@ -26,11 +26,22 @@ export default {
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 1;
+    text-align: center;
+    max-width: 380px;
 }
 .logo{
-    width: 65px
+    width: 85px;
+    margin-bottom: 15px;
+    position: absolute;
+    margin-left: 50%;
+    margin-right: 50%;
 }
 .body{
-    max-width: 380px;
+    
+}
+.index {
+    width: 100vw;
+    height: 100vh;
+    /* background: url('../../../img/woofr-bg.png') */
 }
 </style>
