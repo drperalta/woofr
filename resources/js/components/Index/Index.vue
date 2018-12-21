@@ -32,9 +32,6 @@ export default {
 .logo{
     width: 85px;
     margin-bottom: 15px;
-    position: absolute;
-    margin-left: 50%;
-    margin-right: 50%;
 }
 .body{
     
