@@ -225,6 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -245,11 +246,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       LoginDetails: {
-        user_email: '',
+        user_or_email: '',
         password: '',
         remember_me: false
       }
@@ -417,7 +428,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.center[data-v-19a9cccc]{\r\n    /* To center div */\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,-50%);\r\n            transform: translate(-50%,-50%);\r\n    z-index: 1;\r\n    text-align: center;\r\n    max-width: 380px;\n}\n.logo[data-v-19a9cccc]{\r\n    width: 85px;\r\n    margin-bottom: 15px;\n}\n.body[data-v-19a9cccc]{\n}\n.index[data-v-19a9cccc] {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    /* background: url('../../../img/woofr-bg.png') */\n}\r\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n    z-index: 1;\n    text-align: center;\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\n    width: 100vw;\n    height: 100vh;\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\n    margin-top: 20px;\n}\n", ""]);
 
 // exports
 
@@ -436,7 +447,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\n    margin-top: 4px;\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\n    width: 100%;\n    margin-bottom: 8px;\n}\n", ""]);
 
 // exports
 
@@ -43321,18 +43332,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "index" }, [
-    _c("div", { staticClass: "center" }, [
-      _c("img", {
-        staticClass: "logo",
-        attrs: { src: __webpack_require__(/*! ../../../img/woofr-logo.png */ "./resources/img/woofr-logo.png"), alt: "" }
-      }),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "wrapper" }, [
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "body" }, [_c("router-view")], 1)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "top" }, [
+      _c("img", {
+        staticClass: "logo",
+        attrs: { src: __webpack_require__(/*! ../../../img/woofr-logo-new.png */ "./resources/img/woofr-logo-new.png"), alt: "" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -43354,18 +43374,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "content" },
+    [
+      _c("p", { staticClass: "page-name" }, [_vm._v("LOGIN")]),
+      _vm._v(" "),
+      _c(
+        "Form",
+        { attrs: { inline: "" } },
+        [
+          _c("Input", {
+            staticClass: "input",
+            attrs: { placeholder: "Username or Email" },
+            model: {
+              value: _vm.LoginDetails.user_or_email,
+              callback: function($$v) {
+                _vm.$set(_vm.LoginDetails, "user_or_email", $$v)
+              },
+              expression: "LoginDetails.user_or_email"
+            }
+          }),
+          _vm._v(" "),
+          _c("Input", {
+            staticClass: "input",
+            attrs: { placeholder: "Password", type: "password" },
+            model: {
+              value: _vm.LoginDetails.password,
+              callback: function($$v) {
+                _vm.$set(_vm.LoginDetails, "password", $$v)
+              },
+              expression: "LoginDetails.password"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "Checkbox",
+            {
+              staticClass: "checkbox form-middle",
+              model: {
+                value: _vm.LoginDetails.remember_me,
+                callback: function($$v) {
+                  _vm.$set(_vm.LoginDetails, "remember_me", $$v)
+                },
+                expression: "LoginDetails.remember_me"
+              }
+            },
+            [_vm._v("Remember Me")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "forgotten-password form-middle",
+              attrs: { to: "/forgotten-password" }
+            },
+            [_vm._v("Forgotten your Password?")]
+          ),
+          _vm._v(" "),
+          _c("Button", { staticClass: "button" }, [_vm._v("Log in")]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: "/signup" } }, [
+            _vm._v("Need and account? Sign Up")
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("p", { staticClass: "name" }, [_vm._v("LOGIN")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -57265,14 +57344,14 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./resources/img/woofr-logo.png":
-/*!**************************************!*\
-  !*** ./resources/img/woofr-logo.png ***!
-  \**************************************/
+/***/ "./resources/img/woofr-logo-new.png":
+/*!******************************************!*\
+  !*** ./resources/img/woofr-logo-new.png ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/woofr-logo.png?bc22f0ef5e808f61fc3c39b46fca6c1f";
+module.exports = "/images/woofr-logo-new.png?5ef386d8ddcd06358320506d1b7e0da0";
 
 /***/ }),
 

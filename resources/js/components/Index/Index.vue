@@ -1,9 +1,10 @@
 <template>
-    <div class="index">
-        <div class="center">
-            <!-- LOGO -->
-            <img class="logo" src="../../../img/woofr-logo.png" alt="">
-
+    <div class="container">
+        <div class="wrapper">
+            <div class="top">
+                <!-- LOGO -->
+                <img class="logo" src="../../../img/woofr-logo-new.png" alt="">
+            </div>
             <!-- BODY -->
             <div class="body">
                 <router-view></router-view>
@@ -19,26 +20,24 @@ export default {
 </script>
 
 <style scoped>
-.center{
-    /* To center div */
+.wrapper{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 1;
     text-align: center;
-    max-width: 380px;
+    max-width: 288px;
 }
-.logo{
-    width: 85px;
-    margin-bottom: 15px;
-}
-.body{
-    
-}
-.index {
+.container {
     width: 100vw;
     height: 100vh;
     /* background: url('../../../img/woofr-bg.png') */
+}
+.logo{
+    width: 85px;
+}
+.body{
+    margin-top: 20px;
 }
 </style>
