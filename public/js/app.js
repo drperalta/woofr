@@ -440,7 +440,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n    z-index: 1;\n    text-align: center;\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\n    width: 100vw;\n    height: 100vh;\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\n    margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\n    position: absolute;\n    top: 35%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n    z-index: 1;\n    text-align: center;\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\n    width: 100vw;\n    height: 100vh;\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\n    margin-top: 20px;\n}\n", ""]);
 
 // exports
 
