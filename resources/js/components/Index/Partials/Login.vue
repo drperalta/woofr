@@ -2,7 +2,7 @@
     <div class="content">
         <p class="page-name">LOGIN</p>
         <Form inline>
-            <!-- UPPER -->
+            <!-- TOP -->
             <Input class="input" placeholder="Username or Email" v-model="LoginDetails.user_or_email"/>
             <Input class="input" placeholder="Password" v-model="LoginDetails.password" type="password"/>
             <!-- MIDDLE -->
