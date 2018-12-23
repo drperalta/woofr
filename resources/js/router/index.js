@@ -7,6 +7,8 @@ import Index from '../components/Index/Index'
 import Login from '../components/Index/Partials/Login'
 import SignUp from '../components/Index/Partials/SignUp'
 
+import ResetPassword from '../components/Index/Partials/ResetPassword'
+
 import Home from '../components/Home/Home'
 import Timeline from '../components/Home/Pages/Timeline.vue'
 import Notifications from '../components/Home/Pages/Notifications.vue'
@@ -17,18 +19,21 @@ let router = new VueRouter({
 
     routes: [
         {
-            path: '/', component: Index, redirect: {path: 'login'}, 
+            path: '/', component: Index, redirect: {path: 'login'},
             children: [
                 {
                     path: 'login', component: Login
                 },
                 {
                     path: 'signup', component: SignUp
+                },
+                {
+                    path: 'reset-password', component: ResetPassword
                 }
             ],
         },
         {
-            path: '/', component: Home, 
+            path: '/', component: Home,
             children: [
                 {
                     path: 'timeline', component: Timeline
@@ -39,9 +44,9 @@ let router = new VueRouter({
                 {
                     path: 'messages', component: Messages
                 }
-            ] 
+            ]
         }
-        
+
     ]
 })
 
