@@ -7,7 +7,7 @@
             <Input class="input" placeholder="Password" v-model="LoginDetails.password" type="password"/>
             <!-- MIDDLE -->
             <Checkbox class="checkbox form-middle" v-model="LoginDetails.remember_me">Remember Me</Checkbox>
-            <router-link class="forgotten-password form-middle" to="/forgotten-password">Forgotten your Password?</router-link>
+            <router-link class="forgotten-password form-middle" to="/reset-password">Forgotten your Password?</router-link>
             <!-- BOTTOM -->
             <Button class="button">Log in</Button>
             <router-link to="/signup">Need and account? Sign Up</router-link>
