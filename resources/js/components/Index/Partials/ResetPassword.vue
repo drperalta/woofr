@@ -3,7 +3,7 @@
         <p class="page-name">RESET PASSWORD</p>
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="Email" v-model="LoginDetails.user_email"/>
+            <Input class="input" placeholder="Email" v-model="UserDetails.user_email"/>
             <!-- BOTTOM -->
             <Button class="button">Send Link</Button>
             <router-link to="/login">Nevermind, I got it.</router-link>
@@ -33,6 +33,7 @@ export default {
 }
 .button{
     width: 100%;
+    margin-top: 10px;
     margin-bottom: 8px;
 }
 </style>

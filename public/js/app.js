@@ -512,7 +512,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\n    width: 100%;\n    margin-bottom: 8px;\n}\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\n    width: 100%;\n    margin-top: 10px;\n    margin-bottom: 8px;\n}\n", ""]);
 
 // exports
 
@@ -43575,11 +43575,11 @@ var render = function() {
             staticClass: "input",
             attrs: { placeholder: "Email" },
             model: {
-              value: _vm.LoginDetails.user_email,
+              value: _vm.UserDetails.user_email,
               callback: function($$v) {
-                _vm.$set(_vm.LoginDetails, "user_email", $$v)
+                _vm.$set(_vm.UserDetails, "user_email", $$v)
               },
-              expression: "LoginDetails.user_email"
+              expression: "UserDetails.user_email"
             }
           }),
           _vm._v(" "),
