@@ -124,6 +124,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -179,19 +192,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -398,7 +398,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.navbar[data-v-4ec5f2d4]{\n    padding: 0px 10%;\n}\n.body[data-v-4ec5f2d4]{\n    padding: 0px 10%;\n}\n", ""]);
 
 // exports
 
@@ -455,7 +455,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-25e77581]{\n}\n.profile-box[data-v-25e77581]{\r\n    width: 290px;\r\n    height: 300px;\r\n    background: blue;\r\n    float: left;\r\n    display: block;\r\n    position: relative;\n}\n.timeline-box[data-v-25e77581]{\r\n    \r\n    height: 800px;\r\n    background: red;\r\n    display: block;\r\n    position: relative;\n}\n.trend-box[data-v-25e77581]{\r\n    width: 290px;\r\n    height: 300px;\r\n    background: black;\r\n    float: right;\r\n    display: block;\r\n    position: relative;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43314,7 +43314,63 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("div", { staticClass: "body" }, [_c("router-view")], 1)])
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "Menu",
+        {
+          staticClass: "navbar",
+          attrs: { mode: "horizontal", theme: "light", "active-name": "home" }
+        },
+        [
+          _c(
+            "MenuItem",
+            { attrs: { name: "home", to: "/timeline" } },
+            [
+              _c("Icon", {
+                staticStyle: { margin: "0" },
+                attrs: { type: "md-home" }
+              }),
+              _vm._v("\n            Home\n        ")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "MenuItem",
+            { attrs: { name: "notifications", to: "notifications" } },
+            [
+              _c("Icon", {
+                staticStyle: { margin: "0" },
+                attrs: { type: "md-notifications" }
+              }),
+              _vm._v("\n            Notifications\n        ")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "MenuItem",
+            { attrs: { name: "messages", to: "messages" } },
+            [
+              _c("Icon", {
+                staticStyle: { margin: "0" },
+                attrs: { type: "md-chatboxes" }
+              }),
+              _vm._v("\n            Messages\n        ")
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "body" }, [_c("router-view")], 1)
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43386,26 +43442,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "content" }, [_vm._v("\n    TIMELINE\n")])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "profile-box" }, [
-        _c("div", { staticClass: "user-banner" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-details" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "timeline-box" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "trend-box" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

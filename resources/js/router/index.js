@@ -13,6 +13,7 @@ import Home from '../components/Home/Home'
 import Timeline from '../components/Home/Pages/Timeline.vue'
 import Notifications from '../components/Home/Pages/Notifications.vue'
 import Messages from '../components/Home/Pages/Messages.vue'
+
 let router = new VueRouter({
 
     mode: 'history',
