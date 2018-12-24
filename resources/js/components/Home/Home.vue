@@ -1,17 +1,9 @@
 <template>
     <div class="container">
         <!-- NAVBAR -->
-        <Menu class="navbar" mode="horizontal" theme="light" :active-name="this.$root.active_name">
+        <Menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
             <!-- LOGO -->
-            <img class="logo" src="../../../img/woofr-logo-new.png" alt="Woofr">
-
-            <!-- SEARCH BAR -->
-            <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
-                <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
-                        <router-link :to="user.username">{{ user.name }}</router-link>
-                        <span>@{{ user.username }}</span>
-                </Option>
-            </AutoComplete>
+            <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
 
             <!-- MENU ITEMS -->
             <MenuItem class="menu-item" name="timeline" to="/timeline">
@@ -27,7 +19,17 @@
                 Messages
             </MenuItem>
 
+            <img class="profile" src="../../../img/default-picture.png" alt="DP">
 
+            <div class="nav-right">
+                <!-- SEARCH BAR -->
+                <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
+                    <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
+                            <router-link :to="user.username">{{ user.name }}</router-link>
+                            <span>@{{ user.username }}</span>
+                    </Option>
+                </AutoComplete>
+            </div>
         </Menu>
 
         <div class="body">
@@ -86,24 +88,39 @@ export default {
 .container{
 }
 .logo{
-    margin-top: 6px;
+    margin-top: 11px;
     /* left: 50%;
     transform: translate(-50%,0%);
     position: absolute; */
     float: left;
-    width: 55px;
-    margin-right: 40px;
-    margin-left: 10px;
+    width: 40px;
+    margin-right: 15px;
 }
 .navbar{
     padding: 0px 15%;
+    position: fixed;
+    width: 100vw;
 }
 .menu-item{
+    font-size: 13px;
+    padding: 0px 15px !important;
+}
+.nav-right{
+    float: right;
 }
 .search-bar{
-    width: 250px;
+    width: 180px;
+}
+.profile{
+    width: 35px;
+    float: right;
+    margin-top: 13px;
+    margin-left: 10px;
+
+    border: 2px solid;
+    border-color: gray;
 }
 .body{
-    padding: 0px 15%;
+    padding: 60px 15% 0px 15%;
 }
 </style>
