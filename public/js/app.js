@@ -137,9 +137,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      search: '',
+      users: [{
+        name: 'Bea Amor',
+        username: 'beaamor0212',
+        link: 'https://twitter.com/beaamor0212'
+      }, {
+        name: 'David Peralta',
+        username: 'IamDavidMe',
+        link: 'https://twitter.com/IamDavidMe'
+      }, {
+        name: 'Nikki',
+        username: 'iAmNikkiME',
+        link: 'https://twitter.com/iAmNikkiME'
+      }, {
+        name: 'Rica Camiguing',
+        username: 'ricamiguing_',
+        link: 'https://twitter.com/ricamiguing_'
+      }]
+    };
+  },
+  methods: {},
+  computed: {
+    filteredList: function filteredList() {
+      var vm = this;
+      var listByUsername = this.users.filter(function (data) {
+        return data.username.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
+      });
+      var listByName = this.users.filter(function (data) {
+        return data.name.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
+      });
+
+      if (listByUsername == '') {
+        return listByName;
+      }
+
+      return listByUsername;
+    }
   }
 });
 
@@ -160,7 +210,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    this.$root.active_name = window.location.href.split('/')[3];
+  }
+});
 
 /***/ }),
 
@@ -179,7 +236,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    this.$root.active_name = window.location.href.split('/')[3];
+  }
+});
 
 /***/ }),
 
@@ -198,7 +262,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    this.$root.active_name = window.location.href.split('/')[3];
+  }
+});
 
 /***/ }),
 
@@ -398,7 +477,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.navbar[data-v-4ec5f2d4]{\n    padding: 0px 10%;\n}\n.body[data-v-4ec5f2d4]{\n    padding: 0px 10%;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\n    margin-top: 6px;\n    /* left: 50%;\n    transform: translate(-50%,0%);\n    position: absolute; */\n    float: left;\n    width: 55px;\n    margin-right: 40px;\n    margin-left: 10px;\n}\n.navbar[data-v-4ec5f2d4]{\n    padding: 0px 15%;\n}\n.menu-item[data-v-4ec5f2d4]{\n}\n.search-bar[data-v-4ec5f2d4]{\n    width: 250px;\n}\n.body[data-v-4ec5f2d4]{\n    padding: 0px 15%;\n}\n", ""]);
 
 // exports
 
@@ -417,7 +496,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -436,7 +515,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -455,7 +534,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content[data-v-25e77581]{\n    position: relative;\n    display: table;\n}\n.box[data-v-25e77581]{\n    background: lightblue;\n    margin: 8px;\n    float: left;\n}\n.left[data-v-25e77581]{\n    width: 288px;\n    height: 500px;\n}\n.middle[data-v-25e77581]{\n    width: 588px;\n    height: 500px;\n}\n.right[data-v-25e77581]{\n    width: 288px;\n    height: 400px;\n}\n", ""]);
 
 // exports
 
@@ -43322,12 +43401,57 @@ var render = function() {
         "Menu",
         {
           staticClass: "navbar",
-          attrs: { mode: "horizontal", theme: "light", "active-name": "home" }
+          attrs: {
+            mode: "horizontal",
+            theme: "light",
+            "active-name": this.$root.active_name
+          }
         },
         [
+          _c("img", {
+            staticClass: "logo",
+            attrs: {
+              src: __webpack_require__(/*! ../../../img/woofr-logo-new.png */ "./resources/img/woofr-logo-new.png"),
+              alt: "Woofr"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "AutoComplete",
+            {
+              staticClass: "search-bar",
+              attrs: { icon: "ios-search", placeholder: "Search Woofr" },
+              model: {
+                value: _vm.search,
+                callback: function($$v) {
+                  _vm.search = $$v
+                },
+                expression: "search"
+              }
+            },
+            _vm._l(_vm.filteredList, function(user) {
+              return _c(
+                "Option",
+                { key: user.name, attrs: { value: user.name } },
+                [
+                  _c("router-link", { attrs: { to: user.username } }, [
+                    _vm._v(_vm._s(user.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("@" + _vm._s(user.username))])
+                ],
+                1
+              )
+            }),
+            1
+          ),
+          _vm._v(" "),
           _c(
             "MenuItem",
-            { attrs: { name: "home", to: "/timeline" } },
+            {
+              staticClass: "menu-item",
+              attrs: { name: "timeline", to: "/timeline" }
+            },
             [
               _c("Icon", {
                 staticStyle: { margin: "0" },
@@ -43340,7 +43464,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "MenuItem",
-            { attrs: { name: "notifications", to: "notifications" } },
+            {
+              staticClass: "menu-item",
+              attrs: { name: "notifications", to: "notifications" }
+            },
             [
               _c("Icon", {
                 staticStyle: { margin: "0" },
@@ -43353,7 +43480,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "MenuItem",
-            { attrs: { name: "messages", to: "messages" } },
+            {
+              staticClass: "menu-item",
+              attrs: { name: "messages", to: "messages" }
+            },
             [
               _c("Icon", {
                 staticStyle: { margin: "0" },
@@ -43442,9 +43572,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [_vm._v("\n    TIMELINE\n")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "box left" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "box middle" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "box right" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -57649,7 +57792,12 @@ var app = new Vue({
   components: {
     App: _components_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  router: _router_index__WEBPACK_IMPORTED_MODULE_1__["default"]
+  router: _router_index__WEBPACK_IMPORTED_MODULE_1__["default"],
+  data: function data() {
+    return {
+      active_name: 'timeline'
+    };
+  }
 });
 
 /***/ }),
