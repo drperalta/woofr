@@ -43422,7 +43422,11 @@ var render = function() {
             "AutoComplete",
             {
               staticClass: "search-bar",
-              attrs: { icon: "ios-search", placeholder: "Search Woofr" },
+              attrs: {
+                clearable: "",
+                icon: "ios-search",
+                placeholder: "Search Woofr"
+              },
               on: {
                 "on-search": function($event) {
                   _vm.filterList()

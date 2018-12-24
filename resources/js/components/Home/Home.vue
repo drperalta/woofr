@@ -6,7 +6,7 @@
             <img class="logo" src="../../../img/woofr-logo-new.png" alt="Woofr">
 
             <!-- SEARCH BAR -->
-            <AutoComplete class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
+            <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
                 <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
                         <router-link :to="user.username">{{ user.name }}</router-link>
                         <span>@{{ user.username }}</span>
