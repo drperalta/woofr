@@ -150,10 +150,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       search: '',
+      filteredUsers: [],
       users: [{
         name: 'Bea Amor',
         username: 'beaamor0212',
@@ -173,9 +176,8 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  methods: {},
-  computed: {
-    filteredList: function filteredList() {
+  methods: {
+    filterList: function filterList() {
       var vm = this;
       var listByUsername = this.users.filter(function (data) {
         return data.username.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
@@ -185,10 +187,10 @@ __webpack_require__.r(__webpack_exports__);
       });
 
       if (listByUsername == '') {
-        return listByName;
+        this.filteredUsers = listByName;
       }
 
-      return listByUsername;
+      this.filteredUsers = listByUsername;
     }
   }
 });
@@ -43421,6 +43423,11 @@ var render = function() {
             {
               staticClass: "search-bar",
               attrs: { icon: "ios-search", placeholder: "Search Woofr" },
+              on: {
+                "on-search": function($event) {
+                  _vm.filterList()
+                }
+              },
               model: {
                 value: _vm.search,
                 callback: function($$v) {
@@ -43429,7 +43436,7 @@ var render = function() {
                 expression: "search"
               }
             },
-            _vm._l(_vm.filteredList, function(user) {
+            _vm._l(_vm.filteredUsers, function(user) {
               return _c(
                 "Option",
                 { key: user.name, attrs: { value: user.name } },

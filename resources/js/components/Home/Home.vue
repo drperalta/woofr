@@ -4,13 +4,15 @@
         <Menu class="navbar" mode="horizontal" theme="light" :active-name="this.$root.active_name">
             <!-- LOGO -->
             <img class="logo" src="../../../img/woofr-logo-new.png" alt="Woofr">
+
             <!-- SEARCH BAR -->
-            <AutoComplete class="search-bar" icon="ios-search" placeholder="Search Woofr" v-model="search">
-                <Option v-for="user in filteredList" :value="user.name" :key="user.name">
+            <AutoComplete class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
+                <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
                         <router-link :to="user.username">{{ user.name }}</router-link>
                         <span>@{{ user.username }}</span>
                 </Option>
             </AutoComplete>
+
             <!-- MENU ITEMS -->
             <MenuItem class="menu-item" name="timeline" to="/timeline">
                 <Icon type="md-home" style="margin: 0"/>
@@ -39,6 +41,7 @@ export default {
     data(){
         return{
             search: '',
+            filteredUsers: [],
             users: [
                 {
                     name: 'Bea Amor',
@@ -64,18 +67,16 @@ export default {
         }
     },
     methods:{
-
-    },
-    computed:{
-        filteredList:function(){
+        filterList(){
 
             var vm=this;
             var listByUsername = this.users.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
             var listByName = this.users.filter(function(data){return data.name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
 
             if(listByUsername == ''){
-                return listByName
-            } return listByUsername
+                this.filteredUsers = listByName
+            } this.filteredUsers = listByUsername
+
         }
     }
 }
