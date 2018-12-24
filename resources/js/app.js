@@ -12,5 +12,11 @@ Vue.use(iView, { locale });
 const app = new Vue({
     el: '#app',
     components: {App},
-    router
+    router,
+
+    data(){
+        return{
+            active_name: 'timeline'
+        }
+    }
 });
