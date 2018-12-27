@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <!-- NAVBAR -->
-        <Menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
+        <Menu class="navbar" mode="horizontal" theme="light" :active-name="this.$root.active_name">
             <!-- LOGO -->
             <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
 
@@ -47,23 +47,19 @@ export default {
             users: [
                 {
                     name: 'Bea Amor',
-                    username: 'beaamor0212',
-                    link: 'https://twitter.com/beaamor0212'
+                    username: 'beaamor0212'
                 },
                 {
                     name: 'David Peralta',
-                    username: 'IamDavidMe',
-                    link: 'https://twitter.com/IamDavidMe'
+                    username: 'IamDavidMe'
                 },
                 {
                     name: 'Nikki',
-                    username: 'iAmNikkiME',
-                    link: 'https://twitter.com/iAmNikkiME'
+                    username: 'iAmNikkiME'
                 },
                 {
                     name: 'Rica Camiguing',
-                    username: 'ricamiguing_',
-                    link: 'https://twitter.com/ricamiguing_'
+                    username: 'ricamiguing_'
                 }
             ]
         }
@@ -97,7 +93,7 @@ export default {
     margin-right: 15px;
 }
 .navbar{
-    padding: 0px 15%;
+    padding: 0px 12vw;
     position: fixed;
     width: 100vw;
 }
@@ -114,13 +110,13 @@ export default {
 .profile{
     width: 35px;
     float: right;
-    margin-top: 13px;
+    margin-top: 14px;
     margin-left: 10px;
 
-    border: 2px solid;
-    border-color: gray;
+    border: 2px solid rgba(58, 58, 58, .2);
+    border-radius: 50%;
 }
 .body{
-    padding: 60px 15% 0px 15%;
+    padding: 60px 12vw 0px 12vw;
 }
 </style>
