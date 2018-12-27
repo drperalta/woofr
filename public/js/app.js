@@ -154,6 +154,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -256,6 +259,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -666,7 +682,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.divider[data-v-25e77581]{\r\n    margin: 0;\n}\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 7px;\n}\n.left[data-v-25e77581]{\r\n    background-color: white;\r\n    min-width: 290px;\r\n    float: left;\n}\n.middle[data-v-25e77581]{\r\n    background-color:white;\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-25e77581]{\r\n    background-color:brown;\r\n    min-width: 290px;\r\n    height: 500px;\r\n    float: left;\n}\n.profile-box[data-v-25e77581]{\n}\n.upper[data-v-25e77581]{\r\n    background-color: #41B5E4;\r\n    height: 95px;\n}\n.img[data-v-25e77581]{\r\n    width: 60px;\r\n    position: absolute;\r\n    margin: 10px 20px;\r\n    border-radius: 50%;\r\n    border: 2px solid;\r\n    border-color: gainsboro;\n}\n.user-field[data-v-25e77581]{\r\n    left: 110px;\r\n    margin-left: 95px;\r\n    padding-top: 15px;\n}\n.name[data-v-25e77581]{\r\n    font-size: 18px;\r\n    color: black\n}\n.username[data-v-25e77581]{\n}\n.user-stats[data-v-25e77581]{\n}\n.user-stats ul[data-v-25e77581]{\r\n    margin-top: 15px;\r\n    list-style: none;\r\n    margin-left: 15px;\r\n    display:flex; \r\n    flex-direction: row;\r\n    text-align: center;\n}\n.user-stats li[data-v-25e77581]{\r\n    margin: 10px 15px;\n}\n.span[data-v-25e77581]{\r\n    display:block;\n}\n.user-stats-name[data-v-25e77581]{\r\n    color: #657786;\n}\n.counts[data-v-25e77581]{\r\n    font-size: 22px;\r\n    font-weight: 600;\n}\n.woof-box ul[data-v-25e77581]{\r\n    list-style: none;\r\n    display:flex; \r\n    flex-direction: row;    \r\n    padding-top: 10px;\n}\n.woof-box[data-v-25e77581]{\r\n    background-color: #E8F4FB;  \r\n    padding-bottom: 10px;\n}\n.woof-avatar[data-v-25e77581]{\r\n    margin: 13px;\r\n    margin-left: 20px !important;\n}\n.woof-box-extras[data-v-25e77581]{\n}\n.woof-button[data-v-25e77581]{\n}\n.woof-text[data-v-25e77581]{\r\n    width: 460px;\r\n    margin: 13px 10px;\r\n    display: block;\n}\n.woof-timeline[data-v-25e77581]{\r\n    background: white;\n}\n.user-avatar[data-v-25e77581]{\r\n    margin-right: 15px;\r\n    float: inherit;\r\n    position: absolute;\n}\n.user-woof[data-v-25e77581]{\r\n    display:flex; \r\n    flex-direction: row;\r\n    padding: 18px 20px;\n}\n.circle[data-v-25e77581]{\r\n   width: 25px;\r\n   margin-top: 16px;\n}\r\n", ""]);
+exports.push([module.i, "\n.divider[data-v-25e77581]{\r\n    margin: 0;\n}\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 7px;\n}\n.left[data-v-25e77581]{\r\n    background-color: white;\r\n    min-width: 290px;\r\n    float: left;\n}\n.middle[data-v-25e77581]{\r\n    background-color:white;\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-25e77581]{\r\n    background-color:brown;\r\n    min-width: 290px;\r\n    height: 500px;\r\n    float: left;\n}\n.profile-box[data-v-25e77581]{\n}\n.upper[data-v-25e77581]{\r\n    background-color: #41B5E4;\r\n    height: 95px;\n}\n.img[data-v-25e77581]{\r\n    width: 60px;\r\n    position: absolute;\r\n    margin: 10px 20px;\r\n    border-radius: 50%;\r\n    border: 2px solid;\r\n    border-color: gainsboro;\n}\n.user-field[data-v-25e77581]{\r\n    left: 110px;\r\n    margin-left: 95px;\r\n    padding-top: 15px;\n}\n.name[data-v-25e77581]{\r\n    font-size: 18px;\r\n    color: black\n}\n.username[data-v-25e77581]{\n}\n.user-stats[data-v-25e77581]{\n}\n.user-stats ul[data-v-25e77581]{\r\n    margin-top: 15px;\r\n    list-style: none;\r\n    margin-left: 15px;\r\n    display:flex; \r\n    flex-direction: row;\r\n    text-align: center;\n}\n.user-stats li[data-v-25e77581]{\r\n    margin: 10px 15px;\n}\n.span[data-v-25e77581]{\r\n    display:block;\n}\n.user-stats-name[data-v-25e77581]{\r\n    color: #657786;\n}\n.counts[data-v-25e77581]{\r\n    font-size: 22px;\r\n    font-weight: 600;\n}\n.woof-box ul[data-v-25e77581]{\r\n    list-style: none;\r\n    display:flex; \r\n    flex-direction: row;    \r\n    padding-top: 10px;\n}\n.woof-box[data-v-25e77581]{\r\n    background-color: #E8F4FB;  \r\n    padding-bottom: 10px;\n}\n.woof-avatar[data-v-25e77581]{\r\n    margin: 13px;\r\n    margin-left: 20px !important;\n}\n.woof-box-extras[data-v-25e77581]{\n}\n.woof-button[data-v-25e77581]{\n}\n.woof-text[data-v-25e77581]{\r\n    width: 460px;\r\n    margin: 13px 10px;\r\n    display: block;\n}\n.woof-timeline[data-v-25e77581]{\r\n    background: white;\n}\n.user-avatar[data-v-25e77581]{\r\n    margin-right: 15px;\r\n    float: inherit;\r\n    position: absolute;\n}\n.user-woof[data-v-25e77581]{\r\n    display:flex; \r\n    flex-direction: row;\r\n    padding: 18px 20px;\n}\n.circle[data-v-25e77581]{\r\n   width: 25px;\r\n   margin-top: 16px;\n}\n.actions[data-v-25e77581]{\r\n    display: block;\n}\n.actions ul[data-v-25e77581]{\r\n    list-style: none;\r\n    display:flex; \r\n    flex-direction: row;\n}\r\n", ""]);
 
 // exports
 
@@ -43632,9 +43648,22 @@ var render = function() {
                     "Option",
                     { key: user.name, attrs: { value: user.name } },
                     [
-                      _c("router-link", { attrs: { to: user.username } }, [
-                        _vm._v(_vm._s(user.name))
-                      ]),
+                      _c(
+                        "router-link",
+                        { attrs: { to: user.username } },
+                        [
+                          _c("Avatar", {
+                            staticStyle: { "margin-right": "5px" },
+                            attrs: { icon: "ios-person", size: "small" }
+                          }),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(user.name) +
+                              "\n                        "
+                          )
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c("span", [_vm._v("@" + _vm._s(user.username))])
                     ],
@@ -43891,7 +43920,8 @@ var render = function() {
                       {
                         staticStyle: {
                           "margin-left": "55px",
-                          "max-width": "495px"
+                          "max-width": "495px",
+                          display: "block"
                         }
                       },
                       [
@@ -43920,7 +43950,33 @@ var render = function() {
                           )
                         ])
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "actions" }, [
+                      _c("ul", [
+                        _c(
+                          "li",
+                          [
+                            _c("Icon", {
+                              attrs: { type: "ios-chatbubbles-outline" }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [_c("Icon", { attrs: { type: "md-repeat" } })],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          [_c("Icon", { attrs: { type: "md-heart-outline" } })],
+                          1
+                        )
+                      ])
+                    ])
                   ],
                   1
                 ),
