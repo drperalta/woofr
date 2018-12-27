@@ -43771,7 +43771,7 @@ var render = function() {
     { staticClass: "container" },
     [
       _c(
-        "Menu",
+        "i-menu",
         {
           staticClass: "navbar",
           attrs: {
@@ -43794,7 +43794,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c(
-                "MenuItem",
+                "menu-item",
                 {
                   staticClass: "menu-item",
                   attrs: { name: "timeline", to: "/timeline" }
@@ -43810,7 +43810,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "MenuItem",
+                "menu-item",
                 {
                   staticClass: "menu-item",
                   attrs: { name: "notifications", to: "notifications" }
@@ -43826,7 +43826,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "MenuItem",
+                "menu-item",
                 {
                   staticClass: "menu-item",
                   attrs: { name: "messages", to: "messages" }

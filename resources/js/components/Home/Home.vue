@@ -1,24 +1,24 @@
 <template>
     <div class="container">
         <!-- NAVBAR -->
-        <Menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
+        <i-menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
             <div class="navbar-items">
                 <!-- LOGO -->
                 <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
 
                 <!-- MENU ITEMS -->
-                <MenuItem class="menu-item" name="timeline" to="/timeline">
+                <menu-item class="menu-item" name="timeline" to="/timeline">
                     <Icon type="md-home" style="margin: 0"/>
                     Home
-                </MenuItem>
-                <MenuItem class="menu-item" name="notifications" to="notifications">
+                </menu-item>
+                <menu-item class="menu-item" name="notifications" to="notifications">
                     <Icon type="md-notifications" style="margin: 0"/>
                     Notifications
-                </MenuItem>
-                <MenuItem class="menu-item" name="messages" to="messages">
+                </menu-item>
+                <menu-item class="menu-item" name="messages" to="messages">
                     <Icon type="md-chatboxes" style="margin: 0" />
                     Messages
-                </MenuItem>
+                </menu-item>
 
                 <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
 
@@ -35,7 +35,7 @@
                     </AutoComplete>
                 </div>
             </div>
-        </Menu>
+        </i-menu>
 
         <div class="body">
             <router-view></router-view>
