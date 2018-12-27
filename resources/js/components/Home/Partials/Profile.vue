@@ -52,12 +52,14 @@ export default {
 
 <style scoped>
 .container{
-
+background-color: white;
 }
 /* USER BANNER */
 .user-banner{
     height: 95px;
     background-color: aquamarine;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 .user-img{
     position: absolute;
