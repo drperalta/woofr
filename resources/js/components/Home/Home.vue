@@ -25,7 +25,10 @@
                 <!-- SEARCH BAR -->
                 <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
                     <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
-                            <router-link :to="user.username">{{ user.name }}</router-link>
+                            <router-link :to="user.username">
+                                <Avatar icon="ios-person" size="small" style="margin-right: 5px;"/>
+                                {{ user.name }}
+                            </router-link>
                             <span>@{{ user.username }}</span>
                     </Option>
                 </AutoComplete>
