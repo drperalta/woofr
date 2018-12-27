@@ -1,43 +1,9 @@
 {<template>
     <div class="content">
-        <!-- LEFT BOX -->
-        <div class="box left">
-            <div class="profile-box">
-                <div class="upper">
-                    
-                </div>
-                
-                <div class="lower">
-                    <img class="img" src="../../../../img/default-picture.png" alt="">
-                    <div class="user-field">
-                        <div class="name">David Peralta</div>
-                        <div class="username">@IamDavidMe</div>
-                    </div>
-                    <div class="user-stats">
-                        <ul>
-                            <li>
-                                <router-link to="">
-                                    <span class="span user-stats-name">Tweets</span>
-                                    <span class="span counts">120</span>
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link to="">
-                                    <span class="span user-stats-name">Following</span>
-                                    <span class="span counts">210</span>
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link to="">
-                                    <span class="span user-stats-name">Followers</span>
-                                    <span class="span counts">400</span>
-                                </router-link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="box left-box">
+            <Profile></Profile>
         </div>
+
         <!-- MIDDLE BOX -->
         <div class="box middle">
                 <div class="woof-box">
@@ -54,10 +20,10 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="woof-timeline">
-                    
-                    <ol style="list-style: none;">    
+
+                    <ol style="list-style: none;">
                         <li v-for="item in Woofs" :key="item.id">
                             <div class="user-woof">
                                 <Avatar class="user-avatar" icon="ios-person" size="large" />
@@ -82,7 +48,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <Divider class="divider"/> 
+                            <Divider class="divider"/>
                         </li>
                     </ol>
                 </div>
@@ -95,7 +61,9 @@
 </template>
 
 <script>
+import Profile from '../Partials/Profile'
 export default {
+    components: {Profile},
     data(){
         return{
             focus: false,
@@ -106,35 +74,35 @@ export default {
             },
 
             Woofs:[
-                {   
+                {
                     id: 2,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamNikkiMe',
                     full_name: 'Mary Nicole',
                     created_at: '',
                 },
-                {   
+                {
                     id: 3,
                     woof_text: 'is simply dummy text of the printing and typesetting industry.',
                     user_name: 'beaamor0212',
                     full_name: 'Bea Amor',
                     created_at: '',
                 },
-                {   
+                {
                     id: 4,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamNikkiMe',
                     full_name: 'Mary Nicole',
                     created_at: '',
                 },
-                {   
+                {
                     id: 5,
                     woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
                     user_name: 'ricamiguing_',
                     full_name: 'Rice Lois',
                     created_at: '',
                 },
-                {   
+                {
                     id: 6,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
                     user_name: 'beaamor0212',
@@ -152,9 +120,9 @@ export default {
             this.woof_length = this.WoofDetails.Woof.length;
         },
         showButtons(){
-            
+
         },
-        
+
     },
     computed:{
         color () {
@@ -179,6 +147,17 @@ export default {
 </script>
 
 <style scoped>
+.left-box{
+    max-width: 290px;
+    min-width: 290px;
+    float: left;
+
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 5px;
+}
+
 .divider{
     margin: 0;
 }
@@ -186,22 +165,23 @@ export default {
     margin-top: 7px;
 }
 .box{
-    margin: 7px;
-}
-.left{
-    background-color: white;
-    min-width: 290px;
-    float: left;
+    margin: 5px;
 }
 .middle{
     background-color:white;
     min-width: 590px;
     max-width: 590px;
     float: left;
+
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 5px;
 }
 .right{
     background-color:brown;
     min-width: 290px;
+    max-width: 290px;
     height: 500px;
     float: left;
 }
@@ -233,13 +213,13 @@ export default {
 
 }
 .user-stats{
-    
+
 }
 .user-stats ul{
     margin-top: 15px;
     list-style: none;
     margin-left: 15px;
-    display:flex; 
+    display:flex;
     flex-direction: row;
     text-align: center;
 }
@@ -254,16 +234,16 @@ export default {
 }
 .counts{
     font-size: 22px;
-    font-weight: 600; 
+    font-weight: 600;
 }
 .woof-box ul{
     list-style: none;
-    display:flex; 
-    flex-direction: row;    
+    display:flex;
+    flex-direction: row;
     padding-top: 10px;
 }
 .woof-box{
-    background-color: #E8F4FB;  
+    background-color: #E8F4FB;
     padding-bottom: 10px;
 }
 .woof-avatar{
@@ -274,7 +254,7 @@ export default {
 
 }
 .woof-button{
-    
+
 }
 .woof-text{
     width: 460px;
@@ -290,7 +270,7 @@ export default {
     position: absolute;
 }
 .user-woof{
-    display:flex; 
+    display:flex;
     flex-direction: row;
     padding: 18px 20px;
 }
@@ -303,7 +283,7 @@ export default {
 }
 .actions ul{
     list-style: none;
-    display:flex; 
+    display:flex;
     flex-direction: row;
 }
 </style>
