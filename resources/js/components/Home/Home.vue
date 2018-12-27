@@ -1,37 +1,39 @@
 <template>
     <div class="container">
         <!-- NAVBAR -->
-        <Menu class="navbar" mode="horizontal" theme="light" :active-name="this.$root.active_name">
-            <!-- LOGO -->
-            <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
+        <Menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
+            <div class="navbar-items">
+                <!-- LOGO -->
+                <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
 
-            <!-- MENU ITEMS -->
-            <MenuItem class="menu-item" name="timeline" to="/timeline">
-                <Icon type="md-home" style="margin: 0"/>
-                Home
-            </MenuItem>
-            <MenuItem class="menu-item" name="notifications" to="notifications">
-                <Icon type="md-notifications" style="margin: 0"/>
-                Notifications
-            </MenuItem>
-            <MenuItem class="menu-item" name="messages" to="messages">
-                <Icon type="md-chatboxes" style="margin: 0" />
-                Messages
-            </MenuItem>
+                <!-- MENU ITEMS -->
+                <MenuItem class="menu-item" name="timeline" to="/timeline">
+                    <Icon type="md-home" style="margin: 0"/>
+                    Home
+                </MenuItem>
+                <MenuItem class="menu-item" name="notifications" to="notifications">
+                    <Icon type="md-notifications" style="margin: 0"/>
+                    Notifications
+                </MenuItem>
+                <MenuItem class="menu-item" name="messages" to="messages">
+                    <Icon type="md-chatboxes" style="margin: 0" />
+                    Messages
+                </MenuItem>
 
-            <img class="profile" src="../../../img/default-picture.png" alt="DP">
+                <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
 
-            <div class="nav-right">
-                <!-- SEARCH BAR -->
-                <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
-                    <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
-                            <router-link :to="user.username">
-                                <Avatar icon="ios-person" size="small" style="margin-right: 5px;"/>
-                                {{ user.name }}
-                            </router-link>
-                            <span>@{{ user.username }}</span>
-                    </Option>
-                </AutoComplete>
+                <div class="nav-right">
+                    <!-- SEARCH BAR -->
+                    <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
+                        <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
+                                <router-link :to="user.username">
+                                    <Avatar icon="ios-person" size="small" style="margin-right: 5px;"/>
+                                    {{ user.name }}
+                                </router-link>
+                                <span>@{{ user.username }}</span>
+                        </Option>
+                    </AutoComplete>
+                </div>
             </div>
         </Menu>
 
@@ -96,9 +98,18 @@ export default {
     margin-right: 15px;
 }
 .navbar{
-    padding: 0px 12vw;
     position: fixed;
     width: 100vw;
+
+    background-color: #765d69;
+}
+.navbar-items{
+    min-width: 1200px;
+    max-width: 1200px;
+
+    left: 50%;
+    transform: translate(-50%,0%);
+    position: absolute;
 }
 .menu-item{
     font-size: 13px;
@@ -108,18 +119,27 @@ export default {
     float: right;
 }
 .search-bar{
-    width: 180px;
+    width: 210px;
+    margin-right: 10px;
 }
-.profile{
+.user-picture{
     width: 35px;
     float: right;
-    margin-top: 14px;
+    margin-top: 13px;
     margin-left: 10px;
+    margin-right: 15px;
 
     border: 2px solid rgba(58, 58, 58, .2);
     border-radius: 50%;
 }
 .body{
-    padding: 60px 12vw 0px 12vw;
+    padding-top: 60px;
+
+    min-width: 1200px;
+    max-width: 1200px;
+
+    left: 50%;
+    transform: translate(-50%,0%);
+    position: absolute;
 }
 </style>

@@ -10,7 +10,7 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
 
     </head>
-    <body style="margin: 0; background-color: #E6ECF0;">
+    <body style="margin: 0; background-color: #E9EBEE;">
         <div id="app">
             <App></App>
         </div>
