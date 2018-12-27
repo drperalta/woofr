@@ -85,7 +85,7 @@ export default {
 /* USER STATS */
 .user-stats{
     background-color: white;
-    padding-top: 45px;
+    padding-top: 55px;
 }
 .user-stats ul{
     margin-left: 15px;
