@@ -152,6 +152,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -159,20 +161,16 @@ __webpack_require__.r(__webpack_exports__);
       filteredUsers: [],
       users: [{
         name: 'Bea Amor',
-        username: 'beaamor0212',
-        link: 'https://twitter.com/beaamor0212'
+        username: 'beaamor0212'
       }, {
         name: 'David Peralta',
-        username: 'IamDavidMe',
-        link: 'https://twitter.com/IamDavidMe'
+        username: 'IamDavidMe'
       }, {
         name: 'Nikki',
-        username: 'iAmNikkiME',
-        link: 'https://twitter.com/iAmNikkiME'
+        username: 'iAmNikkiME'
       }, {
         name: 'Rica Camiguing',
-        username: 'ricamiguing_',
-        link: 'https://twitter.com/ricamiguing_'
+        username: 'ricamiguing_'
       }]
     };
   },
@@ -272,9 +270,141 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      focus: false,
+      percent: 0,
+      woof_length: 0,
+      WoofDetails: {
+        Woof: ''
+      },
+      Woofs: [{
+        id: 2,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamNikkiMe',
+        full_name: 'Mary Nicole',
+        created_at: ''
+      }, {
+        id: 3,
+        woof_text: 'is simply dummy text of the printing and typesetting industry.',
+        user_name: 'beaamor0212',
+        full_name: 'Bea Amor',
+        created_at: ''
+      }, {
+        id: 4,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamNikkiMe',
+        full_name: 'Mary Nicole',
+        created_at: ''
+      }, {
+        id: 5,
+        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        user_name: 'ricamiguing_',
+        full_name: 'Rice Lois',
+        created_at: ''
+      }, {
+        id: 6,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        user_name: 'beaamor0212',
+        full_name: 'Bea Amor',
+        created_at: ''
+      }]
+    };
+  },
+  methods: {
+    count: function count() {
+      var multiply = this.WoofDetails.Woof.length / 280;
+      this.percent = multiply * 100;
+      this.woof_length = this.WoofDetails.Woof.length;
+    },
+    showButtons: function showButtons() {}
+  },
+  computed: {
+    color: function color() {
+      var color = '#2db7f5';
+
+      if (this.percent > 100) {
+        color = 'red';
+      }
+
+      return color;
+    },
+    onFocus: function onFocus() {
+      this.focus = true;
+    },
+    blur: function blur() {
+      this.focus = false;
+    }
   },
   created: function created() {
     this.$root.active_name = window.location.href.split('/')[3];
@@ -479,7 +609,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\n    margin-top: 6px;\n    /* left: 50%;\n    transform: translate(-50%,0%);\n    position: absolute; */\n    float: left;\n    width: 55px;\n    margin-right: 40px;\n    margin-left: 10px;\n}\n.navbar[data-v-4ec5f2d4]{\n    padding: 0px 15%;\n}\n.menu-item[data-v-4ec5f2d4]{\n}\n.search-bar[data-v-4ec5f2d4]{\n    width: 250px;\n}\n.body[data-v-4ec5f2d4]{\n    padding: 0px 15%;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\r\n    margin-top: 11px;\r\n    /* left: 50%;\r\n    transform: translate(-50%,0%);\r\n    position: absolute; */\r\n    float: left;\r\n    width: 40px;\r\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\r\n    padding: 0px 12vw;\r\n    position: fixed;\r\n    width: 100vw;\n}\n.menu-item[data-v-4ec5f2d4]{\r\n    font-size: 13px;\r\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\r\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\r\n    width: 180px;\n}\n.profile[data-v-4ec5f2d4]{\r\n    width: 35px;\r\n    float: right;\r\n    margin-top: 14px;\r\n    margin-left: 10px;\r\n\r\n    border: 2px solid rgba(58, 58, 58, .2);\r\n    border-radius: 50%;\n}\n.body[data-v-4ec5f2d4]{\r\n    padding: 60px 12vw 0px 12vw;\n}\r\n", ""]);
 
 // exports
 
@@ -536,7 +666,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-25e77581]{\n    position: relative;\n    display: table;\n}\n.box[data-v-25e77581]{\n    background: lightblue;\n    margin: 8px;\n    float: left;\n}\n.left[data-v-25e77581]{\n    width: 288px;\n    height: 500px;\n}\n.middle[data-v-25e77581]{\n    width: 588px;\n    height: 500px;\n}\n.right[data-v-25e77581]{\n    width: 288px;\n    height: 400px;\n}\n", ""]);
+exports.push([module.i, "\n.divider[data-v-25e77581]{\r\n    margin: 0;\n}\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 7px;\n}\n.left[data-v-25e77581]{\r\n    background-color: white;\r\n    min-width: 290px;\r\n    float: left;\n}\n.middle[data-v-25e77581]{\r\n    background-color:white;\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-25e77581]{\r\n    background-color:brown;\r\n    min-width: 290px;\r\n    height: 500px;\r\n    float: left;\n}\n.profile-box[data-v-25e77581]{\n}\n.upper[data-v-25e77581]{\r\n    background-color: #41B5E4;\r\n    height: 95px;\n}\n.img[data-v-25e77581]{\r\n    width: 60px;\r\n    position: absolute;\r\n    margin: 10px 20px;\r\n    border-radius: 50%;\r\n    border: 2px solid;\r\n    border-color: gainsboro;\n}\n.user-field[data-v-25e77581]{\r\n    left: 110px;\r\n    margin-left: 95px;\r\n    padding-top: 15px;\n}\n.name[data-v-25e77581]{\r\n    font-size: 18px;\r\n    color: black\n}\n.username[data-v-25e77581]{\n}\n.user-stats[data-v-25e77581]{\n}\n.user-stats ul[data-v-25e77581]{\r\n    margin-top: 15px;\r\n    list-style: none;\r\n    margin-left: 15px;\r\n    display:flex; \r\n    flex-direction: row;\r\n    text-align: center;\n}\n.user-stats li[data-v-25e77581]{\r\n    margin: 10px 15px;\n}\n.span[data-v-25e77581]{\r\n    display:block;\n}\n.user-stats-name[data-v-25e77581]{\r\n    color: #657786;\n}\n.counts[data-v-25e77581]{\r\n    font-size: 22px;\r\n    font-weight: 600;\n}\n.woof-box ul[data-v-25e77581]{\r\n    list-style: none;\r\n    display:flex; \r\n    flex-direction: row;    \r\n    padding-top: 10px;\n}\n.woof-box[data-v-25e77581]{\r\n    background-color: #E8F4FB;  \r\n    padding-bottom: 10px;\n}\n.woof-avatar[data-v-25e77581]{\r\n    margin: 13px;\r\n    margin-left: 20px !important;\n}\n.woof-box-extras[data-v-25e77581]{\n}\n.woof-button[data-v-25e77581]{\n}\n.woof-text[data-v-25e77581]{\r\n    width: 460px;\r\n    margin: 13px 10px;\r\n    display: block;\n}\n.woof-timeline[data-v-25e77581]{\r\n    background: white;\n}\n.user-avatar[data-v-25e77581]{\r\n    margin-right: 15px;\r\n    float: inherit;\r\n    position: absolute;\n}\n.user-woof[data-v-25e77581]{\r\n    display:flex; \r\n    flex-direction: row;\r\n    padding: 18px 20px;\n}\n.circle[data-v-25e77581]{\r\n   width: 25px;\r\n   margin-top: 16px;\n}\r\n", ""]);
 
 // exports
 
@@ -555,7 +685,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\n    position: absolute;\n    top: 35%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n    z-index: 1;\n    text-align: center;\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\n    width: 100vw;\n    height: 100vh;\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\n    margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\r\n    position: absolute;\r\n    top: 35%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,-50%);\r\n            transform: translate(-50%,-50%);\r\n    z-index: 1;\r\n    text-align: center;\r\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\r\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\r\n    margin-top: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -574,7 +704,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\n    margin-top: 4px;\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\n    width: 100%;\n    margin-bottom: 8px;\n}\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\r\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\r\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\r\n    margin-top: 4px;\r\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\r\n    width: 100%;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
 
 // exports
 
@@ -593,7 +723,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\n    width: 100%;\n    margin-top: 10px;\n    margin-bottom: 8px;\n}\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin-top: 10px;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
 
 // exports
 
@@ -612,7 +742,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-79d3063d]{\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\n    width: 100%;\n    margin-top: 35px;\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\n    margin: 10px 0px !important;\n    width: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, 0%);\n            transform: translate(-50%, 0%);\n}\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-79d3063d]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin-top: 35px;\r\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\r\n    margin: 10px 0px !important;\r\n    width: 50%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, 0%);\r\n            transform: translate(-50%, 0%);\n}\r\n", ""]);
 
 // exports
 
@@ -43412,50 +43542,8 @@ var render = function() {
         [
           _c("img", {
             staticClass: "logo",
-            attrs: {
-              src: __webpack_require__(/*! ../../../img/woofr-logo-new.png */ "./resources/img/woofr-logo-new.png"),
-              alt: "Woofr"
-            }
+            attrs: { src: __webpack_require__(/*! ../../../img/woofr-logo.png */ "./resources/img/woofr-logo.png"), alt: "Woofr" }
           }),
-          _vm._v(" "),
-          _c(
-            "AutoComplete",
-            {
-              staticClass: "search-bar",
-              attrs: {
-                clearable: "",
-                icon: "ios-search",
-                placeholder: "Search Woofr"
-              },
-              on: {
-                "on-search": function($event) {
-                  _vm.filterList()
-                }
-              },
-              model: {
-                value: _vm.search,
-                callback: function($$v) {
-                  _vm.search = $$v
-                },
-                expression: "search"
-              }
-            },
-            _vm._l(_vm.filteredUsers, function(user) {
-              return _c(
-                "Option",
-                { key: user.name, attrs: { value: user.name } },
-                [
-                  _c("router-link", { attrs: { to: user.username } }, [
-                    _vm._v(_vm._s(user.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("@" + _vm._s(user.username))])
-                ],
-                1
-              )
-            }),
-            1
-          ),
           _vm._v(" "),
           _c(
             "MenuItem",
@@ -43501,6 +43589,60 @@ var render = function() {
                 attrs: { type: "md-chatboxes" }
               }),
               _vm._v("\n            Messages\n        ")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "profile",
+            attrs: {
+              src: __webpack_require__(/*! ../../../img/default-picture.png */ "./resources/img/default-picture.png"),
+              alt: "DP"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "nav-right" },
+            [
+              _c(
+                "AutoComplete",
+                {
+                  staticClass: "search-bar",
+                  attrs: {
+                    clearable: "",
+                    icon: "ios-search",
+                    placeholder: "Search Woofr"
+                  },
+                  on: {
+                    "on-search": function($event) {
+                      _vm.filterList()
+                    }
+                  },
+                  model: {
+                    value: _vm.search,
+                    callback: function($$v) {
+                      _vm.search = $$v
+                    },
+                    expression: "search"
+                  }
+                },
+                _vm._l(_vm.filteredUsers, function(user) {
+                  return _c(
+                    "Option",
+                    { key: user.name, attrs: { value: user.name } },
+                    [
+                      _c("router-link", { attrs: { to: user.username } }, [
+                        _vm._v(_vm._s(user.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("@" + _vm._s(user.username))])
+                    ],
+                    1
+                  )
+                }),
+                1
+              )
             ],
             1
           )
@@ -43583,19 +43725,228 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "box left" }, [
+      _c("div", { staticClass: "profile-box" }, [
+        _c("div", { staticClass: "upper" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "lower" }, [
+          _c("img", {
+            staticClass: "img",
+            attrs: {
+              src: __webpack_require__(/*! ../../../../img/default-picture.png */ "./resources/img/default-picture.png"),
+              alt: ""
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "user-stats" }, [
+            _c("ul", [
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: "" } }, [
+                    _c("span", { staticClass: "span user-stats-name" }, [
+                      _vm._v("Tweets")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "span counts" }, [_vm._v("120")])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: "" } }, [
+                    _c("span", { staticClass: "span user-stats-name" }, [
+                      _vm._v("Following")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "span counts" }, [_vm._v("210")])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c("router-link", { attrs: { to: "" } }, [
+                    _c("span", { staticClass: "span user-stats-name" }, [
+                      _vm._v("Followers")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "span counts" }, [_vm._v("400")])
+                  ])
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "box middle" }, [
+      _c("div", { staticClass: "woof-box" }, [
+        _c("ul", [
+          _c(
+            "li",
+            [
+              _c("Avatar", {
+                staticClass: "woof-avatar",
+                attrs: { icon: "ios-person", size: "medium" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _c("Input", {
+                staticClass: "woof-text",
+                attrs: {
+                  type: "textarea",
+                  maxlength: 280,
+                  placeholder: "What's happening...",
+                  autosize: { minRows: 1, maxRows: 5 }
+                },
+                on: {
+                  "on-change": function($event) {
+                    _vm.count()
+                  }
+                },
+                model: {
+                  value: _vm.WoofDetails.Woof,
+                  callback: function($$v) {
+                    _vm.$set(_vm.WoofDetails, "Woof", $$v)
+                  },
+                  expression: "WoofDetails.Woof"
+                }
+              }),
+              _vm._v(" "),
+              _vm.woof_length != 0
+                ? _c(
+                    "Button",
+                    {
+                      staticClass: "woof-button",
+                      staticStyle: {
+                        width: "110px",
+                        display: "block",
+                        float: "right",
+                        "margin-right": "10px"
+                      },
+                      attrs: { type: "primary", disabled: _vm.woof_length == 0 }
+                    },
+                    [_vm._v("Woof")]
+                  )
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _vm.woof_length != 0
+                ? _c("i-circle", {
+                    staticClass: "circle",
+                    attrs: {
+                      percent: _vm.percent,
+                      "stroke-color": _vm.color,
+                      size: 25
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "woof-timeline" }, [
+        _c(
+          "ol",
+          { staticStyle: { "list-style": "none" } },
+          _vm._l(_vm.Woofs, function(item) {
+            return _c(
+              "li",
+              { key: item.id },
+              [
+                _c(
+                  "div",
+                  { staticClass: "user-woof" },
+                  [
+                    _c("Avatar", {
+                      staticClass: "user-avatar",
+                      attrs: { icon: "ios-person", size: "large" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticStyle: {
+                          "margin-left": "55px",
+                          "max-width": "495px"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticStyle: {
+                              "font-size": "14px",
+                              "font-weight": "600",
+                              color: "black"
+                            },
+                            attrs: { href: "/" + item.user_name }
+                          },
+                          [_vm._v(_vm._s(item.full_name))]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticStyle: { color: "grey" } }, [
+                          _vm._v("@" + _vm._s(item.user_name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "font-size": "13px" } }, [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(item.woof_text) +
+                              "\n                                "
+                          )
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("Divider", { staticClass: "divider" })
+              ],
+              1
+            )
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "box right" })
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "box left" }),
+    return _c("div", { staticClass: "user-field" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("David Peralta")]),
       _vm._v(" "),
-      _c("div", { staticClass: "box middle" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "box right" })
+      _c("div", { staticClass: "username" }, [_vm._v("@IamDavidMe")])
     ])
   }
 ]
@@ -57761,6 +58112,17 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/img/default-picture.png":
+/*!*******************************************!*\
+  !*** ./resources/img/default-picture.png ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/default-picture.png?ff72f8e7f281b0e2cf2a7e98f09ff65e";
+
+/***/ }),
+
 /***/ "./resources/img/woofr-logo-new.png":
 /*!******************************************!*\
   !*** ./resources/img/woofr-logo-new.png ***!
@@ -57769,6 +58131,17 @@ module.exports = g;
 /***/ (function(module, exports) {
 
 module.exports = "/images/woofr-logo-new.png?5ef386d8ddcd06358320506d1b7e0da0";
+
+/***/ }),
+
+/***/ "./resources/img/woofr-logo.png":
+/*!**************************************!*\
+  !*** ./resources/img/woofr-logo.png ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/woofr-logo.png?bc22f0ef5e808f61fc3c39b46fca6c1f";
 
 /***/ }),
 
@@ -58682,8 +59055,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\peral\dev\woofr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\peral\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
