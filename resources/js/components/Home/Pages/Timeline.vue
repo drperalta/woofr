@@ -61,13 +61,26 @@
                         <li v-for="item in Woofs" :key="item.id">
                             <div class="user-woof">
                                 <Avatar class="user-avatar" icon="ios-person" size="large" />
-                                <div style="margin-left: 55px; max-width: 495px">
+                                <div style="margin-left: 55px; max-width: 495px; display: block;">
                                     <a :href="'/'+item.user_name" style="font-size: 14px; font-weight: 600; color: black" >{{item.full_name}}</a>
                                     <span style="color: grey;">@{{item.user_name}}</span>
                                     <div style="font-size: 13px; ">
                                         {{item.woof_text}}
                                     </div>
-                                </div> 
+                                </div>
+                                <div class="actions">
+                                    <ul>
+                                        <li>
+                                            <Icon type="ios-chatbubbles-outline" />
+                                        </li>
+                                        <li>
+                                            <Icon type="md-repeat" />
+                                        </li>
+                                        <li>
+                                            <Icon type="md-heart-outline" />
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <Divider class="divider"/> 
                         </li>
@@ -284,5 +297,13 @@ export default {
 .circle{
    width: 25px;
    margin-top: 16px;
+}
+.actions{
+    display: block;
+}
+.actions ul{
+    list-style: none;
+    display:flex; 
+    flex-direction: row;
 }
 </style>
