@@ -63,20 +63,20 @@ export default {
     position: absolute;
     width: 70px;
 
-    margin-top: 60px;
+    margin-top: 75px;
     margin-left: 20px;
 
     border: 3px solid white;
     border-radius: 50%;
 }
 .user-field{
-    margin-left: 100px;
-    padding-top: 72px;
+    margin-left: 110px;
+    padding-top: 95px;
 }
 .name{
     font-size: 18px;
     font-weight: 600;
-    color: #765d69;
+    color: #17233d;
 }
 .username{
     font-size: 13px;
@@ -85,7 +85,7 @@ export default {
 /* USER STATS */
 .user-stats{
     background-color: white;
-    padding-top: 35px;
+    padding-top: 45px;
 }
 .user-stats ul{
     margin-left: 15px;
