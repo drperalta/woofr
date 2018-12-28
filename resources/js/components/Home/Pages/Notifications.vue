@@ -7,8 +7,12 @@
         <!-- NOTIFICATIONS BOX -->
         <div class="box middle">
             <div class="notifications-header">
-
+                <ButtonGroup>
+                    <Button size="large" to="/notifications">All</Button>
+                    <Button size="large" to="/notifications/mentions">Mentions</Button>
+                </ButtonGroup>
             </div>
+            <Divider style="margin: 5px 0px"/>
             <div class="notifications-body">
                 <router-view></router-view>
             </div>
@@ -57,6 +61,12 @@ export default {
     min-width: 590px;
     max-width: 590px;
     float: left;
+    background-color: white;
+
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 5px;
 }
 .right{
     min-width: 290px;
@@ -67,5 +77,8 @@ export default {
     border-style: solid;
     border-color: #FFFFFF;
     border-radius: 5px;
+}
+.notifications-header{
+    padding: 10px;
 }
 </style>
