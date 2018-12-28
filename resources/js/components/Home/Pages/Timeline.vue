@@ -58,7 +58,6 @@ export default {
     min-width: 590px;
     max-width: 590px;
     float: left;
-    background-color: white;
 
 }
 .right{

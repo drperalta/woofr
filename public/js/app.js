@@ -894,7 +894,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 5px;\n}\n.left[data-v-25e77581]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-25e77581]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\r\n    background-color: white;\n}\n.right[data-v-25e77581]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 5px;\n}\n.left[data-v-25e77581]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-25e77581]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-25e77581]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n\r\n", ""]);
 
 // exports
 
