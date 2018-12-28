@@ -1,13 +1,16 @@
 {<template>
     <div class="content">
+        <!-- PROFILE BOX -->
         <div class="box left">
             <Profile></Profile>
         </div>
+        <!-- TIMELINE BOX -->
         <div class="box middle">
             <Timeline></Timeline>
         </div>
+        <!-- TRENDING BOX -->
         <div class="box right">
-
+            <Trending></Trending>
         </div>
     </div>
 </template>
@@ -15,9 +18,10 @@
 <script>
 import Profile from '../Partials/Profile'
 import Timeline from '../Partials/Timeline'
+import Trending from '../Partials/Trending'
 
 export default {
-    components: {Profile,Timeline},
+    components: {Profile,Timeline,Trending},
     data(){
         return{
         }
@@ -55,11 +59,14 @@ export default {
     float: left;
 }
 .right{
-    background-color:brown;
     min-width: 290px;
     max-width: 290px;
-    height: 500px;
     float: left;
+
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 5px;
 }
 
 </style>
