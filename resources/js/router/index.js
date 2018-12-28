@@ -14,6 +14,9 @@ import Timeline from '../components/Home/Pages/Timeline.vue'
 import Notifications from '../components/Home/Pages/Notifications.vue'
 import Messages from '../components/Home/Pages/Messages.vue'
 
+import Notifs from '../components/Home/Partials/Notifications/Notifs'
+import Mentions from '../components/Home/Partials/Notifications/Mentions'
+
 let router = new VueRouter({
 
     mode: 'history',
@@ -40,7 +43,15 @@ let router = new VueRouter({
                     path: 'timeline', component: Timeline
                 },
                 {
-                    path: 'notifications', component: Notifications
+                    path: 'notifications', component: Notifications, 
+                    children: [
+                        {
+                            path: '/', component: Notifs
+                        },
+                        {
+                            path: 'mentions', component: Mentions
+                        }
+                    ]
                 },
                 {
                     path: 'messages', component: Messages
