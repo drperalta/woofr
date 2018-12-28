@@ -258,6 +258,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -357,7 +361,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      Notifications: [{
+        id: 1,
+        user_name: 'David Peralta',
+        woof_id: 1,
+        notif_text: 'liked your post.',
+        read: false
+      }, {
+        id: 2,
+        user_id: 'Bea Amor',
+        woof_id: 2,
+        notif_text: 'rewoof your post.',
+        read: false
+      }, {
+        id: 3,
+        user_name: 'David Peralta',
+        woof_id: 3,
+        notif_text: 'commented on your post.',
+        read: true
+      }, {
+        id: 4,
+        user_id: 'Bea Amor',
+        woof_id: 4,
+        notif_text: 'liked your post.',
+        read: true
+      }, {
+        id: 5,
+        user_name: 'David Peralta',
+        woof_id: 5,
+        notif_text: 'rewoof your post.',
+        read: false
+      }, {
+        id: 6,
+        user_id: 'Bea Amor',
+        woof_id: 6,
+        notif_text: 'followed you.',
+        read: true
+      }, {
+        id: 7,
+        user_name: 'David Peralta',
+        woof_id: 7,
+        notif_text: 'commented your post.',
+        read: false
+      }, {
+        id: 8,
+        user_id: 'Bea Amor',
+        woof_id: 8,
+        notif_text: 'rewoof your post.',
+        read: false
+      }]
+    };
+  }
+});
 
 /***/ }),
 
@@ -918,7 +990,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-b3c25550]{\r\n    margin-top: 7px;\n}\n.box[data-v-b3c25550]{\r\n    margin: 5px;\n}\n.left[data-v-b3c25550]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-b3c25550]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-b3c25550]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-b3c25550]{\r\n    margin-top: 7px;\n}\n.box[data-v-b3c25550]{\r\n    margin: 5px;\n}\n.left[data-v-b3c25550]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-b3c25550]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.right[data-v-b3c25550]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.notifications-header[data-v-b3c25550]{\r\n    padding: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -975,7 +1047,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\nul[data-v-35213042]{\r\n    list-style: none;\n}\r\n", ""]);
 
 // exports
 
@@ -44242,11 +44314,41 @@ var render = function() {
   return _c("div", { staticClass: "content" }, [
     _c("div", { staticClass: "box left" }, [_c("Trending")], 1),
     _vm._v(" "),
-    _c("div", { staticClass: "box middle" }, [
-      _c("div", { staticClass: "notifications-header" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "notifications-body" }, [_c("router-view")], 1)
-    ]),
+    _c(
+      "div",
+      { staticClass: "box middle" },
+      [
+        _c(
+          "div",
+          { staticClass: "notifications-header" },
+          [
+            _c(
+              "ButtonGroup",
+              [
+                _c(
+                  "Button",
+                  { attrs: { size: "large", to: "/notifications" } },
+                  [_vm._v("All")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "Button",
+                  { attrs: { size: "large", to: "/notifications/mentions" } },
+                  [_vm._v("Mentions")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("Divider", { staticStyle: { margin: "5px 0px" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "notifications-body" }, [_c("router-view")], 1)
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "box right" })
   ])
@@ -44327,7 +44429,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    NOTIFICATIONS\n")])
+  return _c("div", { staticClass: "content" }, [
+    _c(
+      "ul",
+      _vm._l(_vm.Notifications, function(notif) {
+        return _c("li", { key: notif.id }, [
+          _c("ul", [
+            _c(
+              "li",
+              [_c("Avatar", { attrs: { icon: "ios-person", size: "large" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c("li", [
+              _c("div", { staticClass: "details" }, [
+                _c("span", { staticClass: "name" }, [
+                  _vm._v(_vm._s(notif.user_name))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "text" }, [
+                  _vm._v(_vm._s(notif.notif_text))
+                ])
+              ])
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
