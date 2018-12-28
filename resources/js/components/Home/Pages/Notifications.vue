@@ -6,7 +6,12 @@
         </div>
         <!-- NOTIFICATIONS BOX -->
         <div class="box middle">
+            <div class="notifications-header">
 
+            </div>
+            <div class="notifications-body">
+                <router-view></router-view>
+            </div>
         </div>
         <!--BOX -->
         <div class="box right">
