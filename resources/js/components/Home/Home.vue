@@ -113,6 +113,7 @@ export default {
 }
 .menu-item{
     font-size: 13px;
+    font-weight: 600;
     padding: 0px 15px !important;
 }
 .nav-right{
@@ -123,9 +124,9 @@ export default {
     margin-right: 10px;
 }
 .user-picture{
-    width: 35px;
+    width: 40px;
     float: right;
-    margin-top: 13px;
+    margin-top: 11px;
     margin-left: 10px;
     margin-right: 15px;
 
