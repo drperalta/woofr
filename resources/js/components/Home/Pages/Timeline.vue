@@ -9,7 +9,7 @@
             <Timeline></Timeline>
         </div>
         <!-- TRENDING BOX -->
-        <div class="box right">
+        <div class="box right"> 
             <Trending></Trending>
         </div>
     </div>
@@ -47,6 +47,7 @@ export default {
     max-width: 290px;
     min-width: 290px;
     float: left;
+    background-color: white;
 
     border-width: 5px;
     border-style: solid;
@@ -57,11 +58,14 @@ export default {
     min-width: 590px;
     max-width: 590px;
     float: left;
+    background-color: white;
+
 }
 .right{
     min-width: 290px;
     max-width: 290px;
     float: left;
+    background-color: white;
 
     border-width: 5px;
     border-style: solid;

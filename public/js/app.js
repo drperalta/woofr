@@ -235,13 +235,29 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Partials_Trending__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Partials/Trending */ "./resources/js/components/Home/Partials/Trending.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Trending: _Partials_Trending__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {};
   },
@@ -859,7 +875,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content[data-v-b3c25550]{\r\n    margin-top: 7px;\n}\n.box[data-v-b3c25550]{\r\n    margin: 5px;\n}\n.left[data-v-b3c25550]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-b3c25550]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-b3c25550]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n", ""]);
 
 // exports
 
@@ -878,7 +894,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 5px;\n}\n.left[data-v-25e77581]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-25e77581]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-25e77581]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 5px;\n}\n.left[data-v-25e77581]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-25e77581]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\r\n    background-color: white;\n}\n.right[data-v-25e77581]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -44082,7 +44098,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    NOTIFICATIONS\n")])
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "box left" }, [_c("Trending")], 1),
+    _vm._v(" "),
+    _c("div", { staticClass: "box middle" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "box right" })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
