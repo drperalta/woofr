@@ -1,3 +1,4 @@
+// UNFIXED NAVBAR AVATAR HEIGHT
 <template>
     <div class="container">
         <!-- NAVBAR -->
@@ -20,14 +21,14 @@
                     Messages
                 </menu-item>
 
-                <Dropdown class="user-picture-dropdown" trigger="click" style="margin-left: 20px">
+                <Dropdown class="user-picture-dropdown" placement="bottom-end" trigger="click">
                     <a href="javascript:void(0)">
                         <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
                     </a>
                     <DropdownMenu slot="list">
-                        <DropdownItem>Accounts</DropdownItem>
+                        <DropdownItem>Profile</DropdownItem>
                         <DropdownItem>Settings</DropdownItem>
-                        <Divider style="margin: 5px"/>
+                        <Divider style="margin: 5px 0px"/>
                         <DropdownItem>Logout</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
@@ -131,17 +132,16 @@ export default {
 }
 .search-bar{
     width: 210px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 .user-picture{
     width: 40px;
+    margin-top: 11px;
     border: 2px solid rgba(58, 58, 58, .2);
     border-radius: 50%;
 }
 .user-picture-dropdown{
     float: right;
-    margin-top: 11px;
-    margin-left: 10px;
     margin-right: 20px;
 }
 .body{

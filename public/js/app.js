@@ -159,6 +159,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -567,6 +578,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -671,7 +691,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     count: function count() {
-      var quotient = this.WoofDetails.Woof.length / 280;
+      var quotient = this.WoofDetails.Woof.length / 140;
       this.percent = quotient * 100;
       this.woof_length = this.WoofDetails.Woof.length;
     },
@@ -687,7 +707,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     comment: function comment() {},
     reWoof: function reWoof() {},
-    like: function like() {}
+    like: function like(index) {
+      // Check if liked is true
+      if (this.Woofs[index].liked) {
+        // if liked is true, then make it false and minus 1 the counts
+        this.Woofs[index].liked = false;
+        this.Woofs[index].likes -= 1;
+      } else {
+        // if liked is false, then make it true and plus 1 the counts
+        this.Woofs[index].liked = true;
+        this.Woofs[index].likes += 1;
+      }
+    }
   }
 });
 
@@ -952,7 +983,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\r\n    margin-top: 11px;\r\n    /* left: 50%;\r\n    transform: translate(-50%,0%);\r\n    position: absolute; */\r\n    float: left;\r\n    width: 40px;\r\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\r\n    position: fixed;\r\n    width: 100vw;\r\n\r\n    background-color: #57474e;\n}\n.navbar-items[data-v-4ec5f2d4]{\r\n    min-width: 1200px;\r\n    max-width: 1200px;\r\n\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,0%);\r\n            transform: translate(-50%,0%);\r\n    position: absolute;\n}\n.menu-item[data-v-4ec5f2d4]{\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\r\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\r\n    width: 210px;\r\n    margin-right: 10px;\n}\n.user-picture[data-v-4ec5f2d4]{\r\n    width: 40px;\r\n    float: right;\r\n    margin-top: 11px;\r\n    margin-left: 10px;\r\n    margin-right: 15px;\r\n\r\n    border: 2px solid rgba(58, 58, 58, .2);\r\n    border-radius: 50%;\n}\n.body[data-v-4ec5f2d4]{\r\n    padding-top: 60px;\r\n\r\n    min-width: 1200px;\r\n    max-width: 1200px;\r\n\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,0%);\r\n            transform: translate(-50%,0%);\r\n    position: absolute;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\n    margin-top: 11px;\n    /* left: 50%;\n    transform: translate(-50%,0%);\n    position: absolute; */\n    float: left;\n    width: 40px;\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\n    position: fixed;\n    width: 100vw;\n\n    background-color: #57474e;\n}\n.navbar-items[data-v-4ec5f2d4]{\n    min-width: 1200px;\n    max-width: 1200px;\n\n    left: 50%;\n    -webkit-transform: translate(-50%,0%);\n            transform: translate(-50%,0%);\n    position: absolute;\n}\n.menu-item[data-v-4ec5f2d4]{\n    font-size: 13px;\n    font-weight: 600;\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\n    width: 210px;\n    margin-right: 20px;\n}\n.user-picture[data-v-4ec5f2d4]{\n    width: 40px;\n    margin-top: 11px;\n    border: 2px solid rgba(58, 58, 58, .2);\n    border-radius: 50%;\n}\n.user-picture-dropdown[data-v-4ec5f2d4]{\n    float: right;\n    margin-right: 20px;\n}\n.body[data-v-4ec5f2d4]{\n    padding-top: 60px;\n\n    min-width: 1200px;\n    max-width: 1200px;\n\n    left: 50%;\n    -webkit-transform: translate(-50%,0%);\n            transform: translate(-50%,0%);\n    position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -1066,7 +1097,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-63fde0fe]{\r\nbackground-color: white;\n}\r\n/* USER BANNER */\n.user-banner[data-v-63fde0fe]{\r\n    height: 95px;\r\n    background-color: aquamarine;\r\n    border: 1px solid white;\r\n    border-radius: 5px;\n}\n.user-img[data-v-63fde0fe]{\r\n    position: absolute;\r\n    width: 70px;\r\n\r\n    margin-top: 75px;\r\n    margin-left: 20px;\r\n\r\n    border: 3px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-63fde0fe]{\r\n    margin-left: 110px;\r\n    padding-top: 95px;\n}\n.name[data-v-63fde0fe]{\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    color: #17233d;\n}\n.username[data-v-63fde0fe]{\r\n    font-size: 13px;\r\n    color: gray;\n}\r\n/* USER STATS */\n.user-stats[data-v-63fde0fe]{\r\n    background-color: white;\r\n    padding-top: 55px;\n}\n.user-stats ul[data-v-63fde0fe]{\r\n    margin-left: 15px;\r\n    margin-top: 5px;\r\n\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.user-stats li[data-v-63fde0fe]{\r\n    margin: 10px;\r\n    font-weight: 600;\n}\n.span[data-v-63fde0fe]{\r\n    display:block;\n}\n.stats-name[data-v-63fde0fe]{\r\n    color: #657786;\n}\n.stats-counts[data-v-63fde0fe]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-63fde0fe]{\nbackground-color: white;\n}\n/* USER BANNER */\n.user-banner[data-v-63fde0fe]{\n    height: 95px;\n    background-color: aquamarine;\n    border: 1px solid white;\n    border-radius: 5px;\n}\n.user-img[data-v-63fde0fe]{\n    position: absolute;\n    width: 70px;\n\n    margin-top: 75px;\n    margin-left: 20px;\n\n    border: 3px solid white;\n    border-radius: 50%;\n}\n.user-field[data-v-63fde0fe]{\n    margin-left: 110px;\n    padding-top: 95px;\n}\n.name[data-v-63fde0fe]{\n    font-size: 18px;\n    font-weight: 600;\n    color: #17233d;\n}\n.username[data-v-63fde0fe]{\n    font-size: 13px;\n    color: gray;\n}\n/* USER STATS */\n.user-stats[data-v-63fde0fe]{\n    background-color: white;\n    padding-top: 55px;\n}\n.user-stats ul[data-v-63fde0fe]{\n    margin-left: 15px;\n    margin-top: 5px;\n\n    list-style: none;\n    display:flex;\n    flex-direction: row;\n}\n.user-stats li[data-v-63fde0fe]{\n    margin: 10px;\n    font-weight: 600;\n}\n.span[data-v-63fde0fe]{\n    display:block;\n}\n.stats-name[data-v-63fde0fe]{\n    color: #657786;\n}\n.stats-counts[data-v-63fde0fe]{\n    color: #765d69;\n    text-align: center;\n    font-size: 20px;\n}\n", ""]);
 
 // exports
 
@@ -1085,7 +1116,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-box ul[data-v-0338a699]{\r\n    display: flex;\r\n    flex-direction: row;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-timeline[data-v-0338a699]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    background: white;\n}\n.user-woof[data-v-0338a699]{\r\n    padding: 5px;\n}\n.user-woof ul[data-v-0338a699]{\r\n    display: flex;\r\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions ul li[data-v-0338a699]{\r\n    margin-right: 20px;\n}\n.woof-actions ul li a[data-v-0338a699]{\r\n    color: #808695;\n}\r\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    border-width: 5px;\n    border-style: solid;\n    border-color: #FFFFFF;\n    border-radius: 5px;\n\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box ul[data-v-0338a699]{\n    display: flex;\n    flex-direction: row;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-timeline[data-v-0338a699]{\n    border-width: 5px;\n    border-style: solid;\n    border-color: #FFFFFF;\n    border-radius: 5px;\n\n    background: white;\n}\n.user-woof[data-v-0338a699]{\n    padding: 5px;\n}\n.user-woof ul[data-v-0338a699]{\n    display: flex;\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    float: left;\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions ul li[data-v-0338a699]{\n    margin-right: 20px;\n}\n.woof-actions ul li a[data-v-0338a699]{\n    color: #808695;\n}\n", ""]);
 
 // exports
 
@@ -1123,7 +1154,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\r\n    position: absolute;\r\n    top: 35%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,-50%);\r\n            transform: translate(-50%,-50%);\r\n    z-index: 1;\r\n    text-align: center;\r\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\r\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\r\n    margin-top: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\n    position: absolute;\n    top: 35%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n    z-index: 1;\n    text-align: center;\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\n    width: 100vw;\n    height: 100vh;\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\n    margin-top: 20px;\n}\n", ""]);
 
 // exports
 
@@ -1161,7 +1192,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin-top: 10px;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\n    width: 100%;\n    margin-top: 10px;\n    margin-bottom: 8px;\n}\n", ""]);
 
 // exports
 
@@ -1180,7 +1211,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-79d3063d]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin-top: 35px;\r\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\r\n    margin: 10px 0px !important;\r\n    width: 50%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, 0%);\r\n            transform: translate(-50%, 0%);\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-79d3063d]{\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\n    width: 100%;\n    margin-top: 35px;\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\n    margin: 10px 0px !important;\n    width: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, 0%);\n            transform: translate(-50%, 0%);\n}\n", ""]);
 
 // exports
 
@@ -44188,13 +44219,40 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("img", {
-                staticClass: "user-picture",
-                attrs: {
-                  src: __webpack_require__(/*! ../../../img/default-picture.png */ "./resources/img/default-picture.png"),
-                  alt: "DP"
-                }
-              }),
+              _c(
+                "Dropdown",
+                {
+                  staticClass: "user-picture-dropdown",
+                  attrs: { placement: "bottom-end", trigger: "click" }
+                },
+                [
+                  _c("a", { attrs: { href: "javascript:void(0)" } }, [
+                    _c("img", {
+                      staticClass: "user-picture",
+                      attrs: {
+                        src: __webpack_require__(/*! ../../../img/default-picture.png */ "./resources/img/default-picture.png"),
+                        alt: "DP"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "DropdownMenu",
+                    { attrs: { slot: "list" }, slot: "list" },
+                    [
+                      _c("DropdownItem", [_vm._v("Profile")]),
+                      _vm._v(" "),
+                      _c("DropdownItem", [_vm._v("Settings")]),
+                      _vm._v(" "),
+                      _c("Divider", { staticStyle: { margin: "5px 0px" } }),
+                      _vm._v(" "),
+                      _c("DropdownItem", [_vm._v("Logout")])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -44610,7 +44668,7 @@ var render = function() {
               staticClass: "woof-textarea",
               attrs: {
                 type: "textarea",
-                maxlength: 280,
+                maxlength: 140,
                 placeholder: "What's happening...",
                 autosize: { minRows: 1, maxRows: 5 }
               },
@@ -44668,7 +44726,7 @@ var render = function() {
     _c("div", { staticClass: "woof-timeline" }, [
       _c(
         "ul",
-        _vm._l(_vm.Woofs, function(woof) {
+        _vm._l(_vm.Woofs, function(woof, index) {
           return _c(
             "li",
             { key: woof.id },
@@ -44772,14 +44830,22 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.like()
+                              _vm.like(index)
                             }
                           }
                         },
                         [
-                          _c("Icon", {
-                            attrs: { type: "ios-heart-outline", size: "24" }
-                          }),
+                          woof.liked
+                            ? _c("Icon", {
+                                attrs: { type: "ios-heart", size: "24" }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !woof.liked
+                            ? _c("Icon", {
+                                attrs: { type: "ios-heart-outline", size: "24" }
+                              })
+                            : _vm._e(),
                           _vm._v(
                             "\n                                    " +
                               _vm._s(woof.likes) +
@@ -60425,8 +60491,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\peral\dev\woofr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\peral\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
