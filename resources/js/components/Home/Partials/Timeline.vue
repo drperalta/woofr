@@ -57,6 +57,7 @@
                                 </transition>
                                 <Icon type="ios-heart-outline" v-if="!woof.liked" size="24"/>
 
+                                <!-- this span is to add margin left when liking because the solid icon is absolute  -->
                                 <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
                             </a>
                         </div>
@@ -199,10 +200,6 @@ ul{
     width: 100%;
     margin: 5px 10px 15px 0px ;
 }
-
-
-
-/* TRANSITION ANIMATION */
 .woof-actions{
     margin-left: 57px;
     margin-bottom: 10px;
@@ -212,6 +209,15 @@ ul{
     color: #808695;
 }
 
+/* COMMENTS */
+.woof-comments{
+    margin-left: 60px;
+}
+
+
+
+
+/* TRANSITION ANIMATION */
 .bounce-enter-active {
   animation: bounce-in .5s;
 }
