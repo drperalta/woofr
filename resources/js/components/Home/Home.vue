@@ -20,7 +20,17 @@
                     Messages
                 </menu-item>
 
-                <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
+                <Dropdown class="user-picture-dropdown" trigger="click" style="margin-left: 20px">
+                    <a href="javascript:void(0)">
+                        <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
+                    </a>
+                    <DropdownMenu slot="list">
+                        <DropdownItem>Accounts</DropdownItem>
+                        <DropdownItem>Settings</DropdownItem>
+                        <Divider style="margin: 5px"/>
+                        <DropdownItem>Logout</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
 
                 <div class="nav-right">
                     <!-- SEARCH BAR -->
@@ -125,13 +135,14 @@ export default {
 }
 .user-picture{
     width: 40px;
+    border: 2px solid rgba(58, 58, 58, .2);
+    border-radius: 50%;
+}
+.user-picture-dropdown{
     float: right;
     margin-top: 11px;
     margin-left: 10px;
-    margin-right: 15px;
-
-    border: 2px solid rgba(58, 58, 58, .2);
-    border-radius: 50%;
+    margin-right: 20px;
 }
 .body{
     padding-top: 60px;
