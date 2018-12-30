@@ -587,6 +587,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -595,98 +599,7 @@ __webpack_require__.r(__webpack_exports__);
       woof_length: 0,
       WoofDetails: {
         Woof: ''
-      },
-      Woofs: [{
-        id: 1,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamDavidMe',
-        full_name: 'David Peralta',
-        comments: 5,
-        re_woof: 2,
-        likes: 7,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 2,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamNikkiMe',
-        full_name: 'Mary Nicole',
-        comments: 12,
-        re_woof: 2,
-        likes: 5,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 3,
-        woof_text: 'is simply dummy text of the printing and typesetting industry.',
-        user_name: 'beaamor0212',
-        full_name: 'Bea Amor',
-        comments: 5,
-        re_woof: 1,
-        likes: 2,
-        re_woofed: true,
-        liked: true
-      }, {
-        id: 4,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamNikkiMe',
-        full_name: 'Mary Nicole',
-        comments: 1,
-        re_woof: 5,
-        likes: 5,
-        re_woofed: false,
-        liked: false
-      }, {
-        id: 5,
-        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        user_name: 'ricamiguing_',
-        full_name: 'Rice Lois',
-        comments: 0,
-        re_woof: 2,
-        likes: 4,
-        re_woofed: false,
-        liked: true
-      }, {
-        id: 6,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        user_name: 'beaamor0212',
-        full_name: 'Bea Amor',
-        comments: 22,
-        re_woof: 12,
-        likes: 26,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 7,
-        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        user_name: 'beaamor0212',
-        full_name: 'Bea Amor',
-        comments: 6,
-        re_woof: 9,
-        likes: 15,
-        re_woofed: true,
-        liked: true
-      }, {
-        id: 8,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamDavidMe',
-        full_name: 'David Peralta',
-        comments: 5,
-        re_woof: 2,
-        likes: 7,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 9,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamNikkiMe',
-        full_name: 'Mary Nicole',
-        comments: 12,
-        re_woof: 2,
-        likes: 5,
-        re_woofed: true,
-        liked: false
-      }]
+      }
     };
   },
   methods: {
@@ -709,14 +622,14 @@ __webpack_require__.r(__webpack_exports__);
     reWoof: function reWoof() {},
     like: function like(index) {
       // Check if liked is true
-      if (this.Woofs[index].liked) {
+      if (this.$root.Woofs[index].liked) {
         // if liked is true, then make it false and minus 1 the counts
-        this.Woofs[index].liked = false;
-        this.Woofs[index].likes -= 1;
+        this.$root.Woofs[index].liked = false;
+        this.$root.Woofs[index].likes -= 1;
       } else {
         // if liked is false, then make it true and plus 1 the counts
-        this.Woofs[index].liked = true;
-        this.Woofs[index].likes += 1;
+        this.$root.Woofs[index].liked = true;
+        this.$root.Woofs[index].likes += 1;
       }
     }
   }
@@ -1116,7 +1029,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    border-width: 5px;\n    border-style: solid;\n    border-color: #FFFFFF;\n    border-radius: 5px;\n\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box ul[data-v-0338a699]{\n    display: flex;\n    flex-direction: row;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-timeline[data-v-0338a699]{\n    border-width: 5px;\n    border-style: solid;\n    border-color: #FFFFFF;\n    border-radius: 5px;\n\n    background: white;\n}\n.user-woof[data-v-0338a699]{\n    padding: 5px;\n}\n.user-woof ul[data-v-0338a699]{\n    display: flex;\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    float: left;\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions ul li[data-v-0338a699]{\n    margin-right: 20px;\n}\n.woof-actions ul li a[data-v-0338a699]{\n    color: #808695;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    border-width: 5px;\n    border-style: solid;\n    border-color: #FFFFFF;\n    border-radius: 5px;\n\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box ul[data-v-0338a699]{\n    display: flex;\n    flex-direction: row;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\n    border-width: 5px;\n    border-style: solid;\n    border-color: #FFFFFF;\n    border-radius: 5px;\n\n    background: white;\n}\n.woof-body[data-v-0338a699]{\n    padding: 5px;\n}\n.woof-body ul[data-v-0338a699]{\n    display: flex;\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    float: left;\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n\n\n\n/* TRANSITION ANIMATION */\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\n    margin-right: 20px;\n    color: #808695;\n}\n.bounce-enter-active[data-v-0338a699] {\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\n    transition: opacity .5s;\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
 
 // exports
 
@@ -44723,15 +44636,15 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "woof-timeline" }, [
+    _c("div", { staticClass: "woof-list" }, [
       _c(
         "ul",
-        _vm._l(_vm.Woofs, function(woof, index) {
+        _vm._l(this.$root.Woofs, function(woof, index) {
           return _c(
             "li",
             { key: woof.id },
             [
-              _c("div", { staticClass: "user-woof" }, [
+              _c("div", { staticClass: "woof-body" }, [
                 _c("ul", [
                   _c(
                     "li",
@@ -44775,89 +44688,89 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "woof-actions" }, [
-                  _c("ul", [
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.comment()
-                            }
-                          }
-                        },
-                        [
-                          _c("Icon", {
-                            attrs: { type: "ios-text-outline", size: "24" }
-                          }),
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(woof.comments) +
-                              "\n                                "
-                          )
-                        ],
-                        1
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.comment()
+                        }
+                      }
+                    },
+                    [
+                      _c("Icon", {
+                        attrs: { type: "ios-text-outline", size: "24" }
+                      }),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(woof.comments) +
+                          "\n                        "
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "a",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.reWoof()
-                            }
-                          }
-                        },
-                        [
-                          _c("Icon", {
-                            attrs: { type: "ios-repeat", size: "24" }
-                          }),
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(woof.re_woof) +
-                              "\n                                "
-                          )
-                        ],
-                        1
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.reWoof()
+                        }
+                      }
+                    },
+                    [
+                      _c("Icon", { attrs: { type: "ios-repeat", size: "24" } }),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(woof.re_woof) +
+                          "\n                        "
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.like(index)
+                        }
+                      }
+                    },
+                    [
                       _c(
-                        "a",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.like(index)
-                            }
-                          }
-                        },
+                        "transition",
+                        { attrs: { name: "bounce" } },
                         [
                           woof.liked
                             ? _c("Icon", {
+                                staticStyle: { position: "absolute" },
                                 attrs: { type: "ios-heart", size: "24" }
                               })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !woof.liked
-                            ? _c("Icon", {
-                                attrs: { type: "ios-heart-outline", size: "24" }
-                              })
-                            : _vm._e(),
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(woof.likes) +
-                              "\n                                "
-                          )
+                            : _vm._e()
                         ],
                         1
-                      )
-                    ])
-                  ])
+                      ),
+                      _vm._v(" "),
+                      !woof.liked
+                        ? _c("Icon", {
+                            attrs: { type: "ios-heart-outline", size: "24" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      woof.liked
+                        ? _c("span", { staticStyle: { "margin-left": "28px" } })
+                        : _vm._e(),
+                      _vm._v(_vm._s(woof.likes) + "\n                        ")
+                    ],
+                    1
+                  )
                 ])
               ]),
+              _vm._v(" "),
+              _vm._m(0, true),
               _vm._v(" "),
               _c("Divider", { staticStyle: { margin: "0" } })
             ],
@@ -44869,7 +44782,18 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "woof-comments" }, [
+      _c("div", { staticClass: "comment-box" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "comment-list" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59169,7 +59093,98 @@ var app = new Vue({
   router: _router_index__WEBPACK_IMPORTED_MODULE_1__["default"],
   data: function data() {
     return {
-      active_name: 'timeline'
+      active_name: 'timeline',
+      Woofs: [{
+        id: 1,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamDavidMe',
+        full_name: 'David Peralta',
+        comments: 5,
+        re_woof: 2,
+        likes: 7,
+        re_woofed: true,
+        liked: false
+      }, {
+        id: 2,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamNikkiMe',
+        full_name: 'Mary Nicole',
+        comments: 12,
+        re_woof: 2,
+        likes: 5,
+        re_woofed: true,
+        liked: false
+      }, {
+        id: 3,
+        woof_text: 'is simply dummy text of the printing and typesetting industry.',
+        user_name: 'beaamor0212',
+        full_name: 'Bea Amor',
+        comments: 5,
+        re_woof: 1,
+        likes: 2,
+        re_woofed: true,
+        liked: true
+      }, {
+        id: 4,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamNikkiMe',
+        full_name: 'Mary Nicole',
+        comments: 1,
+        re_woof: 5,
+        likes: 5,
+        re_woofed: false,
+        liked: false
+      }, {
+        id: 5,
+        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        user_name: 'ricamiguing_',
+        full_name: 'Rice Lois',
+        comments: 0,
+        re_woof: 2,
+        likes: 4,
+        re_woofed: false,
+        liked: true
+      }, {
+        id: 6,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        user_name: 'beaamor0212',
+        full_name: 'Bea Amor',
+        comments: 22,
+        re_woof: 12,
+        likes: 26,
+        re_woofed: true,
+        liked: false
+      }, {
+        id: 7,
+        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+        user_name: 'beaamor0212',
+        full_name: 'Bea Amor',
+        comments: 6,
+        re_woof: 9,
+        likes: 15,
+        re_woofed: true,
+        liked: true
+      }, {
+        id: 8,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamDavidMe',
+        full_name: 'David Peralta',
+        comments: 5,
+        re_woof: 2,
+        likes: 7,
+        re_woofed: true,
+        liked: false
+      }, {
+        id: 9,
+        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        user_name: 'IamNikkiMe',
+        full_name: 'Mary Nicole',
+        comments: 12,
+        re_woof: 2,
+        likes: 5,
+        re_woofed: true,
+        liked: false
+      }]
     };
   }
 });
