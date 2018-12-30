@@ -1,12 +1,13 @@
 <template>
     <div class="container">
+        <!-- WOOF BOX -->
         <div class="woof-box">
             <ul>
                 <li>
                     <Avatar class="user-avatar" icon="ios-person" size="medium" />
                 </li>
                 <li class="woof-box-middle">
-                    <Input class="woof-textarea" v-model="WoofDetails.Woof" type="textarea" :maxlength="280" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
+                    <Input class="woof-textarea" v-model="WoofDetails.Woof" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
                     <Button class="woof-button" shape="circle" :disabled="woof_length == 0" v-if="focused">Woof</Button>
                 </li>
                 <li>
@@ -15,14 +16,17 @@
             </ul>
         </div>
 
+        <!-- LIST OF ALL WOOFS -->
         <div class="woof-timeline">
             <ul>
-                <li v-for="woof in Woofs" :key="woof.id">
+                <li v-for="(woof, index) in Woofs" :key="woof.id">
                     <div class="user-woof">
                         <ul>
+                            <!-- USER'S AVATAR -->
                             <li>
                                 <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
                             </li>
+                            <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                             <li>
                                 <div class="user-woof-details">
                                     <a :href="'/'+woof.user_name" style="font-size: 14px; font-weight: 600; color: black" >{{woof.full_name}}</a>
@@ -33,8 +37,10 @@
                                 </div>
                             </li>
                         </ul>
+                        <!-- WOOF ACTIONS -->
                         <div class="woof-actions">
                             <ul>
+                                <!-- COMMENT ACTION -->
                                 <li>
                                     <a @click="comment()">
                                         <Icon type="ios-text-outline" size="24"/>
@@ -42,15 +48,18 @@
                                     </a>
 
                                 </li>
+                                <!-- RE-WOOF ACTION -->
                                 <li>
                                     <a @click="reWoof()">
                                         <Icon type="ios-repeat" size="24"/>
                                         {{woof.re_woof}}
                                     </a>
                                 </li>
+                                <!-- LIKE ACTION -->
                                 <li>
-                                    <a @click="like()">
-                                        <Icon type="ios-heart-outline" size="24"/>
+                                    <a @click="like(index)">
+                                        <Icon type="ios-heart" v-if="woof.liked" size="24"/>
+                                        <Icon type="ios-heart-outline" v-if="!woof.liked" size="24"/>
                                         {{woof.likes}}
                                     </a>
                                 </li>
@@ -87,7 +96,7 @@ export default {
                     re_woofed: true,
                     liked: false
                 },
-                {
+                 {
                     id: 2,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamNikkiMe',
@@ -176,12 +185,13 @@ export default {
                     re_woofed: true,
                     liked: false
                 },
+
             ]
         }
     },
     methods:{
         count(){
-            var quotient = this.WoofDetails.Woof.length / 280;
+            var quotient = this.WoofDetails.Woof.length / 140;
             this.percent = quotient * 100;
 
             this.woof_length = this.WoofDetails.Woof.length;
@@ -202,8 +212,17 @@ export default {
         reWoof(){
 
         },
-        like(){
-
+        like(index){
+            // Check if liked is true
+            if(this.Woofs[index].liked){
+                // if liked is true, then make it false and minus 1 the counts
+                this.Woofs[index].liked = false;
+                this.Woofs[index].likes -= 1;
+            }else{
+                // if liked is false, then make it true and plus 1 the counts
+                this.Woofs[index].liked = true;
+                this.Woofs[index].likes += 1;
+            }
         }
     }
 }
