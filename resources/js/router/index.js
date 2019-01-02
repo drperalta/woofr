@@ -13,6 +13,7 @@ import Home from '../components/Home/Home'
 import Timeline from '../components/Home/Pages/Timeline.vue'
 import Notifications from '../components/Home/Pages/Notifications.vue'
 import Messages from '../components/Home/Pages/Messages.vue'
+import Profile from '../components/Home/Pages/Profile'
 
 import Notifs from '../components/Home/Partials/Notifications/Notifs'
 import Mentions from '../components/Home/Partials/Notifications/Mentions'
@@ -43,7 +44,7 @@ let router = new VueRouter({
                     path: 'timeline', component: Timeline
                 },
                 {
-                    path: 'notifications', component: Notifications, 
+                    path: 'notifications', component: Notifications,
                     children: [
                         {
                             path: '/', component: Notifs
@@ -55,6 +56,9 @@ let router = new VueRouter({
                 },
                 {
                     path: 'messages', component: Messages
+                },
+                {
+                    path: ':username', component: Profile
                 }
             ]
         }
