@@ -121,6 +121,39 @@ const app = new Vue({
                 },
 
             ]
+
+            ,Comments:[
+                {
+                    id: 1,
+                    woof_id: 1,
+                    user_id: 1,
+                    comment_text: 'asd',
+                },
+                {
+                    id: 1,
+                    woof_id: 1,
+                    user_id: 1,
+                    comment_text: 'asd',
+                },
+                {
+                    id: 1,
+                    woof_id: 1,
+                    user_id: 1,
+                    comment_text: 'asd',
+                },
+                {
+                    id: 1,
+                    woof_id: 1,
+                    user_id: 1,
+                    comment_text: 'asd',
+                },
+                {
+                    id: 1,
+                    woof_id: 1,
+                    user_id: 1,
+                    comment_text: 'asd',
+                },
+            ]
         }
     }
 });
