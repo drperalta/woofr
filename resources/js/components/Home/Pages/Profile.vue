@@ -1,6 +1,8 @@
 <template>
     <div>
-        asdasdasd
+        <div class="profile-banner">
+
+        </div>
     </div>
 </template>
 
