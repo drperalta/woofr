@@ -44748,7 +44748,11 @@ var render = function() {
                           woof.liked
                             ? _c("Icon", {
                                 staticStyle: { position: "absolute" },
-                                attrs: { type: "ios-heart", size: "24" }
+                                attrs: {
+                                  type: "ios-heart",
+                                  size: "24",
+                                  color: "#db5353"
+                                }
                               })
                             : _vm._e()
                         ],
@@ -59185,6 +59189,32 @@ var app = new Vue({
         likes: 5,
         re_woofed: true,
         liked: false
+      }],
+      Comments: [{
+        id: 1,
+        woof_id: 1,
+        user_id: 1,
+        comment_text: 'asd'
+      }, {
+        id: 1,
+        woof_id: 1,
+        user_id: 1,
+        comment_text: 'asd'
+      }, {
+        id: 1,
+        woof_id: 1,
+        user_id: 1,
+        comment_text: 'asd'
+      }, {
+        id: 1,
+        woof_id: 1,
+        user_id: 1,
+        comment_text: 'asd'
+      }, {
+        id: 1,
+        woof_id: 1,
+        user_id: 1,
+        comment_text: 'asd'
       }]
     };
   }

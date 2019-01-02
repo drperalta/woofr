@@ -53,9 +53,9 @@
                             <!-- LIKE ACTION -->
                             <a @click="like(index)">
                                 <transition name="bounce">
-                                    <Icon type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;"/>
+                                    <Icon type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;" color="#db5353"/>
                                 </transition>
-                                <Icon type="ios-heart-outline" v-if="!woof.liked" size="24"/>
+                                <Icon type="ios-heart-outline" v-if="!woof.liked" size="24" />
 
                                 <!-- this span is to add margin left when liking because the solid icon is absolute  -->
                                 <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
