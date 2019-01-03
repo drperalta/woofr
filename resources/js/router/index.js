@@ -18,6 +18,11 @@ import Profile from '../components/Home/Pages/Profile'
 import Notifs from '../components/Home/Partials/Notifications/Notifs'
 import Mentions from '../components/Home/Partials/Notifications/Mentions'
 
+import Woofs from '../components/Home/Partials/Profile/Woofs'
+import Followers from '../components/Home/Partials/Profile/Followers'
+import Following from '../components/Home/Partials/Profile/Following'
+import Likes from '../components/Home/Partials/Profile/Likes'
+
 let router = new VueRouter({
 
     mode: 'history',
@@ -58,7 +63,21 @@ let router = new VueRouter({
                     path: 'messages', component: Messages
                 },
                 {
-                    path: 'profile', component: Profile
+                    path: 'profile', component: Profile, redirect: {path: 'Profile/woofs'}, children: [
+                        {
+                            path: 'woofs', component: Woofs
+                        },
+                        {
+                            path: 'following', component: Following
+                        },
+                        {
+                            path: 'followers', component: Followers
+                        },
+                        {
+                            path: 'likes', component: Likes
+                        }
+
+                    ]
                 }
             ]
         }
