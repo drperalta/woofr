@@ -20,7 +20,7 @@
                     <!-- TWEETS -->
                     <li>
                         <router-link to="#">
-                            <span class="span stats-name">Tweets</span>
+                            <span class="span stats-name">Woofs</span>
                             <span class="span stats-counts">120</span>
                         </router-link>
                     </li>
@@ -56,7 +56,7 @@ background-color: white;
 }
 /* USER BANNER */
 .user-banner{
-    height: 95px;
+    height: 85px;
     background-color: aquamarine;
     border: 1px solid white;
     border-radius: 5px;
@@ -65,7 +65,7 @@ background-color: white;
     position: absolute;
     width: 70px;
 
-    margin-top: 75px;
+    margin-top: 55px;
     margin-left: 20px;
 
     border: 3px solid white;
@@ -73,7 +73,7 @@ background-color: white;
 }
 .user-field{
     margin-left: 110px;
-    padding-top: 95px;
+    padding-top: 85px;
 }
 .name{
     font-size: 18px;
