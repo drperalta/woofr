@@ -21,6 +21,7 @@ const app = new Vue({
             Woofs:[
                 {
                     id: 1,
+                    user_id: 1,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamDavidMe',
                     full_name: 'David Peralta',
@@ -32,6 +33,7 @@ const app = new Vue({
                 },
                 {
                     id: 2,
+                    user_id: 2,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamNikkiMe',
                     full_name: 'Mary Nicole',
@@ -43,6 +45,7 @@ const app = new Vue({
                 },
                 {
                     id: 3,
+                    user_id: 3,
                     woof_text: 'is simply dummy text of the printing and typesetting industry.',
                     user_name: 'beaamor0212',
                     full_name: 'Bea Amor',
@@ -54,6 +57,7 @@ const app = new Vue({
                 },
                 {
                     id: 4,
+                    user_id: 2,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamNikkiMe',
                     full_name: 'Mary Nicole',
@@ -66,6 +70,7 @@ const app = new Vue({
                 },
                 {
                     id: 5,
+                    user_id: 4,
                     woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
                     user_name: 'ricamiguing_',
                     full_name: 'Rice Lois',
@@ -77,6 +82,7 @@ const app = new Vue({
                 },
                 {
                     id: 6,
+                    user_id: 3,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
                     user_name: 'beaamor0212',
                     full_name: 'Bea Amor',
@@ -88,6 +94,7 @@ const app = new Vue({
                 },
                 {
                     id: 7,
+                    user_id: 3,
                     woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
                     user_name: 'beaamor0212',
                     full_name: 'Bea Amor',
@@ -99,6 +106,7 @@ const app = new Vue({
                 },
                 {
                     id: 8,
+                    user_id: 1,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamDavidMe',
                     full_name: 'David Peralta',
@@ -110,6 +118,7 @@ const app = new Vue({
                 },
                 {
                     id: 9,
+                    user_id: 2,
                     woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     user_name: 'IamNikkiMe',
                     full_name: 'Mary Nicole',
@@ -132,25 +141,25 @@ const app = new Vue({
                 {
                     id: 1,
                     woof_id: 1,
-                    user_id: 1,
+                    user_id: 2,
                     comment_text: 'asd',
                 },
                 {
                     id: 1,
                     woof_id: 1,
-                    user_id: 1,
+                    user_id: 2,
                     comment_text: 'asd',
                 },
                 {
                     id: 1,
                     woof_id: 1,
-                    user_id: 1,
+                    user_id: 3,
                     comment_text: 'asd',
                 },
                 {
                     id: 1,
                     woof_id: 1,
-                    user_id: 1,
+                    user_id: 4,
                     comment_text: 'asd',
                 },
             ]
