@@ -58,7 +58,7 @@ let router = new VueRouter({
                     path: 'messages', component: Messages
                 },
                 {
-                    path: ':username', component: Profile
+                    path: 'profile', component: Profile
                 }
             ]
         }
