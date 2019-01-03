@@ -12,6 +12,7 @@
                     <a href="#" class="username">@{{UserDetails.user_name}}</a>
                 </div>
             </div>
+            
             <div class="profile-menu">
                 <div class="profile-menu-items">
                     <ul>
@@ -43,10 +44,30 @@
                 </div>
             </div>
         </div>
-
+        <div class="user-description">
+            <div class="description">{{UserDetails.description}}</div>
+            <div class="description-list">
+                <Icon type="ios-pin-outline" size="24"/>
+                {{UserDetails.country}}
+            </div>
+            <div class="description-list" >
+                <Icon type="ios-link-outline" size="24"/>
+                <a :href="'http://'+UserDetails.website">{{UserDetails.website}}</a>
+            </div>
+            <div class="description-list">
+                <Icon type="ios-calendar-outline" size="24"/>
+                {{UserDetails.created_at}}
+            </div>
+            <div class="description-list">
+                <Icon type="ios-ice-cream-outline" size="24"/>
+                Born {{UserDetails.birthdate}}
+            </div>
+        </div>
         <div class="profile-body">
             <router-view></router-view>
         </div>
+
+        
     </div>
 </template>
 
@@ -57,6 +78,11 @@ export default {
             UserDetails:{
                 full_name: 'David Peralta',
                 user_name: 'IamDavidMe',
+                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                country:' Republic of the Philippines',
+                created_at: 'January 2019',
+                website: 'facebook.com/peraltadavidr',
+                birthdate: 'April 20, 1998',
                 woof_counts: '120',
                 follower_counts: '210',
                 following_counts: '400',
@@ -78,6 +104,7 @@ export default {
     border-radius: 0px 0px 10px 10px;
 
     background-color: white;
+    margin: 0px 5px 5px 5px;
 }
 .profile-banner{
     width: auto;
@@ -90,16 +117,16 @@ export default {
 }
 .user-img{
     position: absolute;
-    width: 160px;
+    width: 170px;
 
-    margin-top: 300px;
-    margin-left: 50px;
+    margin-top: 320px;
+    margin-left: 55px;
 
     border: 5px solid white;
     border-radius: 50%;
 }
 .user-field{
-    margin-left: 260px;
+    margin-left: 291px;
     padding-top: 370px;
 }
 .name{
@@ -145,14 +172,32 @@ export default {
     font-size: 14px;
     text-align: center;
 }
-
 .profile-body{
-    border-width: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.user-description{
+    border-width: 5px;
     border-style: solid;
     border-color: #FFFFFF;
-    border-radius: 10px;
-
+    border-radius: 5px;
+    
     background-color: white;
-    margin-top: 30px;
+
+    margin: 10px 5px 5px 5px;
+    max-width: 290px;
+    min-width: 290px;
+
+    float: left;
+    padding: 40px 25px 20px 25px;
+}
+.description{
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.description-list{
+    margin-bottom: 6px;
 }
 </style>
