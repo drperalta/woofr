@@ -26,7 +26,7 @@
                         <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
                     </a>
                     <DropdownMenu slot="list">
-                        <DropdownItem>Profile</DropdownItem>
+                        <router-link to="/profile"><DropdownItem>Profile</DropdownItem></router-link>
                         <DropdownItem>Settings</DropdownItem>
                         <Divider style="margin: 5px 0px"/>
                         <DropdownItem>Logout</DropdownItem>
