@@ -12,11 +12,11 @@
                     <Icon type="md-home" style="margin: 0"/>
                     Home
                 </menu-item>
-                <menu-item class="menu-item" name="notifications" to="notifications">
+                <menu-item class="menu-item" name="notifications" to="/notifications">
                     <Icon type="md-notifications" style="margin: 0"/>
                     Notifications
                 </menu-item>
-                <menu-item class="menu-item" name="messages" to="messages">
+                <menu-item class="menu-item" name="messages" to="/messages">
                     <Icon type="md-chatboxes" style="margin: 0" />
                     Messages
                 </menu-item>
