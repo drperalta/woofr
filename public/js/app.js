@@ -349,12 +349,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       UserDetails: {
         full_name: 'David Peralta',
         user_name: 'IamDavidMe',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        country: ' Republic of the Philippines',
+        created_at: 'January 2019',
+        website: 'facebook.com/peraltadavidr',
+        birthdate: 'April 20, 1998',
         woof_counts: '120',
         follower_counts: '210',
         following_counts: '400',
@@ -659,13 +685,89 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Trending__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Trending */ "./resources/js/components/Home/Partials/Trending.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Trending: _Trending__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {};
   }
@@ -1124,7 +1226,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-7448c399]{\n}\n.profile-top[data-v-7448c399]{\r\n    border-width: 10px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 0px 0px 10px 10px;\r\n\r\n    background-color: white;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 367px;\r\n    background-color: azure;\r\n   box-shadow:         inset 0 0 15px #e0e0e0;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 160px;\r\n\r\n    margin-top: 300px;\r\n    margin-left: 50px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 260px;\r\n    padding-top: 370px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul[data-v-7448c399]{\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\n.profile-body[data-v-7448c399]{\r\n    border-width: 10px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 10px;\r\n\r\n    background-color: white;\r\n    margin-top: 30px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-7448c399]{\n}\n.profile-top[data-v-7448c399]{\r\n    border-width: 10px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 0px 0px 10px 10px;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 367px;\r\n    background-color: azure;\r\n   box-shadow:         inset 0 0 15px #e0e0e0;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 320px;\r\n    margin-left: 55px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 370px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul[data-v-7448c399]{\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\n.profile-body[data-v-7448c399]{\r\n    border-radius: 10px;\r\n    background-color: white;\r\n    margin-top: 10px;\n}\n.user-description[data-v-7448c399]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n    \r\n    background-color: white;\r\n\r\n    margin: 10px 5px 5px 5px;\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n\r\n    float: left;\r\n    padding: 40px 25px 20px 25px;\n}\n.description[data-v-7448c399]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\n}\n.description-list[data-v-7448c399]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
 
 // exports
 
@@ -1276,7 +1378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content[data-v-04ee7ef6]{\r\n    background-color: white;\n}\n.user-woofs[data-v-04ee7ef6]{\r\n    float: left;\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n    background-color: white;\r\n    margin: 5px;\n}\n.trending[data-v-04ee7ef6]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    margin: 5px;\n}\nul[data-v-04ee7ef6]{\r\n    list-style: none;\n}\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\r\n    background-color: white;\n}\n.woof-list[data-v-04ee7ef6]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    background: white;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 5px;\n}\n.woof-body ul[data-v-04ee7ef6]{\r\n    display: flex;\r\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n", ""]);
 
 // exports
 
@@ -44870,6 +44972,63 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "user-description" }, [
+      _c("div", { staticClass: "description" }, [
+        _vm._v(_vm._s(_vm.UserDetails.description))
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "description-list" },
+        [
+          _c("Icon", { attrs: { type: "ios-pin-outline", size: "24" } }),
+          _vm._v(
+            "\n            " + _vm._s(_vm.UserDetails.country) + "\n        "
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "description-list" },
+        [
+          _c("Icon", { attrs: { type: "ios-link-outline", size: "24" } }),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "http://" + _vm.UserDetails.website } }, [
+            _vm._v(_vm._s(_vm.UserDetails.website))
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "description-list" },
+        [
+          _c("Icon", { attrs: { type: "ios-calendar-outline", size: "24" } }),
+          _vm._v(
+            "\n            " + _vm._s(_vm.UserDetails.created_at) + "\n        "
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "description-list" },
+        [
+          _c("Icon", { attrs: { type: "ios-ice-cream-outline", size: "24" } }),
+          _vm._v(
+            "\n            Born " +
+              _vm._s(_vm.UserDetails.birthdate) +
+              "\n        "
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "profile-body" }, [_c("router-view")], 1)
   ])
 }
@@ -45192,9 +45351,212 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    WOOFS\n")])
+  return _c("div", { staticClass: "content" }, [
+    _c(
+      "div",
+      { staticClass: "user-woofs" },
+      [
+        _c(
+          "div",
+          { staticClass: "woofs-header" },
+          [
+            _c(
+              "ButtonGroup",
+              [
+                _c("Button", { attrs: { size: "large", to: "#" } }, [
+                  _vm._v("Woofs")
+                ]),
+                _vm._v(" "),
+                _c("Button", { attrs: { size: "large", to: "#" } }, [
+                  _vm._v("Replies")
+                ]),
+                _vm._v(" "),
+                _c("Button", { attrs: { size: "large", to: "#" } }, [
+                  _vm._v("Media")
+                ])
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("Divider", { staticStyle: { margin: "5px 0px" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "woof-list" }, [
+          _c(
+            "ul",
+            _vm._l(this.$root.Woofs, function(woof, index) {
+              return _c(
+                "li",
+                { key: woof.id },
+                [
+                  _c("div", { staticClass: "woof-body" }, [
+                    _c("ul", [
+                      _c(
+                        "li",
+                        [
+                          _c("Avatar", {
+                            staticClass: "user-woof-avatar",
+                            attrs: { icon: "ios-person", size: "large" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("div", { staticClass: "user-woof-details" }, [
+                          _c(
+                            "a",
+                            {
+                              staticStyle: {
+                                "font-size": "14px",
+                                "font-weight": "600",
+                                color: "black"
+                              },
+                              attrs: { href: "/" + woof.user_name }
+                            },
+                            [_vm._v(_vm._s(woof.full_name))]
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticStyle: { color: "grey" } }, [
+                            _vm._v("@" + _vm._s(woof.user_name))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "font-size": "13px" } }, [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(woof.woof_text) +
+                                "\n                                    "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "woof-actions" }, [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.comment()
+                            }
+                          }
+                        },
+                        [
+                          _c("Icon", {
+                            attrs: { type: "ios-text-outline", size: "24" }
+                          }),
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(woof.comments) +
+                              "\n                            "
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.reWoof()
+                            }
+                          }
+                        },
+                        [
+                          _c("Icon", {
+                            attrs: { type: "ios-repeat", size: "24" }
+                          }),
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(woof.re_woof) +
+                              "\n                            "
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.like(index)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "transition",
+                            { attrs: { name: "bounce" } },
+                            [
+                              woof.liked
+                                ? _c("Icon", {
+                                    staticStyle: { position: "absolute" },
+                                    attrs: {
+                                      type: "ios-heart",
+                                      size: "24",
+                                      color: "#db5353"
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          !woof.liked
+                            ? _c("Icon", {
+                                attrs: { type: "ios-heart-outline", size: "24" }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          woof.liked
+                            ? _c("span", {
+                                staticStyle: { "margin-left": "28px" }
+                              })
+                            : _vm._e(),
+                          _vm._v(
+                            _vm._s(woof.likes) +
+                              "\n                            "
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _c("Divider", { staticStyle: { margin: "0" } })
+                ],
+                1
+              )
+            }),
+            0
+          )
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "trending" }, [_c("Trending")], 1)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "woof-comments" }, [
+      _c("div", { staticClass: "comment-box" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "comment-list" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59768,6 +60130,7 @@ var app = new Vue({
       active_name: 'timeline',
       Woofs: [{
         id: 1,
+        user_id: 1,
         woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
         user_name: 'IamDavidMe',
         full_name: 'David Peralta',
@@ -59778,6 +60141,7 @@ var app = new Vue({
         liked: false
       }, {
         id: 2,
+        user_id: 2,
         woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
         user_name: 'IamNikkiMe',
         full_name: 'Mary Nicole',
@@ -59788,6 +60152,7 @@ var app = new Vue({
         liked: false
       }, {
         id: 3,
+        user_id: 3,
         woof_text: 'is simply dummy text of the printing and typesetting industry.',
         user_name: 'beaamor0212',
         full_name: 'Bea Amor',
@@ -59798,6 +60163,7 @@ var app = new Vue({
         liked: true
       }, {
         id: 4,
+        user_id: 2,
         woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
         user_name: 'IamNikkiMe',
         full_name: 'Mary Nicole',
@@ -59808,6 +60174,7 @@ var app = new Vue({
         liked: false
       }, {
         id: 5,
+        user_id: 4,
         woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
         user_name: 'ricamiguing_',
         full_name: 'Rice Lois',
@@ -59818,6 +60185,7 @@ var app = new Vue({
         liked: true
       }, {
         id: 6,
+        user_id: 3,
         woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
         user_name: 'beaamor0212',
         full_name: 'Bea Amor',
@@ -59828,6 +60196,7 @@ var app = new Vue({
         liked: false
       }, {
         id: 7,
+        user_id: 3,
         woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
         user_name: 'beaamor0212',
         full_name: 'Bea Amor',
@@ -59838,6 +60207,7 @@ var app = new Vue({
         liked: true
       }, {
         id: 8,
+        user_id: 1,
         woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
         user_name: 'IamDavidMe',
         full_name: 'David Peralta',
@@ -59848,6 +60218,7 @@ var app = new Vue({
         liked: false
       }, {
         id: 9,
+        user_id: 2,
         woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
         user_name: 'IamNikkiMe',
         full_name: 'Mary Nicole',
@@ -59865,22 +60236,22 @@ var app = new Vue({
       }, {
         id: 1,
         woof_id: 1,
-        user_id: 1,
+        user_id: 2,
         comment_text: 'asd'
       }, {
         id: 1,
         woof_id: 1,
-        user_id: 1,
+        user_id: 2,
         comment_text: 'asd'
       }, {
         id: 1,
         woof_id: 1,
-        user_id: 1,
+        user_id: 3,
         comment_text: 'asd'
       }, {
         id: 1,
         woof_id: 1,
-        user_id: 1,
+        user_id: 4,
         comment_text: 'asd'
       }]
     };
