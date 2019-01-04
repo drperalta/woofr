@@ -36,12 +36,12 @@
                 <div class="nav-right">
                     <!-- SEARCH BAR -->
                     <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
-                        <Option v-for="user in filteredUsers" :value="user.name" :key="user.name">
-                                <router-link :to="user.username">
+                        <Option v-for="user in filteredUsers" :value="user.full_name" :key="user.id">
+                                <router-link :to="user.user_name">
                                     <Avatar icon="ios-person" size="small" style="margin-right: 5px;"/>
-                                    {{ user.name }}
+                                    {{ user.full_name }}
                                 </router-link>
-                                <span>@{{ user.username }}</span>
+                                <span>@{{ user.user_name }}</span>
                         </Option>
                     </AutoComplete>
                 </div>
@@ -66,8 +66,8 @@ export default {
         filterList(){
 
             var vm=this;
-            var listByUsername = this.$root.users.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
-            var listByName = this.$root.users.filter(function(data){return data.name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByUsername = this.$root.users.filter(function(data){return data.user_name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByName = this.$root.users.filter(function(data){return data.full_name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
 
             if(listByUsername == ''){
                 this.filteredUsers = listByName

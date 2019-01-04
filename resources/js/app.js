@@ -17,22 +17,63 @@ const app = new Vue({
     data(){
         return{
             active_name: 'timeline',
+            profile_active_page: 'woofs',
             users: [
-                {
-                    name: 'Bea Amor',
-                    username: 'beaamor0212'
+                {   
+                    id: 1,
+                    full_name: 'Bea Amor',
+                    user_name: 'beaamor0212',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
                 },
-                {
-                    name: 'David Peralta',
-                    username: 'IamDavidMe'
+                {   id: 2,
+                    full_name: 'David Peralta',
+                    user_name: 'IamDavidMe',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
                 },
-                {
-                    name: 'Nikki',
-                    username: 'iAmNikkiME'
+                {   
+                    id: 3,
+                    full_name: 'Nikki',
+                    user_name: 'iAmNikkiME',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
                 },
-                {
-                    name: 'Rica Camiguing',
-                    username: 'ricamiguing_'
+                {   id: 4,
+                    full_name: 'Rica Camiguing',
+                    user_name: 'ricamiguing_',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
+                },
+                {   id: 5,
+                    full_name: 'Jan Raphael',
+                    user_name: 'janraphael11',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
+                },
+                {   id: 6,
+                    full_name: 'Tacs',
+                    user_name: 'xtephaein',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
+                },
+                {   id: 7,
+                    full_name: 'Lizzy',
+                    user_name: 'heyitsmelizzy',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
+                },
+                {   id: 8,
+                    full_name: 'Deysi',
+                    user_name: 'aisybomi',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
+                },
+                {   id: 9,
+                    full_name: 'L i a n',
+                    user_name: 'cstrlian',
+                    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                    following: true,
                 }
             ],
             Woofs:[
