@@ -181,10 +181,10 @@ __webpack_require__.r(__webpack_exports__);
     filterList: function filterList() {
       var vm = this;
       var listByUsername = this.$root.users.filter(function (data) {
-        return data.username.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
+        return data.user_name.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
       });
       var listByName = this.$root.users.filter(function (data) {
-        return data.name.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
+        return data.full_name.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
       });
 
       if (listByUsername == '') {
@@ -284,6 +284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Partials_Trending__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Partials/Trending */ "./resources/js/components/Home/Partials/Trending.vue");
 //
 //
 //
@@ -357,7 +358,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Trending: _Partials_Trending__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       UserDetails: {
@@ -372,8 +383,16 @@ __webpack_require__.r(__webpack_exports__);
         follower_counts: '210',
         following_counts: '400',
         like_counts: '390'
-      }
+      },
+      page: this.$root.profile_active_page
     };
+  },
+  methods: {
+    trend: function trend() {
+      if (this.$root.profile_active_page == 'followers' || this.$root.profile_active_page == 'following' || this.$root.profile_active_page == 'likes') {
+        return true;
+      }
+    }
   }
 });
 
@@ -609,9 +628,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  methods: {
+    unfollow: function unfollow(index) {
+      this.$root.users[index].following = false;
+    },
+    follow: function follow(index) {
+      this.$root.users[index].following = true;
+    }
+  },
+  created: function created() {
+    this.$root.profile_active_page = window.location.href.split('/')[4];
   }
 });
 
@@ -632,9 +675,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  methods: {
+    unfollow: function unfollow(index) {
+      this.$root.users[index].following = false;
+    },
+    follow: function follow(index) {
+      this.$root.users[index].following = true;
+    }
+  },
+  created: function created() {
+    this.$root.profile_active_page = window.location.href.split('/')[4];
   }
 });
 
@@ -658,6 +725,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  created: function created() {
+    this.$root.profile_active_page = window.location.href.split('/')[4];
   }
 });
 
@@ -757,6 +827,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {};
+  },
+  created: function created() {
+    this.$root.profile_active_page = window.location.href.split('/')[4];
   }
 });
 
@@ -1213,7 +1286,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-7448c399]{\n}\n.profile-top[data-v-7448c399]{\r\n    border-width: 10px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 0px 0px 10px 10px;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 367px;\r\n    background-color: azure;\r\n   box-shadow:         inset 0 0 15px #e0e0e0;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 320px;\r\n    margin-left: 55px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 370px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul[data-v-7448c399]{\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\n.profile-body[data-v-7448c399]{\r\n    border-radius: 10px;\r\n    background-color: white;\r\n    margin-top: 10px;\n}\n.user-description[data-v-7448c399]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n    \r\n    background-color: white;\r\n\r\n    margin: 10px 5px 5px 5px;\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n\r\n    float: left;\r\n    padding: 40px 25px 20px 25px;\n}\n.description[data-v-7448c399]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\n}\n.description-list[data-v-7448c399]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-7448c399]{\n}\n.profile-top[data-v-7448c399]{\r\n    border-width: 10px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 0px 0px 10px 10px;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 352px;\r\n    background-color: azure;\r\n    box-shadow:         inset 0 0 15px #e0e0e0;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 310px;\r\n    margin-left: 55px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 355px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul[data-v-7448c399]{\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\n.profile-body[data-v-7448c399]{\r\n    border-radius: 10px;\r\n    background-color: white;\r\n    margin-top: 10px;\n}\n.left-box[data-v-7448c399]{\r\n    float: left;\r\n    \r\n    max-width: 290px;\r\n    min-width: 290px;\n}\n.trending[data-v-7448c399]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    margin: 10px 5px;\n}\n.user-description[data-v-7448c399]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n    \r\n    background-color: white;\r\n\r\n    margin: 10px 5px 5px 5px;\r\n    padding: 40px 25px 20px 25px;\n}\n.description[data-v-7448c399]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\n}\n.description-list[data-v-7448c399]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
 
 // exports
 
@@ -1308,7 +1381,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content[data-v-740e7432]{\r\n    float: left;\r\n    background: transparent;\r\n    width: 895px;\r\n    \r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.title[data-v-740e7432]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.list[data-v-740e7432]{\r\n    display: block;\r\n    float: left;\r\n\r\n    width: 287px;\r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: white;\r\n    border-radius: 5px;\r\n\r\n    margin: 5px;\r\n\r\n    background-color: white;\n}\n.followers-banner[data-v-740e7432]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\r\n    \r\n    margin: 5px;\n}\n.followers-img[data-v-740e7432]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n    \r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\r\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\r\n    height: 150px;      \r\n    padding: 30px;\n}\n.description[data-v-740e7432]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n    \r\n    text-align: center;\n}\n.button[data-v-740e7432]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -1327,7 +1400,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.content[data-v-dbd5933a]{\r\n    float: left;\r\n    background: transparent;\r\n    width: 895px;\r\n    \r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.title[data-v-dbd5933a]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.list[data-v-dbd5933a]{\r\n    display: block;\r\n    float: left;\r\n\r\n    width: 287px;\r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: white;\r\n    border-radius: 5px;\r\n\r\n    margin: 5px;\r\n\r\n    background-color: white;\n}\n.following-banner[data-v-dbd5933a]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\r\n    \r\n    margin: 5px;\n}\n.following-img[data-v-dbd5933a]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n    \r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\r\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\r\n    height: 150px;      \r\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n    \r\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -1346,7 +1419,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -44706,11 +44779,11 @@ var render = function() {
                     _vm._l(_vm.filteredUsers, function(user) {
                       return _c(
                         "Option",
-                        { key: user.name, attrs: { value: user.name } },
+                        { key: user.id, attrs: { value: user.full_name } },
                         [
                           _c(
                             "router-link",
-                            { attrs: { to: user.username } },
+                            { attrs: { to: user.user_name } },
                             [
                               _c("Avatar", {
                                 staticStyle: { "margin-right": "5px" },
@@ -44718,14 +44791,14 @@ var render = function() {
                               }),
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(user.name) +
+                                  _vm._s(user.full_name) +
                                   "\n                            "
                               )
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c("span", [_vm._v("@" + _vm._s(user.username))])
+                          _c("span", [_vm._v("@" + _vm._s(user.user_name))])
                         ],
                         1
                       )
@@ -44959,61 +45032,73 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "user-description" }, [
-      _c("div", { staticClass: "description" }, [
-        _vm._v(_vm._s(_vm.UserDetails.description))
+    _c("div", { staticClass: "left-box" }, [
+      _c("div", { staticClass: "user-description" }, [
+        _c("div", { staticClass: "description" }, [
+          _vm._v(_vm._s(_vm.UserDetails.description))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "description-list" },
+          [
+            _c("Icon", { attrs: { type: "ios-pin-outline", size: "24" } }),
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.UserDetails.country) +
+                "\n            "
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "description-list" },
+          [
+            _c("Icon", { attrs: { type: "ios-link-outline", size: "24" } }),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "http://" + _vm.UserDetails.website } }, [
+              _vm._v(_vm._s(_vm.UserDetails.website))
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "description-list" },
+          [
+            _c("Icon", { attrs: { type: "ios-calendar-outline", size: "24" } }),
+            _vm._v(
+              "\n                " +
+                _vm._s(_vm.UserDetails.created_at) +
+                "\n            "
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "description-list" },
+          [
+            _c("Icon", {
+              attrs: { type: "ios-ice-cream-outline", size: "24" }
+            }),
+            _vm._v(
+              "\n                Born " +
+                _vm._s(_vm.UserDetails.birthdate) +
+                "\n            "
+            )
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-pin-outline", size: "24" } }),
-          _vm._v(
-            "\n            " + _vm._s(_vm.UserDetails.country) + "\n        "
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-link-outline", size: "24" } }),
-          _vm._v(" "),
-          _c("a", { attrs: { href: "http://" + _vm.UserDetails.website } }, [
-            _vm._v(_vm._s(_vm.UserDetails.website))
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-calendar-outline", size: "24" } }),
-          _vm._v(
-            "\n            " + _vm._s(_vm.UserDetails.created_at) + "\n        "
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-ice-cream-outline", size: "24" } }),
-          _vm._v(
-            "\n            Born " +
-              _vm._s(_vm.UserDetails.birthdate) +
-              "\n        "
-          )
-        ],
-        1
-      )
+      _vm.trend()
+        ? _c("div", { staticClass: "trending" }, [_c("Trending")], 1)
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "profile-body" }, [_c("router-view")], 1)
@@ -45266,7 +45351,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    { staticClass: "content" },
+    _vm._l(this.$root.users, function(followers, index) {
+      return _c("div", { key: index, staticClass: "list" }, [
+        _c("div", { staticClass: "followers-banner" }, [
+          _c("img", {
+            staticClass: "followers-img",
+            attrs: { src: __webpack_require__(/*! ../../../../../img/default-picture.png */ "./resources/img/default-picture.png") }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "followers-field" }, [
+            _c("div", { staticClass: "name" }, [
+              _vm._v(_vm._s(followers.full_name))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "username" }, [
+              _vm._v("@" + _vm._s(followers.user_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "followers-body" },
+          [
+            _c("div", { staticClass: "description" }, [
+              _vm._v(_vm._s(followers.description))
+            ]),
+            _vm._v(" "),
+            followers.following
+              ? _c(
+                  "Button",
+                  {
+                    staticClass: "button",
+                    attrs: { type: "primary", shape: "circle" },
+                    on: {
+                      click: function($event) {
+                        _vm.unfollow(index)
+                      }
+                    }
+                  },
+                  [_vm._v("Following")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            !followers.following
+              ? _c(
+                  "Button",
+                  {
+                    staticClass: "button",
+                    attrs: { shape: "circle" },
+                    on: {
+                      click: function($event) {
+                        _vm.follow(index)
+                      }
+                    }
+                  },
+                  [_vm._v("Follow")]
+                )
+              : _vm._e()
+          ],
+          1
+        )
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45290,7 +45442,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    { staticClass: "content" },
+    _vm._l(this.$root.users, function(following, index) {
+      return _c("div", { key: index, staticClass: "list" }, [
+        _c("div", { staticClass: "following-banner" }, [
+          _c("img", {
+            staticClass: "following-img",
+            attrs: { src: __webpack_require__(/*! ../../../../../img/default-picture.png */ "./resources/img/default-picture.png") }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "following-field" }, [
+            _c("div", { staticClass: "name" }, [
+              _vm._v(_vm._s(following.full_name))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "username" }, [
+              _vm._v("@" + _vm._s(following.user_name))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "following-body" },
+          [
+            _c("div", { staticClass: "description" }, [
+              _vm._v(_vm._s(following.description))
+            ]),
+            _vm._v(" "),
+            following.following
+              ? _c(
+                  "Button",
+                  {
+                    staticClass: "button",
+                    attrs: { type: "primary", shape: "circle" },
+                    on: {
+                      click: function($event) {
+                        _vm.unfollow(index)
+                      }
+                    }
+                  },
+                  [_vm._v("Following")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            !following.following
+              ? _c(
+                  "Button",
+                  {
+                    staticClass: "button",
+                    attrs: { type: "primary", shape: "circle" },
+                    on: {
+                      click: function($event) {
+                        _vm.follow(index)
+                      }
+                    }
+                  },
+                  [_vm._v("Follow")]
+                )
+              : _vm._e()
+          ],
+          1
+        )
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60115,18 +60334,61 @@ var app = new Vue({
   data: function data() {
     return {
       active_name: 'timeline',
+      profile_active_page: 'woofs',
       users: [{
-        name: 'Bea Amor',
-        username: 'beaamor0212'
+        id: 1,
+        full_name: 'Bea Amor',
+        user_name: 'beaamor0212',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
       }, {
-        name: 'David Peralta',
-        username: 'IamDavidMe'
+        id: 2,
+        full_name: 'David Peralta',
+        user_name: 'IamDavidMe',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
       }, {
-        name: 'Nikki',
-        username: 'iAmNikkiME'
+        id: 3,
+        full_name: 'Nikki',
+        user_name: 'iAmNikkiME',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
       }, {
-        name: 'Rica Camiguing',
-        username: 'ricamiguing_'
+        id: 4,
+        full_name: 'Rica Camiguing',
+        user_name: 'ricamiguing_',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
+      }, {
+        id: 5,
+        full_name: 'Jan Raphael',
+        user_name: 'janraphael11',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
+      }, {
+        id: 6,
+        full_name: 'Tacs',
+        user_name: 'xtephaein',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
+      }, {
+        id: 7,
+        full_name: 'Lizzy',
+        user_name: 'heyitsmelizzy',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
+      }, {
+        id: 8,
+        full_name: 'Deysi',
+        user_name: 'aisybomi',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
+      }, {
+        id: 9,
+        full_name: 'L i a n',
+        user_name: 'cstrlian',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+        following: true
       }],
       Woofs: [{
         id: 1,

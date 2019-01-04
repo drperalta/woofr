@@ -44,23 +44,29 @@
                 </div>
             </div>
         </div>
-        <div class="user-description">
-            <div class="description">{{UserDetails.description}}</div>
-            <div class="description-list">
-                <Icon type="ios-pin-outline" size="24"/>
-                {{UserDetails.country}}
+        <div class="left-box">
+            <div class="user-description">
+                <div class="description">{{UserDetails.description}}</div>
+                <div class="description-list">
+                    <Icon type="ios-pin-outline" size="24"/>
+                    {{UserDetails.country}}
+                </div>
+                <div class="description-list" >
+                    <Icon type="ios-link-outline" size="24"/>
+                    <a :href="'http://'+UserDetails.website">{{UserDetails.website}}</a>
+                </div>
+                <div class="description-list">
+                    <Icon type="ios-calendar-outline" size="24"/>
+                    {{UserDetails.created_at}}
+                </div>
+                <div class="description-list">
+                    <Icon type="ios-ice-cream-outline" size="24"/>
+                    Born {{UserDetails.birthdate}}
+                </div>
             </div>
-            <div class="description-list" >
-                <Icon type="ios-link-outline" size="24"/>
-                <a :href="'http://'+UserDetails.website">{{UserDetails.website}}</a>
-            </div>
-            <div class="description-list">
-                <Icon type="ios-calendar-outline" size="24"/>
-                {{UserDetails.created_at}}
-            </div>
-            <div class="description-list">
-                <Icon type="ios-ice-cream-outline" size="24"/>
-                Born {{UserDetails.birthdate}}
+
+            <div class="trending" v-if="trend()">
+                <Trending></Trending>
             </div>
         </div>
         <div class="profile-body">
@@ -72,7 +78,9 @@
 </template>
 
 <script>
+import Trending from '../Partials/Trending'
 export default {
+    components: {Trending},
     data(){
         return{
             UserDetails:{
@@ -87,7 +95,17 @@ export default {
                 follower_counts: '210',
                 following_counts: '400',
                 like_counts: '390'
-            }
+            },
+            page: this.$root.profile_active_page ,
+        }
+    },
+    methods:{
+        trend(){
+            if(this.$root.profile_active_page == 'followers' || 
+            this.$root.profile_active_page == 'following' || 
+            this.$root.profile_active_page == 'likes'){
+                return true;
+            }   
         }
     }
 }
@@ -108,18 +126,18 @@ export default {
 }
 .profile-banner{
     width: auto;
-    height: 367px;
+    height: 352px;
     background-color: azure;
 
     -moz-box-shadow:    inset 0 0 15px #e0e0e0;
-   -webkit-box-shadow: inset 0 0 15px #e0e0e0;
-   box-shadow:         inset 0 0 15px #e0e0e0;
+    -webkit-box-shadow: inset 0 0 15px #e0e0e0;
+    box-shadow:         inset 0 0 15px #e0e0e0;
 }
 .user-img{
     position: absolute;
     width: 170px;
 
-    margin-top: 320px;
+    margin-top: 310px;
     margin-left: 55px;
 
     border: 5px solid white;
@@ -127,7 +145,7 @@ export default {
 }
 .user-field{
     margin-left: 291px;
-    padding-top: 370px;
+    padding-top: 355px;
 }
 .name{
     font-size: 26px;
@@ -177,7 +195,20 @@ export default {
     background-color: white;
     margin-top: 10px;
 }
+.left-box{
+    float: left;
+    
+    max-width: 290px;
+    min-width: 290px;
+}
+.trending{
+    border-width: 5px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 5px;
 
+    margin: 10px 5px;
+}
 .user-description{
     border-width: 5px;
     border-style: solid;
@@ -187,10 +218,6 @@ export default {
     background-color: white;
 
     margin: 10px 5px 5px 5px;
-    max-width: 290px;
-    min-width: 290px;
-
-    float: left;
     padding: 40px 25px 20px 25px;
 }
 .description{

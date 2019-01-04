@@ -10,6 +10,9 @@ export default {
         return{
 
         }
+    },
+    created(){
+        this.$root.profile_active_page = window.location.href.split('/')[4];
     }
 }
 </script>
