@@ -17,7 +17,24 @@ const app = new Vue({
     data(){
         return{
             active_name: 'timeline',
-
+            users: [
+                {
+                    name: 'Bea Amor',
+                    username: 'beaamor0212'
+                },
+                {
+                    name: 'David Peralta',
+                    username: 'IamDavidMe'
+                },
+                {
+                    name: 'Nikki',
+                    username: 'iAmNikkiME'
+                },
+                {
+                    name: 'Rica Camiguing',
+                    username: 'ricamiguing_'
+                }
+            ],
             Woofs:[
                 {
                     id: 1,

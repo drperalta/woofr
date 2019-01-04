@@ -174,29 +174,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       search: '',
-      filteredUsers: [],
-      users: [{
-        name: 'Bea Amor',
-        username: 'beaamor0212'
-      }, {
-        name: 'David Peralta',
-        username: 'IamDavidMe'
-      }, {
-        name: 'Nikki',
-        username: 'iAmNikkiME'
-      }, {
-        name: 'Rica Camiguing',
-        username: 'ricamiguing_'
-      }]
+      filteredUsers: []
     };
   },
   methods: {
     filterList: function filterList() {
       var vm = this;
-      var listByUsername = this.users.filter(function (data) {
+      var listByUsername = this.$root.users.filter(function (data) {
         return data.username.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
       });
-      var listByName = this.users.filter(function (data) {
+      var listByName = this.$root.users.filter(function (data) {
         return data.name.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
       });
 
@@ -60128,6 +60115,19 @@ var app = new Vue({
   data: function data() {
     return {
       active_name: 'timeline',
+      users: [{
+        name: 'Bea Amor',
+        username: 'beaamor0212'
+      }, {
+        name: 'David Peralta',
+        username: 'IamDavidMe'
+      }, {
+        name: 'Nikki',
+        username: 'iAmNikkiME'
+      }, {
+        name: 'Rica Camiguing',
+        username: 'ricamiguing_'
+      }],
       Woofs: [{
         id: 1,
         user_id: 1,

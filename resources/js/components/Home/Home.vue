@@ -60,32 +60,14 @@ export default {
         return{
             search: '',
             filteredUsers: [],
-            users: [
-                {
-                    name: 'Bea Amor',
-                    username: 'beaamor0212'
-                },
-                {
-                    name: 'David Peralta',
-                    username: 'IamDavidMe'
-                },
-                {
-                    name: 'Nikki',
-                    username: 'iAmNikkiME'
-                },
-                {
-                    name: 'Rica Camiguing',
-                    username: 'ricamiguing_'
-                }
-            ]
         }
     },
     methods:{
         filterList(){
 
             var vm=this;
-            var listByUsername = this.users.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
-            var listByName = this.users.filter(function(data){return data.name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByUsername = this.$root.users.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByName = this.$root.users.filter(function(data){return data.name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
 
             if(listByUsername == ''){
                 this.filteredUsers = listByName
