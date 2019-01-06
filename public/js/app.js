@@ -1340,7 +1340,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\nul[data-v-35213042]{\r\n    list-style: none;\n}\r\n", ""]);
+exports.push([module.i, "\nul[data-v-35213042]{\n    list-style: none;\n}\n", ""]);
 
 // exports
 
