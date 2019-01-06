@@ -94,7 +94,7 @@ export default {
     position: fixed;
     width: 100vw;
 
-    background-color: #57474e;
+    background-color: #765d69;
 }
 .navbar-items{
     min-width: 1200px;
