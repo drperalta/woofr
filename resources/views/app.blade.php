@@ -11,7 +11,7 @@
 
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     </head>
-    <body style="margin: 0; background-color: #f0eaea;">
+    <body style="margin: 0; background-color: rgba(240, 234, 234, 0.80);">
         <div id="app">
             <App></App>
         </div>
