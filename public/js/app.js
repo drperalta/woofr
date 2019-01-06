@@ -1249,7 +1249,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\r\n    margin-top: 11px;\r\n    /* left: 50%;\r\n    transform: translate(-50%,0%);\r\n    position: absolute; */\r\n    float: left;\r\n    width: 40px;\r\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\r\n    position: fixed;\r\n    width: 100vw;\r\n\r\n    background-color: #57474e;\n}\n.navbar-items[data-v-4ec5f2d4]{\r\n    min-width: 1200px;\r\n    max-width: 1200px;\r\n\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,0%);\r\n            transform: translate(-50%,0%);\r\n    position: absolute;\n}\n.menu-item[data-v-4ec5f2d4]{\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\r\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\r\n    width: 210px;\r\n    margin-right: 20px;\n}\n.user-picture[data-v-4ec5f2d4]{\r\n    width: 40px;\r\n    margin-top: 11px;\r\n    border: 2px solid rgba(58, 58, 58, .2);\r\n    border-radius: 50%;\n}\n.user-picture-dropdown[data-v-4ec5f2d4]{\r\n    float: right;\r\n    margin-right: 20px;\n}\n.body[data-v-4ec5f2d4]{\r\n    padding-top: 60px;\r\n\r\n    min-width: 1200px;\r\n    max-width: 1200px;\r\n\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,0%);\r\n            transform: translate(-50%,0%);\r\n    position: absolute;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\n    margin-top: 11px;\n    /* left: 50%;\n    transform: translate(-50%,0%);\n    position: absolute; */\n    float: left;\n    width: 40px;\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\n    position: fixed;\n    width: 100vw;\n\n    background-color: #57474e;\n}\n.navbar-items[data-v-4ec5f2d4]{\n    min-width: 1200px;\n    max-width: 1200px;\n\n    left: 50%;\n    -webkit-transform: translate(-50%,0%);\n            transform: translate(-50%,0%);\n    position: absolute;\n}\n.menu-item[data-v-4ec5f2d4]{\n    font-size: 13px;\n    font-weight: 600;\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\n    width: 210px;\n    margin-right: 20px;\n}\n.user-picture[data-v-4ec5f2d4]{\n    width: 40px;\n    margin-top: 11px;\n    border: 2px solid rgba(58, 58, 58, .2);\n    border-radius: 50%;\n}\n.user-picture-dropdown[data-v-4ec5f2d4]{\n    float: right;\n    margin-right: 20px;\n}\n.body[data-v-4ec5f2d4]{\n    padding-top: 60px;\n\n    min-width: 1200px;\n    max-width: 1200px;\n\n    left: 50%;\n    -webkit-transform: translate(-50%,0%);\n            transform: translate(-50%,0%);\n    position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -44807,7 +44807,12 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("DropdownItem", [_vm._v("Settings")]),
+                      _c(
+                        "router-link",
+                        { attrs: { to: "/settings" } },
+                        [_c("DropdownItem", [_vm._v("Settings")])],
+                        1
+                      ),
                       _vm._v(" "),
                       _c("Divider", { staticStyle: { margin: "5px 0px" } }),
                       _vm._v(" "),
@@ -45231,7 +45236,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [_vm._v("\n    SETTINGS\n")])
 }
 var staticRenderFns = []
 render._withStripped = true

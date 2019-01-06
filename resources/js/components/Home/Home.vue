@@ -27,7 +27,7 @@
                     </a>
                     <DropdownMenu slot="list">
                         <router-link to="/profile"><DropdownItem>Profile</DropdownItem></router-link>
-                        <DropdownItem>Settings</DropdownItem>
+                        <router-link to="/settings"><DropdownItem>Settings</DropdownItem></router-link>
                         <Divider style="margin: 5px 0px"/>
                         <DropdownItem>Logout</DropdownItem>
                     </DropdownMenu>
