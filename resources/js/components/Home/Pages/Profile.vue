@@ -1,7 +1,7 @@
 <template>
     <div class="content">
-        <div class="profile-top">
-            <div class="profile-banner">
+        <div class="profile-top woofr-border">
+            <div class="profile-banner box-shadow-in">
                 <!-- PROFILE PICTURE -->
                 <a href="#">
                     <img class="user-img" src="../../../../img/default-picture1.png" alt="">
@@ -12,10 +12,10 @@
                     <a href="#" class="username">@{{UserDetails.user_name}}</a>
                 </div>
             </div>
-            
+
             <div class="profile-menu">
                 <div class="profile-menu-items">
-                    <ul>
+                    <ul class="row">
                         <li>
                             <router-link class="item" to="woofs">
                                 <span class="span menu-title">Woofs</span>
@@ -44,8 +44,9 @@
                 </div>
             </div>
         </div>
-        <div class="left-box">
-            <div class="user-description">
+
+        <div class="left">
+            <div class="box side-box user-description white woofr-border ">
                 <div class="description">{{UserDetails.description}}</div>
                 <div class="description-list">
                     <Icon type="ios-pin-outline" size="24"/>
@@ -65,15 +66,11 @@
                 </div>
             </div>
 
-            <div class="trending" v-if="trend()">
-                <Trending></Trending>
-            </div>
-        </div>
-        <div class="profile-body">
-            <router-view></router-view>
+            <Trending class="box side-box woofr-border" v-if="trend()"></Trending>
         </div>
 
-        
+        <router-view></router-view>
+
     </div>
 </template>
 
@@ -101,25 +98,19 @@ export default {
     },
     methods:{
         trend(){
-            if(this.$root.profile_active_page == 'followers' || 
-            this.$root.profile_active_page == 'following' || 
+            if(this.$root.profile_active_page == 'followers' ||
+            this.$root.profile_active_page == 'following' ||
             this.$root.profile_active_page == 'likes'){
                 return true;
-            }   
+            }
         }
     }
 }
 </script>
 
 <style scoped>
-.content{
-
-}
 .profile-top{
-    border-width: 10px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 5px 5px !important;
 
     background-color: white;
     margin: 0px 5px 5px 5px;
@@ -128,10 +119,6 @@ export default {
     width: auto;
     height: 352px;
     background-color: azure;
-
-    -moz-box-shadow:    inset 0 0 15px #e0e0e0;
-    -webkit-box-shadow: inset 0 0 15px #e0e0e0;
-    box-shadow:         inset 0 0 15px #e0e0e0;
 }
 .user-img{
     position: absolute;
@@ -145,7 +132,7 @@ export default {
 }
 .user-field{
     margin-left: 291px;
-    padding-top: 355px;
+    padding-top: 352px;
 }
 .name{
     font-size: 26px;
@@ -164,11 +151,6 @@ export default {
 .profile-menu-items{
     float: right;
     margin-right: 60px;
-}
-.profile-menu ul{
-    list-style: none;
-    display:flex;
-    flex-direction: row;
 }
 .profile-menu ul li{
     margin: 10px 15px;
@@ -190,35 +172,9 @@ export default {
     font-size: 14px;
     text-align: center;
 }
-.profile-body{
-    border-radius: 10px;
-    background-color: white;
-    margin-top: 10px;
-}
-.left-box{
-    float: left;
-    
-    max-width: 290px;
-    min-width: 290px;
-}
-.trending{
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-
-    margin: 10px 5px;
-}
 .user-description{
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-    
-    background-color: white;
-
-    margin: 10px 5px 5px 5px;
     padding: 40px 25px 20px 25px;
+    margin-bottom: 10px;
 }
 .description{
     font-size: 13px;

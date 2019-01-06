@@ -1,15 +1,15 @@
-{<template>
+<template>
     <div class="content">
         <!-- PROFILE BOX -->
-        <div class="box left">
+        <div class="box side-box left woofr-border">
             <Profile></Profile>
         </div>
         <!-- TIMELINE BOX -->
-        <div class="box middle">
+        <div class="box middle-box left">
             <Timeline></Timeline>
         </div>
         <!-- TRENDING BOX -->
-        <div class="box right"> 
+        <div class="box side-box left woofr-border">
             <Trending></Trending>
         </div>
     </div>
@@ -38,38 +38,6 @@ export default {
 
 <style scoped>
 .content{
-    margin-top: 7px;
+    margin-top: 5px;
 }
-.box{
-    margin: 5px;
-}
-.left{
-    max-width: 290px;
-    min-width: 290px;
-    float: left;
-    background-color: white;
-
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-}
-.middle{
-    min-width: 590px;
-    max-width: 590px;
-    float: left;
-
-}
-.right{
-    min-width: 290px;
-    max-width: 290px;
-    float: left;
-    background-color: white;
-
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-}
-
 </style>

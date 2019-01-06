@@ -15,7 +15,7 @@
                             {{trend.tweet_counts}} Tweets
                         </div>
                     </a>
-                    
+
                 </li>
             </ul>
         </div>
@@ -63,9 +63,6 @@ export default {
 .container{
     padding: 10px 20px;
     background-color: white;
-}
-ul{
-    list-style: none;
 }
 .trending-list ul li{
     margin-bottom: 10px;

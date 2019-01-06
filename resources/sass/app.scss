@@ -1,4 +1,3 @@
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -6,9 +5,71 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+}
+
+.hdivider{
+    height: 1px;
+    width: 100%;
+    display: block;
+    position: relative;
+    margin: 5px 0px;
+    background-color: #8C8B8B;
+}
+.vdivider{
+    height: 100%;
+    width: 1px;
+    display: block;
+    position: relative;
+    margin: 0px 5px;
+    background-color: #8C8B8B;
+}
+
+.woofr-border{
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 6px;
+}
+
+.side-box{
+    max-width: 290px;
+    min-width: 290px;
+}
+.middle-box{
+    min-width: 590px;
+    max-width: 590px;
+}
+.left{
+    float: left;
+}
+.box{
+    margin: 5px;
+    display: block;
+}
+ul{
+    list-style: none;
+}
+.row{
+    display:flex;
+    flex-direction: row;
+}
+.box-shadow-in{
+    -moz-box-shadow:    inset 0 0 15px #e0e0e0;
+    -webkit-box-shadow: inset 0 0 15px #e0e0e0;
+    box-shadow:         inset 0 0 15px #e0e0e0;
+}
+.white{
+    background-color: white;
 }

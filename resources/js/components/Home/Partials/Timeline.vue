@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <!-- WOOF BOX -->
-        <div class="woof-box">
-            <ul>
+        <div class="woof-box woofr-border">
+            <ul class="row">
                 <li>
                     <Avatar class="user-avatar" icon="ios-person" size="medium" />
                 </li>
@@ -17,18 +17,18 @@
         </div>
 
         <!-- LIST OF ALL WOOFS -->
-        <div class="woof-list">
+        <div class="woof-list woofr-border">
             <ul>
                 <li v-for="(woof, index) in this.$root.Woofs" :key="woof.id">
                     <div class="woof-body">
-                        <ul>
+                        <ul class="row">
                             <!-- USER'S AVATAR -->
                             <li>
                                 <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
                             </li>
                             <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                             <li>
-                                <div class="user-woof-details">
+                                <div class="user-woof-details left">
                                     <a :href="'/'+woof.user_name" style="font-size: 14px; font-weight: 600; color: black" >{{woof.full_name}}</a>
                                     <span style="color: grey;">@{{woof.user_name}}</span>
                                     <div style="font-size: 13px; ">
@@ -138,18 +138,9 @@ ul{
 }
 /* WOOF BOX */
 .woof-box{
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-
     background-color: white;
     padding: 5px;
     margin-bottom: 10px;
-}
-.woof-box ul{
-    display: flex;
-    flex-direction: row;
 }
 .woof-box-middle{
     width: 100%;
@@ -177,26 +168,16 @@ ul{
 
 /* WOOF TIMELINE BOX */
 .woof-list{
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-
     background: white;
 }
 .woof-body{
     padding: 5px;
-}
-.woof-body ul{
-    display: flex;
-    flex-direction: row;
 }
 .user-woof-avatar{
     float: left;
     margin: 10px;
 }
 .user-woof-details{
-    float: left;
     width: 100%;
     margin: 5px 10px 15px 0px ;
 }

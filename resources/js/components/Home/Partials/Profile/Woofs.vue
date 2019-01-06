@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="user-woofs">
+        <div class="box middle-box left white woofr-border">
             <div class="woofs-header">
                 <ButtonGroup>
                     <Button size="large" to="#">Woofs</Button>
@@ -14,7 +14,7 @@
                 <ul>
                     <li v-for="(woof, index) in this.$root.Woofs" :key="woof.id">
                         <div class="woof-body">
-                            <ul>
+                            <ul class="row">
                                 <!-- USER'S AVATAR -->
                                 <li>
                                     <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
@@ -69,7 +69,7 @@
                 </ul>
             </div>
         </div>
-        <div class="trending">
+        <div class="box side-box left woofr-border">
             <Trending></Trending>
         </div>
     </div>
@@ -91,54 +91,11 @@ export default {
 </script>
 
 <style scoped>
-.content{
-    background-color: white;
-}
-.user-woofs{
-    float: left;
-    min-width: 590px;
-    max-width: 590px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-    background-color: white;
-    margin: 5px;
-}
-.trending{
-    min-width: 290px;
-    max-width: 290px;
-    float: left;
-    background-color: white;
-
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-
-    margin: 5px;
-}
-ul{
-    list-style: none;
-}
 .woofs-header{
     padding: 10px;
-    background-color: white;
-}
-.woof-list{
-    border-width: 5px;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 5px;
-
-    background: white;
 }
 .woof-body{
     padding: 5px;
-}
-.woof-body ul{
-    display: flex;
-    flex-direction: row;
 }
 .user-woof-avatar{
     float: left;

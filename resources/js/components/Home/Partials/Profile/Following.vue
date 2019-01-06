@@ -1,6 +1,6 @@
 <template>
-    <div class="content">
-        <div class="list" v-for="(following, index) in this.$root.users" :key="index">
+    <div class="content left">
+        <div class="box side-box list left woofr-border white" v-for="(following, index) in this.$root.users " :key="index">
             <div class="following-banner">
                 <img class="following-img" src="../../../../../img/default-picture.png">
                 <div class="following-field">
@@ -11,7 +11,7 @@
             <div class="following-body">
                 <div class="description">{{following.description}}</div>
                 <Button class="button" type="primary" shape="circle" v-if="following.following" @click="unfollow(index)">Following</Button>
-                <Button class="button" type="primary" shape="circle" v-if="!following.following" @click="follow(index)">Follow</Button>
+                <Button class="button" shape="circle" v-if="!following.following" @click="follow(index)">Follow</Button>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@ export default {
         },
         follow(index){
             this.$root.users[index].following = true;
-        }  
+        }
     },
     created(){
         this.$root.profile_active_page = window.location.href.split('/')[4];
@@ -40,34 +40,13 @@ export default {
 
 <style scoped>
 .content{
-    float: left;
-    background: transparent;
-    width: 895px;
-    
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
-    border-radius: 5px;
+    width: 900px;
 }
 .title{
     font-size: 21px;
     font-weight: 600;
     margin: 15px;
 
-}
-.list{
-    display: block;
-    float: left;
-
-    width: 287px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: white;
-    border-radius: 5px;
-
-    margin: 5px;
-
-    background-color: white;
 }
 .following-banner{
     width: auto;
@@ -78,14 +57,12 @@ export default {
     border-style: solid;
     border-color: transparent;
     border-radius: 5px;
-    
-    margin: 5px;
 }
 .following-img{
     width: 65px;
     border-radius: 50%;
     border: 3px solid white;
-    
+
     position: absolute;
     margin-top: 40px;
     margin-left: 10px;
@@ -102,14 +79,14 @@ export default {
     color: grey;
 }
 .following-body{
-    height: 150px;      
+    height: 150px;
     padding: 30px;
 }
 .description{
     max-width: 230px;
     min-width: 230px;
-    
-    text-align: center; 
+
+    text-align: center;
 }
 .button{
     width: 200px;

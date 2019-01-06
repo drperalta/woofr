@@ -361,9 +361,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1286,7 +1283,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-7448c399]{\n}\n.profile-top[data-v-7448c399]{\r\n    border-width: 10px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 0px 0px 10px 10px;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 352px;\r\n    background-color: azure;\r\n    box-shadow:         inset 0 0 15px #e0e0e0;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 310px;\r\n    margin-left: 55px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 355px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul[data-v-7448c399]{\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\n.profile-body[data-v-7448c399]{\r\n    border-radius: 10px;\r\n    background-color: white;\r\n    margin-top: 10px;\n}\n.left-box[data-v-7448c399]{\r\n    float: left;\r\n    \r\n    max-width: 290px;\r\n    min-width: 290px;\n}\n.trending[data-v-7448c399]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    margin: 10px 5px;\n}\n.user-description[data-v-7448c399]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n    \r\n    background-color: white;\r\n\r\n    margin: 10px 5px 5px 5px;\r\n    padding: 40px 25px 20px 25px;\n}\n.description[data-v-7448c399]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\n}\n.description-list[data-v-7448c399]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
+exports.push([module.i, "\n.profile-top[data-v-7448c399]{\n    border-radius: 0px 0px 5px 5px !important;\n\n    background-color: white;\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\n    width: auto;\n    height: 352px;\n    background-color: azure;\n}\n.user-img[data-v-7448c399]{\n    position: absolute;\n    width: 170px;\n\n    margin-top: 310px;\n    margin-left: 55px;\n\n    border: 5px solid white;\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\n    margin-left: 291px;\n    padding-top: 352px;\n}\n.name[data-v-7448c399]{\n    font-size: 26px;\n    font-weight: 600;\n    color: #17233d;\n    display: block;\n}\n.username[data-v-7448c399]{\n    font-size: 16px;\n    color: gray;\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\n    float: right;\n    margin-right: 60px;\n}\n.profile-menu ul li[data-v-7448c399]{\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\n    display: block;\n}\n.menu-title[data-v-7448c399]{\n    font-weight: 600;\n    color: #657786;\n}\n.counts[data-v-7448c399]{\n    color: #765d69;\n    text-align: center;\n    font-size: 20px;\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\n    font-size: 14px;\n    text-align: center;\n}\n.user-description[data-v-7448c399]{\n    padding: 40px 25px 20px 25px;\n    margin-bottom: 10px;\n}\n.description[data-v-7448c399]{\n    font-size: 13px;\n    margin-bottom: 20px;\n}\n.description-list[data-v-7448c399]{\n    margin-bottom: 6px;\n}\n", ""]);
 
 // exports
 
@@ -1305,7 +1302,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-25e77581]{\r\n    margin-top: 7px;\n}\n.box[data-v-25e77581]{\r\n    margin: 5px;\n}\n.left[data-v-25e77581]{\r\n    max-width: 290px;\r\n    min-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\n.middle[data-v-25e77581]{\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    float: left;\n}\n.right[data-v-25e77581]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-25e77581]{\n    margin-top: 5px;\n}\n", ""]);
 
 // exports
 
@@ -1362,7 +1359,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-63fde0fe]{\r\nbackground-color: white;\n}\r\n/* USER BANNER */\n.user-banner[data-v-63fde0fe]{\r\n    height: 85px;\r\n    background-color: aquamarine;\r\n    border: 1px solid white;\r\n    border-radius: 5px;\n}\n.user-img[data-v-63fde0fe]{\r\n    position: absolute;\r\n    width: 70px;\r\n\r\n    margin-top: 55px;\r\n    margin-left: 20px;\r\n\r\n    border: 3px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-63fde0fe]{\r\n    margin-left: 110px;\r\n    padding-top: 85px;\n}\n.name[data-v-63fde0fe]{\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    color: #17233d;\n}\n.username[data-v-63fde0fe]{\r\n    font-size: 13px;\r\n    color: gray;\n}\r\n/* USER STATS */\n.user-stats[data-v-63fde0fe]{\r\n    background-color: white;\r\n    padding-top: 55px;\n}\n.user-stats ul[data-v-63fde0fe]{\r\n    margin-left: 15px;\r\n    margin-top: 5px;\r\n\r\n    list-style: none;\r\n    display:flex;\r\n    flex-direction: row;\n}\n.user-stats li[data-v-63fde0fe]{\r\n    margin: 10px;\r\n    font-weight: 600;\n}\n.span[data-v-63fde0fe]{\r\n    display:block;\n}\n.stats-name[data-v-63fde0fe]{\r\n    color: #657786;\n}\n.stats-counts[data-v-63fde0fe]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-63fde0fe]{\nbackground-color: white;\n}\n/* USER BANNER */\n.user-banner[data-v-63fde0fe]{\n    height: 85px;\n    background-color: aquamarine;\n    border: 1px solid white;\n    border-radius: 5px;\n}\n.user-img[data-v-63fde0fe]{\n    position: absolute;\n    width: 70px;\n\n    margin-top: 55px;\n    margin-left: 20px;\n\n    border: 3px solid white;\n    border-radius: 50%;\n}\n.user-field[data-v-63fde0fe]{\n    margin-left: 110px;\n    padding-top: 85px;\n}\n.name[data-v-63fde0fe]{\n    font-size: 18px;\n    font-weight: 600;\n    color: #17233d;\n}\n.username[data-v-63fde0fe]{\n    font-size: 13px;\n    color: gray;\n}\n/* USER STATS */\n.user-stats[data-v-63fde0fe]{\n    background-color: white;\n    padding-top: 55px;\n}\n.user-stats ul[data-v-63fde0fe]{\n    margin-left: 15px;\n    margin-top: 5px;\n}\n.user-stats li[data-v-63fde0fe]{\n    margin: 10px;\n    font-weight: 600;\n}\n.span[data-v-63fde0fe]{\n    display:block;\n}\n.stats-name[data-v-63fde0fe]{\n    color: #657786;\n}\n.stats-counts[data-v-63fde0fe]{\n    color: #765d69;\n    text-align: center;\n    font-size: 20px;\n}\n", ""]);
 
 // exports
 
@@ -1381,7 +1378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-740e7432]{\r\n    float: left;\r\n    background: transparent;\r\n    width: 895px;\r\n    \r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.title[data-v-740e7432]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.list[data-v-740e7432]{\r\n    display: block;\r\n    float: left;\r\n\r\n    width: 287px;\r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: white;\r\n    border-radius: 5px;\r\n\r\n    margin: 5px;\r\n\r\n    background-color: white;\n}\n.followers-banner[data-v-740e7432]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\r\n    \r\n    margin: 5px;\n}\n.followers-img[data-v-740e7432]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n    \r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\r\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\r\n    height: 150px;      \r\n    padding: 30px;\n}\n.description[data-v-740e7432]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n    \r\n    text-align: center;\n}\n.button[data-v-740e7432]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-740e7432]{\n    width: 900px;\n}\n.title[data-v-740e7432]{\n    font-size: 21px;\n    font-weight: 600;\n    margin: 15px;\n}\n.followers-banner[data-v-740e7432]{\n    width: auto;\n    height: 83px;\n    background-color: aliceblue;\n\n    border-width: 5px;\n    border-style: solid;\n    border-color: transparent;\n    border-radius: 5px;\n}\n.followers-img[data-v-740e7432]{\n    width: 65px;\n    border-radius: 50%;\n    border: 3px solid white;\n\n    position: absolute;\n    margin-top: 40px;\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\n    padding-top: 58px;\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\n    font-weight: 600;\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\n    height: 150px;\n    padding: 30px;\n}\n.description[data-v-740e7432]{\n    max-width: 230px;\n    min-width: 230px;\n\n    text-align: center;\n}\n.button[data-v-740e7432]{\n    width: 200px;\n    margin: 13px;\n}\n", ""]);
 
 // exports
 
@@ -1400,7 +1397,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-dbd5933a]{\r\n    float: left;\r\n    background: transparent;\r\n    width: 895px;\r\n    \r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.title[data-v-dbd5933a]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.list[data-v-dbd5933a]{\r\n    display: block;\r\n    float: left;\r\n\r\n    width: 287px;\r\n    border-width: 1px;\r\n    border-style: solid;\r\n    border-color: white;\r\n    border-radius: 5px;\r\n\r\n    margin: 5px;\r\n\r\n    background-color: white;\n}\n.following-banner[data-v-dbd5933a]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\r\n    \r\n    margin: 5px;\n}\n.following-img[data-v-dbd5933a]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n    \r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\r\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\r\n    height: 150px;      \r\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n    \r\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-dbd5933a]{\n    width: 900px;\n}\n.title[data-v-dbd5933a]{\n    font-size: 21px;\n    font-weight: 600;\n    margin: 15px;\n}\n.following-banner[data-v-dbd5933a]{\n    width: auto;\n    height: 83px;\n    background-color: aliceblue;\n\n    border-width: 5px;\n    border-style: solid;\n    border-color: transparent;\n    border-radius: 5px;\n}\n.following-img[data-v-dbd5933a]{\n    width: 65px;\n    border-radius: 50%;\n    border: 3px solid white;\n\n    position: absolute;\n    margin-top: 40px;\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\n    padding-top: 58px;\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\n    font-weight: 600;\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\n    height: 150px;\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\n    max-width: 230px;\n    min-width: 230px;\n\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\n    width: 200px;\n    margin: 13px;\n}\n", ""]);
 
 // exports
 
@@ -1438,7 +1435,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-04ee7ef6]{\r\n    background-color: white;\n}\n.user-woofs[data-v-04ee7ef6]{\r\n    float: left;\r\n    min-width: 590px;\r\n    max-width: 590px;\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n    background-color: white;\r\n    margin: 5px;\n}\n.trending[data-v-04ee7ef6]{\r\n    min-width: 290px;\r\n    max-width: 290px;\r\n    float: left;\r\n    background-color: white;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    margin: 5px;\n}\nul[data-v-04ee7ef6]{\r\n    list-style: none;\n}\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\r\n    background-color: white;\n}\n.woof-list[data-v-04ee7ef6]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    background: white;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 5px;\n}\n.woof-body ul[data-v-04ee7ef6]{\r\n    display: flex;\r\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n", ""]);
+exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\n    padding: 10px;\n}\n.woof-body[data-v-04ee7ef6]{\n    padding: 5px;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\n    float: left;\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\n    margin-right: 20px;\n    color: #808695;\n}\n", ""]);
 
 // exports
 
@@ -1457,7 +1454,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-box ul[data-v-0338a699]{\r\n    display: flex;\r\n    flex-direction: row;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: #FFFFFF;\r\n    border-radius: 5px;\r\n\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 5px;\n}\n.woof-body ul[data-v-0338a699]{\r\n    display: flex;\r\n    flex-direction: row;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\n    background: white;\n}\n.woof-body[data-v-0338a699]{\n    padding: 5px;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\n    margin-right: 20px;\n    color: #808695;\n}\n\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\n    margin-left: 60px;\n}\n\n\n\n\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\n    transition: opacity .5s;\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
 
 // exports
 
@@ -1476,7 +1473,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-d71bd506]{\r\n    padding: 10px 20px;\r\n    background-color: white;\n}\nul[data-v-d71bd506]{\r\n    list-style: none;\n}\n.trending-list ul li[data-v-d71bd506]{\r\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\r\n    color: #765D69;\r\n    font-size: 14px;\r\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\r\n    color: #afb2b8;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-d71bd506]{\n    padding: 10px 20px;\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\n    color: #765D69;\n    font-size: 14px;\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\n    color: #afb2b8;\n}\n", ""]);
 
 // exports
 
@@ -1495,7 +1492,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-19a9cccc]{\r\n    position: absolute;\r\n    top: 35%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,-50%);\r\n            transform: translate(-50%,-50%);\r\n    z-index: 1;\r\n    text-align: center;\r\n    max-width: 288px;\n}\n.container[data-v-19a9cccc] {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.logo[data-v-19a9cccc]{\r\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\r\n    margin-top: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-19a9cccc] {\n    width: 100vw;\n    height: 100vh;\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.wrapper[data-v-19a9cccc]{\n    top: 40% !important;\n    text-align: center;\n    max-width: 288px;\n}\n.logo[data-v-19a9cccc]{\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\n    margin-top: 20px;\n}\n", ""]);
 
 // exports
 
@@ -1514,7 +1511,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\r\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\r\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\r\n    margin-top: 4px;\r\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\r\n    width: 100%;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\n    margin-top: 4px;\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\n    width: 100%;\n    margin-bottom: 8px;\n}\n", ""]);
 
 // exports
 
@@ -1552,7 +1549,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-79d3063d]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin-top: 35px;\r\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\r\n    margin: 10px 0px !important;\r\n    width: 50%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, 0%);\r\n            transform: translate(-50%, 0%);\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-79d3063d]{\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\n    width: 100%;\n    margin-top: 35px;\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\n    margin: 10px 0px !important;\n    width: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, 0%);\n            transform: translate(-50%, 0%);\n}\n", ""]);
 
 // exports
 
@@ -44929,180 +44926,204 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c("div", { staticClass: "profile-top" }, [
-      _c("div", { staticClass: "profile-banner" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-field" }, [
-          _c("a", { staticClass: "name", attrs: { href: "#" } }, [
-            _vm._v(_vm._s(_vm.UserDetails.full_name))
-          ]),
+  return _c(
+    "div",
+    { staticClass: "content" },
+    [
+      _c("div", { staticClass: "profile-top woofr-border" }, [
+        _c("div", { staticClass: "profile-banner box-shadow-in" }, [
+          _vm._m(0),
           _vm._v(" "),
-          _c("a", { staticClass: "username", attrs: { href: "#" } }, [
-            _vm._v("@" + _vm._s(_vm.UserDetails.user_name))
+          _c("div", { staticClass: "user-field" }, [
+            _c("a", { staticClass: "name", attrs: { href: "#" } }, [
+              _vm._v(_vm._s(_vm.UserDetails.full_name))
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "username", attrs: { href: "#" } }, [
+              _vm._v("@" + _vm._s(_vm.UserDetails.user_name))
+            ])
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "profile-menu" }, [
-        _c("div", { staticClass: "profile-menu-items" }, [
-          _c("ul", [
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "item", attrs: { to: "woofs" } },
-                  [
-                    _c("span", { staticClass: "span menu-title" }, [
-                      _vm._v("Woofs")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(_vm.UserDetails.woof_counts))
-                    ])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "item", attrs: { to: "following" } },
-                  [
-                    _c("span", { staticClass: "span menu-title" }, [
-                      _vm._v("Following")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(_vm.UserDetails.follower_counts))
-                    ])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "item", attrs: { to: "followers" } },
-                  [
-                    _c("span", { staticClass: "span menu-title" }, [
-                      _vm._v("Followers")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(_vm.UserDetails.follower_counts))
-                    ])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "item", attrs: { to: "likes" } },
-                  [
-                    _c("span", { staticClass: "span menu-title" }, [
-                      _vm._v("Likes")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(_vm.UserDetails.like_counts))
-                    ])
-                  ]
-                )
-              ],
-              1
-            )
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "left-box" }, [
-      _c("div", { staticClass: "user-description" }, [
-        _c("div", { staticClass: "description" }, [
-          _vm._v(_vm._s(_vm.UserDetails.description))
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "description-list" },
-          [
-            _c("Icon", { attrs: { type: "ios-pin-outline", size: "24" } }),
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.UserDetails.country) +
-                "\n            "
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "description-list" },
-          [
-            _c("Icon", { attrs: { type: "ios-link-outline", size: "24" } }),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "http://" + _vm.UserDetails.website } }, [
-              _vm._v(_vm._s(_vm.UserDetails.website))
+        _c("div", { staticClass: "profile-menu" }, [
+          _c("div", { staticClass: "profile-menu-items" }, [
+            _c("ul", { staticClass: "row" }, [
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "item", attrs: { to: "woofs" } },
+                    [
+                      _c("span", { staticClass: "span menu-title" }, [
+                        _vm._v("Woofs")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span counts" }, [
+                        _vm._v(_vm._s(_vm.UserDetails.woof_counts))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "item", attrs: { to: "following" } },
+                    [
+                      _c("span", { staticClass: "span menu-title" }, [
+                        _vm._v("Following")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span counts" }, [
+                        _vm._v(_vm._s(_vm.UserDetails.follower_counts))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "item", attrs: { to: "followers" } },
+                    [
+                      _c("span", { staticClass: "span menu-title" }, [
+                        _vm._v("Followers")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span counts" }, [
+                        _vm._v(_vm._s(_vm.UserDetails.follower_counts))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                [
+                  _c(
+                    "router-link",
+                    { staticClass: "item", attrs: { to: "likes" } },
+                    [
+                      _c("span", { staticClass: "span menu-title" }, [
+                        _vm._v("Likes")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "span counts" }, [
+                        _vm._v(_vm._s(_vm.UserDetails.like_counts))
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
             ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "description-list" },
-          [
-            _c("Icon", { attrs: { type: "ios-calendar-outline", size: "24" } }),
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.UserDetails.created_at) +
-                "\n            "
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "description-list" },
-          [
-            _c("Icon", {
-              attrs: { type: "ios-ice-cream-outline", size: "24" }
-            }),
-            _vm._v(
-              "\n                Born " +
-                _vm._s(_vm.UserDetails.birthdate) +
-                "\n            "
-            )
-          ],
-          1
-        )
+          ])
+        ])
       ]),
       _vm._v(" "),
-      _vm.trend()
-        ? _c("div", { staticClass: "trending" }, [_c("Trending")], 1)
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "profile-body" }, [_c("router-view")], 1)
-  ])
+      _c(
+        "div",
+        { staticClass: "left" },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "box side-box user-description white woofr-border "
+            },
+            [
+              _c("div", { staticClass: "description" }, [
+                _vm._v(_vm._s(_vm.UserDetails.description))
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "description-list" },
+                [
+                  _c("Icon", {
+                    attrs: { type: "ios-pin-outline", size: "24" }
+                  }),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.UserDetails.country) +
+                      "\n            "
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "description-list" },
+                [
+                  _c("Icon", {
+                    attrs: { type: "ios-link-outline", size: "24" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { attrs: { href: "http://" + _vm.UserDetails.website } },
+                    [_vm._v(_vm._s(_vm.UserDetails.website))]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "description-list" },
+                [
+                  _c("Icon", {
+                    attrs: { type: "ios-calendar-outline", size: "24" }
+                  }),
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.UserDetails.created_at) +
+                      "\n            "
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "description-list" },
+                [
+                  _c("Icon", {
+                    attrs: { type: "ios-ice-cream-outline", size: "24" }
+                  }),
+                  _vm._v(
+                    "\n                Born " +
+                      _vm._s(_vm.UserDetails.birthdate) +
+                      "\n            "
+                  )
+                ],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm.trend()
+            ? _c("Trending", { staticClass: "box side-box woofr-border" })
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("router-view")
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -45139,11 +45160,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content" }, [
-    _c("div", { staticClass: "box left" }, [_c("Profile")], 1),
+    _c(
+      "div",
+      { staticClass: "box side-box left woofr-border" },
+      [_c("Profile")],
+      1
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "box middle" }, [_c("Timeline")], 1),
+    _c("div", { staticClass: "box middle-box left" }, [_c("Timeline")], 1),
     _vm._v(" "),
-    _c("div", { staticClass: "box right" }, [_c("Trending")], 1)
+    _c(
+      "div",
+      { staticClass: "box side-box left woofr-border" },
+      [_c("Trending")],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -45249,7 +45280,7 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "user-stats" }, [
-        _c("ul", [
+        _c("ul", { staticClass: "row" }, [
           _c(
             "li",
             [
@@ -45353,69 +45384,76 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "content" },
+    { staticClass: "content left" },
     _vm._l(this.$root.users, function(followers, index) {
-      return _c("div", { key: index, staticClass: "list" }, [
-        _c("div", { staticClass: "followers-banner" }, [
-          _c("img", {
-            staticClass: "followers-img",
-            attrs: { src: __webpack_require__(/*! ../../../../../img/default-picture.png */ "./resources/img/default-picture.png") }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "followers-field" }, [
-            _c("div", { staticClass: "name" }, [
-              _vm._v(_vm._s(followers.full_name))
-            ]),
+      return _c(
+        "div",
+        {
+          key: index,
+          staticClass: "box side-box list left woofr-border white"
+        },
+        [
+          _c("div", { staticClass: "followers-banner" }, [
+            _c("img", {
+              staticClass: "followers-img",
+              attrs: { src: __webpack_require__(/*! ../../../../../img/default-picture.png */ "./resources/img/default-picture.png") }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "username" }, [
-              _vm._v("@" + _vm._s(followers.user_name))
+            _c("div", { staticClass: "followers-field" }, [
+              _c("div", { staticClass: "name" }, [
+                _vm._v(_vm._s(followers.full_name))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "username" }, [
+                _vm._v("@" + _vm._s(followers.user_name))
+              ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "followers-body" },
-          [
-            _c("div", { staticClass: "description" }, [
-              _vm._v(_vm._s(followers.description))
-            ]),
-            _vm._v(" "),
-            followers.following
-              ? _c(
-                  "Button",
-                  {
-                    staticClass: "button",
-                    attrs: { type: "primary", shape: "circle" },
-                    on: {
-                      click: function($event) {
-                        _vm.unfollow(index)
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "followers-body" },
+            [
+              _c("div", { staticClass: "description" }, [
+                _vm._v(_vm._s(followers.description))
+              ]),
+              _vm._v(" "),
+              followers.following
+                ? _c(
+                    "Button",
+                    {
+                      staticClass: "button",
+                      attrs: { type: "primary", shape: "circle" },
+                      on: {
+                        click: function($event) {
+                          _vm.unfollow(index)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Following")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !followers.following
-              ? _c(
-                  "Button",
-                  {
-                    staticClass: "button",
-                    attrs: { shape: "circle" },
-                    on: {
-                      click: function($event) {
-                        _vm.follow(index)
+                    },
+                    [_vm._v("Following")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !followers.following
+                ? _c(
+                    "Button",
+                    {
+                      staticClass: "button",
+                      attrs: { shape: "circle" },
+                      on: {
+                        click: function($event) {
+                          _vm.follow(index)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Follow")]
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      ])
+                    },
+                    [_vm._v("Follow")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ]
+      )
     }),
     0
   )
@@ -45444,69 +45482,76 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "content" },
+    { staticClass: "content left" },
     _vm._l(this.$root.users, function(following, index) {
-      return _c("div", { key: index, staticClass: "list" }, [
-        _c("div", { staticClass: "following-banner" }, [
-          _c("img", {
-            staticClass: "following-img",
-            attrs: { src: __webpack_require__(/*! ../../../../../img/default-picture.png */ "./resources/img/default-picture.png") }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "following-field" }, [
-            _c("div", { staticClass: "name" }, [
-              _vm._v(_vm._s(following.full_name))
-            ]),
+      return _c(
+        "div",
+        {
+          key: index,
+          staticClass: "box side-box list left woofr-border white"
+        },
+        [
+          _c("div", { staticClass: "following-banner" }, [
+            _c("img", {
+              staticClass: "following-img",
+              attrs: { src: __webpack_require__(/*! ../../../../../img/default-picture.png */ "./resources/img/default-picture.png") }
+            }),
             _vm._v(" "),
-            _c("div", { staticClass: "username" }, [
-              _vm._v("@" + _vm._s(following.user_name))
+            _c("div", { staticClass: "following-field" }, [
+              _c("div", { staticClass: "name" }, [
+                _vm._v(_vm._s(following.full_name))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "username" }, [
+                _vm._v("@" + _vm._s(following.user_name))
+              ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "following-body" },
-          [
-            _c("div", { staticClass: "description" }, [
-              _vm._v(_vm._s(following.description))
-            ]),
-            _vm._v(" "),
-            following.following
-              ? _c(
-                  "Button",
-                  {
-                    staticClass: "button",
-                    attrs: { type: "primary", shape: "circle" },
-                    on: {
-                      click: function($event) {
-                        _vm.unfollow(index)
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "following-body" },
+            [
+              _c("div", { staticClass: "description" }, [
+                _vm._v(_vm._s(following.description))
+              ]),
+              _vm._v(" "),
+              following.following
+                ? _c(
+                    "Button",
+                    {
+                      staticClass: "button",
+                      attrs: { type: "primary", shape: "circle" },
+                      on: {
+                        click: function($event) {
+                          _vm.unfollow(index)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Following")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !following.following
-              ? _c(
-                  "Button",
-                  {
-                    staticClass: "button",
-                    attrs: { type: "primary", shape: "circle" },
-                    on: {
-                      click: function($event) {
-                        _vm.follow(index)
+                    },
+                    [_vm._v("Following")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !following.following
+                ? _c(
+                    "Button",
+                    {
+                      staticClass: "button",
+                      attrs: { shape: "circle" },
+                      on: {
+                        click: function($event) {
+                          _vm.follow(index)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Follow")]
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      ])
+                    },
+                    [_vm._v("Follow")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ]
+      )
     }),
     0
   )
@@ -45560,7 +45605,7 @@ var render = function() {
   return _c("div", { staticClass: "content" }, [
     _c(
       "div",
-      { staticClass: "user-woofs" },
+      { staticClass: "box middle-box left white woofr-border" },
       [
         _c(
           "div",
@@ -45598,7 +45643,7 @@ var render = function() {
                 { key: woof.id },
                 [
                   _c("div", { staticClass: "woof-body" }, [
-                    _c("ul", [
+                    _c("ul", { staticClass: "row" }, [
                       _c(
                         "li",
                         [
@@ -45748,7 +45793,12 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "trending" }, [_c("Trending")], 1)
+    _c(
+      "div",
+      { staticClass: "box side-box left woofr-border" },
+      [_c("Trending")],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -45785,8 +45835,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "woof-box" }, [
-      _c("ul", [
+    _c("div", { staticClass: "woof-box woofr-border" }, [
+      _c("ul", { staticClass: "row" }, [
         _c(
           "li",
           [
@@ -45861,7 +45911,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "woof-list" }, [
+    _c("div", { staticClass: "woof-list woofr-border" }, [
       _c(
         "ul",
         _vm._l(this.$root.Woofs, function(woof, index) {
@@ -45870,7 +45920,7 @@ var render = function() {
             { key: woof.id },
             [
               _c("div", { staticClass: "woof-body" }, [
-                _c("ul", [
+                _c("ul", { staticClass: "row" }, [
                   _c(
                     "li",
                     [
@@ -45883,7 +45933,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("li", [
-                    _c("div", { staticClass: "user-woof-details" }, [
+                    _c("div", { staticClass: "user-woof-details left" }, [
                       _c(
                         "a",
                         {
@@ -46115,7 +46165,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "wrapper" }, [
+    _c("div", { staticClass: "wrapper center" }, [
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "body" }, [_c("router-view")], 1)

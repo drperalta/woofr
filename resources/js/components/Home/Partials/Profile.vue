@@ -16,7 +16,7 @@
             </div>
             <!-- USER STATS -->
             <div class="user-stats">
-                <ul>
+                <ul class="row">
                     <!-- TWEETS -->
                     <li>
                         <router-link to="#">
@@ -92,10 +92,6 @@ background-color: white;
 .user-stats ul{
     margin-left: 15px;
     margin-top: 5px;
-
-    list-style: none;
-    display:flex;
-    flex-direction: row;
 }
 .user-stats li{
     margin: 10px;
