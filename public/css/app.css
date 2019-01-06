@@ -30,6 +30,10 @@
   background-color: #8C8B8B;
 }
 
+.idivider {
+  margin: 5px 0px !important;
+}
+
 .woofr-border {
   border-width: 5px;
   border-style: solid;
@@ -71,5 +75,9 @@ ul {
 
 .white {
   background-color: white;
+}
+
+.color-black {
+  color: black;
 }
 
