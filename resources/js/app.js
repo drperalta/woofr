@@ -6,8 +6,10 @@ import router from './router/index'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import locale from 'iview/dist/locale/en-US';
+import Hover from 'hover.css'
 
 Vue.use(iView, { locale });
+Vue.use(Hover)
 
 const app = new Vue({
     el: '#app',
@@ -19,7 +21,7 @@ const app = new Vue({
             active_name: 'timeline',
             profile_active_page: 'woofs',
             users: [
-                {   
+                {
                     id: 1,
                     full_name: 'Bea Amor',
                     user_name: 'beaamor0212',
@@ -32,7 +34,7 @@ const app = new Vue({
                     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
                     following: true,
                 },
-                {   
+                {
                     id: 3,
                     full_name: 'Nikki',
                     user_name: 'iAmNikkiME',
