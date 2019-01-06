@@ -26,10 +26,30 @@
                         <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
                     </a>
                     <DropdownMenu slot="list">
-                        <router-link to="/profile"><DropdownItem>Profile</DropdownItem></router-link>
-                        <router-link to="/settings"><DropdownItem>Settings</DropdownItem></router-link>
+                        <router-link to="/profile">
+                            <DropdownItem>
+                                <p class="fullname">{{loggedInUser.full_name}}</p>
+                                <p class="username">@{{loggedInUser.user_name}}</p>
+                            </DropdownItem>
+                        </router-link>
+                        <Divider class="idivider"/>
+                        <router-link to="/profile">
+                            <DropdownItem>
+                                <Icon type="ios-contact" size="16" style="float:left; margin-right: 5px" />
+                                <p class="item">Profile</p>
+                            </DropdownItem>
+                        </router-link>
+                        <router-link to="settings">
+                            <DropdownItem>
+                                <Icon type="ios-settings" size="16" style="float:left; margin-right: 5px"/>
+                                <p class="item">Settings</p>
+                            </DropdownItem>
+                        </router-link>
                         <Divider style="margin: 5px 0px"/>
-                        <DropdownItem>Logout</DropdownItem>
+                        <DropdownItem>
+
+                            <p class="item">Logout</p>
+                        </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
 
@@ -60,6 +80,11 @@ export default {
         return{
             search: '',
             filteredUsers: [],
+            loggedInUser:{
+                full_name: 'David Peralta',
+                user_name: 'IamDavidMe',
+
+            }
         }
     },
     methods:{
@@ -135,5 +160,16 @@ export default {
     left: 50%;
     transform: translate(-50%,0%);
     position: absolute;
+}
+.fullname{
+    font-weight: 700;
+    font-size: 18px;
+}
+.username{
+    color: #765d69;
+    font-size: 14px;
+}
+.item{
+    font-size: 14px;
 }
 </style>
