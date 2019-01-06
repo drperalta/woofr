@@ -124,8 +124,8 @@ export default {
     position: absolute;
     width: 170px;
 
-    margin-top: 310px;
-    margin-left: 55px;
+    margin-top: 295px;
+    margin-left: 60px;
 
     border: 5px solid white;
     border-radius: 50%;
