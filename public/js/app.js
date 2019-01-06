@@ -45037,7 +45037,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "router-link",
-                        { attrs: { to: "settings" } },
+                        { attrs: { to: "/profile/settings" } },
                         [
                           _c(
                             "DropdownItem",

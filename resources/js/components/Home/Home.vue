@@ -39,7 +39,7 @@
                                 <p class="item">Profile</p>
                             </DropdownItem>
                         </router-link>
-                        <router-link to="settings">
+                        <router-link to="/profile/settings">
                             <DropdownItem>
                                 <Icon type="ios-settings" size="16" style="float:left; margin-right: 5px"/>
                                 <p class="item">Settings</p>
