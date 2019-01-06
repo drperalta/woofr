@@ -22,7 +22,7 @@ import Woofs from '../components/Home/Partials/Profile/Woofs'
 import Followers from '../components/Home/Partials/Profile/Followers'
 import Following from '../components/Home/Partials/Profile/Following'
 import Likes from '../components/Home/Partials/Profile/Likes'
-import Settings from '../components/Home/Pages/Settings'
+import Settings from '../components/Home/Partials/Settings'
 
 let router = new VueRouter({
 
@@ -78,13 +78,14 @@ let router = new VueRouter({
                         },
                         {   //LIKES
                             path: 'likes', component: Likes
+                        },
+                        {
+                            path: 'settings', component: Settings,
                         }
 
                     ]
                 },
-                {
-                    path: 'settings', component: Settings,
-                }
+
 
 
             ]
