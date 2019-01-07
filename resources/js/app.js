@@ -7,9 +7,11 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import locale from 'iview/dist/locale/en-US';
 import Hover from 'hover.css'
+import CountryList from 'country-list'
 
 Vue.use(iView, { locale });
 Vue.use(Hover)
+Vue.use(CountryList)
 
 const app = new Vue({
     el: '#app',
@@ -190,7 +192,6 @@ const app = new Vue({
                 },
 
             ]
-
             ,Comments:[
                 {
                     id: 1,
@@ -223,6 +224,20 @@ const app = new Vue({
                     comment_text: 'asd',
                 },
             ]
+            ,UserDetails:{
+                full_name: 'David Peralta',
+                user_name: 'IamDavidMe',
+                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
+                country:'Philippines',
+                created_at: 'January 2019',
+                website: 'facebook.com/peraltadavidr',
+                birthdate: 'April 20 1998',
+                woof_counts: '120',
+                follower_counts: '210',
+                following_counts: '400',
+                like_counts: '390'
+            },
+            toggleEditProfile: false
         }
     }
 });
