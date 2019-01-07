@@ -1,6 +1,6 @@
 // UNFIXED NAVBAR AVATAR HEIGHT
 <template>
-    <div class="container">
+    <div>
         <!-- NAVBAR -->
         <i-menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
             <div class="navbar-items">
@@ -18,9 +18,11 @@
                     <Icon type="md-notifications" style="margin: 0"/>
                     Notifications
                 </menu-item>
-                <menu-item class="menu-item" name="messages" to="/messages">
-                    <Icon type="md-chatboxes" style="margin: 0" />
-                    Messages
+                <menu-item class="menu-item" name="messages">
+                    <button @click="modal = true" style="margin: 0; background-color: transparent; border: 0px solid transparent; font-weight: 600; color: #D6CFD2; outline: 0px;cursor:pointer">
+                        <Icon type="md-chatboxes" style="margin: 0"/>
+                        Messages
+                    </button>
                 </menu-item>
 
                 <Dropdown class="user-picture-dropdown" placement="bottom-end" trigger="click">
@@ -73,6 +75,10 @@
         <div class="body">
             <router-view></router-view>
         </div>
+
+        <Modal v-model="modal" title="Common Modal dialog box title" >
+            MESSAGES
+        </Modal>
     </div>
 </template>
 
@@ -80,13 +86,15 @@
 export default {
     data(){
         return{
+            modal: false,
             search: '',
             filteredUsers: [],
             loggedInUser:{
                 full_name: 'David Peralta',
                 user_name: 'IamDavidMe',
 
-            }
+            },
+            
         }
     },
     methods:{

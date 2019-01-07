@@ -192,9 +192,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      modal: false,
       search: '',
       filteredUsers: [],
       loggedInUser: {
@@ -219,32 +226,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.filteredUsers = listByUsername;
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home/Pages/Messages.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-  created: function created() {
-    this.$root.active_name = window.location.href.split('/')[3];
   }
 });
 
@@ -402,7 +383,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     trend: function trend() {
-      if (this.$root.profile_active_page == 'followers' || this.$root.profile_active_page == 'following' || this.$root.profile_active_page == 'likes') {
+      if (this.$root.profile_active_page == 'followers' || this.$root.profile_active_page == 'following') {
         return true;
       }
 
@@ -849,13 +830,79 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Trending__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Trending */ "./resources/js/components/Home/Partials/Trending.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Trending: _Trending__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {};
   },
@@ -1738,25 +1785,6 @@ exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Notifications.vue?vue&type=style&index=0&id=b3c25550&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home/Pages/Notifications.vue?vue&type=style&index=0&id=b3c25550&scoped=true&lang=css& ***!
@@ -1921,7 +1949,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.woofs-header[data-v-6168e70e]{\r\n    padding: 10px;\n}\n.woof-body[data-v-6168e70e]{\r\n    padding: 5px;\n}\n.user-woof-avatar[data-v-6168e70e]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-6168e70e]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-6168e70e]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-6168e70e]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n", ""]);
 
 // exports
 
@@ -44129,36 +44157,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Notifications.vue?vue&type=style&index=0&id=b3c25550&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home/Pages/Notifications.vue?vue&type=style&index=0&id=b3c25550&scoped=true&lang=css& ***!
@@ -45414,7 +45412,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container" },
     [
       _c(
         "i-menu",
@@ -45475,18 +45472,36 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "menu-item",
-                {
-                  staticClass: "menu-item",
-                  attrs: { name: "messages", to: "/messages" }
-                },
+                { staticClass: "menu-item", attrs: { name: "messages" } },
                 [
-                  _c("Icon", {
-                    staticStyle: { margin: "0" },
-                    attrs: { type: "md-chatboxes" }
-                  }),
-                  _vm._v("\n                Messages\n            ")
-                ],
-                1
+                  _c(
+                    "button",
+                    {
+                      staticStyle: {
+                        margin: "0",
+                        "background-color": "transparent",
+                        border: "0px solid transparent",
+                        "font-weight": "600",
+                        color: "#D6CFD2",
+                        outline: "0px",
+                        cursor: "pointer"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.modal = true
+                        }
+                      }
+                    },
+                    [
+                      _c("Icon", {
+                        staticStyle: { margin: "0" },
+                        attrs: { type: "md-chatboxes" }
+                      }),
+                      _vm._v("\n                    Messages\n                ")
+                    ],
+                    1
+                  )
+                ]
               ),
               _vm._v(" "),
               _c(
@@ -45655,34 +45670,25 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "body" }, [_c("router-view")], 1)
+      _c("div", { staticClass: "body" }, [_c("router-view")], 1),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: { title: "Common Modal dialog box title" },
+          model: {
+            value: _vm.modal,
+            callback: function($$v) {
+              _vm.modal = $$v
+            },
+            expression: "modal"
+          }
+        },
+        [_vm._v("\n        MESSAGES\n    ")]
+      )
     ],
     1
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Home/Pages/Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    MESSAGES\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46557,9 +46563,186 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { staticClass: "content " }, [
+    _c(
+      "div",
+      { staticClass: "woof-list middle-box box woofr-border white left" },
+      [
+        _c(
+          "ul",
+          _vm._l(this.$root.Woofs, function(woof, index) {
+            return _c(
+              "li",
+              { key: woof.id },
+              [
+                _c("div", { staticClass: "woof-body" }, [
+                  _c("ul", { staticClass: "row" }, [
+                    _c(
+                      "li",
+                      [
+                        _c("Avatar", {
+                          staticClass: "user-woof-avatar",
+                          attrs: { icon: "ios-person", size: "large" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("div", { staticClass: "user-woof-details" }, [
+                        _c(
+                          "a",
+                          {
+                            staticStyle: {
+                              "font-size": "14px",
+                              "font-weight": "600",
+                              color: "black"
+                            },
+                            attrs: { href: "/" + woof.user_name }
+                          },
+                          [_vm._v(_vm._s(woof.full_name))]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticStyle: { color: "grey" } }, [
+                          _vm._v("@" + _vm._s(woof.user_name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "font-size": "13px" } }, [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(woof.woof_text) +
+                              "\n                                    "
+                          )
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "woof-actions" }, [
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.comment()
+                          }
+                        }
+                      },
+                      [
+                        _c("Icon", {
+                          attrs: { type: "ios-text-outline", size: "24" }
+                        }),
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(woof.comments) +
+                            "\n                            "
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.reWoof()
+                          }
+                        }
+                      },
+                      [
+                        _c("Icon", {
+                          attrs: { type: "ios-repeat", size: "24" }
+                        }),
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(woof.re_woof) +
+                            "\n                            "
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.like(index)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "transition",
+                          { attrs: { name: "bounce" } },
+                          [
+                            woof.liked
+                              ? _c("Icon", {
+                                  staticStyle: { position: "absolute" },
+                                  attrs: {
+                                    type: "ios-heart",
+                                    size: "24",
+                                    color: "#db5353"
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        !woof.liked
+                          ? _c("Icon", {
+                              attrs: { type: "ios-heart-outline", size: "24" }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        woof.liked
+                          ? _c("span", {
+                              staticStyle: { "margin-left": "28px" }
+                            })
+                          : _vm._e(),
+                        _vm._v(
+                          _vm._s(woof.likes) + "\n                            "
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c("Divider", { staticStyle: { margin: "0" } })
+              ],
+              1
+            )
+          }),
+          0
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "box side-box left woofr-border" },
+      [_c("Trending")],
+      1
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "woof-comments" }, [
+      _c("div", { staticClass: "comment-box" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "comment-list" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -61822,6 +62005,906 @@ module.exports = Vue;
 
 /***/ }),
 
+/***/ "./node_modules/vuebar/vuebar.js":
+/*!***************************************!*\
+  !*** ./node_modules/vuebar/vuebar.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*----------------------------------------*\
+    Vuebar
+\*----------------------------------------*/
+;(function(){
+    'use strict';
+
+
+
+    /*------------------------------------*\
+        Vuebar
+    \*------------------------------------*/
+    var Vuebar = {};
+    Vuebar.install = function(Vue, installOptions){
+
+
+        /*------------------------------------*\
+            Custom Directive Name
+        \*------------------------------------*/
+        installOptions = installOptions || {};
+        installOptions.directive = installOptions.directive || 'bar';
+
+
+        /*------------------------------------*\
+            Create State
+            - contains default values
+        \*------------------------------------*/
+        function createState(el){
+            el._vuebarState = {
+
+                // config with default values that may be overwritten on directive intialization
+                config: {
+                    scrollThrottle: 10,
+                    draggerThrottle: 10,
+                    resizeRefresh: true,
+                    observerThrottle: 100,
+                    resizeDebounce: 100,
+                    unselectableBody: true,
+                    overrideFloatingScrollbar: true,
+                    scrollingPhantomDelay: 1000,
+                    draggingPhantomDelay: 1000,
+                    preventParentScroll: false,
+                    useScrollbarPseudo: false, // experimental
+
+                    el1Class: 'vb',
+                    el1ScrollVisibleClass: 'vb-visible',
+                    el1ScrollInvisibleClass: 'vb-invisible',
+                    el1ScrollingClass: 'vb-scrolling',
+                    el1ScrollingPhantomClass: 'vb-scrolling-phantom',
+                    el1DraggingClass: 'vb-dragging',
+                    el1DraggingPhantomClass: 'vb-dragging-phantom',
+
+                    el2Class: 'vb-content',
+
+                    draggerClass: 'vb-dragger',
+                    draggerStylerClass: 'vb-dragger-styler',
+                },
+
+                // reference to binding
+                binding: null,
+
+                // references to directive DOM elements
+                el1: null,
+                el2: null,
+                dragger: null,
+
+                // show dragger
+                draggerEnabled: null,
+
+                // properties computed for internal directive logic & DOM manipulations
+                visibleArea: 0, // ratio between container height and scrollable content height
+                scrollTop: 0, // position of content scrollTop in px
+                barTop: 0, // position of dragger in px
+                barHeight: 0, // height of dragger in px
+                mouseBarOffsetY: 0, // relative position of mouse at the time of clicking on dragger
+                barDragging: false, // when the dragger is used
+
+                // reference to MutationObserver
+                mutationObserver: null,
+
+                // references to timeouts for DOM class manipulation
+                scrollingClassTimeout: null,
+                draggingClassTimeout: null,
+                scrollingPhantomClassTimeout: null,
+                draggingPhantomClassTimeout: null,
+
+                // references to a functions we'll need when removing events
+                barMousedown: null,
+                documentMousemove: null,
+                documentMouseup: null,
+                windowResize: null,
+                scrollHandler: null,
+                wheelHandler: null,
+
+            };
+            return el._vuebarState;
+        }
+
+
+
+
+        /*------------------------------------*\
+            Get State
+        \*------------------------------------*/
+        function getState(el){
+            return el._vuebarState;
+        }
+
+
+
+
+        /*------------------------------------*\
+            Mount Validation
+        \*------------------------------------*/
+        function markupValidation(el){
+            if (!el.firstChild) {
+                Vue.util.warn('(Vuebar) Element 1 with v-bar directive doesn\'t have required child element 2.');
+                return false;
+            }
+            return true;
+        }
+
+
+
+
+
+        /*------------------------------------*\
+            Computing Properties
+        \*------------------------------------*/
+        function computeVisibleArea(el){
+            var state = getState(el);
+            state.visibleArea = (state.el2.clientHeight / state.el2.scrollHeight);
+        }
+
+        function computeScrollTop(el){
+            var state = getState(el);
+            state.scrollTop = state.barTop * (state.el2.scrollHeight / state.el2.clientHeight);
+        }
+
+        function computeBarTop(el, event){
+            var state = getState(el);
+
+            // if the function gets called on scroll event
+            if (!event) {
+                state.barTop = state.el2.scrollTop * state.visibleArea;
+                return false;
+            } // else the function gets called when moving dragger with mouse
+
+
+            var relativeMouseY = (event.clientY - state.el1.getBoundingClientRect().top);
+            if (relativeMouseY <= state.mouseBarOffsetY) { // if bar is trying to go over top
+                state.barTop = 0;
+            }
+
+            if (relativeMouseY > state.mouseBarOffsetY) { // if bar is moving between top and bottom
+                state.barTop = relativeMouseY - state.mouseBarOffsetY;
+            }
+
+
+            if ( (state.barTop + state.barHeight ) >= state.el2.clientHeight ) { // if bar is trying to go over bottom
+                state.barTop = state.el2.clientHeight - state.barHeight;
+            }
+
+        }
+
+        function computeBarHeight(el){
+            var state = getState(el);
+            if (state.visibleArea >= 1) {
+                state.barHeight = 0;
+            } else {
+                state.barHeight = state.el2.clientHeight * state.visibleArea;
+            }
+        }
+
+
+
+
+        /*------------------------------------*\
+            Styles & DOM
+        \*------------------------------------*/
+        function createDragger(el){
+            var state = getState(el);
+
+            var dragger = document.createElement('div');
+            var draggerStyler = document.createElement('div');
+
+            dragger.className = state.config.draggerClass;
+
+            dragger.style.position = 'absolute';
+
+            if (!state.draggerEnabled) {
+                dragger.style.display = 'none';
+            }
+
+            draggerStyler.className = state.config.draggerStylerClass;
+
+            dragger.appendChild(draggerStyler);
+            state.el1.appendChild(dragger);
+
+            return dragger;
+        }
+
+
+        function updateDragger(el, options){
+            var options = options ? options : {};
+            var state = getState(el);
+
+            // setting dragger styles
+            state.dragger.style.height = parseInt( Math.round( state.barHeight)  ) + 'px';
+            state.dragger.style.top = parseInt( Math.round( state.barTop ) ) + 'px';
+            //state.dragger.style.height = Math.ceil( state.barHeight ) + 'px';
+            //state.dragger.style.top = Math.ceil( state.barTop ) + 'px';
+
+            // scrollbar visible / invisible classes
+            if (state.draggerEnabled && (state.visibleArea<1)) {
+                removeClass(state.el1, state.config.el1ScrollInvisibleClass);
+                addClass(state.el1, state.config.el1ScrollVisibleClass);
+            } else {
+                removeClass(state.el1, state.config.el1ScrollVisibleClass);
+                addClass(state.el1, state.config.el1ScrollInvisibleClass);
+            }
+
+
+
+            if (options.withScrollingClasses) {
+
+                // add scrolling class
+                addClass(state.el1, state.config.el1ScrollingClass);
+
+                // remove scrolling class
+                state.scrollingClassTimeout ?
+                    clearTimeout(state.scrollingClassTimeout) : null;
+                state.scrollingClassTimeout = setTimeout(function() {
+                    removeClass(state.el1, state.config.el1ScrollingClass);
+                }, state.config.scrollThrottle + 5);
+
+
+
+                // add phantom scrolling class
+                addClass(state.el1, state.config.el1ScrollingPhantomClass);
+
+                // remove phantom scrolling class
+                state.scrollingPhantomClassTimeout ?
+                    clearTimeout(state.scrollingPhantomClassTimeout) : null;
+                state.scrollingPhantomClassTimeout = setTimeout(function() {
+                    removeClass(state.el1, state.config.el1ScrollingPhantomClass);
+                }, state.config.scrollThrottle + state.config.scrollingPhantomDelay);
+
+            }
+
+        }
+
+
+
+        // this is an experimental feature
+        // - it works only on chrome and safari
+        // - instead of hiding scrollbar by overflowing it with its parent set to overflow:hidden
+        //   we hide scrollbar using pseudo-element selector ::-webkit-scrollbar
+        function hideScrollbarUsingPseudoElement(el){
+            var state = getState(el);
+            var idName = 'vuebar-pseudo-element-styles';
+            var selector = '.' + state.config.el2Class + '::-webkit-scrollbar';
+            var styleElm = document.getElementById(idName);
+            var sheet = null;
+
+            if (styleElm) {
+                sheet = styleElm.sheet;
+            } else {
+                styleElm = document.createElement('style');
+                styleElm.id = idName;
+                document.head.appendChild(styleElm);
+                sheet = styleElm.sheet;
+            }
+
+            // detect if there is a rule already added to the selector
+            var ruleExists = false;
+            for(var i=0, l=sheet.rules.length; i<l; i++){
+                var rule = sheet.rules[i];
+                if (rule.selectorText == selector) {
+                    ruleExists = true;
+                }
+            }
+
+            // if there is rule added already then don't continue
+            if ( ruleExists ) { return false }
+
+            // insert rule
+            // - we only need to use insertRule and don't need to use addRule at all
+            //   because we're only targeting chrome & safari browsers
+            if (sheet.insertRule) {
+                sheet.insertRule(selector + '{display:none}', 0);
+            }
+
+        }
+
+
+
+
+        function preventParentScroll(el, event){
+            var state = getState(el);
+
+            if (state.visibleArea >= 1) {
+                return false;
+            }
+
+            var scrollDist = state.el2.scrollHeight - state.el2.clientHeight;
+            var scrollTop = state.el2.scrollTop;
+
+            var wheelingUp = event.deltaY < 0;
+            var wheelingDown = event.deltaY > 0;
+
+            if ( (scrollTop <= 0) && wheelingUp) {
+                event.preventDefault();
+                return false;
+            }
+
+            if ( (scrollTop >= scrollDist) && wheelingDown) {
+                event.preventDefault();
+                return false;
+            }
+
+        }
+
+
+
+        function updateScroll(el){
+            var state = getState(el);
+            state.el2.scrollTop = state.scrollTop;
+        }
+
+
+
+
+        /*------------------------------------*\
+            Refresh
+        \*------------------------------------*/
+
+        function refreshScrollbar(el, options){
+            var options = options ? options : {};
+
+            if (options.immediate) {
+                computeVisibleArea(el);
+                computeBarTop(el);
+                computeBarHeight(el);
+                updateDragger(el);
+            }
+
+            Vue.nextTick(function(){
+                if ( !getState(el) ) { return false }
+                computeVisibleArea(el);
+                computeBarTop(el);
+                computeBarHeight(el);
+                updateDragger(el);
+            }.bind(this));
+        }
+
+
+
+
+        /*------------------------------------*\
+            Events & Handlers
+        \*------------------------------------*/
+
+        function scrollHandler(el){
+            var state = getState(el);
+            return throttle(function(event){
+                computeVisibleArea(el);
+                computeBarHeight(el); // fallback for an undetected content change
+                if (!state.barDragging) {
+                    computeBarTop(el);
+                    updateDragger(el, {withScrollingClasses: true});
+                }
+            }.bind(this), state.config.scrollThrottle);
+        }
+
+
+        function wheelHandler(el){
+            return function(event){
+                preventParentScroll(el, event);
+            }.bind(this);
+        }
+
+
+        function documentMousemove(el){
+            var state = getState(el);
+            return throttle(function(event){
+                computeBarTop(el, event);
+                updateDragger(el);
+                computeScrollTop(el);
+                updateScroll(el);
+            }.bind(this), state.config.draggerThrottle);
+        }
+
+
+        function documentMouseup(el){
+            var state = getState(el);
+            return function(event){
+
+                //
+                state.barDragging = false;
+
+                // enable user select
+                state.el1.style.userSelect = '';
+                state.config.unselectableBody ? compatStyle(document.body, 'UserSelect', '') : null;
+
+                // remove dragging class
+                removeClass(state.el1, state.config.el1DraggingClass);
+                state.draggingPhantomClassTimeout = setTimeout(function() {
+                    removeClass(state.el1, state.config.el1DraggingPhantomClass);
+                }, state.config.draggingPhantomDelay);
+
+
+                // remove events
+                document.removeEventListener('mousemove', state.documentMousemove, 0);
+                document.removeEventListener('mouseup', state.documentMouseup, 0);
+
+            }.bind(this);
+
+        }
+
+
+        function barMousedown(el){
+            var state = getState(el);
+            return function(event){
+
+                // don't do nothing if it's not left mouse button
+                if ( event.which!==1 ) { return false }
+
+                state.barDragging = true;
+                state.mouseBarOffsetY = event.offsetY;
+
+                // disable user select
+                state.el1.style.userSelect = 'none';
+                state.config.unselectableBody ? compatStyle(document.body, 'UserSelect', 'none') : null;
+
+                // add dragging class
+                addClass(state.el1, state.config.el1DraggingClass);
+                state.draggingPhantomClassTimeout ?
+                    clearTimeout(state.draggingPhantomClassTimeout) : null;
+                addClass(state.el1, state.config.el1DraggingPhantomClass);
+
+                // add events
+                document.addEventListener('mousemove', state.documentMousemove, 0);
+                document.addEventListener('mouseup', state.documentMouseup, 0);
+
+
+            }.bind(this);
+        }
+
+
+        function windowResize(el){
+            var state = getState(el);
+            return debounce(function(event){
+                refreshScrollbar(el);
+            }.bind(this), state.config.resizeDebounce);
+        }
+
+
+
+
+        function initMutationObserver(el){
+            if (typeof MutationObserver === typeof void 0) { return null }
+
+            var state = getState(el);
+
+            var observer = new MutationObserver(throttle(function(mutations) {
+                refreshScrollbar(el);
+            }, state.config.observerThrottle));
+
+            observer.observe(state.el2, {
+                childList: true,
+                characterData: true,
+                subtree: true,
+            });
+
+            return observer;
+        }
+
+
+
+
+        /*------------------------------------*\
+            Initialize Scrollbar
+        \*------------------------------------*/
+        function initScrollbar(el, kwargs){
+
+            // validate on directive bind if the markup is OK
+            if ( !markupValidation.call(this, el) ) { return false }
+
+            // safeguard to not initialize vuebar when it's already initialized
+            if (el._vuebarState) {
+                // and I'm actually curious if that can happen
+                Vue.util.warn('(Vuebar) Tried to initialize second time. If you see this please create an issue on https://github.com/DominikSerafin/vuebar with all relevent debug information. Thank you!');
+                return false;
+            }
+
+            // create state
+            var state = createState(el);
+
+            // get options object
+            // - it will come from directive binding (there is a 'value' property)
+            // - or it will come from public method direct options object
+            var options = kwargs.value ? kwargs.value : (kwargs ? kwargs : {});
+
+            // overwrite defaults with provided options
+            for (var key in options){
+                state.config[key] = options[key];
+            }
+
+            // detect browser
+            var browser = detectBrowser();
+
+            // dragger enabled?
+            var elNativeScrollbarWidth = getNativeScrollbarWidth(el.firstElementChild);
+            var overlayScrollbar = elNativeScrollbarWidth == 0;
+            state.draggerEnabled = ( (!overlayScrollbar) || state.config.overrideFloatingScrollbar ) ? 1 : 0;
+
+            // setup scrollbar "state"
+            state.binding = kwargs.value ? kwargs : null;
+            state.el1 = el;
+            state.el2 = el.firstElementChild;
+            state.dragger = createDragger(el);
+
+            // create and reference event listeners
+            state.barMousedown = barMousedown(el);
+            state.documentMousemove = documentMousemove(el);
+            state.documentMouseup = documentMouseup(el);
+            state.windowResize = windowResize(el);
+            state.scrollHandler = scrollHandler(el);
+            state.wheelHandler = wheelHandler(el);
+
+            // initialize and reference mutation observer
+            state.mutationObserver = initMutationObserver(el);
+
+            // el1 styles and class
+            addClass(state.el1, state.config.el1Class);
+            state.el1.style.position = 'relative';
+            state.el1.style.overflow = 'hidden';
+
+            // el2 styles and class
+            addClass(state.el2, state.config.el2Class);
+            state.el2.style.display = 'block';
+            state.el2.style.overflowX = 'hidden';
+            state.el2.style.overflowY = 'scroll';
+            state.el2.style.height = '100%';
+
+            // do the magic
+            if (state.draggerEnabled) {
+
+                // hide original browser scrollbar using pseudo css selectors (only chrome & safari)
+                if ( state.config.useScrollbarPseudo && (browser.chrome || browser.safari) ) {
+                    state.el2.style.width = '100%';
+                    hideScrollbarUsingPseudoElement(el);
+                }
+
+                // hide original browser overlay scrollbar and add padding to compensate for that
+                else if (overlayScrollbar) {
+                    /* state.el2.style.width = 'calc(100% + ' + 20 + 'px)';
+                    compatStyle(state.el2, 'BoxSizing', 'border-box'); */
+                    state.el2.style.width = '100%';
+                    compatStyle(state.el2, 'BoxSizing', 'content-box');
+                    state.el2.style.paddingRight = '20px';
+                }
+
+                // hide original browser scrollbar behind element edges and hidden overflow
+                else {
+                    state.el2.style.width = 'calc(100% + ' + elNativeScrollbarWidth + 'px)';
+                }
+
+            }
+
+            // add events
+            // - wheel event is only needed when preventParentScroll option is enabled
+            // - resize event is only needed when resizeRefresh option is enabled
+            state.el2.addEventListener('scroll', state.scrollHandler, 0);
+            state.dragger.addEventListener('mousedown', state.barMousedown, 0);
+            state.config.preventParentScroll ? state.el2.addEventListener('wheel', state.wheelHandler, 0) : null;
+            state.config.resizeRefresh ? window.addEventListener('resize', state.windowResize, 0) : null;
+
+            // initial calculations using refresh scrollbar
+            refreshScrollbar(el, {immediate: true});
+
+        }
+
+
+
+
+        /*------------------------------------*\
+            Destroy Scrollbar
+        \*------------------------------------*/
+        function destroyScrollbar(el, options){
+            var options = options ? options : {};
+            var state = getState(el);
+            if (!state) return;
+
+            // clear events
+            state.dragger.removeEventListener('mousedown', state.barMousedown, 0);
+            state.el2.removeEventListener('scroll', state.scrollHandler, 0);
+            state.el2.removeEventListener('wheel', state.scrollHandler, 0);
+            window.removeEventListener('resize', state.windowResize, 0);
+
+            // disconnect mutation observer
+            state.mutationObserver ? state.mutationObserver.disconnect() : null;
+
+            // clear el1 classes
+            removeClass(state.el1, state.config.el1Class);
+            removeClass(state.el1, state.config.el1ScrollVisibleClass);
+            removeClass(state.el1, state.config.el1ScrollInvisibleClass);
+            removeClass(state.el1, state.config.el1ScrollingClass);
+            removeClass(state.el1, state.config.el1ScrollingPhantomClass);
+            removeClass(state.el1, state.config.el1DraggingClass);
+
+            // clear el1 styles
+            if (options.clearStyles) {
+                state.el1.style.position = '';
+                state.el1.style.overflow = '';
+            }
+
+            // clear el2 classes
+            removeClass(state.el2, state.config.el2Class);
+
+            // clear el2 styles
+            if (options.clearStyles) {
+                state.el2.style.display = '';
+                state.el2.style.overflowX = '';
+                state.el2.style.overflowY = '';
+                state.el2.style.msOverflowStyle = '';
+                state.el2.style.height = '';
+                state.el2.style.width = '';
+            }
+
+            // clear dragger
+            state.dragger.removeChild(state.dragger.firstChild);
+            state.el1.removeChild(state.dragger);
+
+            // clear timeouts that may be still running
+            state.scrollingPhantomClassTimeout ?
+                clearTimeout(state.scrollingPhantomClassTimeout) : null;
+            state.draggingPhantomClassTimeout ?
+                clearTimeout(state.draggingPhantomClassTimeout) : null;
+
+            // delete state object from element
+            delete el._vuebarState;
+
+        }
+
+
+
+
+
+
+        /*------------------------------------*\
+            Public Methods Install
+        \*------------------------------------*/
+        function publicMethods(){
+            return {
+                getState: getState,
+                initScrollbar: initScrollbar,
+                destroyScrollbar: destroyScrollbar,
+                refreshScrollbar: refreshScrollbar,
+            };
+        }
+        Vue.vuebar = publicMethods();
+        Vue.prototype.$vuebar = publicMethods();
+
+
+
+
+
+        /*------------------------------------*\
+            Directive Install
+        \*------------------------------------*/
+        Vue.directive(installOptions.directive, {
+
+            inserted: function(el, binding, vnode){
+                initScrollbar.call(this, el, binding);
+            },
+
+            componentUpdated: function(el, binding, vnode, oldVnode){
+                refreshScrollbar.call(this, el);
+            },
+
+            unbind: function(el, binding, vnode, oldVnode){
+                // we shouldn't clearStyles because it actually doesn't matter that much
+                // the element will be always deleted on unbind and its styles also
+                // and if we do clear styles then it looks bad on transitions
+                destroyScrollbar.call(this, el, {clearStyles: false});
+            },
+
+        });
+
+
+
+
+
+
+
+        /*------------------------------------*\
+            Debounce Helper
+            https://remysharp.com/2010/07/21/throttling-function-calls
+        \*------------------------------------*/
+        function debounce(fn, delay) {
+            var timer = null;
+            return function () {
+                var context = this, args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    fn.apply(context, args);
+                }, delay);
+            };
+        };
+
+
+
+
+        /*------------------------------------*\
+            Throttle Helper
+            https://remysharp.com/2010/07/21/throttling-function-calls
+        \*------------------------------------*/
+        function throttle(fn, threshhold, scope) {
+            threshhold || (threshhold = 250);
+            var last,
+                deferTimer;
+            return function () {
+                var context = scope || this;
+
+                var now = +new Date,
+                    args = arguments;
+                if (last && now < last + threshhold) {
+                    // hold on to it
+                    clearTimeout(deferTimer);
+                    deferTimer = setTimeout(function () {
+                        last = now;
+                        fn.apply(context, args);
+                    }, threshhold);
+                } else {
+                    last = now;
+                    fn.apply(context, args);
+                }
+            }
+        }
+
+
+
+        /*------------------------------------*\
+            Style Vendor Prefixes Helper
+        \*------------------------------------*/
+        function compatStyle(element, property, value) {
+            element.style['webkit' + property] = value;
+            element.style['moz' + property] = value;
+            element.style['ms' + property] = value;
+            element.style['o' + property] = value;
+            element.style[ property.slice(0,1).toLowerCase() + property.substring(1) ] = value;
+        }
+
+
+
+        /*------------------------------------*\
+            Class Manipulation Helpers
+            https://plainjs.com/javascript/attributes/adding-removing-and-testing-for-classes-9/
+        \*------------------------------------*/
+        function hasClass(el, className) {
+            return el.classList ? el.classList.contains(className) : new RegExp('\\b'+ className+'\\b').test(el.className);
+        }
+
+        function addClass(el, className) {
+            if (el.classList) el.classList.add(className);
+            else if (!hasClass(el, className)) el.className += ' ' + className;
+        }
+
+        function removeClass(el, className) {
+            if (el.classList) el.classList.remove(className);
+            else el.className = el.className.replace(new RegExp('\\b'+ className+'\\b', 'g'), '');
+        }
+
+
+
+
+
+        /*------------------------------------*\
+            Browser Detection Helper
+        \*------------------------------------*/
+        function detectBrowser(){
+
+            // get ie version helper
+            function getIEVersion() {
+                var match = window.navigator.userAgent.match(/(?:MSIE |Trident\/.*; rv:)(\d+)/);
+                return match ? parseInt(match[1]) : void 0;
+            }
+
+            // user agent & vendor
+            var ua = window.navigator.userAgent;
+            var vendor = window.navigator.vendor;
+
+            // chrome
+            var chrome = (
+                (ua.toLowerCase().indexOf('chrome') > -1) && (vendor.toLowerCase().indexOf('google') > -1)
+            );
+
+            // edge
+            var edge = ua.indexOf('Edge') > -1;
+
+            // safari
+            var safari = !!window.safari || ((ua.toLowerCase().indexOf('safari') > -1) && (vendor.toLowerCase().indexOf('apple') > -1));
+
+            // internet explorer
+            var ie8 = getIEVersion() == 8;
+            var ie9 = getIEVersion() == 9;
+            var ie10 = getIEVersion() == 10;
+            var ie11 = getIEVersion() == 11;
+            var ie = ie8 || ie9 || ie10 || ie11;
+
+            // is it mobile browser?
+            // regex below thanks to http://detectmobilebrowsers.com/
+            var uaOrVendor = ua || vendor || window.opera;
+            var mobile = (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(uaOrVendor)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(uaOrVendor.substr(0,4)));
+
+            // construct return object
+            return {
+                edge: edge,
+                chrome: chrome,
+                safari: safari,
+                mobile: mobile,
+                ie: ie,
+                ie8: ie8,
+                ie9: ie9,
+                ie10: ie10,
+                ie11: ie11,
+            };
+
+        }
+
+
+        /*------------------------------------*\
+            Calculate scrollbar width in element
+            - if the width is 0 it means the scrollbar is floated/overlayed
+            - accepts "container" paremeter because ie & edge can have different
+              scrollbar behaviors for different elements using '-ms-overflow-style'
+        \*------------------------------------*/
+        function getNativeScrollbarWidth(container) {
+            var container = container ? container : document.body;
+
+            var fullWidth = 0;
+            var barWidth = 0;
+
+            var wrapper = document.createElement('div');
+            var child = document.createElement('div');
+
+            wrapper.style.position = 'absolute';
+            wrapper.style.pointerEvents = 'none';
+            wrapper.style.bottom = '0';
+            wrapper.style.right = '0';
+            wrapper.style.width = '100px';
+            wrapper.style.overflow = 'hidden';
+
+            wrapper.appendChild(child);
+            container.appendChild(wrapper);
+
+            fullWidth = child.offsetWidth;
+            child.style.width = '100%';
+            wrapper.style.overflowY = 'scroll';
+            barWidth = fullWidth - child.offsetWidth;
+
+            container.removeChild(wrapper);
+
+            return barWidth;
+        }
+
+
+
+
+    };
+
+
+
+    /*------------------------------------*\
+        Expose / Autoinstall
+    \*------------------------------------*/
+    if (true) {
+        module.exports = Vuebar;
+    } else {}
+
+    if (typeof Vue !== typeof void 0) {
+        Vue.use(Vuebar);
+    }
+
+
+
+
+})();
+
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -61918,7 +63001,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hover_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(hover_css__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var country_list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! country-list */ "./node_modules/country-list/country-list.js");
 /* harmony import */ var country_list__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(country_list__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuebar */ "./node_modules/vuebar/vuebar.js");
+/* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vuebar__WEBPACK_IMPORTED_MODULE_7__);
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 
@@ -61931,6 +63017,7 @@ Vue.use(iview__WEBPACK_IMPORTED_MODULE_2___default.a, {
 });
 Vue.use(hover_css__WEBPACK_IMPORTED_MODULE_5___default.a);
 Vue.use(country_list__WEBPACK_IMPORTED_MODULE_6___default.a);
+Vue.use(vuebar__WEBPACK_IMPORTED_MODULE_7___default.a);
 var app = new Vue({
   el: '#app',
   components: {
@@ -62311,93 +63398,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_4ec5f2d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_template_id_4ec5f2d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Home/Pages/Messages.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/Home/Pages/Messages.vue ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Messages_vue_vue_type_template_id_fa3fb5e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true& */ "./resources/js/components/Home/Pages/Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true&");
-/* harmony import */ var _Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Messages.vue?vue&type=script&lang=js& */ "./resources/js/components/Home/Pages/Messages.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css& */ "./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Messages_vue_vue_type_template_id_fa3fb5e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Messages_vue_vue_type_template_id_fa3fb5e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "fa3fb5e8",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Home/Pages/Messages.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Home/Pages/Messages.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/Home/Pages/Messages.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Messages.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css& ***!
-  \******************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=style&index=0&id=fa3fb5e8&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_style_index_0_id_fa3fb5e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Home/Pages/Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/Home/Pages/Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true& ***!
-  \****************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_template_id_fa3fb5e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Messages.vue?vue&type=template&id=fa3fb5e8&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_template_id_fa3fb5e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_template_id_fa3fb5e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -64249,21 +65249,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Home_Home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Home/Home */ "./resources/js/components/Home/Home.vue");
 /* harmony import */ var _components_Home_Pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Home/Pages/Timeline.vue */ "./resources/js/components/Home/Pages/Timeline.vue");
 /* harmony import */ var _components_Home_Pages_Notifications_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Home/Pages/Notifications.vue */ "./resources/js/components/Home/Pages/Notifications.vue");
-/* harmony import */ var _components_Home_Pages_Messages_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Home/Pages/Messages.vue */ "./resources/js/components/Home/Pages/Messages.vue");
-/* harmony import */ var _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Home/Pages/Profile */ "./resources/js/components/Home/Pages/Profile.vue");
-/* harmony import */ var _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Notifs */ "./resources/js/components/Home/Partials/Notifications/Notifs.vue");
-/* harmony import */ var _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Mentions */ "./resources/js/components/Home/Partials/Notifications/Mentions.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Woofs */ "./resources/js/components/Home/Partials/Profile/Woofs.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Followers */ "./resources/js/components/Home/Partials/Profile/Followers.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Following */ "./resources/js/components/Home/Partials/Profile/Following.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Likes */ "./resources/js/components/Home/Partials/Profile/Likes.vue");
-/* harmony import */ var _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Home/Partials/Settings */ "./resources/js/components/Home/Partials/Settings.vue");
-/* harmony import */ var _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Primary */ "./resources/js/components/Home/Partials/Settings/Primary.vue");
-/* harmony import */ var _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Password */ "./resources/js/components/Home/Partials/Settings/Password.vue");
+/* harmony import */ var _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Home/Pages/Profile */ "./resources/js/components/Home/Pages/Profile.vue");
+/* harmony import */ var _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Notifs */ "./resources/js/components/Home/Partials/Notifications/Notifs.vue");
+/* harmony import */ var _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Mentions */ "./resources/js/components/Home/Partials/Notifications/Mentions.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Woofs */ "./resources/js/components/Home/Partials/Profile/Woofs.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Followers */ "./resources/js/components/Home/Partials/Profile/Followers.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Following */ "./resources/js/components/Home/Partials/Profile/Following.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Likes */ "./resources/js/components/Home/Partials/Profile/Likes.vue");
+/* harmony import */ var _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Home/Partials/Settings */ "./resources/js/components/Home/Partials/Settings.vue");
+/* harmony import */ var _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Primary */ "./resources/js/components/Home/Partials/Settings/Primary.vue");
+/* harmony import */ var _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Password */ "./resources/js/components/Home/Partials/Settings/Password.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-
 
 
 
@@ -64315,48 +65313,44 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       children: [{
         //PROFILE
         path: '/',
-        component: _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_11__["default"]
+        component: _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_10__["default"]
       }, {
         //MENTIONS
         path: 'mentions',
-        component: _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_12__["default"]
+        component: _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_11__["default"]
       }]
-    }, {
-      //MESSAGES
-      path: 'messages',
-      component: _components_Home_Pages_Messages_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
     }, {
       //PROFILE
       path: 'profile',
-      component: _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_10__["default"],
+      component: _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_9__["default"],
       redirect: {
         path: 'profile/woofs'
       },
       children: [{
         //WOOFS
         path: 'woofs',
-        component: _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_13__["default"]
+        component: _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_12__["default"]
       }, {
         //FOLLOWING
         path: 'following',
-        component: _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_15__["default"]
+        component: _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_14__["default"]
       }, {
         //FOLLOWERS
         path: 'followers',
-        component: _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_14__["default"]
+        component: _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_13__["default"]
       }, {
         //LIKES
         path: 'likes',
-        component: _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_16__["default"]
+        component: _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_15__["default"]
       }, {
         path: 'settings',
-        component: _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_17__["default"],
+        component: _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_16__["default"],
         children: [{
           path: '/',
-          component: _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_18__["default"]
+          component: _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_17__["default"]
         }, {
           path: 'password',
-          component: _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_19__["default"]
+          component: _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_18__["default"]
         }]
       }]
     }]
