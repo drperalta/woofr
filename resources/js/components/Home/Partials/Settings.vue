@@ -8,7 +8,7 @@
             </ButtonGroup>
         </div>
         <Divider class="idivider"/>
-        <router-view class="white" style="padding: 20px 200 px;"></router-view>
+        <router-view class="white" style="padding: 20px 200px;"></router-view>
     </div>
 </template>
 
