@@ -2063,7 +2063,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\n    background: white;\n}\n.woof-body[data-v-0338a699]{\n    padding: 5px;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\n    margin-right: 20px;\n    color: #808695;\n}\n\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\n    margin-left: 60px;\n}\n\n\n\n\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\n    transition: opacity .5s;\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\n    background: white;\n}\n.woof-body[data-v-0338a699]{\n    padding: 5px;\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\n    margin-right: 20px;\n    color: #808695;\n}\n\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\n    margin-left: 60px;\n}\n\n\n\n\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\n    transition: opacity .5s;\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
 
 // exports
 
@@ -47563,135 +47563,148 @@ var render = function() {
             "li",
             { key: woof.id },
             [
-              _c("div", { staticClass: "woof-body" }, [
-                _c("ul", { staticClass: "row" }, [
-                  _c(
-                    "li",
-                    [
-                      _c("Avatar", {
-                        staticClass: "user-woof-avatar",
-                        attrs: { icon: "ios-person", size: "large" }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("div", { staticClass: "user-woof-details left" }, [
-                      _c(
-                        "a",
-                        {
-                          staticStyle: {
-                            "font-size": "14px",
-                            "font-weight": "600",
-                            color: "black"
+              _c(
+                "Card",
+                {
+                  staticClass: "woof-body",
+                  attrs: { "dis-hover": "", bordered: false }
+                },
+                [
+                  _c("ul", { staticClass: "row" }, [
+                    _c(
+                      "li",
+                      [
+                        _c("Avatar", {
+                          staticClass: "user-woof-avatar",
+                          attrs: { icon: "ios-person", size: "large" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("div", { staticClass: "user-woof-details left" }, [
+                        _c(
+                          "a",
+                          {
+                            staticStyle: {
+                              "font-size": "14px",
+                              "font-weight": "600",
+                              color: "black"
+                            },
+                            attrs: { href: "/" + woof.user_name }
                           },
-                          attrs: { href: "/" + woof.user_name }
-                        },
-                        [_vm._v(_vm._s(woof.full_name))]
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticStyle: { color: "grey" } }, [
-                        _vm._v("@" + _vm._s(woof.user_name))
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticStyle: { "font-size": "13px" } }, [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(woof.woof_text) +
-                            "\n                                "
-                        )
+                          [_vm._v(_vm._s(woof.full_name))]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticStyle: { color: "grey" } }, [
+                          _vm._v("@" + _vm._s(woof.user_name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "font-size": "13px" } }, [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(woof.woof_text) +
+                              "\n                                "
+                          )
+                        ])
                       ])
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "woof-actions" }, [
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.comment()
+                          }
+                        }
+                      },
+                      [
+                        _c("Icon", {
+                          attrs: { type: "ios-text-outline", size: "24" }
+                        }),
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(woof.comments) +
+                            "\n                        "
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.reWoof()
+                          }
+                        }
+                      },
+                      [
+                        _c("Icon", {
+                          attrs: { type: "ios-repeat", size: "24" }
+                        }),
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(woof.re_woof) +
+                            "\n                        "
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.like(index)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "transition",
+                          { attrs: { name: "bounce" } },
+                          [
+                            woof.liked
+                              ? _c("Icon", {
+                                  staticStyle: { position: "absolute" },
+                                  attrs: {
+                                    type: "ios-heart",
+                                    size: "24",
+                                    color: "#db5353"
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        !woof.liked
+                          ? _c("Icon", {
+                              attrs: { type: "ios-heart-outline", size: "24" }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        woof.liked
+                          ? _c("span", {
+                              staticStyle: { "margin-left": "28px" }
+                            })
+                          : _vm._e(),
+                        _vm._v(
+                          _vm._s(woof.likes) + "\n                        "
+                        )
+                      ],
+                      1
+                    )
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "woof-actions" }, [
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.comment()
-                        }
-                      }
-                    },
-                    [
-                      _c("Icon", {
-                        attrs: { type: "ios-text-outline", size: "24" }
-                      }),
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(woof.comments) +
-                          "\n                        "
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.reWoof()
-                        }
-                      }
-                    },
-                    [
-                      _c("Icon", { attrs: { type: "ios-repeat", size: "24" } }),
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(woof.re_woof) +
-                          "\n                        "
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.like(index)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "transition",
-                        { attrs: { name: "bounce" } },
-                        [
-                          woof.liked
-                            ? _c("Icon", {
-                                staticStyle: { position: "absolute" },
-                                attrs: {
-                                  type: "ios-heart",
-                                  size: "24",
-                                  color: "#db5353"
-                                }
-                              })
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      !woof.liked
-                        ? _c("Icon", {
-                            attrs: { type: "ios-heart-outline", size: "24" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      woof.liked
-                        ? _c("span", { staticStyle: { "margin-left": "28px" } })
-                        : _vm._e(),
-                      _vm._v(_vm._s(woof.likes) + "\n                        ")
-                    ],
-                    1
-                  )
-                ])
-              ]),
+                ]
+              ),
               _vm._v(" "),
               _vm._m(0, true),
               _vm._v(" "),
