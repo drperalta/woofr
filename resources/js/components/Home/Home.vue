@@ -5,7 +5,9 @@
         <i-menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
             <div class="navbar-items">
                 <!-- LOGO -->
-                <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
+                <a href="/timeline">
+                    <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
+                </a>
 
                 <!-- MENU ITEMS -->
                 <menu-item class="menu-item" name="timeline" to="/timeline">
