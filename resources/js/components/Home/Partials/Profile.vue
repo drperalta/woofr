@@ -5,13 +5,13 @@
             <!-- BANNER -->
             <div class="user-banner">
                 <!-- PROFILE PICTURE -->
-                <a href="#">
+                <a href="/profile">
                     <img class="user-img" src="../../../../img/default-picture.png" alt="">
                 </a>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <a href="#" class="name">David Peralta</a>
-                    <a href="#" class="username">@IamDavidMe</a>
+                    <a href="/profile" class="name">David Peralta</a>
+                    <a href="/profile" class="username">@IamDavidMe</a>
                 </div>
             </div>
             <!-- USER STATS -->
@@ -19,21 +19,21 @@
                 <ul class="row">
                     <!-- TWEETS -->
                     <li>
-                        <router-link to="#">
+                        <router-link to="/profile/woofs">
                             <span class="span stats-name">Woofs</span>
                             <span class="span stats-counts">120</span>
                         </router-link>
                     </li>
                     <!-- FOLLOWING -->
                     <li>
-                        <router-link to="#">
+                        <router-link to="/profile/following">
                             <span class="span stats-name">Following</span>
                             <span class="span stats-counts">210</span>
                         </router-link>
                     </li>
                     <!-- FOLLOWERS -->
                     <li>
-                        <router-link to="#">
+                        <router-link to="/profile/followers">
                             <span class="span stats-name">Followers</span>
                             <span class="span stats-counts">400</span>
                         </router-link>
