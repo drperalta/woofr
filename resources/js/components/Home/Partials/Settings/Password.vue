@@ -1,17 +1,17 @@
 <template>
-    <div class="content left">
+    <div class="content">
         <Form label-position="right" :label-width="110  ">
-            <FormItem label="Current Password">
+            <FormItem class="form-item" label="Current Password">
                 <Input class="input" v-model="PasswordDetails.password" size="large"/>
             </FormItem>
-            <FormItem label="New Password">
+            <FormItem class="form-item" label="New Password">
                 <Input class="input" v-model="PasswordDetails.new_password" size="large" @on-change="changed()"/>
             </FormItem>
-            <FormItem label="Confirm Password">
+            <FormItem class="form-item" label="Confirm Password">
                 <Input class="input" v-model="PasswordDetails.confirm_current_pasword" size="large" @on-change="changed()"/>
             </FormItem>
             <FormItem>
-                <Button class="button" type="primary" shape="circle" :disabled="this.disabled">Change Password</Button>
+                <Button  class="button" type="primary" shape="circle" :disabled="this.disabled">Change Password</Button>
             </FormItem>
         </Form>
     </div>
@@ -47,7 +47,6 @@ export default {
 
 <style scoped>
 .content{
-    width: 450px;
 }
 .input{
     width: 250px;
