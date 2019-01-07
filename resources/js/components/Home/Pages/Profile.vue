@@ -85,9 +85,7 @@ export default {
     },
     methods:{
         trend(){
-            if(this.$root.profile_active_page == 'followers' ||
-            this.$root.profile_active_page == 'following' ||
-            this.$root.profile_active_page == 'likes'){
+            if(this.$root.profile_active_page == 'followers' || this.$root.profile_active_page == 'following' ){
                 return true;
             } return false; 
         }
