@@ -69,7 +69,7 @@
             <Trending class="box side-box woofr-border" v-if="trend()"></Trending>
         </div>
 
-        <div class="left" style="max-width: 900px">
+        <div class=" left white woofr-border" style="max-width: 890px; min-width: 890px; margin: 5px;">
             <router-view></router-view>
         </div>
 
