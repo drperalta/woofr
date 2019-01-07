@@ -1,7 +1,5 @@
 <template>
-    <div>
-        MESSAGES
-    </div>
+    
 </template>
 
 <script>
@@ -10,9 +8,6 @@ export default {
         return{
 
         }
-    },
-    created(){
-        this.$root.active_name = window.location.href.split('/')[3];
     }
 }
 </script>
