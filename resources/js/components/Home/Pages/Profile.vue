@@ -8,8 +8,8 @@
                 </a>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <a href="#" class="name">{{UserDetails.full_name}}</a>
-                    <a href="#" class="username">@{{UserDetails.user_name}}</a>
+                    <a href="#" class="name">{{this.$root.UserDetails.full_name}}</a>
+                    <a href="#" class="username">@{{this.$root.UserDetails.user_name}}</a>
                 </div>
             </div>
 
@@ -17,27 +17,27 @@
                 <div class="profile-menu-items">
                     <ul class="row">
                         <li>
-                            <router-link class="item" to="woofs">
+                            <router-link class="item" to="/profile/woofs">
                                 <span class="span menu-title">Woofs</span>
-                                <span class="span counts">{{UserDetails.woof_counts}}</span>
+                                <span class="span counts">{{this.$root.UserDetails.woof_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" to="following">
+                            <router-link class="item" to="/profile/following">
                                 <span class="span menu-title">Following</span>
-                                <span class="span counts">{{UserDetails.follower_counts}}</span>
+                                <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" to="followers">
+                            <router-link class="item" to="/profile/followers">
                                 <span class="span menu-title">Followers</span>
-                                <span class="span counts">{{UserDetails.follower_counts}}</span>
+                                <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" to="likes">
+                            <router-link class="item" to="/profile/likes">
                                 <span class="span menu-title">Likes</span>
-                                <span class="span counts">{{UserDetails.like_counts}}</span>
+                                <span class="span counts">{{this.$root.UserDetails.like_counts}}</span>
                             </router-link>
                         </li>
                     </ul>
@@ -46,30 +46,12 @@
         </div>
 
         <div class="left">
-            <div class="box side-box user-description white woofr-border ">
-                <div class="description">{{UserDetails.description}}</div>
-                <div class="description-list">
-                    <Icon type="ios-pin-outline" size="24"/>
-                    {{UserDetails.country}}
-                </div>
-                <div class="description-list" >
-                    <Icon type="ios-link-outline" size="24"/>
-                    <a :href="'http://'+UserDetails.website">{{UserDetails.website}}</a>
-                </div>
-                <div class="description-list">
-                    <Icon type="ios-calendar-outline" size="24"/>
-                    {{UserDetails.created_at}}
-                </div>
-                <div class="description-list">
-                    <Icon type="ios-ice-cream-outline" size="24"/>
-                    Born {{UserDetails.birthdate}}
-                </div>
-            </div>
-
+            <UserDescription v-if="!this.$root.toggleEditProfile"></UserDescription>
+            <EditProfile v-if="this.$root.toggleEditProfile"></EditProfile>
             <Trending class="box side-box woofr-border" v-if="trend()"></Trending>
         </div>
 
-        <div class=" left white woofr-border" style="max-width: 890px; min-width: 890px; margin: 5px;">
+        <div class=" left" style="max-width: 900px; min-width: 900px;">
             <router-view></router-view>
         </div>
 
@@ -78,15 +60,18 @@
 
 <script>
 import Trending from '../Partials/Trending'
+import UserDescription from '../Partials/UserDescription'
+import EditProfile from '../Partials/Settings/EditProfile'
+
 export default {
-    components: {Trending},
+    components: {Trending, UserDescription, EditProfile},
     data(){
         return{
             UserDetails:{
                 full_name: 'David Peralta',
                 user_name: 'IamDavidMe',
                 description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-                country:' Republic of the Philippines',
+                country:'Philippines',
                 created_at: 'January 2019',
                 website: 'facebook.com/peraltadavidr',
                 birthdate: 'April 20, 1998',
@@ -104,7 +89,7 @@ export default {
             this.$root.profile_active_page == 'following' ||
             this.$root.profile_active_page == 'likes'){
                 return true;
-            }
+            } return false; 
         }
     }
 }
@@ -173,16 +158,5 @@ export default {
 .item{
     font-size: 14px;
     text-align: center;
-}
-.user-description{
-    padding: 40px 25px 20px 25px;
-    margin-bottom: 10px;
-}
-.description{
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-.description-list{
-    margin-bottom: 6px;
 }
 </style>
