@@ -1,45 +1,60 @@
 <template>
-    <div class="content">
-        <div class="box side-box user-description white woofr-border ">
-            <div class="description">{{UserDetails.description}}</div>
-            <div class="description-list">
-                <Icon type="ios-pin-outline" size="24"/>
-                {{UserDetails.country}}
-            </div>
-            <div class="description-list" >
-                <Icon type="ios-link-outline" size="24"/>
-                <a :href="'http://'+UserDetails.website">{{UserDetails.website}}</a>
-            </div>
-            <div class="description-list">
-                <Icon type="ios-calendar-outline" size="24"/>
-                {{UserDetails.created_at}}
-            </div>
-            <div class="description-list">
-                <Icon type="ios-ice-cream-outline" size="24"/>
-                Born {{UserDetails.birthdate}}
-            </div>
+    <div class="box side-box user-description white woofr-border">
+
+        <Input class="description" v-model="this.$root.UserDetails.description" :value="search" type="textarea" :maxlength="110" placeholder="Bio" :autosize="{minRows: 1,maxRows: 4}"/>
+        
+        <AutoComplete clearable class="country-bar input" v-model="search" @on-change="filterList()" placeholder="Location">
+            <Option v-for="(country, index) in filteredCountries" :value="country.name" :key="index">
+                {{ country.name }}
+            </Option>
+        </AutoComplete>
+
+        <Input class="input" v-model="this.$root.UserDetails.website" placeholder="Website"/>
+        <DatePicker class="input" v-model="this.$root.UserDetails.birthdate" type="date" placeholder="Birthdate" format="MMMM dd yyyy" style="width: 100%;"></DatePicker>
+
+        <div class="button">
+            <Button shape="circle" @click="cancel()">Cancel</Button>
+            <Button type="primary" shape="circle" style="float: right" @click="save()">Save Changes</Button>
         </div>
+        
     </div>
 </template>
 
 <script>
+const countryList = require('country-list');
+
 export default {
     data(){
         return{
-            UserDetails:{
-                full_name: 'David Peralta',
-                user_name: 'IamDavidMe',
-                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-                country:' Republic of the Philippines',
-                created_at: 'January 2019',
-                website: 'facebook.com/peraltadavidr',
-                birthdate: 'April 20, 1998',
-                woof_counts: '120',
-                follower_counts: '210',
-                following_counts: '400',
-                like_counts: '390'
-            },
+            filteredCountries: [],
+            search: this.$root.UserDetails.country
         }
+    },
+    methods:{
+        filterList(){
+            var vm=this;
+            this.filteredCountries = countryList.getData().filter(function(data){return data.name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;})
+        },
+        handleReachBottom () {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        const last = this.filteredCountries[this.filteredCountries.length - 1];
+                        for (let i = 1; i < 11; i++) {
+                            this.filteredCountries.push(last + i);
+                        }
+                        resolve();
+                    }, 2000);
+                });
+            },
+        cancel(){
+            this.$root.toggleEditProfile = false;
+        },
+        save(){
+            this.$root.toggleEditProfile = false;
+        }
+    },
+    created(){
+        console.log(countryList.getData());
     }
 }
 </script>
@@ -48,5 +63,18 @@ export default {
 .user-description{
     padding: 40px 25px 20px 25px;
     margin-bottom: 10px;
+}
+.description{
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.description-list{
+    margin-bottom: 6px;
+}
+.input{
+    margin: 5px;
+}
+.button {
+    margin-top: 20px;
 }
 </style>
