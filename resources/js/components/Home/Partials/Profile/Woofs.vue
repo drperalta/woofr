@@ -4,7 +4,6 @@
             <div class="woofs-header">
                 <ButtonGroup>
                     <Button size="large" to="#">Woofs</Button>
-                    <Button size="large" to="#">Replies</Button>
                     <Button size="large" to="#">Media</Button>
                 </ButtonGroup>
             </div>
