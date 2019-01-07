@@ -1,22 +1,22 @@
 <template>
     <div class="content left">
-            <Form label-position="right" :label-width="100">
-                <FormItem class="form-item" label="Full Name">
-                    <Input class="input" v-model="PrimaryDetails.full_name" placeholder="Enter your Full Name here" size="large" @on-change="changed()"/>
-                </FormItem>
-                <FormItem class="form-item" label="Username">
-                    <Input class="input" v-model="PrimaryDetails.user_name" placeholder="Enter your Username here" size="large" @on-change="changed()"/>
-                    <span style="margin-left: 7px; color: grey">https://woofr.com/</span>{{PrimaryDetails.user_name}}
-                </FormItem>
-                <FormItem class="form-item" label="Email">
-                    <Input class="input" v-model="PrimaryDetails.user_email" placeholder="Enter your Email her" size="large" @on-change="changed()"/>
-                    <span style="margin-left: 7px; color: grey;">Email will not be publicly displayed.</span>
-                </FormItem>
-                <FormItem>
-                    <Button class="button" type="primary" shape="circle" :disabled="this.disabled">Save Changes</Button>
-                </FormItem>
-            </Form>
-        </div>
+        <Form label-position="right" :label-width="110">
+            <FormItem class="form-item" label="Full Name">
+                <Input class="input" v-model="PrimaryDetails.full_name" placeholder="Enter your Full Name here" size="large" @on-change="changed()"/>
+            </FormItem>
+            <FormItem class="form-item" label="Username">
+                <Input class="input" v-model="PrimaryDetails.user_name" placeholder="Enter your Username here" size="large" @on-change="changed()"/>
+                <span style="margin-left: 7px; color: grey">https://woofr.com/</span>{{PrimaryDetails.user_name}}
+            </FormItem>
+            <FormItem class="form-item" label="Email">
+                <Input class="input" v-model="PrimaryDetails.user_email" placeholder="Enter your Email her" size="large" @on-change="changed()"/>
+                <span style="margin-left: 7px; color: grey;">Email will not be publicly displayed.</span>
+            </FormItem>
+            <FormItem>
+                <Button class="button" type="primary" shape="circle" :disabled="this.disabled">Save Changes</Button>
+            </FormItem>
+        </Form>
+    </div>
 </template>
 
 <script>
