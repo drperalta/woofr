@@ -1,5 +1,5 @@
 <template>
-    <div class="content left">
+    <div class="content">
         <Form label-position="right" :label-width="110">
             <FormItem class="form-item" label="Full Name">
                 <Input class="input" v-model="PrimaryDetails.full_name" placeholder="Enter your Full Name here" size="large" @on-change="changed()"/>
@@ -51,7 +51,6 @@ export default {
 
 <style scoped>
 .content{
-    width: 450px;
 }
 .input{
     width: 250px;
