@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <Form label-position="right" :label-width="110  ">
+        <Form label-position="right" :label-width="111">
             <FormItem class="form-item" label="Current Password">
                 <Input class="input" v-model="PasswordDetails.password" size="large"/>
             </FormItem>

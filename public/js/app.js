@@ -999,7 +999,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -46781,10 +46780,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("Button", { attrs: { size: "large", to: "#" } }, [
-                  _vm._v("Replies")
-                ]),
-                _vm._v(" "),
-                _c("Button", { attrs: { size: "large", to: "#" } }, [
                   _vm._v("Media")
                 ])
               ],
@@ -47042,7 +47037,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view", {
         staticClass: "white",
-        staticStyle: { padding: "20px 200 px" }
+        staticStyle: { padding: "20px 200px" }
       })
     ],
     1
@@ -47212,7 +47207,7 @@ var render = function() {
     [
       _c(
         "Form",
-        { attrs: { "label-position": "right", "label-width": 110 } },
+        { attrs: { "label-position": "right", "label-width": 111 } },
         [
           _c(
             "FormItem",
@@ -47338,7 +47333,7 @@ var render = function() {
     [
       _c(
         "Form",
-        { attrs: { "label-position": "right", "label-width": 110 } },
+        { attrs: { "label-position": "right", "label-width": 111 } },
         [
           _c(
             "FormItem",

@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <Form label-position="right" :label-width="110">
+        <Form label-position="right" :label-width="111">
             <FormItem class="form-item" label="Full Name">
                 <Input class="input" v-model="PrimaryDetails.full_name" placeholder="Enter your Full Name here" size="large" @on-change="changed()"/>
             </FormItem>
