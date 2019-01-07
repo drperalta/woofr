@@ -1,14 +1,14 @@
 <template>
-    <div class="content">
+    <div class="box woofr-border white">
         <div class="settings-header">
             <ButtonGroup>
                 <Button size="large" to="/profile/settings">Username and Email</Button>
                 <Button size="large" to="/profile/settings/password">Password</Button>
-                <Button size="large" to="">Edit Profile</Button>
+                <Button size="large" @click="toggle()">Edit Profile</Button>
             </ButtonGroup>
         </div>
         <Divider class="idivider"/>
-        <router-view style="margin: 20px 20px;"></router-view>
+        <router-view class="white" style="padding: 20px 200 px;"></router-view>
     </div>
 </template>
 
@@ -18,6 +18,14 @@ export default {
         return{
 
         }
+    },
+    methods:{
+        toggle(){
+            this.$root.toggleEditProfile = true;
+        }
+    },
+    created(){
+        this.$root.profile_active_page = window.location.href.split('/')[4];
     }
 }
 </script>
