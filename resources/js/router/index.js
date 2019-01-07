@@ -24,6 +24,9 @@ import Following from '../components/Home/Partials/Profile/Following'
 import Likes from '../components/Home/Partials/Profile/Likes'
 import Settings from '../components/Home/Partials/Settings'
 
+import Primary from '../components/Home/Partials/Settings/Primary'
+import Password from '../components/Home/Partials/Settings/Password'
+
 let router = new VueRouter({
 
     mode: 'history',
@@ -80,7 +83,14 @@ let router = new VueRouter({
                             path: 'likes', component: Likes
                         },
                         {
-                            path: 'settings', component: Settings,
+                            path: 'settings', component: Settings, children: [
+                                {
+                                    path: '/', component: Primary
+                                },
+                                {
+                                    path: 'password', component: Password
+                                }
+                            ]
                         }
 
                     ]
