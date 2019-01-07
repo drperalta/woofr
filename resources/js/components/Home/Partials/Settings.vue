@@ -1,6 +1,6 @@
 <template>
-    <div>
-        SETTINGS
+    <div class="content">
+        <router-view></router-view>
     </div>
 </template>
 
@@ -15,5 +15,7 @@ export default {
 </script>
 
 <style scoped>
-
+.content{
+    margin: 5px;
+}
 </style>
