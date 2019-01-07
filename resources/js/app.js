@@ -8,10 +8,12 @@ import 'iview/dist/styles/iview.css';
 import locale from 'iview/dist/locale/en-US';
 import Hover from 'hover.css'
 import CountryList from 'country-list'
+import Vuebar from 'vuebar'
 
 Vue.use(iView, { locale });
 Vue.use(Hover)
 Vue.use(CountryList)
+Vue.use(Vuebar)
 
 const app = new Vue({
     el: '#app',
