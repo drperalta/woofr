@@ -1826,7 +1826,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.notif[data-v-0f242808]{\r\n    padding: 15px;\n}\n.name[data-v-0f242808]{\r\n    font-weight: 600;\r\n    font-size: 14px;\n}\n.username[data-v-0f242808]{\r\n    color: grey;\n}\n.details[data-v-0f242808]{\r\n    margin-left: 10px;\n}\n.woof[data-v-0f242808]{\r\n    border: 1px solid #E6ECF0;\r\n    border-radius: 5px;\r\n    padding: 10px;\r\n    margin-top: 10px;\n}\n.woof-fullname[data-v-0f242808]{\r\n    font-weight: 600;\n}\n.woof-username[data-v-0f242808]{\r\n    color: grey;\n}\n.woof-text[data-v-0f242808]{\n}\r\n", ""]);
+exports.push([module.i, "\n.notif[data-v-0f242808]{\r\n    padding: 15px;\n}\n.name[data-v-0f242808]{\r\n    font-weight: 600;\r\n    font-size: 14px;\n}\n.username[data-v-0f242808]{\r\n    color: grey;\n}\n.details[data-v-0f242808]{\r\n    margin-left: 10px;\n}\n.woof[data-v-0f242808]{\r\n    border: 1px solid #E6ECF0;\r\n    border-radius: 5px;\r\n    margin-top: 10px;\n}\n.woof-fullname[data-v-0f242808]{\r\n    font-weight: 600;\n}\n.woof-username[data-v-0f242808]{\r\n    color: grey;\n}\n.woof-text[data-v-0f242808]{\n}\r\n", ""]);
 
 // exports
 
@@ -1845,7 +1845,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.notif[data-v-35213042]{\r\n    padding: 15px;\n}\n.name[data-v-35213042]{\r\n    font-weight: 600;\r\n    font-size: 14px;\n}\n.username[data-v-35213042]{\r\n    color: grey;\n}\n.details[data-v-35213042]{\r\n    margin-left: 10px;\n}\n.woof[data-v-35213042]{\r\n    border: 1px solid #E6ECF0;\r\n    border-radius: 5px;\r\n    padding: 10px;\r\n    margin-top: 10px;\n}\n.woof-fullname[data-v-35213042]{\r\n    font-weight: 600;\n}\n.woof-username[data-v-35213042]{\r\n    color: grey;\n}\n.woof-text[data-v-35213042]{\n}\r\n", ""]);
+exports.push([module.i, "\n.notif[data-v-35213042]{\r\n    padding: 15px;\n}\n.name[data-v-35213042]{\r\n    font-weight: 600;\r\n    font-size: 14px;\n}\n.username[data-v-35213042]{\r\n    color: grey;\n}\n.details[data-v-35213042]{\r\n    margin-left: 10px;\n}\n.woof[data-v-35213042]{\r\n    border: 1px solid #E6ECF0;\r\n    border-radius: 5px;\r\n    margin-top: 10px;\n}\n.woof-fullname[data-v-35213042]{\r\n    font-weight: 600;\n}\n.woof-username[data-v-35213042]{\r\n    color: grey;\n}\n.woof-text[data-v-35213042]{\n}\r\n", ""]);
 
 // exports
 
@@ -46037,43 +46037,48 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.Woofs(), function(woof, index) {
-                    return _c("a", { key: index }, [
-                      woof.id == notif.woof_id
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "woof hvr-fade",
-                              on: {
-                                click: function($event) {
-                                  _vm.show(woof.id)
+                    return _c(
+                      "a",
+                      { key: index },
+                      [
+                        woof.id == notif.woof_id
+                          ? _c(
+                              "Card",
+                              {
+                                staticClass: "woof",
+                                on: {
+                                  click: function($event) {
+                                    _vm.show(woof.id)
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "woof-fullname color-black",
-                                  attrs: { href: "/" + woof.user_name }
-                                },
-                                [_vm._v(_vm._s(woof.full_name))]
-                              ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "woof-username" }, [
-                                _vm._v("@" + _vm._s(woof.user_name))
-                              ]),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "woof-text color-black" },
-                                [_vm._v(_vm._s(woof.woof_text))]
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ])
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "woof-fullname color-black",
+                                    attrs: { href: "/" + woof.user_name }
+                                  },
+                                  [_vm._v(_vm._s(woof.full_name))]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "woof-username" }, [
+                                  _vm._v("@" + _vm._s(woof.user_name))
+                                ]),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "woof-text color-black" },
+                                  [_vm._v(_vm._s(woof.woof_text))]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
                   })
                 ],
                 2
@@ -46170,43 +46175,48 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm._l(_vm.Woofs(), function(woof, index) {
-                    return _c("a", { key: index }, [
-                      woof.id == notif.woof_id
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "woof hvr-fade",
-                              on: {
-                                click: function($event) {
-                                  _vm.show(woof.id)
+                    return _c(
+                      "a",
+                      { key: index },
+                      [
+                        woof.id == notif.woof_id
+                          ? _c(
+                              "Card",
+                              {
+                                staticClass: "woof",
+                                on: {
+                                  click: function($event) {
+                                    _vm.show(woof.id)
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "woof-fullname color-black",
-                                  attrs: { href: "/" + woof.user_name }
-                                },
-                                [_vm._v(_vm._s(woof.full_name))]
-                              ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "woof-username" }, [
-                                _vm._v("@" + _vm._s(woof.user_name))
-                              ]),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "woof-text color-black" },
-                                [_vm._v(_vm._s(woof.woof_text))]
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ])
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "woof-fullname color-black",
+                                    attrs: { href: "/" + woof.user_name }
+                                  },
+                                  [_vm._v(_vm._s(woof.full_name))]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "woof-username" }, [
+                                  _vm._v("@" + _vm._s(woof.user_name))
+                                ]),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "woof-text color-black" },
+                                  [_vm._v(_vm._s(woof.woof_text))]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
                   })
                 ],
                 2

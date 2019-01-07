@@ -12,12 +12,12 @@
                             <span class="text">{{notif.notif_text}}</span>
                         </div>
                         <a v-for="(woof, index) in Woofs()" :key="index">
-                            <div class="woof hvr-fade" v-if="woof.id == notif.woof_id" @click="show(woof.id)">
+                            <Card class="woof"  v-if="woof.id == notif.woof_id" @click="show(woof.id)">
                                 <a :href="'/'+woof.user_name" class="woof-fullname color-black">{{woof.full_name}}</a>
                                 <span class="woof-username">@{{woof.user_name}}</span>
                                 <br/>
                                 <span class="woof-text color-black">{{woof.woof_text}}</span>
-                            </div>
+                            </Card>
                         </a>
                     </li>
                 </ul>
@@ -126,7 +126,6 @@ export default {
 .woof{
     border: 1px solid #E6ECF0;
     border-radius: 5px;
-    padding: 10px;
     margin-top: 10px;
 }
 .woof-fullname{
