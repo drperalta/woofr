@@ -12,7 +12,6 @@ import ResetPassword from '../components/Index/Partials/ResetPassword'
 import Home from '../components/Home/Home'
 import Timeline from '../components/Home/Pages/Timeline.vue'
 import Notifications from '../components/Home/Pages/Notifications.vue'
-import Messages from '../components/Home/Pages/Messages.vue'
 import Profile from '../components/Home/Pages/Profile'
 
 import Notifs from '../components/Home/Partials/Notifications/Notifs'
@@ -64,9 +63,6 @@ let router = new VueRouter({
                             path: 'mentions', component: Mentions
                         }
                     ]
-                },
-                {   //MESSAGES
-                    path: 'messages', component: Messages
                 },
                 {   //PROFILE
                     path: 'profile', component: Profile, redirect: {path: 'profile/woofs'}, children: [
