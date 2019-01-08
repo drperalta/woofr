@@ -20,7 +20,7 @@
         <div class="woof-list woofr-border">
             <ul>
                 <li v-for="(woof, index) in this.$root.Woofs" :key="woof.id">
-                    <div class="woof-body">
+                    <Card dis-hover :bordered="false" class="woof-body">
                         <ul class="row">
                             <!-- USER'S AVATAR -->
                             <li>
@@ -61,7 +61,7 @@
                                 <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
                             </a>
                         </div>
-                    </div>
+                    </Card>
 
                     <div class="woof-comments">
                         <div class="comment-box">
@@ -172,6 +172,7 @@ ul{
 }
 .woof-body{
     padding: 5px;
+    cursor: pointer;
 }
 .user-woof-avatar{
     float: left;
