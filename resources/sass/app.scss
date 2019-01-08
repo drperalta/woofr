@@ -16,7 +16,11 @@
     transform: translate(-50%,-50%);
     z-index: 1;
 }
-
+.in-center{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
 .hdivider{
     height: 1px;
     width: 100%;
@@ -83,4 +87,10 @@ ul{
     height: auto;
     max-height: 200px;
     overflow: auto;
+}
+
+div{
+    .ivu-modal-body{
+        padding: 0px !important;
+    }
 }
