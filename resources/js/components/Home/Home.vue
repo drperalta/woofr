@@ -76,14 +76,16 @@
             <router-view></router-view>
         </div>
 
-        <Modal v-model="modal" title="Common Modal dialog box title" >
-            MESSAGES
+        <Modal v-model="modal" title="Direct Messages" footer-hide width="900">
+            <Messages></Messages>
         </Modal>
     </div>
 </template>
 
 <script>
+import Messages from './Modals/Messages'
 export default {
+    components: {Messages},
     data(){
         return{
             modal: false,
