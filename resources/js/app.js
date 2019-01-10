@@ -2,7 +2,7 @@ window.Vue = require('vue');
 
 import App from './components/App.vue'
 import router from './router/index'
-import store from './store/store'
+import store from './store/index'
 import axios from 'axios'
 
 import iView from 'iview';
