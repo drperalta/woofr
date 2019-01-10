@@ -2,6 +2,7 @@ window.Vue = require('vue');
 
 import App from './components/App.vue'
 import router from './router/index'
+import store from './store/store'
 import axios from 'axios'
 
 import iView from 'iview';
@@ -27,7 +28,7 @@ window.axios=axios
 const app = new Vue({
     el: '#app',
     components: {App},
-    router,
+    router,store,
 
     data(){
         return{
