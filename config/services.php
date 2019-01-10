@@ -40,9 +40,4 @@ return [
         ],
     ],
 
-    'firebase' => [
-        'database_url' => env('FB_DATABASE', 'https://project-woofr.firebaseio.com/'),
-        'secret' => env('FB_DATABASE_KEY', 'qkhdK9TpKdp8XWXYXYfBYAsgX9hQHZw76o4B6WQz'),
-    ]
-
 ];
