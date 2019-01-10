@@ -23,7 +23,7 @@ class UsersTable extends Migration
             $table->string('country');
             $table->string('website');
             $table->string('birthdate');
-            $table->string('role');
+            $table->integer('role');
             $table->boolean('is_active')->default(false);
             $table->string('activation_token');
             $table->timestamps();
