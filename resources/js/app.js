@@ -2,6 +2,7 @@ window.Vue = require('vue');
 
 import App from './components/App.vue'
 import router from './router/index'
+import axios from 'axios'
 
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
@@ -14,6 +15,14 @@ Vue.use(iView, { locale });
 Vue.use(Hover)
 Vue.use(CountryList)
 Vue.use(Vuebar)
+
+
+import Auth from '../js/api/auth'
+
+Vue.use(Auth)
+
+
+window.axios=axios
 
 const app = new Vue({
     el: '#app',

@@ -3,14 +3,14 @@
         <p class="page-name">SIGN UP</p>
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="Full Name" v-model="SignUpDetails.full_name"/>
-            <Input class="input" placeholder="Username" v-model="SignUpDetails.user_name"/>
-            <Input class="input" placeholder="Email" v-model="SignUpDetails.user_email"/>
+            <Input class="input" placeholder="Full Name" v-model="SignUpDetails.fullname"/>
+            <Input class="input" placeholder="Username" v-model="SignUpDetails.username"/>
+            <Input class="input" placeholder="Email" v-model="SignUpDetails.email"/>
             <Divider class="divider"/>
-            <Input class="input" placeholder="Password" v-model="SignUpDetails.user_pass" type="password"/>
-            <Input class="input" placeholder="Confirm Password" v-model="SignUpDetails.user_confirm_pass" type="password"/>
+            <Input class="input" placeholder="Password" v-model="SignUpDetails.password" type="password"/>
+            <Input class="input" placeholder="Confirm Password" v-model="SignUpDetails.confirm_password" type="password"/>
             <!-- BOTTOM -->
-            <Button class="button">Sign up</Button>
+            <Button class="button" @click.prevent="signup">Sign up</Button>
             <router-link to="/login">Already a member? Log in</router-link>
         </Form>
     </div>
@@ -21,12 +21,17 @@ export default {
     data(){
         return{
             SignUpDetails:{
-                full_name: '',
-                user_name: '',
-                user_email: '',
-                user_pass: '',
-                user_confirm_pass: ''
+                fullname: '',
+                username: '',
+                email: '',
+                password: '',
+                confirm_password: ''
             }
+        }
+    },
+    methods:{
+        signup(){
+             Vue.auth.signup(this, this.SignUpDetails);
         }
     }
 }

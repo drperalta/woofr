@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\User;
 
 class AuthController extends Controller
 {
     public function signup(Request $request)
-    {      
+    {
         //Validate the Data
         $request->validate([
             'fullname' => 'required|string',
@@ -19,7 +18,7 @@ class AuthController extends Controller
             'password' => 'required|min:6|same:confirm_password', //|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/|same:confirm_password
             'confirm_password' => 'sometimes'
         ]);
-        
+
         //Register the passed Data
         $user = User::create([
             'fullname' => $request->fullname,

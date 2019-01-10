@@ -3,13 +3,13 @@
         <p class="page-name">LOGIN</p>
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="Username or Email" v-model="LoginDetails.user_or_email"/>
+            <Input class="input" placeholder="Username or Email" v-model="LoginDetails.username"/>
             <Input class="input" placeholder="Password" v-model="LoginDetails.password" type="password"/>
             <!-- MIDDLE -->
             <Checkbox class="checkbox form-middle" v-model="LoginDetails.remember_me">Remember Me</Checkbox>
             <router-link class="forgotten-password form-middle" to="/reset-password">Forgotten your Password?</router-link>
             <!-- BOTTOM -->
-            <Button class="button">Log in</Button>
+            <Button class="button" @click.prevent="login">Log in</Button>
             <router-link to="/signup">Need and account? Sign Up</router-link>
         </Form>
     </div>
@@ -20,10 +20,15 @@ export default {
     data(){
         return{
             LoginDetails:{
-                user_or_email: '',
+                username: '',
                 password: '',
                 remember_me: false
             }
+        }
+    },
+    methods: {
+        login(){
+            Vue.auth.login(this, this.LoginDetails)
         }
     }
 }
