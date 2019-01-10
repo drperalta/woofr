@@ -25,7 +25,7 @@ class UsersTable extends Migration
             $table->string('birthdate')->nullable();
             $table->integer('role')->default('2');;
             $table->boolean('is_active')->default(false);
-            $table->string('activation_token')->nullable();
+            $table->string('activation_token');
             $table->timestamps();
             $table->softDeletes();
         });
