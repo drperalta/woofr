@@ -1,6 +1,8 @@
 <template>
     <div class="content">
         <p class="page-name">LOGIN</p>
+        <Alert id="success" class="notification" type="success" v-if="success.success">{{success.message}}</Alert>
+        <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
         <Form inline>
             <!-- TOP -->
             <Input class="input" placeholder="Username or Email" v-model="LoginDetails.username"/>
@@ -19,6 +21,15 @@
 export default {
     data(){
         return{
+            success:{
+                success: false,
+                message: ''
+            },
+            error:{
+                error: false,
+                message: ''
+            },
+
             LoginDetails:{
                 username: '',
                 password: '',
