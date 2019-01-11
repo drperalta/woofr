@@ -8,6 +8,7 @@ import Login from '../components/Index/Partials/Login'
 import SignUp from '../components/Index/Partials/SignUp'
 
 import ResetPassword from '../components/Index/Partials/ResetPassword'
+import VerifyEmail from '../components/Index/Partials/VerifyEmail'
 
 import Home from '../components/Home/Home'
 import Timeline from '../components/Home/Pages/Timeline.vue'
@@ -43,6 +44,9 @@ let router = new VueRouter({
                 },
                 {
                     path: 'reset-password', component: ResetPassword
+                },
+                {
+                    path: 'link', component: VerifyEmail
                 }
             ],
         },
