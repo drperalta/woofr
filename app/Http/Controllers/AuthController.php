@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\User;
 
 class AuthController extends Controller
@@ -35,9 +37,40 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function login()
-    {
+    public function login(Request $request)
+    {   
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+            'remember_me' => 'boolean'
+        ]);
+
         $credentials = request(['username', 'password']);
+
+        if(Auth::validate($credentials)){
+
+            //$credentials['is_active'] = 1;
+            $credentials['deleted_at'] = null;
+
+            //Will check if Email is Verified
+            if($token = auth()->attempt($credentials)){
+
+                $user = $request->user();
+                $time = 1;
+
+                if ($request->remember_me){
+                    $time = 24;
+                }
+
+                return $this->respondWithToken($token, $time);
+
+            }else{ // if you didn't confirm your email yet
+                return response()->json([
+                    'errors' => [ 'message' => ['This account is not Verified'] ]
+                ], 401);
+            }
+
+        }
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -53,15 +86,41 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $add)
     {
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => auth()->factory()->getTTL() * 60
+            'expires_in'   => auth()->factory()->getTTL() * 60 * $add
         ]);
     }
 
+    //This will redirect you to the page where you will need to click the verify button
+    public function open_link($activation_token){
+
+        return redirect('verify_email/'.$activation_token);
+
+    }
+    //This will update your is_active to true
+    public function verify_email($activation_token){
+
+        $user = User::where('activation_token', $activation_token)->first();
+
+        if (!$user) {
+            return response()->json([
+                'errors' => [ 'message' => ['This activation token is invalid.'] ]
+            ], 404);
+        }
+
+        $user->is_active = true;
+        $user->activation_token = '';
+        $user->save();
+
+        return response()->json([
+            'message' => 'Successfully confirmed your Email'
+        ], 200);
+    }
+    
     public function me()
     {
         return response()->json(auth()->user());
