@@ -29,3 +29,13 @@ Route::group([ 'prefix' => 'auth' ], function ()
     Route::get('verify_email/{activation_token}', 'AuthController@verify_email');
     
 });
+
+// PASSWORD RESET ROUTES
+Route::group([ 'middleware' => 'api', 'prefix' => 'password'], function ()
+{
+    Route::post('create', 'ResetPasswordController@create');
+    Route::get('find/{token}', 'ResetPasswordController@find');
+    Route::post('reset', 'ResetPasswordController@reset');
+    Route::get('setEmail/{token}' , 'ResetPasswordController@setEmail');
+    Route::get('check/{token}', 'ResetPasswordController@check');
+});
