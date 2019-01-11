@@ -25,7 +25,7 @@ Route::group([ 'prefix' => 'auth' ], function ()
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
 
-    Route::get('open_link', 'AuthController@open_link');
-    Route::get('verify_email', 'AuthController@verify_email');
+    Route::get('link/{activation_token}', 'AuthController@link');
+    Route::get('verify_email/{activation_token}', 'AuthController@verify_email');
     
 });
