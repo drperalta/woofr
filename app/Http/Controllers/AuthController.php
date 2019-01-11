@@ -98,9 +98,9 @@ class AuthController extends Controller
     }
 
     //This will redirect you to the page where you will need to click the verify button
-    public function open_link($activation_token){
+    public function link($activation_token){
 
-        return redirect('verify_email/'.$activation_token);
+        return redirect('link/'.$activation_token);
 
     }
     //This will update your is_active to true
@@ -119,7 +119,7 @@ class AuthController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Successfully confirmed your Email'
+            'message' => 'Successfully verify your Email'
         ], 200);
     }
     
