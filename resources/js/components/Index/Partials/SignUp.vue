@@ -1,6 +1,8 @@
 <template>
     <div class="content">
         <p class="page-name">SIGN UP</p>
+        <Alert id="success" class="notification" type="success" v-if="success.success">{{success.message}}</Alert>
+        <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
         <Form inline>
             <!-- TOP -->
             <Input class="input" placeholder="Full Name" v-model="SignUpDetails.fullname"/>
@@ -20,6 +22,14 @@
 export default {
     data(){
         return{
+            success:{
+                success: false,
+                message: ''
+            },
+            error:{
+                error: false,
+                message: ''
+            },
             SignUpDetails:{
                 fullname: '',
                 username: '',
@@ -55,5 +65,9 @@ export default {
     width: 50%;
     left: 50%;
     transform: translate(-50%, 0%);
+}
+.notifications{
+    text-align: center;
+    margin-bottom: 15px;
 }
 </style>
