@@ -33,7 +33,7 @@ class VerifyEmail extends Mailable
         $address = 'app.woofr@gmail.com';
         $subject = 'Verify your Email';
         $name = 'Woofr App';
-        return $this->markdown('mail.confirmEmail')
+        return $this->markdown('mail.verifyEmail')
                     ->from($address, $name)
                     ->cc($address, $name)
                     ->bcc($address, $name)

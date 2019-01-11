@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Mail\VerifyEmail;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,8 @@ class AuthController extends Controller
             'password' => bcrypt($request['password']),
             'activation_token' => str_random(60)
         ]);
-
+        
+        \Mail::to($user['email'])->send(new VerifyEmail($user));
         //return $this->respondWithToken($user);
 
         return response()->json([
@@ -49,7 +51,7 @@ class AuthController extends Controller
 
         if(Auth::validate($credentials)){
 
-            //$credentials['is_active'] = 1;
+            $credentials['is_active'] = 1;
             $credentials['deleted_at'] = null;
 
             //Will check if Email is Verified
