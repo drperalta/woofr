@@ -46,7 +46,7 @@ let router = new VueRouter({
                     path: 'reset-password', component: ResetPassword
                 },
                 {
-                    path: 'link', component: VerifyEmail
+                    path: 'link/:activation_token', component: VerifyEmail
                 }
             ],
         },
