@@ -1,13 +1,21 @@
 export default function(Vue){
     Vue.auth = {
+
         signup(context,data){
 
             axios.post( '/api/auth/signup', data)
             .then(response => {
                 context.success.success = true;
-                context.success.message = response;
-            }).catch(error => {
+                context.success.message = response.data.message;;
 
+                context.SignUpDetails.fullname = '';
+                context.SignUpDetails.email = '';
+                context.SignUpDetails.username = '';
+                context.SignUpDetails.password = '';
+                context.SignUpDetails.confirm_password = '';
+
+
+            }).catch(error => {
                 context.error.error = true;
 
                 var errorArray = Object.values(error.response.data.errors);
@@ -25,9 +33,14 @@ export default function(Vue){
 
             axios.post('/api/auth/login', data)
             .then(response => {
-                console.log(response)
+                context.success.success = true;
+                context.success.message = response.data.message;
             }).catch(error => {
-                console.log(error)
+                context.error.error = true;
+
+                var errorArray = Object.values(error.response.data.errors);
+
+                context.error.message = errorArray[0][0];
             })
 
         },
@@ -37,13 +50,15 @@ export default function(Vue){
             .then(response => {
 
                 context.success.success = true;
-                context.success.message = response;
+                context.success.message = response.data.message;
+                context.hide = true;
                 console.log(response)
 
             }).catch(error => {
                 
                 context.error.error = true;
                 context.error.message = error.response.data.errors.message[0];
+                context.hide = true;
 
             })
         }
