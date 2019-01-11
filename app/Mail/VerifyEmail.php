@@ -29,7 +29,7 @@ class VerifyEmail extends Mailable
      */
     public function build()
     {
-        $url = url('/api/auth/open_link/'.$this->data->activation_token);
+        $url = url('/api/auth/link/'.$this->data->activation_token);
         $address = 'app.woofr@gmail.com';
         $subject = 'Verify your Email';
         $name = 'Woofr App';
