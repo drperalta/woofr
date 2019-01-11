@@ -41,7 +41,12 @@ export default {
     },
     methods:{
         signup(){
-             Vue.auth.signup(this, this.SignUpDetails);
+            this.clearNotification()
+            Vue.auth.signup(this, this.SignUpDetails);
+        },
+        clearNotification(){
+            this.error.error = false;
+            this.success.success = false;
         }
     }
 }
