@@ -9,13 +9,13 @@
             <p class="email" >peraltadavidr@outlook.com</p>
         </div>
         <!-- Confirm Email Button -->
-        <Button long v-if="!error.error" class="button" @click.prevent="confirm">Confirm Email</Button>
+        <Button long v-show="!hide" class="button" @click.prevent="confirm">Confirm Email</Button>
 
         <router-link to="/login" v-if="success.success">
-            <v-btn outline class="backToLogin" type="submit">Back to Login</v-btn>
+            <Button class="backToLogin" long>Back to Login</Button>
         </router-link>
         <router-link to="/login" v-if="error.error">
-            <v-btn outline class="backToLogin" type="submit">Back to Login</v-btn>
+            <Button class="backToLogin" long>Back to Login</Button>
         </router-link>
     </div>
 </template>
@@ -31,7 +31,8 @@ export default {
             error:{
                 error: false,
                 message: ''
-            }
+            },
+            hide: false,
 
         }
     },
