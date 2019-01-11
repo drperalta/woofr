@@ -68,17 +68,17 @@ class AuthController extends Controller
 
             }else{ // if you didn't confirm your email yet
                 return response()->json([
-                    'errors' => [ 'message' => ['This account is not Verified'] ]
+                    'errors' => [ 'message' => ['This account is not verified'] ]
                 ], 401);
             }
 
+        }else{ 
+            //if username and password is not correct
+            return response()->json([
+                'errors' => [ 'message' => ['Invalid username or password'] ]
+            ], 401);
         }
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
     }
 
     public function logout()
