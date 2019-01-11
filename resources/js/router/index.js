@@ -7,6 +7,7 @@ import Index from '../components/Index/Index'
 import Login from '../components/Index/Partials/Login'
 import SignUp from '../components/Index/Partials/SignUp'
 
+import ResetPasswordRequest from '../components/Index/Partials/ResetPasswordRequest'
 import ResetPassword from '../components/Index/Partials/ResetPassword'
 import VerifyEmail from '../components/Index/Partials/VerifyEmail'
 
@@ -41,6 +42,9 @@ let router = new VueRouter({
                 },
                 {
                     path: 'signup', component: SignUp
+                },
+                {
+                    path: 'reset-password-request', component: ResetPasswordRequest
                 },
                 {
                     path: 'reset-password', component: ResetPassword
