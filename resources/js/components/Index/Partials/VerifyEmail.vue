@@ -5,11 +5,11 @@
         <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
 
         <!-- Email -->
-        <div class="input" v-if="!hide">
+        <div class="input" v-if="!success.succes">
             <p class="email" >peraltadavidr@outlook.com</p>
         </div>
         <!-- Confirm Email Button -->
-        <Button long v-if="!error.error" class="button" @click="confirm">Confirm Email</Button>
+        <Button long v-if="!error.error" class="button" @click.prevent="confirm">Confirm Email</Button>
 
         <router-link to="/login" v-if="success.success">
             <v-btn outline class="backToLogin" type="submit">Back to Login</v-btn>
@@ -34,6 +34,11 @@ export default {
             }
 
         }
+    },
+    methods:{
+        confirm(){
+            Vue.auth.verify(this, this.$route.params.activation_token)
+        }
     }
 }
 </script>
@@ -55,5 +60,9 @@ export default {
 .email{
     font-size: 14px;
     font-weight: 400;
+}
+.notifications{
+    text-align: center;
+    margin-bottom: 15px;
 }
 </style>
