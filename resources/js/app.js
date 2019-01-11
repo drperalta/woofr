@@ -19,8 +19,10 @@ Vue.use(Vuebar)
 
 
 import Auth from '../js/api/auth'
+import Reset from '../js/api/reset'
 
 Vue.use(Auth)
+Vue.use(Reset)
 
 
 window.axios=axios
