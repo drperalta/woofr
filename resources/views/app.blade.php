@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Woofr</title>
-        <link rel="icon" href="{{ asset('images /woofr-logo.png') }}"/>
+        <link rel="icon" href="{{ asset('images/woofr-logo.png') }}"/>
 
         <!-- Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
