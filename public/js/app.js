@@ -3439,9 +3439,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      success: {
+        success: false,
+        message: ''
+      },
+      error: {
+        error: false,
+        message: ''
+      },
+      ResetPasswordDetails: {
+        password: '',
+        confirm_password: '',
+        token: this.$route.params.reset_token
+      }
+    };
+  },
+  methods: {
+    reset: function reset() {
+      Vue.reset.reset(this, this.ResetPasswordDetails);
+    }
   }
 });
 
@@ -4145,7 +4173,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\r\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\r\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\r\n    margin-top: 4px;\r\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\r\n    width: 100%;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6d27fd18]{\n    margin-bottom: 20px;\n}\n.input[data-v-6d27fd18]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.checkbox[data-v-6d27fd18]{\n    float: left;\n}\n.forgotten-password[data-v-6d27fd18]{\n    float: right;\n}\n.form-middle[data-v-6d27fd18]{\n    margin-top: 4px;\n    margin-bottom: 30px;\n}\n.button[data-v-6d27fd18]{\n    width: 100%;\n    margin-bottom: 8px;\n}\n", ""]);
 
 // exports
 
@@ -4164,7 +4192,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\n    width: 100%;\n    margin-top: 10px;\n    margin-bottom: 8px;\n}\n", ""]);
 
 // exports
 
@@ -4202,7 +4230,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-79d3063d]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\r\n    width: 100%;\r\n    margin-top: 35px;\r\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\r\n    margin: 10px 0px !important;\r\n    width: 50%;\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%, 0%);\r\n            transform: translate(-50%, 0%);\n}\n.notifications[data-v-79d3063d]{\r\n    text-align: center;\r\n    margin-bottom: 15px;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-79d3063d]{\n    margin-bottom: 20px;\n}\n.input[data-v-79d3063d]{\n    width: 100%;\n    margin: 4px 0px;\n}\n.button[data-v-79d3063d]{\n    width: 100%;\n    margin-top: 35px;\n    margin-bottom: 8px;\n}\n.divider[data-v-79d3063d]{\n    margin: 10px 0px !important;\n    width: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, 0%);\n            transform: translate(-50%, 0%);\n}\n.notifications[data-v-79d3063d]{\n    text-align: center;\n    margin-bottom: 15px;\n}\n", ""]);
 
 // exports
 
@@ -4221,7 +4249,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-065c196e]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-065c196e]{\r\n    height: 35px;\r\n    margin-bottom: 10px;\r\n    padding: 5px;\r\n    text-align: center;\r\n    background-color: white;\r\n    border: 1px solid transparent;\r\n    border-radius: 5px;\r\n    width: 272px;\n}\n.email[data-v-065c196e]{\r\n    font-size: 14px;\r\n    font-weight: 400;\n}\n.notifications[data-v-065c196e]{\r\n    text-align: center;\r\n    margin-bottom: 15px;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-065c196e]{\n    margin-bottom: 20px;\n}\n.input[data-v-065c196e]{\n    height: 35px;\n    margin-bottom: 10px;\n    padding: 5px;\n    text-align: center;\n    background-color: white;\n    border: 1px solid transparent;\n    border-radius: 5px;\n    width: 272px;\n}\n.email[data-v-065c196e]{\n    font-size: 14px;\n    font-weight: 400;\n}\n.notifications[data-v-065c196e]{\n    text-align: center;\n    margin-bottom: 15px;\n}\n", ""]);
 
 // exports
 
@@ -50332,7 +50360,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "success", type: "success" }
+              attrs: { id: "success", type: "success", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.success.message))]
           )
@@ -50343,7 +50371,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "error", type: "error" }
+              attrs: { id: "error", type: "error", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.error.message))]
           )
@@ -50447,7 +50475,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("p", { staticClass: "page-name" }, [_vm._v("RESET PASSWORD")]),
+      _vm._v(" "),
+      _vm.success.success
+        ? _c(
+            "Alert",
+            {
+              staticClass: "notification",
+              attrs: { id: "success", type: "success" }
+            },
+            [_vm._v(_vm._s(_vm.success.message))]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.error.error
+        ? _c(
+            "Alert",
+            {
+              staticClass: "notification",
+              attrs: { id: "error", type: "error" }
+            },
+            [_vm._v(_vm._s(_vm.error.message))]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "Form",
+        { attrs: { inline: "" } },
+        [
+          _c("Input", {
+            staticClass: "input",
+            attrs: { placeholder: "New Password", type: "password" },
+            model: {
+              value: _vm.ResetPasswordDetails.password,
+              callback: function($$v) {
+                _vm.$set(_vm.ResetPasswordDetails, "password", $$v)
+              },
+              expression: "ResetPasswordDetails.password"
+            }
+          }),
+          _vm._v(" "),
+          _c("Input", {
+            staticClass: "input",
+            attrs: { placeholder: "Confirm Password", type: "password" },
+            model: {
+              value: _vm.ResetPasswordDetails.confirm_password,
+              callback: function($$v) {
+                _vm.$set(_vm.ResetPasswordDetails, "confirm_password", $$v)
+              },
+              expression: "ResetPasswordDetails.confirm_password"
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "Button",
+            {
+              staticClass: "button",
+              attrs: { long: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.reset($event)
+                }
+              }
+            },
+            [_vm._v("Change Password")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50562,7 +50664,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "success", type: "success" }
+              attrs: { id: "success", type: "success", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.success.message))]
           )
@@ -50573,7 +50675,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "error", type: "error" }
+              attrs: { id: "error", type: "error", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.error.message))]
           )
@@ -66556,6 +66658,7 @@ module.exports = "/images/woofr-logo.png?bc22f0ef5e808f61fc3c39b46fca6c1f";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
   Vue.auth = {
+    //This is for Registration
     signup: function signup(context, data) {
       axios.post('/api/auth/signup', data).then(function (response) {
         context.success.success = true;
@@ -66577,6 +66680,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    //This is for Loggin in
     login: function login(context, data) {
       axios.post('/api/auth/login', data).then(function (response) {
         context.success.success = true;
@@ -66587,6 +66691,15 @@ __webpack_require__.r(__webpack_exports__);
         context.error.message = errorArray[0][0];
       });
     },
+    //This is to check if the Activation Token is Valid
+    check: function check(context, data) {
+      axios.get('/api/auth/check/', data).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    //This is when confirming email verification
     verify: function verify(context, token) {
       axios.get('/api/auth/verify_email/' + token).then(function (response) {
         context.success.success = true;
@@ -66617,6 +66730,13 @@ __webpack_require__.r(__webpack_exports__);
   Vue.reset = {
     create: function create(context, data) {
       axios.post('/api/password/create', data).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    reset: function reset(context, data) {
+      axios.post('/api/password/reset', data).then(function (response) {
         console.log(response);
       }).catch(function (error) {
         console.log(error);

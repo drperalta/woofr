@@ -30,7 +30,7 @@ class AuthController extends Controller
             'password' => bcrypt($request['password']),
             'activation_token' => str_random(60)
         ]);
-        
+
         \Mail::to($user['email'])->send(new VerifyEmail($user));
         //return $this->respondWithToken($user);
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {   
+    {
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
@@ -72,7 +72,7 @@ class AuthController extends Controller
                 ], 401);
             }
 
-        }else{ 
+        }else{
             //if username and password is not correct
             return response()->json([
                 'errors' => [ 'message' => ['Invalid username or password'] ]
@@ -122,7 +122,7 @@ class AuthController extends Controller
             'message' => 'Successfully verify your Email'
         ], 200);
     }
-    
+
     public function me()
     {
         return response()->json(auth()->user());

@@ -32,7 +32,7 @@ class ResetPasswordSuccess extends Mailable
         $address = 'app.woofr@gmail.com';
         $subject = 'Password Changed Successfully';
         $name = 'Woofr App';
-        return $this->markdown('emails.resetPasswordSuccess')
+        return $this->markdown('mail.resetPasswordSuccess')
                     ->from($address, $name)
                     ->cc($address, $name)
                     ->bcc($address, $name)

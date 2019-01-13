@@ -1,6 +1,6 @@
 export default function(Vue){
     Vue.auth = {
-
+        //This is for Registration
         signup(context,data){
 
             axios.post( '/api/auth/signup', data)
@@ -28,7 +28,7 @@ export default function(Vue){
             })
 
         },
-
+        //This is for Loggin in
         login(context, data){
 
             axios.post('/api/auth/login', data)
@@ -45,6 +45,16 @@ export default function(Vue){
 
         },
 
+        //This is to check if the Activation Token is Valid
+        check(context, data){
+            axios.get('/api/auth/check/', data)
+            .then(response => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        //This is when confirming email verification
         verify(context,token){
             axios.get('/api/auth/verify_email/' + token)
             .then(response => {
@@ -55,7 +65,7 @@ export default function(Vue){
                 console.log(response)
 
             }).catch(error => {
-                
+
                 context.error.error = true;
                 context.error.message = error.response.data.errors.message[0];
                 context.hide = true;

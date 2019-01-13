@@ -60,15 +60,15 @@ class ResetPasswordController extends Controller
      */
     public function find($token)
     {
-        $resetPassword = ResetPassword::where('token', $token)->first();
+       // $resetPassword = ResetPassword::where('token', $token)->first();
 
-        if (!$resetPassword){
-            response()->json([
-                'errors' => [ 'message' => ['This password reset token is invalid.'] ]
-            ], 404);
-            $user = ResetPassword::where('token', $token)->first();
-            return redirect('change-password/INVALID_TOKEN');
-        }
+        // if (!$resetPassword){
+        //     response()->json([
+        //         'errors' => [ 'message' => ['This password reset token is invalid.'] ]
+        //     ], 404);
+        //     $user = ResetPassword::where('token', $token)->first();
+        //     return redirect('change-password/INVALID_TOKEN');
+        // }
         // if ($resetPassword->updated_at) {
         //     $resetPassword->delete();
         //     return response()->json([
@@ -76,7 +76,7 @@ class ResetPasswordController extends Controller
         //     ], 404);
         //     return redirect('change-password/INVALID_TOKEN');
         // }
-        return redirect('reset-password/'.$resetPassword->token);
+        return redirect('reset-password/'.$token);
     }
 
     public function check($token)
@@ -107,34 +107,37 @@ class ResetPasswordController extends Controller
     public function reset(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/|same:confirm_password',
-            'confirm_password' => 'sometimes',
-            'token' => 'required|string'
+            'password' => 'required|min:6|same:confirm_password', //|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+            'confirm_password' => 'sometimes'
         ]);
-        $resetPassword = ResetPassword::where([ ['token', $request->token], ['email', $request->email] ])->first();
+
+        $resetPassword = ResetPassword::where('token', $request->token)->first();
+
         if (!$resetPassword){
             return response()->json([
                 'errors' => [ 'message' => ['This password reset token is invalid.'] ]
             ], 404);
         }
-        $user = User::where('email', $resetPassword->email)->first();
-        if (!$user){
-            return response()->json([
-                'errors' => [ 'message' => ['We can\'t find a user with that e-mail address.'] ]
-            ], 404);
-        }
+
+        $email = ResetPassword::select('email')->where('token', $request->token)->first();
+
+        $user = User::where('email', $email->email)->first();
+
         $user->password = bcrypt($request->password);
         $user->save();
         $resetPassword->delete();
+
         $data = [
             User::select('fullname')->where('email', $user->email)->first(),
         ];
+
         \Mail::to($resetPassword->email)->send(new ResetPasswordSuccess($data));
+
         return response()->json([
             'message' => 'Successfully Changed your Password'
         ], 200);
     }
+
     public function setEmail($token){
         return $resetPassword = ResetPassword::select('email')->where('token', $token)->first();
     }

@@ -8,6 +8,14 @@ export default function(Vue){
             }).catch(error => {
                 console.log(error)
             })
+        },
+        reset(context, data){
+            axios.post('/api/password/reset', data)
+            .then(response => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
         }
 
     }
