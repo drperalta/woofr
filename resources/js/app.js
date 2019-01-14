@@ -11,11 +11,27 @@ import locale from 'iview/dist/locale/en-US';
 import Hover from 'hover.css'
 import CountryList from 'country-list'
 import Vuebar from 'vuebar'
+import VueProgressBar from 'vue-progressbar'
+
+const options = {
+    color: 'white',
+    // failedColor: '#874b4b',
+    // thickness: '3px',
+    // transition: {
+    //   speed: '0.1s',
+    //   opacity: '1',
+    //   termination: 300
+    // },
+    // autoRevert: true,
+    // location: 'top',
+    // inverse: false
+  }
 
 Vue.use(iView, { locale });
 Vue.use(Hover)
 Vue.use(CountryList)
 Vue.use(Vuebar)
+Vue.use(VueProgressBar, options)
 
 
 import Auth from '../js/api/auth'
@@ -23,6 +39,9 @@ import Reset from '../js/api/reset'
 
 Vue.use(Auth)
 Vue.use(Reset)
+
+
+
 
 
 window.axios=axios
