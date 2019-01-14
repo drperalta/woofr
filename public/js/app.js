@@ -66830,7 +66830,7 @@ __webpack_require__.r(__webpack_exports__);
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('loginUser');
         localStorage.setItem('token', response.data.access_token);
         _router_index__WEBPACK_IMPORTED_MODULE_1__["default"].push({
-          path: '/'
+          name: 'timeline'
         });
       }).catch(function (error) {
         context.$root.$emit('login:error');
