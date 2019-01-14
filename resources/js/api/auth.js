@@ -39,7 +39,7 @@ export default function(Vue){
                 context.$root.$emit('login:success')
                 store.commit('loginUser')
                 localStorage.setItem('token', response.data.access_token)
-                router.push({ path: '/timeline' })
+                router.push({ path: '/' })
 
             }).catch(error => {
                 context.$root.$emit('login:error')
