@@ -5,12 +5,12 @@
         <i-menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
             <div class="navbar-items">
                 <!-- LOGO -->
-                <a href="/timeline">
+                <a href="/">
                     <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
                 </a>
 
                 <!-- MENU ITEMS -->
-                <menu-item class="menu-item" name="timeline" to="/timeline">
+                <menu-item class="menu-item" name="timeline" to="/">
                     <Icon type="md-home" style="margin: 0"/>
                     Home
                 </menu-item>

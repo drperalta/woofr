@@ -57,10 +57,10 @@ let router = new VueRouter({
         },
         //HOME
         {
-            path: '/', component: Home,
+            path: '/', component: Home, meta: { requiresAuth: true },
             children: [
                 {   //TIMELINE
-                    path: 'timeline', component: Timeline, meta: { requiresAuth: true }
+                    path: '/', component: Timeline, name: 'timeline', meta: { requiresAuth: true }
                 },
                 {   //NOTIFICATIONS
                     path: 'notifications', component: Notifications, meta: { requiresAuth: true },
@@ -116,7 +116,7 @@ router.beforeEach((to, from, next) => {
 
     // if logged in redirect to dashboard
     if(to.path === '/login' && store.state.isLoggedIn) {
-        next({ path: '/timeline' })
+        next({ name: 'timeline' })
         return
     }
 

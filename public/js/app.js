@@ -47710,7 +47710,7 @@ var render = function() {
             "div",
             { staticClass: "navbar-items" },
             [
-              _c("a", { attrs: { href: "/timeline" } }, [
+              _c("a", { attrs: { href: "/" } }, [
                 _c("img", {
                   staticClass: "logo",
                   attrs: {
@@ -47724,7 +47724,7 @@ var render = function() {
                 "menu-item",
                 {
                   staticClass: "menu-item",
-                  attrs: { name: "timeline", to: "/timeline" }
+                  attrs: { name: "timeline", to: "/" }
                 },
                 [
                   _c("Icon", {
@@ -69558,10 +69558,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   {
     path: '/',
     component: _components_Home_Home__WEBPACK_IMPORTED_MODULE_9__["default"],
+    meta: {
+      requiresAuth: true
+    },
     children: [{
       //TIMELINE
-      path: 'timeline',
+      path: '/',
       component: _components_Home_Pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+      name: 'timeline',
       meta: {
         requiresAuth: true
       }
@@ -69664,7 +69668,7 @@ router.beforeEach(function (to, from, next) {
 
   if (to.path === '/login' && _store_index__WEBPACK_IMPORTED_MODULE_2__["default"].state.isLoggedIn) {
     next({
-      path: '/timeline'
+      name: 'timeline'
     });
     return;
   }
