@@ -50474,7 +50474,10 @@ var render = function() {
         [
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Username or Email" },
+            attrs: {
+              placeholder: "Username or Email",
+              disabled: _vm.isLoading
+            },
             model: {
               value: _vm.LoginDetails.username,
               callback: function($$v) {
@@ -50486,7 +50489,11 @@ var render = function() {
           _vm._v(" "),
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Password", type: "password" },
+            attrs: {
+              placeholder: "Password",
+              type: "password",
+              disabled: _vm.isLoading
+            },
             model: {
               value: _vm.LoginDetails.password,
               callback: function($$v) {
@@ -50500,6 +50507,7 @@ var render = function() {
             "Checkbox",
             {
               staticClass: "checkbox form-middle",
+              attrs: { disabled: _vm.isLoading },
               model: {
                 value: _vm.LoginDetails.remember_me,
                 callback: function($$v) {
@@ -50601,7 +50609,11 @@ var render = function() {
             [
               _c("Input", {
                 staticClass: "input",
-                attrs: { placeholder: "New Password", type: "password" },
+                attrs: {
+                  placeholder: "New Password",
+                  type: "password",
+                  disabled: _vm.isLoading
+                },
                 model: {
                   value: _vm.ResetPasswordDetails.password,
                   callback: function($$v) {
@@ -50613,7 +50625,11 @@ var render = function() {
               _vm._v(" "),
               _c("Input", {
                 staticClass: "input",
-                attrs: { placeholder: "Confirm Password", type: "password" },
+                attrs: {
+                  placeholder: "Confirm Password",
+                  type: "password",
+                  disabled: _vm.isLoading
+                },
                 model: {
                   value: _vm.ResetPasswordDetails.confirm_password,
                   callback: function($$v) {
@@ -50718,7 +50734,7 @@ var render = function() {
         [
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Email" },
+            attrs: { placeholder: "Email", disabled: _vm.isLoading },
             model: {
               value: _vm.UserDetails.email,
               callback: function($$v) {
@@ -50804,7 +50820,7 @@ var render = function() {
         [
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Full Name" },
+            attrs: { placeholder: "Full Name", disabled: _vm.isLoading },
             model: {
               value: _vm.SignUpDetails.fullname,
               callback: function($$v) {
@@ -50816,7 +50832,7 @@ var render = function() {
           _vm._v(" "),
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Username" },
+            attrs: { placeholder: "Username", disabled: _vm.isLoading },
             model: {
               value: _vm.SignUpDetails.username,
               callback: function($$v) {
@@ -50828,7 +50844,7 @@ var render = function() {
           _vm._v(" "),
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Email" },
+            attrs: { placeholder: "Email", disabled: _vm.isLoading },
             model: {
               value: _vm.SignUpDetails.email,
               callback: function($$v) {
@@ -50842,7 +50858,11 @@ var render = function() {
           _vm._v(" "),
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Password", type: "password" },
+            attrs: {
+              placeholder: "Password",
+              type: "password",
+              disabled: _vm.isLoading
+            },
             model: {
               value: _vm.SignUpDetails.password,
               callback: function($$v) {
@@ -50854,7 +50874,11 @@ var render = function() {
           _vm._v(" "),
           _c("Input", {
             staticClass: "input",
-            attrs: { placeholder: "Confirm Password", type: "password" },
+            attrs: {
+              placeholder: "Confirm Password",
+              type: "password",
+              disabled: _vm.isLoading
+            },
             model: {
               value: _vm.SignUpDetails.confirm_password,
               callback: function($$v) {

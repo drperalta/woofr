@@ -5,12 +5,12 @@
         <Alert  id="error" class="notification" type="error" v-if="error.error" show-icon>{{error.message}}</Alert>
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="Full Name" v-model="SignUpDetails.fullname"/>
-            <Input class="input" placeholder="Username" v-model="SignUpDetails.username"/>
-            <Input class="input" placeholder="Email" v-model="SignUpDetails.email"/>
+            <Input class="input" placeholder="Full Name" v-model="SignUpDetails.fullname" :disabled="isLoading"/>
+            <Input class="input" placeholder="Username" v-model="SignUpDetails.username" :disabled="isLoading"/>
+            <Input class="input" placeholder="Email" v-model="SignUpDetails.email" :disabled="isLoading"/>
             <Divider class="divider"/>
-            <Input class="input" placeholder="Password" v-model="SignUpDetails.password" type="password"/>
-            <Input class="input" placeholder="Confirm Password" v-model="SignUpDetails.confirm_password" type="password"/>
+            <Input class="input" placeholder="Password" v-model="SignUpDetails.password" type="password" :disabled="isLoading"/>
+            <Input class="input" placeholder="Confirm Password" v-model="SignUpDetails.confirm_password" type="password" :disabled="isLoading"/>
             <!-- BOTTOM -->
             <Button class="button" @click.prevent="signup" :loading="isLoading">Sign up</Button>
             <router-link to="/login">Already a member? Log in</router-link>

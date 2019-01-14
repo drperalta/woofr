@@ -5,10 +5,10 @@
         <Alert  id="error" class="notification" type="error" v-if="error.error" show-icon>{{error.message}}</Alert>
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="Username or Email" v-model="LoginDetails.username"/>
-            <Input class="input" placeholder="Password" v-model="LoginDetails.password" type="password"/>
+            <Input class="input" placeholder="Username or Email" v-model="LoginDetails.username" :disabled="isLoading"/>
+            <Input class="input" placeholder="Password" v-model="LoginDetails.password" type="password" :disabled="isLoading"/>
             <!-- MIDDLE -->
-            <Checkbox class="checkbox form-middle" v-model="LoginDetails.remember_me">Remember Me</Checkbox>
+            <Checkbox class="checkbox form-middle" v-model="LoginDetails.remember_me" :disabled="isLoading">Remember Me</Checkbox>
             <router-link class="forgotten-password form-middle" to="/reset-password-request">Forgotten your Password?</router-link>
             <!-- BOTTOM -->
             <Button class="button" @click.prevent="login" :loading="isLoading">Log in</Button>

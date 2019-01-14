@@ -6,8 +6,8 @@
 
         <Form inline v-if="!hidden">
             <!-- TOP -->
-            <Input class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password"/>
-            <Input class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password"/>
+            <Input class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password" :disabled="isLoading"/>
+            <Input class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password" :disabled="isLoading"/>
             <!-- BOTTOM -->
             <Button v-if="!success.success" class="button" @click.prevent="reset" long :loading="isLoading">Change Password</Button>
         </Form>

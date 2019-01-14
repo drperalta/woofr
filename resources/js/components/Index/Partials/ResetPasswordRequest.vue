@@ -6,7 +6,7 @@
 
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="Email" v-model="UserDetails.email"/>
+            <Input class="input" placeholder="Email" v-model="UserDetails.email" :disabled="isLoading"/>
             <!-- BOTTOM -->
             <Button class="button" @click="send" :loading="isLoading">Send Link</Button>
             <router-link to="/login">Nevermind, I got it.</router-link>
