@@ -8,6 +8,9 @@ export default function(Vue){
 
             axios.post( '/api/auth/signup', data)
             .then(response => {
+
+                context.$root.$emit('register:success')
+
                 context.success.success = true;
                 context.success.message = response.data.message;;
 
@@ -18,6 +21,7 @@ export default function(Vue){
                 context.SignUpDetails.confirm_password = '';
 
             }).catch(error => {
+                context.$root.$emit('register:error')
 
                 context.error.error = true;
 
@@ -32,14 +36,15 @@ export default function(Vue){
 
             axios.post('/api/auth/login', data)
             .then(response => {
-
+                context.$root.$emit('login:success')
                 store.commit('loginUser')
                 localStorage.setItem('token', response.data.access_token)
                 router.push({ path: '/timeline' })
 
             }).catch(error => {
-                context.error.error = true;
+                context.$root.$emit('login:error')
 
+                context.error.error = true;
                 var errorArray = Object.values(error.response.data.errors);
 
                 context.error.message = errorArray[0][0];
@@ -65,14 +70,14 @@ export default function(Vue){
         verify(context,token){
             axios.get('/api/auth/verify_email/' + token)
             .then(response => {
-
+                context.$root.$emit('verify:success')
                 context.success.success = true;
                 context.success.message = response.data.message;
                 context.hidden = true;
                 console.log(response)
 
             }).catch(error => {
-
+                context.$root.$emit('verify:error')
                 context.error.error = true;
                 context.error.message = error.response.data.errors.message[0];
                 context.hide = true;

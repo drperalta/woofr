@@ -106,7 +106,7 @@ let router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-
+    //router.app.$Progress.start()
     // check if the route requires authentication and user is not logged in
     if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
         // redirect to login page
@@ -121,6 +121,10 @@ router.beforeEach((to, from, next) => {
     }
 
     next()
+})
+
+router.afterEach(() => {
+    //router.app.$Progress.finish()
 })
 
 export default router

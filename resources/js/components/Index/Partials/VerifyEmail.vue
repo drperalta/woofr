@@ -10,7 +10,7 @@
                 <p class="email" >{{email}}</p>
             </div>
             <!-- Confirm Email Button -->
-            <Button long class="button" @click.prevent="confirm">Confirm Email</Button>
+            <Button long class="button" @click.prevent="confirm" :loading="isLoading">Confirm Email</Button>
         </Form>
         <Button to="/login" v-if="success.success" class="backToLogin" long>Back to Login</Button>
         <Button to="/login" v-if="error.error" class="backToLogin" long>Back to Login</Button>
@@ -30,16 +30,27 @@ export default {
                 message: ''
             },
             hidden: false,
-            email: ''
+            email: '',
+            isLoading: false
         }
     },
     methods:{
         confirm(){
+            this.isLoading = true;
             Vue.auth.verify(this, this.$route.params.activation_token)
         }
     },
     created(){
         Vue.auth.validate(this, this.$route.params.activation_token)
+    },
+    mounted(){
+
+        this.$root.$on('verify:success', () => {
+            this.isLoading = false
+        })
+        this.$root.$on('verify:error', () => {
+            this.isLoading = false
+        })
     }
 }
 </script>

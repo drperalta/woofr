@@ -8,7 +8,7 @@
             <!-- TOP -->
             <Input class="input" placeholder="Email" v-model="UserDetails.email"/>
             <!-- BOTTOM -->
-            <Button class="button" @click="send">Send Link</Button>
+            <Button class="button" @click="send" :loading="isLoading">Send Link</Button>
             <router-link to="/login">Nevermind, I got it.</router-link>
         </Form>
 
@@ -30,11 +30,13 @@ export default {
 
             UserDetails:{
                 email: ''
-            }
+            },
+            isLoading: false
         }
     },
     methods:{
         send(){
+            this.isLoading = true;
             this.clearNotifs();
             Vue.reset.create(this, this.UserDetails)
         },
@@ -44,6 +46,15 @@ export default {
             this.error.error = false;
             this.error.message = '';
         }
+    },
+    mounted(){
+
+        this.$root.$on('create:success', () => {
+            this.isLoading = false
+        })
+        this.$root.$on('create:error', () => {
+            this.isLoading = false
+        })
     }
 }
 </script>

@@ -3414,13 +3414,25 @@ __webpack_require__.r(__webpack_exports__);
         username: '',
         password: '',
         remember_me: false
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
     login: function login() {
+      this.isLoading = true;
       Vue.auth.login(this, this.LoginDetails);
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('login:success', function () {
+      _this.isLoading = false;
+    });
+    this.$root.$on('login:error', function () {
+      _this.isLoading = false;
+    });
   }
 });
 
@@ -3470,11 +3482,13 @@ __webpack_require__.r(__webpack_exports__);
         password: '',
         confirm_password: '',
         token: this.$route.params.reset_token
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
     reset: function reset() {
+      this.isLoading = true;
       this.clearNotifs();
       Vue.reset.reset(this, this.ResetPasswordDetails);
     },
@@ -3487,6 +3501,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     Vue.reset.validate(this, this.$route.params.reset_token);
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('reset:success', function () {
+      _this.isLoading = false;
+    });
+    this.$root.$on('reset:error', function () {
+      _this.isLoading = false;
+    });
   }
 });
 
@@ -3531,11 +3555,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       UserDetails: {
         email: ''
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
     send: function send() {
+      this.isLoading = true;
       this.clearNotifs();
       Vue.reset.create(this, this.UserDetails);
     },
@@ -3545,6 +3571,16 @@ __webpack_require__.r(__webpack_exports__);
       this.error.error = false;
       this.error.message = '';
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('create:success', function () {
+      _this.isLoading = false;
+    });
+    this.$root.$on('create:error', function () {
+      _this.isLoading = false;
+    });
   }
 });
 
@@ -3596,11 +3632,13 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: '',
         confirm_password: ''
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
     signup: function signup() {
+      this.isLoading = true;
       this.clearNotification();
       Vue.auth.signup(this, this.SignUpDetails);
     },
@@ -3610,6 +3648,16 @@ __webpack_require__.r(__webpack_exports__);
       this.error.error = false;
       this.error.message = '';
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('register:success', function () {
+      _this.isLoading = false;
+    });
+    this.$root.$on('register:error', function () {
+      _this.isLoading = false;
+    });
   }
 });
 
@@ -3655,16 +3703,28 @@ __webpack_require__.r(__webpack_exports__);
         message: ''
       },
       hidden: false,
-      email: ''
+      email: '',
+      isLoading: false
     };
   },
   methods: {
     confirm: function confirm() {
+      this.isLoading = true;
       Vue.auth.verify(this, this.$route.params.activation_token);
     }
   },
   created: function created() {
     Vue.auth.validate(this, this.$route.params.activation_token);
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('verify:success', function () {
+      _this.isLoading = false;
+    });
+    this.$root.$on('verify:error', function () {
+      _this.isLoading = false;
+    });
   }
 });
 
@@ -4181,7 +4241,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-19a9cccc] {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.wrapper[data-v-19a9cccc]{\r\n    top: 40% !important;\r\n    text-align: center;\r\n    max-width: 288px;\n}\n.logo[data-v-19a9cccc]{\r\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\r\n    margin-top: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.container[data-v-19a9cccc] {\r\n    width: 100vw;\r\n    height: 100vh;\r\n    /* background: url('../../../img/woofr-bg.png') */\n}\n.wrapper[data-v-19a9cccc]{\r\n    top: 40% !important;\r\n    text-align: center;\r\n    max-width: 288px;\n}\n.logo[data-v-19a9cccc]{\r\n    width: 85px;\n}\n.body[data-v-19a9cccc]{\r\n    margin-top: 20px;\r\n    min-width: 288px;\r\n    max-width: 288px;\n}\r\n", ""]);
 
 // exports
 
@@ -50464,6 +50524,7 @@ var render = function() {
             "Button",
             {
               staticClass: "button",
+              attrs: { loading: _vm.isLoading },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -50567,7 +50628,7 @@ var render = function() {
                     "Button",
                     {
                       staticClass: "button",
-                      attrs: { long: "" },
+                      attrs: { long: "", loading: _vm.isLoading },
                       on: {
                         click: function($event) {
                           $event.preventDefault()
@@ -50667,9 +50728,15 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("Button", { staticClass: "button", on: { click: _vm.send } }, [
-            _vm._v("Send Link")
-          ]),
+          _c(
+            "Button",
+            {
+              staticClass: "button",
+              attrs: { loading: _vm.isLoading },
+              on: { click: _vm.send }
+            },
+            [_vm._v("Send Link")]
+          ),
           _vm._v(" "),
           _c("router-link", { attrs: { to: "/login" } }, [
             _vm._v("Nevermind, I got it.")
@@ -50801,6 +50868,7 @@ var render = function() {
             "Button",
             {
               staticClass: "button",
+              attrs: { loading: _vm.isLoading },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -50888,7 +50956,7 @@ var render = function() {
                 "Button",
                 {
                   staticClass: "button",
-                  attrs: { long: "" },
+                  attrs: { long: "", loading: _vm.isLoading },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -66702,6 +66770,7 @@ __webpack_require__.r(__webpack_exports__);
     //This is for Registration
     signup: function signup(context, data) {
       axios.post('/api/auth/signup', data).then(function (response) {
+        context.$root.$emit('register:success');
         context.success.success = true;
         context.success.message = response.data.message;
         ;
@@ -66711,6 +66780,7 @@ __webpack_require__.r(__webpack_exports__);
         context.SignUpDetails.password = '';
         context.SignUpDetails.confirm_password = '';
       }).catch(function (error) {
+        context.$root.$emit('register:error');
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
         context.error.message = errorArray[0][0];
@@ -66719,12 +66789,14 @@ __webpack_require__.r(__webpack_exports__);
     //This is for Logging in
     login: function login(context, data) {
       axios.post('/api/auth/login', data).then(function (response) {
+        context.$root.$emit('login:success');
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('loginUser');
         localStorage.setItem('token', response.data.access_token);
         _router_index__WEBPACK_IMPORTED_MODULE_1__["default"].push({
           path: '/timeline'
         });
       }).catch(function (error) {
+        context.$root.$emit('login:error');
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
         context.error.message = errorArray[0][0];
@@ -66748,11 +66820,13 @@ __webpack_require__.r(__webpack_exports__);
     //This is when confirming email verification
     verify: function verify(context, token) {
       axios.get('/api/auth/verify_email/' + token).then(function (response) {
+        context.$root.$emit('verify:success');
         context.success.success = true;
         context.success.message = response.data.message;
         context.hidden = true;
         console.log(response);
       }).catch(function (error) {
+        context.$root.$emit('verify:error');
         context.error.error = true;
         context.error.message = error.response.data.errors.message[0];
         context.hide = true;
@@ -66785,11 +66859,13 @@ __webpack_require__.r(__webpack_exports__);
   Vue.reset = {
     create: function create(context, data) {
       axios.post('/api/password/create', data).then(function (response) {
-        //clear the inputs
+        context.$root.$emit('create:success'); //clear the inputs
+
         context.UserDetails = '';
         context.success.success = true;
         context.success.message = response.data.message;
       }).catch(function (error) {
+        context.$root.$emit('create:error');
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
         context.error.message = errorArray[0][0];
@@ -66797,10 +66873,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     reset: function reset(context, data) {
       axios.post('/api/password/reset', data).then(function (response) {
+        context.$root.$emit('reset:success');
         context.hidden = true;
         context.success.success = true;
         context.success.message = response.data.message;
       }).catch(function (error) {
+        context.$root.$emit('reset:error');
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
         context.error.message = errorArray[0][0];
@@ -69517,6 +69595,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }]
 });
 router.beforeEach(function (to, from, next) {
+  //router.app.$Progress.start()
   // check if the route requires authentication and user is not logged in
   if (to.matched.some(function (route) {
     return route.meta.requiresAuth;
@@ -69537,6 +69616,8 @@ router.beforeEach(function (to, from, next) {
   }
 
   next();
+});
+router.afterEach(function () {//router.app.$Progress.finish()
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 

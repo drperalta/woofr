@@ -12,7 +12,7 @@
             <Input class="input" placeholder="Password" v-model="SignUpDetails.password" type="password"/>
             <Input class="input" placeholder="Confirm Password" v-model="SignUpDetails.confirm_password" type="password"/>
             <!-- BOTTOM -->
-            <Button class="button" @click.prevent="signup">Sign up</Button>
+            <Button class="button" @click.prevent="signup" :loading="isLoading">Sign up</Button>
             <router-link to="/login">Already a member? Log in</router-link>
         </Form>
     </div>
@@ -36,11 +36,14 @@ export default {
                 email: '',
                 password: '',
                 confirm_password: ''
-            }
+            },
+            isLoading: false
         }
     },
     methods:{
         signup(){
+            this.isLoading = true;
+
             this.clearNotification();
             Vue.auth.signup(this, this.SignUpDetails);
         },
@@ -50,6 +53,15 @@ export default {
             this.error.error = false;
             this.error.message = '';
         }
+    },
+    mounted(){
+
+        this.$root.$on('register:success', () => {
+            this.isLoading = false
+        })
+        this.$root.$on('register:error', () => {
+            this.isLoading = false
+        })
     }
 }
 </script>

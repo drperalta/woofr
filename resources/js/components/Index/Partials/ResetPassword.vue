@@ -9,7 +9,7 @@
             <Input class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password"/>
             <Input class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password"/>
             <!-- BOTTOM -->
-            <Button v-if="!success.success" class="button" @click.prevent="reset" long>Change Password</Button>
+            <Button v-if="!success.success" class="button" @click.prevent="reset" long :loading="isLoading">Change Password</Button>
         </Form>
         <router-link to="/login" v-if="hidden">
             <Button class="backToLogin" long>Back to Login</Button>
@@ -34,11 +34,13 @@ export default {
                 password: '',
                 confirm_password: '',
                 token: this.$route.params.reset_token
-            }
+            },
+            isLoading: false
         }
     },
     methods:{
         reset(){
+            this.isLoading = true;
             this.clearNotifs();
             Vue.reset.reset(this, this.ResetPasswordDetails)
         },
@@ -51,6 +53,15 @@ export default {
     },
     created(){
         Vue.reset.validate(this, this.$route.params.reset_token)
+    },
+    mounted(){
+
+        this.$root.$on('reset:success', () => {
+            this.isLoading = false
+        })
+        this.$root.$on('reset:error', () => {
+            this.isLoading = false
+        })
     }
 }
 </script>

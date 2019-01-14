@@ -4,12 +4,14 @@ export default function(Vue){
         create(context, data){
             axios.post('/api/password/create', data)
             .then(response => {
+                context.$root.$emit('create:success')
                 //clear the inputs
                 context.UserDetails = '';
 
                 context.success.success = true;
                 context.success.message = response.data.message;
             }).catch(error => {
+                context.$root.$emit('create:error')
                 context.error.error = true;
 
                 var errorArray = Object.values(error.response.data.errors);
@@ -20,12 +22,12 @@ export default function(Vue){
         reset(context, data){
             axios.post('/api/password/reset', data)
             .then(response => {
-                
+                context.$root.$emit('reset:success')
                 context.hidden = true;
                 context.success.success = true;
                 context.success.message = response.data.message;
             }).catch(error => {
-
+                context.$root.$emit('reset:error')
                 context.error.error = true;
 
                 var errorArray = Object.values(error.response.data.errors);

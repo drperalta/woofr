@@ -38,5 +38,7 @@ export default {
 
 .body{
     margin-top: 20px;
+    min-width: 288px;
+    max-width: 288px;
 }
 </style>
