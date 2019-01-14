@@ -12,13 +12,8 @@
             <!-- Confirm Email Button -->
             <Button long class="button" @click.prevent="confirm">Confirm Email</Button>
         </Form>
-
-        <router-link to="/login" v-if="success.success">
-            <Button class="backToLogin" long>Back to Login</Button>
-        </router-link>
-        <router-link to="/login" v-if="error.error">
-            <Button class="backToLogin" long>Back to Login</Button>
-        </router-link>
+        <Button to="/login" v-if="success.success" class="backToLogin" long>Back to Login</Button>
+        <Button to="/login" v-if="error.error" class="backToLogin" long>Back to Login</Button>
     </div>
 </template>
 

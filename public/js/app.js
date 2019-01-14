@@ -3641,11 +3641,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -50904,31 +50899,17 @@ var render = function() {
       _vm._v(" "),
       _vm.success.success
         ? _c(
-            "router-link",
-            { attrs: { to: "/login" } },
-            [
-              _c(
-                "Button",
-                { staticClass: "backToLogin", attrs: { long: "" } },
-                [_vm._v("Back to Login")]
-              )
-            ],
-            1
+            "Button",
+            { staticClass: "backToLogin", attrs: { to: "/login", long: "" } },
+            [_vm._v("Back to Login")]
           )
         : _vm._e(),
       _vm._v(" "),
       _vm.error.error
         ? _c(
-            "router-link",
-            { attrs: { to: "/login" } },
-            [
-              _c(
-                "Button",
-                { staticClass: "backToLogin", attrs: { long: "" } },
-                [_vm._v("Back to Login")]
-              )
-            ],
-            1
+            "Button",
+            { staticClass: "backToLogin", attrs: { to: "/login", long: "" } },
+            [_vm._v("Back to Login")]
           )
         : _vm._e()
     ],
