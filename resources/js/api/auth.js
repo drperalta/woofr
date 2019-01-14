@@ -15,15 +15,12 @@ export default function(Vue){
                 context.SignUpDetails.confirm_password = '';
 
             }).catch(error => {
+
                 context.error.error = true;
 
                 var errorArray = Object.values(error.response.data.errors);
 
-                if(error.response.data.errors.password[0] === "The password format is invalid."){
-                    context.error.message = "The password should have at least one uppercase letter, one lowercase letter, and one number"
-                }else {
-                    context.error.message = errorArray[0][0];
-                }
+                context.error.message = errorArray[0][0];
             })
 
         },

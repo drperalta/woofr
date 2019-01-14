@@ -7,6 +7,7 @@ use App\Mail\ResetPasswordRequest;
 use App\Mail\ResetPasswordSuccess;
 use App\User;
 use App\ResetPassword;
+use Carbon\Carbon;
 
 class ResetPasswordController extends Controller
 {
@@ -118,6 +119,8 @@ class ResetPasswordController extends Controller
 
         $user->password = bcrypt($request->password);
         $user->save();
+
+        $resetPassword = ResetPassword::where('token', $request->token)->first();    
         $resetPassword->delete();
 
         $data = [

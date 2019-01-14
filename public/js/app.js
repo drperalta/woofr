@@ -3466,7 +3466,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       ResetPasswordDetails: {
         password: '',
-        confirm_password: ''
+        confirm_password: '',
+        token: this.$route.params.reset_token
       }
     };
   },
@@ -3602,8 +3603,10 @@ __webpack_require__.r(__webpack_exports__);
       Vue.auth.signup(this, this.SignUpDetails);
     },
     clearNotification: function clearNotification() {
-      this.error.error = false;
       this.success.success = false;
+      this.success.message = '';
+      this.error.error = false;
+      this.error.message = '';
     }
   }
 });
@@ -66719,12 +66722,7 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (error) {
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
-
-        if (error.response.data.errors.password[0] === "The password format is invalid.") {
-          context.error.message = "The password should have at least one uppercase letter, one lowercase letter, and one number";
-        } else {
-          context.error.message = errorArray[0][0];
-        }
+        context.error.message = errorArray[0][0];
       });
     },
     //This is for Logging in
