@@ -38,5 +38,5 @@ Route::group([ 'middleware' => 'api', 'prefix' => 'password'], function ()
     Route::get('find/{token}', 'ResetPasswordController@find');
     Route::post('reset', 'ResetPasswordController@reset');
     Route::get('setEmail/{token}' , 'ResetPasswordController@setEmail');
-    Route::get('check/{token}', 'ResetPasswordController@check');
+    Route::get('validate/{token}', 'ResetPasswordController@validate_token');
 });

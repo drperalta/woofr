@@ -79,9 +79,10 @@ class ResetPasswordController extends Controller
         return redirect('reset-password/'.$token);
     }
 
-    public function check($token)
+    public function validate_token($token)
     {
-        $resetPassword = ResetPassword::where('token', $token)->first();
+        $resetPassword = ResetPassword::where('token', $token)->first();    
+
         if (!$resetPassword){
             return response()->json([
                 'errors' => [ 'message' => ['This password reset token is invalid.'] ]
@@ -110,14 +111,6 @@ class ResetPasswordController extends Controller
             'password' => 'required|min:6|same:confirm_password', //|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
             'confirm_password' => 'sometimes'
         ]);
-
-        $resetPassword = ResetPassword::where('token', $request->token)->first();
-
-        if (!$resetPassword){
-            return response()->json([
-                'errors' => [ 'message' => ['This password reset token is invalid.'] ]
-            ], 404);
-        }
 
         $email = ResetPassword::select('email')->where('token', $request->token)->first();
 

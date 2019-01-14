@@ -3451,9 +3451,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      hidden: false,
       success: {
         success: false,
         message: ''
@@ -3464,8 +3466,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       ResetPasswordDetails: {
         password: '',
-        confirm_password: '',
-        token: this.$route.params.reset_token
+        confirm_password: ''
       }
     };
   },
@@ -3480,6 +3481,9 @@ __webpack_require__.r(__webpack_exports__);
       this.error.error = false;
       this.error.message = '';
     }
+  },
+  created: function created() {
+    Vue.reset.validate(this, this.$route.params.reset_token);
   }
 });
 
@@ -4209,7 +4213,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin-top: 10px;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-name[data-v-6eaa3395]{\r\n    margin-bottom: 20px;\n}\n.input[data-v-6eaa3395]{\r\n    width: 100%;\r\n    margin: 4px 0px;\n}\n.button[data-v-6eaa3395]{\r\n    width: 100% !important;\r\n    margin-top: 10px;\r\n    margin-bottom: 8px;\n}\r\n", ""]);
 
 // exports
 
@@ -50519,12 +50523,12 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "Form",
-        { attrs: { inline: "" } },
-        [
-          !this.success.success
-            ? _c("Input", {
+      !_vm.hidden
+        ? _c(
+            "Form",
+            { attrs: { inline: "" } },
+            [
+              _c("Input", {
                 staticClass: "input",
                 attrs: { placeholder: "New Password", type: "password" },
                 model: {
@@ -50534,11 +50538,9 @@ var render = function() {
                   },
                   expression: "ResetPasswordDetails.password"
                 }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          !this.success.success
-            ? _c("Input", {
+              }),
+              _vm._v(" "),
+              _c("Input", {
                 staticClass: "input",
                 attrs: { placeholder: "Confirm Password", type: "password" },
                 model: {
@@ -50548,43 +50550,43 @@ var render = function() {
                   },
                   expression: "ResetPasswordDetails.confirm_password"
                 }
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          !_vm.success.success
-            ? _c(
-                "Button",
-                {
-                  staticClass: "button",
-                  attrs: { long: "" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.reset($event)
-                    }
-                  }
-                },
-                [_vm._v("Change Password")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.success.success
-            ? _c(
-                "router-link",
-                { attrs: { to: "/login" } },
-                [
-                  _c(
+              }),
+              _vm._v(" "),
+              !_vm.success.success
+                ? _c(
                     "Button",
-                    { staticClass: "backToLogin", attrs: { long: "" } },
-                    [_vm._v("Back to Login")]
+                    {
+                      staticClass: "button",
+                      attrs: { long: "" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.reset($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Change Password")]
                   )
-                ],
-                1
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.hidden
+        ? _c(
+            "router-link",
+            { attrs: { to: "/login" } },
+            [
+              _c(
+                "Button",
+                { staticClass: "backToLogin", attrs: { long: "" } },
+                [_vm._v("Back to Login")]
               )
-            : _vm._e()
-        ],
-        1
-      )
+            ],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -66780,15 +66782,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     reset: function reset(context, data) {
       axios.post('/api/password/reset', data).then(function (response) {
-        //clear the inputs
-        context.ResetPasswordDetails.password = '';
-        context.ResetPasswordDetails.confirm_password = '';
+        context.hidden = true;
         context.success.success = true;
         context.success.message = response.data.message;
       }).catch(function (error) {
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
         context.error.message = errorArray[0][0];
+      });
+    },
+    validate: function validate(context, token) {
+      axios.get('/api/password/validate/' + token).then(function (response) {}).catch(function (error) {
+        context.hidden = true;
+        context.error.error = true;
+        context.error.message = error.response.data.errors.message[0];
       });
     }
   };

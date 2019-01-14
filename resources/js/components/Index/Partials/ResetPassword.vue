@@ -3,16 +3,17 @@
         <p class="page-name">RESET PASSWORD</p>
         <Alert id="success" class="notification" type="success" v-if="success.success">{{success.message}}</Alert>
         <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
-        <Form inline>
+
+        <Form inline v-if="!hidden">
             <!-- TOP -->
-            <Input v-if="!this.success.success" class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password"/>
-            <Input v-if="!this.success.success" class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password"/>
+            <Input class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password"/>
+            <Input class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password"/>
             <!-- BOTTOM -->
             <Button v-if="!success.success" class="button" @click.prevent="reset" long>Change Password</Button>
-            <router-link to="/login" v-if="success.success">
-                <Button class="backToLogin" long>Back to Login</Button>
-            </router-link>
         </Form>
+        <router-link to="/login" v-if="hidden">
+            <Button class="backToLogin" long>Back to Login</Button>
+        </router-link>
     </div>
 </template>
 
@@ -20,6 +21,7 @@
 export default {
     data(){
         return{
+            hidden: false,
             success:{
                 success: false,
                 message: ''
@@ -30,8 +32,7 @@ export default {
             },
             ResetPasswordDetails:{
                 password: '',
-                confirm_password: '',
-                token: this.$route.params.reset_token
+                confirm_password: ''
             }
         }
     },
@@ -46,6 +47,9 @@ export default {
             this.error.error = false;
             this.error.message = '';
         }
+    },
+    created(){
+        Vue.reset.validate(this, this.$route.params.reset_token)
     }
 }
 </script>
@@ -59,7 +63,7 @@ export default {
     margin: 4px 0px;
 }
 .button{
-    width: 100%;
+    width: 100% !important;
     margin-top: 10px;
     margin-bottom: 8px;
 }
