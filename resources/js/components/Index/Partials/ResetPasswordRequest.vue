@@ -35,7 +35,14 @@ export default {
     },
     methods:{
         send(){
+            this.clearNotifs();
             Vue.reset.create(this, this.UserDetails)
+        },
+        clearNotifs(){
+            this.success.success = false;
+            this.success.message = '';
+            this.error.error = false;
+            this.error.message = '';
         }
     }
 }

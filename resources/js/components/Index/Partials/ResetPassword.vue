@@ -34,7 +34,14 @@ export default {
     },
     methods:{
         reset(){
+            this.clearNotifs();
             Vue.reset.reset(this, this.ResetPasswordDetails)
+        },
+        clearNotifs(){
+            this.success.success = false;
+            this.success.message = '';
+            this.error.error = false;
+            this.error.message = '';
         }
     }
 }
