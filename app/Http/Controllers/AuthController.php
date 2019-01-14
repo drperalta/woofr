@@ -127,4 +127,17 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
+
+    public function validate_token($token){
+
+        $user = User::where('activation_token', $token)->first();
+
+        if (!$user) {
+            return response()->json([
+                'errors' => [ 'message' => ['This activation token is invalid.'] ]
+            ], 404);
+        }else{
+            return $user->email;
+        }
+    }
 }

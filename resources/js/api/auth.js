@@ -14,7 +14,6 @@ export default function(Vue){
                 context.SignUpDetails.password = '';
                 context.SignUpDetails.confirm_password = '';
 
-
             }).catch(error => {
                 context.error.error = true;
 
@@ -28,7 +27,7 @@ export default function(Vue){
             })
 
         },
-        //This is for Loggin in
+        //This is for Logging in
         login(context, data){
 
             axios.post('/api/auth/login', data)
@@ -61,7 +60,7 @@ export default function(Vue){
 
                 context.success.success = true;
                 context.success.message = response.data.message;
-                context.hide = true;
+                context.hidden = true;
                 console.log(response)
 
             }).catch(error => {
@@ -70,6 +69,17 @@ export default function(Vue){
                 context.error.message = error.response.data.errors.message[0];
                 context.hide = true;
 
+            })
+        },
+
+        validate(context, token){
+            axios.get('/api/auth/verify_email/validate/'+token)
+            .then(response => {
+                context.email = response.data
+            }).catch(error => {
+                context.error.error = true;
+                context.error.message = error.response.data.errors.message[0];
+                context.hidden = true;
             })
         }
     }

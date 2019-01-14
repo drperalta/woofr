@@ -4,12 +4,14 @@
         <Alert id="success" class="notification" type="success" v-if="success.success">{{success.message}}</Alert>
         <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
 
-        <!-- Email -->
-        <div class="input" v-if="!success.succes">
-            <p class="email" >peraltadavidr@outlook.com</p>
-        </div>
-        <!-- Confirm Email Button -->
-        <Button long v-show="!hide" class="button" @click.prevent="confirm">Confirm Email</Button>
+        <Form inline v-if="!hidden">
+            <!-- Email -->
+            <div class="input" v-if="!success.succes">
+                <p class="email" >{{email}}</p>
+            </div>
+            <!-- Confirm Email Button -->
+            <Button long class="button" @click.prevent="confirm">Confirm Email</Button>
+        </Form>
 
         <router-link to="/login" v-if="success.success">
             <Button class="backToLogin" long>Back to Login</Button>
@@ -32,14 +34,17 @@ export default {
                 error: false,
                 message: ''
             },
-            hide: false,
-
+            hidden: false,
+            email: ''
         }
     },
     methods:{
         confirm(){
             Vue.auth.verify(this, this.$route.params.activation_token)
         }
+    },
+    created(){
+        Vue.auth.validate(this, this.$route.params.activation_token)
     }
 }
 </script>

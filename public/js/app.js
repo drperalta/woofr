@@ -3641,6 +3641,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3652,13 +3654,17 @@ __webpack_require__.r(__webpack_exports__);
         error: false,
         message: ''
       },
-      hide: false
+      hidden: false,
+      email: ''
     };
   },
   methods: {
     confirm: function confirm() {
       Vue.auth.verify(this, this.$route.params.activation_token);
     }
+  },
+  created: function created() {
+    Vue.auth.validate(this, this.$route.params.activation_token);
   }
 });
 
@@ -50861,36 +50867,37 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      !_vm.success.succes
-        ? _c("div", { staticClass: "input" }, [
-            _c("p", { staticClass: "email" }, [
-              _vm._v("peraltadavidr@outlook.com")
-            ])
-          ])
+      !_vm.hidden
+        ? _c(
+            "Form",
+            { attrs: { inline: "" } },
+            [
+              !_vm.success.succes
+                ? _c("div", { staticClass: "input" }, [
+                    _c("p", { staticClass: "email" }, [
+                      _vm._v(_vm._s(_vm.email))
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "Button",
+                {
+                  staticClass: "button",
+                  attrs: { long: "" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.confirm($event)
+                    }
+                  }
+                },
+                [_vm._v("Confirm Email")]
+              )
+            ],
+            1
+          )
         : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "Button",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.hide,
-              expression: "!hide"
-            }
-          ],
-          staticClass: "button",
-          attrs: { long: "" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              return _vm.confirm($event)
-            }
-          }
-        },
-        [_vm._v("Confirm Email")]
-      ),
       _vm._v(" "),
       _vm.success.success
         ? _c(
@@ -66720,7 +66727,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    //This is for Loggin in
+    //This is for Logging in
     login: function login(context, data) {
       axios.post('/api/auth/login', data).then(function (response) {
         context.success.success = true;
@@ -66744,12 +66751,21 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/auth/verify_email/' + token).then(function (response) {
         context.success.success = true;
         context.success.message = response.data.message;
-        context.hide = true;
+        context.hidden = true;
         console.log(response);
       }).catch(function (error) {
         context.error.error = true;
         context.error.message = error.response.data.errors.message[0];
         context.hide = true;
+      });
+    },
+    validate: function validate(context, token) {
+      axios.get('/api/auth/verify_email/validate/' + token).then(function (response) {
+        context.email = response.data;
+      }).catch(function (error) {
+        context.error.error = true;
+        context.error.message = error.response.data.errors.message[0];
+        context.hidden = true;
       });
     }
   };

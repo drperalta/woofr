@@ -27,7 +27,7 @@ Route::group([ 'prefix' => 'auth' ], function ()
 
     Route::get('link/{activation_token}', 'AuthController@link');
     Route::get('verify_email/{activation_token}', 'AuthController@verify_email');
-    Route::get('check/{activation_token}', 'AuthController@check');
+    Route::get('verify_email/validate/{activation_token}', 'AuthController@validate_token');
 
 });
 
