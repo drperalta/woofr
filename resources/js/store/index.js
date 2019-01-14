@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state:{
-        //
+        isLoggedIn: !!localStorage.getItem('token')
     },
 
     getters: {
@@ -14,7 +14,12 @@ export default new Vuex.Store({
     },
 
     mutations:{
-        //
+        loginUser (state) {
+            state.isLoggedIn = true
+        },
+        logoutUser (state) {
+            state.isLoggedIn = false
+        },
     },
 
     actions:{

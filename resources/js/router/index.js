@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 
 Vue.use(VueRouter)
 
@@ -59,53 +60,67 @@ let router = new VueRouter({
             path: '/', component: Home,
             children: [
                 {   //TIMELINE
-                    path: 'timeline', component: Timeline
+                    path: 'timeline', component: Timeline, meta: { requiresAuth: true }
                 },
                 {   //NOTIFICATIONS
-                    path: 'notifications', component: Notifications,
+                    path: 'notifications', component: Notifications, meta: { requiresAuth: true },
                     children: [
                         {   //PROFILE
-                            path: '/', component: Notifs
+                            path: '/', component: Notifs, meta: { requiresAuth: true }
                         },
                         {   //MENTIONS
-                            path: 'mentions', component: Mentions
+                            path: 'mentions', component: Mentions, meta: { requiresAuth: true }
                         }
                     ]
                 },
                 {   //PROFILE
-                    path: 'profile', component: Profile, redirect: {path: 'profile/woofs'}, children: [
+                    path: 'profile', component: Profile, redirect: {path: 'profile/woofs'}, meta: { requiresAuth: true }, children: [
                         {   //WOOFS
-                            path: 'woofs', component: Woofs
+                            path: 'woofs', component: Woofs, meta: { requiresAuth: true }
                         },
                         {   //FOLLOWING
-                            path: 'following', component: Following
+                            path: 'following', component: Following, meta: { requiresAuth: true }
                         },
                         {   //FOLLOWERS
-                            path: 'followers', component: Followers
+                            path: 'followers', component: Followers, meta: { requiresAuth: true }
                         },
                         {   //LIKES
-                            path: 'likes', component: Likes
+                            path: 'likes', component: Likes, meta: { requiresAuth: true }
                         },
                         {
-                            path: 'settings', component: Settings, children: [
+                            path: 'settings', component: Settings, meta: { requiresAuth: true }, children: [
                                 {
-                                    path: '/', component: Primary
+                                    path: '/', component: Primary, meta: { requiresAuth: true }
                                 },
                                 {
-                                    path: 'password', component: Password
+                                    path: 'password', component: Password, meta: { requiresAuth: true }
                                 }
                             ]
                         }
 
                     ]
                 },
-
-
-
             ]
         }
+    ],
+})
 
-    ]
+router.beforeEach((to, from, next) => {
+
+    // check if the route requires authentication and user is not logged in
+    if (to.matched.some(route => route.meta.requiresAuth) && !store.state.isLoggedIn) {
+        // redirect to login page
+        next({ path: '/login' })
+        return
+    }
+
+    // if logged in redirect to dashboard
+    if(to.path === '/login' && store.state.isLoggedIn) {
+        next({ path: '/timeline' })
+        return
+    }
+
+    next()
 })
 
 export default router

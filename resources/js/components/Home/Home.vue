@@ -51,8 +51,7 @@
                         </router-link>
                         <Divider style="margin: 5px 0px"/>
                         <DropdownItem>
-
-                            <p class="item">Logout</p>
+                            <p class="item" @click="logout">Logout</p>
                         </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
@@ -110,6 +109,9 @@ export default {
                 this.filteredUsers = listByName
             } this.filteredUsers = listByUsername
 
+        },
+        logout(){
+            Vue.auth.logout();
         }
     }
 }

@@ -1,3 +1,6 @@
+import store from '../store/index'
+import router from '../router/index'
+
 export default function(Vue){
     Vue.auth = {
         //This is for Registration
@@ -29,8 +32,11 @@ export default function(Vue){
 
             axios.post('/api/auth/login', data)
             .then(response => {
-                context.success.success = true;
-                context.success.message = response.data.message;
+
+                store.commit('loginUser')
+                localStorage.setItem('token', response.data.access_token)
+                router.push({ path: '/timeline' })
+
             }).catch(error => {
                 context.error.error = true;
 
@@ -39,6 +45,11 @@ export default function(Vue){
                 context.error.message = errorArray[0][0];
             })
 
+        },
+        logout(){
+            localStorage.removeItem('token')
+            store.commit('logoutUser')
+            router.push({ path: '/login' })
         },
 
         //This is to check if the Activation Token is Valid

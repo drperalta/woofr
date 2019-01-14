@@ -1866,7 +1866,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1898,6 +1897,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.filteredUsers = listByUsername;
+    },
+    logout: function logout() {
+      Vue.auth.logout();
     }
   }
 });
@@ -47816,7 +47818,11 @@ var render = function() {
                       _c("Divider", { staticStyle: { margin: "5px 0px" } }),
                       _vm._v(" "),
                       _c("DropdownItem", [
-                        _c("p", { staticClass: "item" }, [_vm._v("Logout")])
+                        _c(
+                          "p",
+                          { staticClass: "item", on: { click: _vm.logout } },
+                          [_vm._v("Logout")]
+                        )
                       ])
                     ],
                     1
@@ -66687,6 +66693,10 @@ module.exports = "/images/woofr-logo.png?bc22f0ef5e808f61fc3c39b46fca6c1f";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../router/index */ "./resources/js/router/index.js");
+
+
 /* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
   Vue.auth = {
     //This is for Registration
@@ -66709,12 +66719,22 @@ __webpack_require__.r(__webpack_exports__);
     //This is for Logging in
     login: function login(context, data) {
       axios.post('/api/auth/login', data).then(function (response) {
-        context.success.success = true;
-        context.success.message = response.data.message;
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('loginUser');
+        localStorage.setItem('token', response.data.access_token);
+        _router_index__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+          path: '/timeline'
+        });
       }).catch(function (error) {
         context.error.error = true;
         var errorArray = Object.values(error.response.data.errors);
         context.error.message = errorArray[0][0];
+      });
+    },
+    logout: function logout() {
+      localStorage.removeItem('token');
+      _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('logoutUser');
+      _router_index__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+        path: '/login'
       });
     },
     //This is to check if the Activation Token is Valid
@@ -69334,25 +69354,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_Index_Index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Index/Index */ "./resources/js/components/Index/Index.vue");
-/* harmony import */ var _components_Index_Partials_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Index/Partials/Login */ "./resources/js/components/Index/Partials/Login.vue");
-/* harmony import */ var _components_Index_Partials_SignUp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Index/Partials/SignUp */ "./resources/js/components/Index/Partials/SignUp.vue");
-/* harmony import */ var _components_Index_Partials_ResetPasswordRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Index/Partials/ResetPasswordRequest */ "./resources/js/components/Index/Partials/ResetPasswordRequest.vue");
-/* harmony import */ var _components_Index_Partials_ResetPassword__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Index/Partials/ResetPassword */ "./resources/js/components/Index/Partials/ResetPassword.vue");
-/* harmony import */ var _components_Index_Partials_VerifyEmail__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Index/Partials/VerifyEmail */ "./resources/js/components/Index/Partials/VerifyEmail.vue");
-/* harmony import */ var _components_Home_Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Home/Home */ "./resources/js/components/Home/Home.vue");
-/* harmony import */ var _components_Home_Pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Home/Pages/Timeline.vue */ "./resources/js/components/Home/Pages/Timeline.vue");
-/* harmony import */ var _components_Home_Pages_Notifications_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Home/Pages/Notifications.vue */ "./resources/js/components/Home/Pages/Notifications.vue");
-/* harmony import */ var _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Home/Pages/Profile */ "./resources/js/components/Home/Pages/Profile.vue");
-/* harmony import */ var _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Notifs */ "./resources/js/components/Home/Partials/Notifications/Notifs.vue");
-/* harmony import */ var _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Mentions */ "./resources/js/components/Home/Partials/Notifications/Mentions.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Woofs */ "./resources/js/components/Home/Partials/Profile/Woofs.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Followers */ "./resources/js/components/Home/Partials/Profile/Followers.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Following */ "./resources/js/components/Home/Partials/Profile/Following.vue");
-/* harmony import */ var _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Likes */ "./resources/js/components/Home/Partials/Profile/Likes.vue");
-/* harmony import */ var _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Home/Partials/Settings */ "./resources/js/components/Home/Partials/Settings.vue");
-/* harmony import */ var _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Primary */ "./resources/js/components/Home/Partials/Settings/Primary.vue");
-/* harmony import */ var _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Password */ "./resources/js/components/Home/Partials/Settings/Password.vue");
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _components_Index_Index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Index/Index */ "./resources/js/components/Index/Index.vue");
+/* harmony import */ var _components_Index_Partials_Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Index/Partials/Login */ "./resources/js/components/Index/Partials/Login.vue");
+/* harmony import */ var _components_Index_Partials_SignUp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Index/Partials/SignUp */ "./resources/js/components/Index/Partials/SignUp.vue");
+/* harmony import */ var _components_Index_Partials_ResetPasswordRequest__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Index/Partials/ResetPasswordRequest */ "./resources/js/components/Index/Partials/ResetPasswordRequest.vue");
+/* harmony import */ var _components_Index_Partials_ResetPassword__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Index/Partials/ResetPassword */ "./resources/js/components/Index/Partials/ResetPassword.vue");
+/* harmony import */ var _components_Index_Partials_VerifyEmail__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Index/Partials/VerifyEmail */ "./resources/js/components/Index/Partials/VerifyEmail.vue");
+/* harmony import */ var _components_Home_Home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Home/Home */ "./resources/js/components/Home/Home.vue");
+/* harmony import */ var _components_Home_Pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Home/Pages/Timeline.vue */ "./resources/js/components/Home/Pages/Timeline.vue");
+/* harmony import */ var _components_Home_Pages_Notifications_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Home/Pages/Notifications.vue */ "./resources/js/components/Home/Pages/Notifications.vue");
+/* harmony import */ var _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/Home/Pages/Profile */ "./resources/js/components/Home/Pages/Profile.vue");
+/* harmony import */ var _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Notifs */ "./resources/js/components/Home/Partials/Notifications/Notifs.vue");
+/* harmony import */ var _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Home/Partials/Notifications/Mentions */ "./resources/js/components/Home/Partials/Notifications/Mentions.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Woofs */ "./resources/js/components/Home/Partials/Profile/Woofs.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Followers */ "./resources/js/components/Home/Partials/Profile/Followers.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Following */ "./resources/js/components/Home/Partials/Profile/Following.vue");
+/* harmony import */ var _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Home/Partials/Profile/Likes */ "./resources/js/components/Home/Partials/Profile/Likes.vue");
+/* harmony import */ var _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/Home/Partials/Settings */ "./resources/js/components/Home/Partials/Settings.vue");
+/* harmony import */ var _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Primary */ "./resources/js/components/Home/Partials/Settings/Primary.vue");
+/* harmony import */ var _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../components/Home/Partials/Settings/Password */ "./resources/js/components/Home/Partials/Settings/Password.vue");
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -69380,83 +69402,141 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [//INDEX
   {
     path: '/',
-    component: _components_Index_Index__WEBPACK_IMPORTED_MODULE_2__["default"],
+    component: _components_Index_Index__WEBPACK_IMPORTED_MODULE_3__["default"],
     redirect: {
       path: 'login'
     },
     children: [{
       path: 'login',
-      component: _components_Index_Partials_Login__WEBPACK_IMPORTED_MODULE_3__["default"]
+      component: _components_Index_Partials_Login__WEBPACK_IMPORTED_MODULE_4__["default"]
     }, {
       path: 'signup',
-      component: _components_Index_Partials_SignUp__WEBPACK_IMPORTED_MODULE_4__["default"]
+      component: _components_Index_Partials_SignUp__WEBPACK_IMPORTED_MODULE_5__["default"]
     }, {
       path: 'reset-password-request',
-      component: _components_Index_Partials_ResetPasswordRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
+      component: _components_Index_Partials_ResetPasswordRequest__WEBPACK_IMPORTED_MODULE_6__["default"]
     }, {
       path: 'reset-password/:reset_token',
-      component: _components_Index_Partials_ResetPassword__WEBPACK_IMPORTED_MODULE_6__["default"]
+      component: _components_Index_Partials_ResetPassword__WEBPACK_IMPORTED_MODULE_7__["default"]
     }, {
       path: 'link/:activation_token',
-      component: _components_Index_Partials_VerifyEmail__WEBPACK_IMPORTED_MODULE_7__["default"]
+      component: _components_Index_Partials_VerifyEmail__WEBPACK_IMPORTED_MODULE_8__["default"]
     }]
   }, //HOME
   {
     path: '/',
-    component: _components_Home_Home__WEBPACK_IMPORTED_MODULE_8__["default"],
+    component: _components_Home_Home__WEBPACK_IMPORTED_MODULE_9__["default"],
     children: [{
       //TIMELINE
       path: 'timeline',
-      component: _components_Home_Pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+      component: _components_Home_Pages_Timeline_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+      meta: {
+        requiresAuth: true
+      }
     }, {
       //NOTIFICATIONS
       path: 'notifications',
-      component: _components_Home_Pages_Notifications_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+      component: _components_Home_Pages_Notifications_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+      meta: {
+        requiresAuth: true
+      },
       children: [{
         //PROFILE
         path: '/',
-        component: _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_12__["default"]
+        component: _components_Home_Partials_Notifications_Notifs__WEBPACK_IMPORTED_MODULE_13__["default"],
+        meta: {
+          requiresAuth: true
+        }
       }, {
         //MENTIONS
         path: 'mentions',
-        component: _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_13__["default"]
+        component: _components_Home_Partials_Notifications_Mentions__WEBPACK_IMPORTED_MODULE_14__["default"],
+        meta: {
+          requiresAuth: true
+        }
       }]
     }, {
       //PROFILE
       path: 'profile',
-      component: _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_11__["default"],
+      component: _components_Home_Pages_Profile__WEBPACK_IMPORTED_MODULE_12__["default"],
       redirect: {
         path: 'profile/woofs'
+      },
+      meta: {
+        requiresAuth: true
       },
       children: [{
         //WOOFS
         path: 'woofs',
-        component: _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_14__["default"]
+        component: _components_Home_Partials_Profile_Woofs__WEBPACK_IMPORTED_MODULE_15__["default"],
+        meta: {
+          requiresAuth: true
+        }
       }, {
         //FOLLOWING
         path: 'following',
-        component: _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_16__["default"]
+        component: _components_Home_Partials_Profile_Following__WEBPACK_IMPORTED_MODULE_17__["default"],
+        meta: {
+          requiresAuth: true
+        }
       }, {
         //FOLLOWERS
         path: 'followers',
-        component: _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_15__["default"]
+        component: _components_Home_Partials_Profile_Followers__WEBPACK_IMPORTED_MODULE_16__["default"],
+        meta: {
+          requiresAuth: true
+        }
       }, {
         //LIKES
         path: 'likes',
-        component: _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_17__["default"]
+        component: _components_Home_Partials_Profile_Likes__WEBPACK_IMPORTED_MODULE_18__["default"],
+        meta: {
+          requiresAuth: true
+        }
       }, {
         path: 'settings',
-        component: _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_18__["default"],
+        component: _components_Home_Partials_Settings__WEBPACK_IMPORTED_MODULE_19__["default"],
+        meta: {
+          requiresAuth: true
+        },
         children: [{
           path: '/',
-          component: _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_19__["default"]
+          component: _components_Home_Partials_Settings_Primary__WEBPACK_IMPORTED_MODULE_20__["default"],
+          meta: {
+            requiresAuth: true
+          }
         }, {
           path: 'password',
-          component: _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_20__["default"]
+          component: _components_Home_Partials_Settings_Password__WEBPACK_IMPORTED_MODULE_21__["default"],
+          meta: {
+            requiresAuth: true
+          }
         }]
       }]
     }]
   }]
+});
+router.beforeEach(function (to, from, next) {
+  // check if the route requires authentication and user is not logged in
+  if (to.matched.some(function (route) {
+    return route.meta.requiresAuth;
+  }) && !_store_index__WEBPACK_IMPORTED_MODULE_2__["default"].state.isLoggedIn) {
+    // redirect to login page
+    next({
+      path: '/login'
+    });
+    return;
+  } // if logged in redirect to dashboard
+
+
+  if (to.path === '/login' && _store_index__WEBPACK_IMPORTED_MODULE_2__["default"].state.isLoggedIn) {
+    next({
+      path: '/timeline'
+    });
+    return;
+  }
+
+  next();
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
@@ -69478,11 +69558,18 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {//
+  state: {
+    isLoggedIn: !!localStorage.getItem('token')
   },
   getters: {//
   },
-  mutations: {//
+  mutations: {
+    loginUser: function loginUser(state) {
+      state.isLoggedIn = true;
+    },
+    logoutUser: function logoutUser(state) {
+      state.isLoggedIn = false;
+    }
   },
   actions: {//
   }
