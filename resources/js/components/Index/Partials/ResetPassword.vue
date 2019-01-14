@@ -1,8 +1,8 @@
 <template>
     <div>
         <p class="page-name">RESET PASSWORD</p>
-        <Alert id="success" class="notification" type="success" v-if="success.success">{{success.message}}</Alert>
-        <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
+        <Alert id="success" class="notification" type="success" v-if="success.success" show-icon>{{success.message}}</Alert>
+        <Alert  id="error" class="notification" type="error" v-if="error.error" show-icon>{{error.message}}</Alert>
 
         <Form inline v-if="!hidden">
             <!-- TOP -->

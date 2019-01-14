@@ -50512,7 +50512,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "success", type: "success" }
+              attrs: { id: "success", type: "success", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.success.message))]
           )
@@ -50523,7 +50523,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "error", type: "error" }
+              attrs: { id: "error", type: "error", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.error.message))]
           )
@@ -50630,7 +50630,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "success", type: "success" }
+              attrs: { id: "success", type: "success", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.success.message))]
           )
@@ -50641,7 +50641,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "error", type: "error" }
+              attrs: { id: "error", type: "error", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.error.message))]
           )
@@ -50850,7 +50850,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "success", type: "success" }
+              attrs: { id: "success", type: "success", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.success.message))]
           )
@@ -50861,7 +50861,7 @@ var render = function() {
             "Alert",
             {
               staticClass: "notification",
-              attrs: { id: "error", type: "error" }
+              attrs: { id: "error", type: "error", "show-icon": "" }
             },
             [_vm._v(_vm._s(_vm.error.message))]
           )
