@@ -32,7 +32,8 @@ export default {
             },
             ResetPasswordDetails:{
                 password: '',
-                confirm_password: ''
+                confirm_password: '',
+                token: this.$route.params.reset_token
             }
         }
     },
