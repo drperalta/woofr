@@ -6,7 +6,7 @@ export default function(Vue){
             .then(response => {
                 //clear the inputs
                 context.UserDetails = '';
-                
+
                 context.success.success = true;
                 context.success.message = response.data.message;
             }).catch(error => {
@@ -23,7 +23,7 @@ export default function(Vue){
                 //clear the inputs
                 context.ResetPasswordDetails.password = '';
                 context.ResetPasswordDetails.confirm_password = '';
-
+                
                 context.success.success = true;
                 context.success.message = response.data.message;
             }).catch(error => {

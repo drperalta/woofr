@@ -5,10 +5,13 @@
         <Alert  id="error" class="notification" type="error" v-if="error.error">{{error.message}}</Alert>
         <Form inline>
             <!-- TOP -->
-            <Input class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password"/>
-            <Input class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password"/>
+            <Input v-if="!this.success.success" class="input" placeholder="New Password" v-model="ResetPasswordDetails.password" type="password"/>
+            <Input v-if="!this.success.success" class="input" placeholder="Confirm Password" v-model="ResetPasswordDetails.confirm_password" type="password"/>
             <!-- BOTTOM -->
-            <Button class="button" @click.prevent="reset" long>Change Password</Button>
+            <Button v-if="!success.success" class="button" @click.prevent="reset" long>Change Password</Button>
+            <router-link to="/login" v-if="success.success">
+                <Button class="backToLogin" long>Back to Login</Button>
+            </router-link>
         </Form>
     </div>
 </template>

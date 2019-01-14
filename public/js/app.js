@@ -3448,6 +3448,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -50520,44 +50523,65 @@ var render = function() {
         "Form",
         { attrs: { inline: "" } },
         [
-          _c("Input", {
-            staticClass: "input",
-            attrs: { placeholder: "New Password", type: "password" },
-            model: {
-              value: _vm.ResetPasswordDetails.password,
-              callback: function($$v) {
-                _vm.$set(_vm.ResetPasswordDetails, "password", $$v)
-              },
-              expression: "ResetPasswordDetails.password"
-            }
-          }),
-          _vm._v(" "),
-          _c("Input", {
-            staticClass: "input",
-            attrs: { placeholder: "Confirm Password", type: "password" },
-            model: {
-              value: _vm.ResetPasswordDetails.confirm_password,
-              callback: function($$v) {
-                _vm.$set(_vm.ResetPasswordDetails, "confirm_password", $$v)
-              },
-              expression: "ResetPasswordDetails.confirm_password"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "Button",
-            {
-              staticClass: "button",
-              attrs: { long: "" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.reset($event)
+          !this.success.success
+            ? _c("Input", {
+                staticClass: "input",
+                attrs: { placeholder: "New Password", type: "password" },
+                model: {
+                  value: _vm.ResetPasswordDetails.password,
+                  callback: function($$v) {
+                    _vm.$set(_vm.ResetPasswordDetails, "password", $$v)
+                  },
+                  expression: "ResetPasswordDetails.password"
                 }
-              }
-            },
-            [_vm._v("Change Password")]
-          )
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          !this.success.success
+            ? _c("Input", {
+                staticClass: "input",
+                attrs: { placeholder: "Confirm Password", type: "password" },
+                model: {
+                  value: _vm.ResetPasswordDetails.confirm_password,
+                  callback: function($$v) {
+                    _vm.$set(_vm.ResetPasswordDetails, "confirm_password", $$v)
+                  },
+                  expression: "ResetPasswordDetails.confirm_password"
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.success.success
+            ? _c(
+                "Button",
+                {
+                  staticClass: "button",
+                  attrs: { long: "" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.reset($event)
+                    }
+                  }
+                },
+                [_vm._v("Change Password")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.success.success
+            ? _c(
+                "router-link",
+                { attrs: { to: "/login" } },
+                [
+                  _c(
+                    "Button",
+                    { staticClass: "backToLogin", attrs: { long: "" } },
+                    [_vm._v("Back to Login")]
+                  )
+                ],
+                1
+              )
+            : _vm._e()
         ],
         1
       )
