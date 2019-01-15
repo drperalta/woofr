@@ -31,9 +31,9 @@ Route::group([ 'prefix' => 'auth' ], function ()
 
     Route::get('user', 'AuthController@user');
     
-    Route::post('edit_password', 'AuthController@edit_user_password');
-    Route::post('edit_profile', 'AuthController@edit_user_profile');
-    Route::post('edit_primary', 'AuthController@edit_user_primary');
+    Route::post('save_password', 'AuthController@save_password');
+    Route::post('save_profile', 'AuthController@save_profile');
+    Route::post('save_primary', 'AuthController@save_primary');
 
 });
 
