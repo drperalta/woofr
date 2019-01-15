@@ -1784,6 +1784,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_Messages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modals/Messages */ "./resources/js/components/Home/Modals/Messages.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -1868,6 +1869,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Messages: _Modals_Messages__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -1876,11 +1878,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       modal: false,
       search: '',
-      filteredUsers: [],
-      loggedInUser: {
-        full_name: 'David Peralta',
-        user_name: 'IamDavidMe'
-      }
+      filteredUsers: []
     };
   },
   methods: {
@@ -1902,7 +1900,11 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       Vue.auth.logout();
     }
-  }
+  },
+  mounted: function mounted() {
+    Vue.auth.setUser();
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['UserData'])
 });
 
 /***/ }),
@@ -2156,6 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Partials_Trending__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Partials/Trending */ "./resources/js/components/Home/Partials/Trending.vue");
 /* harmony import */ var _Partials_UserDescription__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Partials/UserDescription */ "./resources/js/components/Home/Partials/UserDescription.vue");
 /* harmony import */ var _Partials_Settings_EditProfile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Partials/Settings/EditProfile */ "./resources/js/components/Home/Partials/Settings/EditProfile.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2216,6 +2219,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -2251,7 +2255,8 @@ __webpack_require__.r(__webpack_exports__);
 
       return false;
     }
-  }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['UserData'])
 });
 
 /***/ }),
@@ -2539,6 +2544,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2585,7 +2591,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
+});
 
 /***/ }),
 
@@ -2924,6 +2936,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2948,11 +2961,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 var countryList = __webpack_require__(/*! country-list */ "./node_modules/country-list/country-list.js");
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       filteredCountries: [],
-      search: this.$root.UserDetails.country
+      search: ''
     };
   },
   methods: {
@@ -2986,7 +3000,8 @@ var countryList = __webpack_require__(/*! country-list */ "./node_modules/countr
   },
   created: function created() {
     console.log(countryList.getData());
-  }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
 });
 
 /***/ }),
@@ -3057,6 +3072,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3078,31 +3094,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       disabled: true,
-      PrimaryDetails: {
-        full_name: 'David Peralta',
-        user_name: 'IamDavidMe',
-        user_email: 'peraltadavidr@outlook.com'
-      },
-      UserDetails: {
-        full_name: 'David Peralta',
-        user_name: 'IamDavidMe',
-        user_email: 'peraltadavidr@outlook.com'
+      User: {
+        fullname: '',
+        email: '',
+        username: ''
       }
     };
   },
   methods: {
     changed: function changed() {
-      if (this.UserDetails.full_name != this.PrimaryDetails.full_name || this.UserDetails.user_name != this.PrimaryDetails.user_name || this.UserDetails.user_email != this.PrimaryDetails.user_email) {
-        this.disabled = false;
-      } else {
-        this.disabled = true;
-      }
+      // if(this.UserDetails.full_name != this.PrimaryDetails.full_name ||
+      //     this.UserDetails.user_name != this.PrimaryDetails.user_name ||
+      //     this.UserDetails.user_email != this.PrimaryDetails.user_email){
+      //         this.disabled = false;
+      // }else{ this.disabled = true; }
+      this.disabled = false;
     }
-  }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
 });
 
 /***/ }),
@@ -3314,6 +3328,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3336,10 +3351,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
-  }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
 });
 
 /***/ }),
@@ -3823,7 +3840,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "/*!\n * Hover.css (http://ianlunn.github.io/Hover/)\n * Version: 2.3.2\n * Author: Ian Lunn @IanLunn\n * Author URL: http://ianlunn.co.uk/\n * Github: https://github.com/IanLunn/Hover\n\n * Hover.css Copyright Ian Lunn 2017. Generated with Sass.\n */\n/* 2D TRANSITIONS */\n/* Grow */\n.hvr-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n\n/* Shrink */\n.hvr-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-shrink:hover, .hvr-shrink:focus, .hvr-shrink:active {\n  -webkit-transform: scale(0.9);\n  transform: scale(0.9);\n}\n\n/* Pulse */\n@-webkit-keyframes hvr-pulse {\n  25% {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n  75% {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n@keyframes hvr-pulse {\n  25% {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n  75% {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n.hvr-pulse {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {\n  -webkit-animation-name: hvr-pulse;\n  animation-name: hvr-pulse;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Pulse Grow */\n@-webkit-keyframes hvr-pulse-grow {\n  to {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n}\n@keyframes hvr-pulse-grow {\n  to {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n}\n.hvr-pulse-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {\n  -webkit-animation-name: hvr-pulse-grow;\n  animation-name: hvr-pulse-grow;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Pulse Shrink */\n@-webkit-keyframes hvr-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n@keyframes hvr-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n.hvr-pulse-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pulse-shrink:hover, .hvr-pulse-shrink:focus, .hvr-pulse-shrink:active {\n  -webkit-animation-name: hvr-pulse-shrink;\n  animation-name: hvr-pulse-shrink;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Push */\n@-webkit-keyframes hvr-push {\n  50% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n@keyframes hvr-push {\n  50% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.hvr-push {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-push:hover, .hvr-push:focus, .hvr-push:active {\n  -webkit-animation-name: hvr-push;\n  animation-name: hvr-push;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Pop */\n@-webkit-keyframes hvr-pop {\n  50% {\n    -webkit-transform: scale(1.2);\n    transform: scale(1.2);\n  }\n}\n@keyframes hvr-pop {\n  50% {\n    -webkit-transform: scale(1.2);\n    transform: scale(1.2);\n  }\n}\n.hvr-pop {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {\n  -webkit-animation-name: hvr-pop;\n  animation-name: hvr-pop;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Bounce In */\n.hvr-bounce-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.5s;\n}\n.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {\n  -webkit-transform: scale(1.2);\n  transform: scale(1.2);\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\n}\n\n/* Bounce Out */\n.hvr-bounce-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.5s;\n}\n.hvr-bounce-out:hover, .hvr-bounce-out:focus, .hvr-bounce-out:active {\n  -webkit-transform: scale(0.8);\n  transform: scale(0.8);\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\n}\n\n/* Rotate */\n.hvr-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-rotate:hover, .hvr-rotate:focus, .hvr-rotate:active {\n  -webkit-transform: rotate(4deg);\n  transform: rotate(4deg);\n}\n\n/* Grow Rotate */\n.hvr-grow-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-grow-rotate:hover, .hvr-grow-rotate:focus, .hvr-grow-rotate:active {\n  -webkit-transform: scale(1.1) rotate(4deg);\n  transform: scale(1.1) rotate(4deg);\n}\n\n/* Float */\n.hvr-float {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-float:hover, .hvr-float:focus, .hvr-float:active {\n  -webkit-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n\n/* Sink */\n.hvr-sink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {\n  -webkit-transform: translateY(8px);\n  transform: translateY(8px);\n}\n\n/* Bob */\n@-webkit-keyframes hvr-bob {\n  0% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n  50% {\n    -webkit-transform: translateY(-4px);\n    transform: translateY(-4px);\n  }\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n@keyframes hvr-bob {\n  0% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n  50% {\n    -webkit-transform: translateY(-4px);\n    transform: translateY(-4px);\n  }\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n@-webkit-keyframes hvr-bob-float {\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n@keyframes hvr-bob-float {\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n.hvr-bob {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {\n  -webkit-animation-name: hvr-bob-float, hvr-bob;\n  animation-name: hvr-bob-float, hvr-bob;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Hang */\n@-webkit-keyframes hvr-hang {\n  0% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  50% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n@keyframes hvr-hang {\n  0% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  50% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n@-webkit-keyframes hvr-hang-sink {\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n@keyframes hvr-hang-sink {\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n.hvr-hang {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-hang:hover, .hvr-hang:focus, .hvr-hang:active {\n  -webkit-animation-name: hvr-hang-sink, hvr-hang;\n  animation-name: hvr-hang-sink, hvr-hang;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Skew */\n.hvr-skew {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-skew:hover, .hvr-skew:focus, .hvr-skew:active {\n  -webkit-transform: skew(-10deg);\n  transform: skew(-10deg);\n}\n\n/* Skew Forward */\n.hvr-skew-forward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  -webkit-transform-origin: 0 100%;\n  transform-origin: 0 100%;\n}\n.hvr-skew-forward:hover, .hvr-skew-forward:focus, .hvr-skew-forward:active {\n  -webkit-transform: skew(-10deg);\n  transform: skew(-10deg);\n}\n\n/* Skew Backward */\n.hvr-skew-backward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  -webkit-transform-origin: 0 100%;\n  transform-origin: 0 100%;\n}\n.hvr-skew-backward:hover, .hvr-skew-backward:focus, .hvr-skew-backward:active {\n  -webkit-transform: skew(10deg);\n  transform: skew(10deg);\n}\n\n/* Wobble Vertical */\n@-webkit-keyframes hvr-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n@keyframes hvr-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n.hvr-wobble-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-vertical:hover, .hvr-wobble-vertical:focus, .hvr-wobble-vertical:active {\n  -webkit-animation-name: hvr-wobble-vertical;\n  animation-name: hvr-wobble-vertical;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Horizontal */\n@-webkit-keyframes hvr-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(8px);\n    transform: translateX(8px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-6px);\n    transform: translateX(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@keyframes hvr-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(8px);\n    transform: translateX(8px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-6px);\n    transform: translateX(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.hvr-wobble-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-horizontal:hover, .hvr-wobble-horizontal:focus, .hvr-wobble-horizontal:active {\n  -webkit-animation-name: hvr-wobble-horizontal;\n  animation-name: hvr-wobble-horizontal;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble To Bottom Right */\n@-webkit-keyframes hvr-wobble-to-bottom-right {\n  16.65% {\n    -webkit-transform: translate(8px, 8px);\n    transform: translate(8px, 8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, -6px);\n    transform: translate(-6px, -6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, 4px);\n    transform: translate(4px, 4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, -2px);\n    transform: translate(-2px, -2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, 1px);\n    transform: translate(1px, 1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n@keyframes hvr-wobble-to-bottom-right {\n  16.65% {\n    -webkit-transform: translate(8px, 8px);\n    transform: translate(8px, 8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, -6px);\n    transform: translate(-6px, -6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, 4px);\n    transform: translate(4px, 4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, -2px);\n    transform: translate(-2px, -2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, 1px);\n    transform: translate(1px, 1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n.hvr-wobble-to-bottom-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-to-bottom-right:hover, .hvr-wobble-to-bottom-right:focus, .hvr-wobble-to-bottom-right:active {\n  -webkit-animation-name: hvr-wobble-to-bottom-right;\n  animation-name: hvr-wobble-to-bottom-right;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble To Top Right */\n@-webkit-keyframes hvr-wobble-to-top-right {\n  16.65% {\n    -webkit-transform: translate(8px, -8px);\n    transform: translate(8px, -8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, 6px);\n    transform: translate(-6px, 6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, -4px);\n    transform: translate(4px, -4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, 2px);\n    transform: translate(-2px, 2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, -1px);\n    transform: translate(1px, -1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n@keyframes hvr-wobble-to-top-right {\n  16.65% {\n    -webkit-transform: translate(8px, -8px);\n    transform: translate(8px, -8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, 6px);\n    transform: translate(-6px, 6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, -4px);\n    transform: translate(4px, -4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, 2px);\n    transform: translate(-2px, 2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, -1px);\n    transform: translate(1px, -1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n.hvr-wobble-to-top-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-to-top-right:hover, .hvr-wobble-to-top-right:focus, .hvr-wobble-to-top-right:active {\n  -webkit-animation-name: hvr-wobble-to-top-right;\n  animation-name: hvr-wobble-to-top-right;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Top */\n@-webkit-keyframes hvr-wobble-top {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n@keyframes hvr-wobble-top {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n.hvr-wobble-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  -webkit-transform-origin: 0 100%;\n  transform-origin: 0 100%;\n}\n.hvr-wobble-top:hover, .hvr-wobble-top:focus, .hvr-wobble-top:active {\n  -webkit-animation-name: hvr-wobble-top;\n  animation-name: hvr-wobble-top;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Bottom */\n@-webkit-keyframes hvr-wobble-bottom {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n@keyframes hvr-wobble-bottom {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n.hvr-wobble-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  -webkit-transform-origin: 100% 0;\n  transform-origin: 100% 0;\n}\n.hvr-wobble-bottom:hover, .hvr-wobble-bottom:focus, .hvr-wobble-bottom:active {\n  -webkit-animation-name: hvr-wobble-bottom;\n  animation-name: hvr-wobble-bottom;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Skew */\n@-webkit-keyframes hvr-wobble-skew {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n@keyframes hvr-wobble-skew {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n.hvr-wobble-skew {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-skew:hover, .hvr-wobble-skew:focus, .hvr-wobble-skew:active {\n  -webkit-animation-name: hvr-wobble-skew;\n  animation-name: hvr-wobble-skew;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Buzz */\n@-webkit-keyframes hvr-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n@keyframes hvr-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n.hvr-buzz {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {\n  -webkit-animation-name: hvr-buzz;\n  animation-name: hvr-buzz;\n  -webkit-animation-duration: 0.15s;\n  animation-duration: 0.15s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Buzz Out */\n@-webkit-keyframes hvr-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n@keyframes hvr-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n.hvr-buzz-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {\n  -webkit-animation-name: hvr-buzz-out;\n  animation-name: hvr-buzz-out;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Forward */\n.hvr-forward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {\n  -webkit-transform: translateX(8px);\n  transform: translateX(8px);\n}\n\n/* Backward */\n.hvr-backward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-backward:hover, .hvr-backward:focus, .hvr-backward:active {\n  -webkit-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n\n/* BACKGROUND TRANSITIONS */\n/* Fade */\n.hvr-fade {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  overflow: hidden;\n  transition-duration: 0.3s;\n  transition-property: color, background-color;\n}\n.hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {\n  background-color: #fffbfb;\n  color: white;\n}\n\n/* Back Pulse */\n@-webkit-keyframes hvr-back-pulse {\n  50% {\n    background-color: rgba(32, 152, 209, 0.75);\n  }\n}\n@keyframes hvr-back-pulse {\n  50% {\n    background-color: rgba(32, 152, 209, 0.75);\n  }\n}\n.hvr-back-pulse {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  overflow: hidden;\n  transition-duration: 0.5s;\n  transition-property: color, background-color;\n}\n.hvr-back-pulse:hover, .hvr-back-pulse:focus, .hvr-back-pulse:active {\n  -webkit-animation-name: hvr-back-pulse;\n  animation-name: hvr-back-pulse;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-delay: 0.5s;\n  animation-delay: 0.5s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  background-color: #fffbfb;\n  background-color: #2098d1;\n  color: white;\n}\n\n/* Sweep To Right */\n.hvr-sweep-to-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 0 50%;\n  transform-origin: 0 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {\n  color: white;\n}\n.hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n}\n\n/* Sweep To Left */\n.hvr-sweep-to-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 100% 50%;\n  transform-origin: 100% 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-left:hover, .hvr-sweep-to-left:focus, .hvr-sweep-to-left:active {\n  color: white;\n}\n.hvr-sweep-to-left:hover:before, .hvr-sweep-to-left:focus:before, .hvr-sweep-to-left:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n}\n\n/* Sweep To Bottom */\n.hvr-sweep-to-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-bottom:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 0;\n  transform-origin: 50% 0;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {\n  color: white;\n}\n.hvr-sweep-to-bottom:hover:before, .hvr-sweep-to-bottom:focus:before, .hvr-sweep-to-bottom:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n}\n\n/* Sweep To Top */\n.hvr-sweep-to-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-top:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 100%;\n  transform-origin: 50% 100%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-top:hover, .hvr-sweep-to-top:focus, .hvr-sweep-to-top:active {\n  color: white;\n}\n.hvr-sweep-to-top:hover:before, .hvr-sweep-to-top:focus:before, .hvr-sweep-to-top:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n}\n\n/* Bounce To Right */\n.hvr-bounce-to-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 0 50%;\n  transform-origin: 0 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {\n  color: white;\n}\n.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Bounce To Left */\n.hvr-bounce-to-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 100% 50%;\n  transform-origin: 100% 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-left:hover, .hvr-bounce-to-left:focus, .hvr-bounce-to-left:active {\n  color: white;\n}\n.hvr-bounce-to-left:hover:before, .hvr-bounce-to-left:focus:before, .hvr-bounce-to-left:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Bounce To Bottom */\n.hvr-bounce-to-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-bottom:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 0;\n  transform-origin: 50% 0;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {\n  color: white;\n}\n.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Bounce To Top */\n.hvr-bounce-to-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-top:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 100%;\n  transform-origin: 50% 100%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-top:hover, .hvr-bounce-to-top:focus, .hvr-bounce-to-top:active {\n  color: white;\n}\n.hvr-bounce-to-top:hover:before, .hvr-bounce-to-top:focus:before, .hvr-bounce-to-top:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Radial Out */\n.hvr-radial-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-radial-out:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  border-radius: 100%;\n  -webkit-transform: scale(0);\n  transform: scale(0);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-radial-out:hover, .hvr-radial-out:focus, .hvr-radial-out:active {\n  color: white;\n}\n.hvr-radial-out:hover:before, .hvr-radial-out:focus:before, .hvr-radial-out:active:before {\n  -webkit-transform: scale(2);\n  transform: scale(2);\n}\n\n/* Radial In */\n.hvr-radial-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-radial-in:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e1e1e1;\n  border-radius: 100%;\n  -webkit-transform: scale(2);\n  transform: scale(2);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-radial-in:hover, .hvr-radial-in:focus, .hvr-radial-in:active {\n  color: white;\n}\n.hvr-radial-in:hover:before, .hvr-radial-in:focus:before, .hvr-radial-in:active:before {\n  -webkit-transform: scale(0);\n  transform: scale(0);\n}\n\n/* Rectangle In */\n.hvr-rectangle-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-rectangle-in:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e1e1e1;\n  -webkit-transform: scale(1);\n  transform: scale(1);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-rectangle-in:hover, .hvr-rectangle-in:focus, .hvr-rectangle-in:active {\n  color: white;\n}\n.hvr-rectangle-in:hover:before, .hvr-rectangle-in:focus:before, .hvr-rectangle-in:active:before {\n  -webkit-transform: scale(0);\n  transform: scale(0);\n}\n\n/* Rectangle Out */\n.hvr-rectangle-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-rectangle-out:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scale(0);\n  transform: scale(0);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-rectangle-out:hover, .hvr-rectangle-out:focus, .hvr-rectangle-out:active {\n  color: white;\n}\n.hvr-rectangle-out:hover:before, .hvr-rectangle-out:focus:before, .hvr-rectangle-out:active:before {\n  -webkit-transform: scale(1);\n  transform: scale(1);\n}\n\n/* Shutter In Horizontal */\n.hvr-shutter-in-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-in-horizontal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #e1e1e1;\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-in-horizontal:hover, .hvr-shutter-in-horizontal:focus, .hvr-shutter-in-horizontal:active {\n  color: white;\n}\n.hvr-shutter-in-horizontal:hover:before, .hvr-shutter-in-horizontal:focus:before, .hvr-shutter-in-horizontal:active:before {\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n}\n\n/* Shutter Out Horizontal */\n.hvr-shutter-out-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-out-horizontal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-out-horizontal:hover, .hvr-shutter-out-horizontal:focus, .hvr-shutter-out-horizontal:active {\n  color: white;\n}\n.hvr-shutter-out-horizontal:hover:before, .hvr-shutter-out-horizontal:focus:before, .hvr-shutter-out-horizontal:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n}\n\n/* Shutter In Vertical */\n.hvr-shutter-in-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-in-vertical:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #e1e1e1;\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-in-vertical:hover, .hvr-shutter-in-vertical:focus, .hvr-shutter-in-vertical:active {\n  color: white;\n}\n.hvr-shutter-in-vertical:hover:before, .hvr-shutter-in-vertical:focus:before, .hvr-shutter-in-vertical:active:before {\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n}\n\n/* Shutter Out Vertical */\n.hvr-shutter-out-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-out-vertical:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-out-vertical:hover, .hvr-shutter-out-vertical:focus, .hvr-shutter-out-vertical:active {\n  color: white;\n}\n.hvr-shutter-out-vertical:hover:before, .hvr-shutter-out-vertical:focus:before, .hvr-shutter-out-vertical:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n}\n\n/* BORDER TRANSITIONS */\n/* Border Fade */\n.hvr-border-fade {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n.hvr-border-fade:hover, .hvr-border-fade:focus, .hvr-border-fade:active {\n  box-shadow: inset 0 0 0 4px #2098D1, 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n\n/* Hollow */\n.hvr-hollow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: background;\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n.hvr-hollow:hover, .hvr-hollow:focus, .hvr-hollow:active {\n  background: none;\n}\n\n/* Trim */\n.hvr-trim {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-trim:before {\n  content: '';\n  position: absolute;\n  border: white solid 4px;\n  top: 4px;\n  left: 4px;\n  right: 4px;\n  bottom: 4px;\n  opacity: 0;\n  transition-duration: 0.3s;\n  transition-property: opacity;\n}\n.hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {\n  opacity: 1;\n}\n\n/* Ripple Out */\n@-webkit-keyframes hvr-ripple-out {\n  100% {\n    top: -12px;\n    right: -12px;\n    bottom: -12px;\n    left: -12px;\n    opacity: 0;\n  }\n}\n@keyframes hvr-ripple-out {\n  100% {\n    top: -12px;\n    right: -12px;\n    bottom: -12px;\n    left: -12px;\n    opacity: 0;\n  }\n}\n.hvr-ripple-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-ripple-out:before {\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 6px;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.hvr-ripple-out:hover:before, .hvr-ripple-out:focus:before, .hvr-ripple-out:active:before {\n  -webkit-animation-name: hvr-ripple-out;\n  animation-name: hvr-ripple-out;\n}\n\n/* Ripple In */\n@-webkit-keyframes hvr-ripple-in {\n  100% {\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 1;\n  }\n}\n@keyframes hvr-ripple-in {\n  100% {\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 1;\n  }\n}\n.hvr-ripple-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-ripple-in:before {\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 4px;\n  top: -12px;\n  right: -12px;\n  bottom: -12px;\n  left: -12px;\n  opacity: 0;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.hvr-ripple-in:hover:before, .hvr-ripple-in:focus:before, .hvr-ripple-in:active:before {\n  -webkit-animation-name: hvr-ripple-in;\n  animation-name: hvr-ripple-in;\n}\n\n/* Outline Out */\n.hvr-outline-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-outline-out:before {\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 4px;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  transition-duration: 0.3s;\n  transition-property: top, right, bottom, left;\n}\n.hvr-outline-out:hover:before, .hvr-outline-out:focus:before, .hvr-outline-out:active:before {\n  top: -8px;\n  right: -8px;\n  bottom: -8px;\n  left: -8px;\n}\n\n/* Outline In */\n.hvr-outline-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-outline-in:before {\n  pointer-events: none;\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 4px;\n  top: -16px;\n  right: -16px;\n  bottom: -16px;\n  left: -16px;\n  opacity: 0;\n  transition-duration: 0.3s;\n  transition-property: top, right, bottom, left;\n}\n.hvr-outline-in:hover:before, .hvr-outline-in:focus:before, .hvr-outline-in:active:before {\n  top: -8px;\n  right: -8px;\n  bottom: -8px;\n  left: -8px;\n  opacity: 1;\n}\n\n/* Round Corners */\n.hvr-round-corners {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: border-radius;\n}\n.hvr-round-corners:hover, .hvr-round-corners:focus, .hvr-round-corners:active {\n  border-radius: 1em;\n}\n\n/* Underline From Left */\n.hvr-underline-from-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-from-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 100%;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {\n  right: 0;\n}\n\n/* Underline From Center */\n.hvr-underline-from-center {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-from-center:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 51%;\n  right: 51%;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left, right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {\n  left: 0;\n  right: 0;\n}\n\n/* Underline From Right */\n.hvr-underline-from-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-from-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 100%;\n  right: 0;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-from-right:hover:before, .hvr-underline-from-right:focus:before, .hvr-underline-from-right:active:before {\n  left: 0;\n}\n\n/* Overline From Left */\n.hvr-overline-from-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-from-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 100%;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-from-left:hover:before, .hvr-overline-from-left:focus:before, .hvr-overline-from-left:active:before {\n  right: 0;\n}\n\n/* Overline From Center */\n.hvr-overline-from-center {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-from-center:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 51%;\n  right: 51%;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left, right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-from-center:hover:before, .hvr-overline-from-center:focus:before, .hvr-overline-from-center:active:before {\n  left: 0;\n  right: 0;\n}\n\n/* Overline From Right */\n.hvr-overline-from-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-from-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 100%;\n  right: 0;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-from-right:hover:before, .hvr-overline-from-right:focus:before, .hvr-overline-from-right:active:before {\n  left: 0;\n}\n\n/* Reveal */\n.hvr-reveal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-reveal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  border-color: #2098D1;\n  border-style: solid;\n  border-width: 0;\n  transition-property: border-width;\n  transition-duration: 0.1s;\n  transition-timing-function: ease-out;\n}\n.hvr-reveal:hover:before, .hvr-reveal:focus:before, .hvr-reveal:active:before {\n  -webkit-transform: translateY(0);\n  transform: translateY(0);\n  border-width: 4px;\n}\n\n/* Underline Reveal */\n.hvr-underline-reveal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-reveal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  -webkit-transform: translateY(4px);\n  transform: translateY(4px);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {\n  -webkit-transform: translateY(0);\n  transform: translateY(0);\n}\n\n/* Overline Reveal */\n.hvr-overline-reveal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-reveal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 0;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  -webkit-transform: translateY(-4px);\n  transform: translateY(-4px);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-reveal:hover:before, .hvr-overline-reveal:focus:before, .hvr-overline-reveal:active:before {\n  -webkit-transform: translateY(0);\n  transform: translateY(0);\n}\n\n/* SHADOW/GLOW TRANSITIONS */\n/* Glow */\n.hvr-glow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n}\n.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {\n  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\n}\n\n/* Shadow */\n.hvr-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n}\n.hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\n}\n\n/* Grow Shadow */\n.hvr-grow-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow, -webkit-transform;\n  transition-property: box-shadow, transform;\n  transition-property: box-shadow, transform, -webkit-transform;\n}\n.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n\n/* Box Shadow Outset */\n.hvr-box-shadow-outset {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n}\n.hvr-box-shadow-outset:hover, .hvr-box-shadow-outset:focus, .hvr-box-shadow-outset:active {\n  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);\n}\n\n/* Box Shadow Inset */\n.hvr-box-shadow-inset {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n.hvr-box-shadow-inset:hover, .hvr-box-shadow-inset:focus, .hvr-box-shadow-inset:active {\n  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n\n/* Float Shadow */\n.hvr-float-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-float-shadow:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  top: 100%;\n  left: 5%;\n  height: 10px;\n  width: 90%;\n  opacity: 0;\n  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);\n  /* W3C */\n  transition-duration: 0.3s;\n  transition-property: opacity, -webkit-transform;\n  transition-property: transform, opacity;\n  transition-property: transform, opacity, -webkit-transform;\n}\n.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {\n  -webkit-transform: translateY(-5px);\n  transform: translateY(-5px);\n  /* move the element up by 5px */\n}\n.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {\n  opacity: 1;\n  -webkit-transform: translateY(5px);\n  transform: translateY(5px);\n  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */\n}\n\n/* Shadow Radial */\n.hvr-shadow-radial {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-shadow-radial:before, .hvr-shadow-radial:after {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  left: 0;\n  width: 100%;\n  box-sizing: border-box;\n  background-repeat: no-repeat;\n  height: 5px;\n  opacity: 0;\n  transition-duration: 0.3s;\n  transition-property: opacity;\n}\n.hvr-shadow-radial:before {\n  bottom: 100%;\n  background: radial-gradient(ellipse at 50% 150%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\n}\n.hvr-shadow-radial:after {\n  top: 100%;\n  background: radial-gradient(ellipse at 50% -50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\n}\n.hvr-shadow-radial:hover:before, .hvr-shadow-radial:focus:before, .hvr-shadow-radial:active:before, .hvr-shadow-radial:hover:after, .hvr-shadow-radial:focus:after, .hvr-shadow-radial:active:after {\n  opacity: 1;\n}\n\n/* SPEECH BUBBLES */\n/* Bubble Top */\n.hvr-bubble-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-top:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  left: calc(50% - 10px);\n  top: 0;\n  border-width: 0 10px 10px 10px;\n  border-color: transparent transparent #e1e1e1 transparent;\n}\n.hvr-bubble-top:hover:before, .hvr-bubble-top:focus:before, .hvr-bubble-top:active:before {\n  -webkit-transform: translateY(-10px);\n  transform: translateY(-10px);\n}\n\n/* Bubble Right */\n.hvr-bubble-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-right:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  top: calc(50% - 10px);\n  right: 0;\n  border-width: 10px 0 10px 10px;\n  border-color: transparent transparent transparent #e1e1e1;\n}\n.hvr-bubble-right:hover:before, .hvr-bubble-right:focus:before, .hvr-bubble-right:active:before {\n  -webkit-transform: translateX(10px);\n  transform: translateX(10px);\n}\n\n/* Bubble Bottom */\n.hvr-bubble-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-bottom:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  left: calc(50% - 10px);\n  bottom: 0;\n  border-width: 10px 10px 0 10px;\n  border-color: #e1e1e1 transparent transparent transparent;\n}\n.hvr-bubble-bottom:hover:before, .hvr-bubble-bottom:focus:before, .hvr-bubble-bottom:active:before {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px);\n}\n\n/* Bubble Left */\n.hvr-bubble-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-left:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  top: calc(50% - 10px);\n  left: 0;\n  border-width: 10px 10px 10px 0;\n  border-color: transparent #e1e1e1 transparent transparent;\n}\n.hvr-bubble-left:hover:before, .hvr-bubble-left:focus:before, .hvr-bubble-left:active:before {\n  -webkit-transform: translateX(-10px);\n  transform: translateX(-10px);\n}\n\n/* Bubble Float Top */\n.hvr-bubble-float-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-top:before {\n  position: absolute;\n  z-index: -1;\n  content: '';\n  left: calc(50% - 10px);\n  top: 0;\n  border-style: solid;\n  border-width: 0 10px 10px 10px;\n  border-color: transparent transparent #e1e1e1 transparent;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-top:hover, .hvr-bubble-float-top:focus, .hvr-bubble-float-top:active {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px);\n}\n.hvr-bubble-float-top:hover:before, .hvr-bubble-float-top:focus:before, .hvr-bubble-float-top:active:before {\n  -webkit-transform: translateY(-10px);\n  transform: translateY(-10px);\n}\n\n/* Bubble Float Right */\n.hvr-bubble-float-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-right:before {\n  position: absolute;\n  z-index: -1;\n  top: calc(50% - 10px);\n  right: 0;\n  content: '';\n  border-style: solid;\n  border-width: 10px 0 10px 10px;\n  border-color: transparent transparent transparent #e1e1e1;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-right:hover, .hvr-bubble-float-right:focus, .hvr-bubble-float-right:active {\n  -webkit-transform: translateX(-10px);\n  transform: translateX(-10px);\n}\n.hvr-bubble-float-right:hover:before, .hvr-bubble-float-right:focus:before, .hvr-bubble-float-right:active:before {\n  -webkit-transform: translateX(10px);\n  transform: translateX(10px);\n}\n\n/* Bubble Float Bottom */\n.hvr-bubble-float-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-bottom:before {\n  position: absolute;\n  z-index: -1;\n  content: '';\n  left: calc(50% - 10px);\n  bottom: 0;\n  border-style: solid;\n  border-width: 10px 10px 0 10px;\n  border-color: #e1e1e1 transparent transparent transparent;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-bottom:hover, .hvr-bubble-float-bottom:focus, .hvr-bubble-float-bottom:active {\n  -webkit-transform: translateY(-10px);\n  transform: translateY(-10px);\n}\n.hvr-bubble-float-bottom:hover:before, .hvr-bubble-float-bottom:focus:before, .hvr-bubble-float-bottom:active:before {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px);\n}\n\n/* Bubble Float Left */\n.hvr-bubble-float-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-left:before {\n  position: absolute;\n  z-index: -1;\n  content: '';\n  top: calc(50% - 10px);\n  left: 0;\n  border-style: solid;\n  border-width: 10px 10px 10px 0;\n  border-color: transparent #e1e1e1 transparent transparent;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-left:hover, .hvr-bubble-float-left:focus, .hvr-bubble-float-left:active {\n  -webkit-transform: translateX(10px);\n  transform: translateX(10px);\n}\n.hvr-bubble-float-left:hover:before, .hvr-bubble-float-left:focus:before, .hvr-bubble-float-left:active:before {\n  -webkit-transform: translateX(-10px);\n  transform: translateX(-10px);\n}\n\n/* ICONS */\n/* Icon Back */\n.hvr-icon-back {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.1s;\n}\n.hvr-icon-back .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.1s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-back:hover .hvr-icon, .hvr-icon-back:focus .hvr-icon, .hvr-icon-back:active .hvr-icon {\n  -webkit-transform: translateX(-4px);\n  transform: translateX(-4px);\n}\n\n/* Icon Forward */\n.hvr-icon-forward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.1s;\n}\n.hvr-icon-forward .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.1s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-forward:hover .hvr-icon, .hvr-icon-forward:focus .hvr-icon, .hvr-icon-forward:active .hvr-icon {\n  -webkit-transform: translateX(4px);\n  transform: translateX(4px);\n}\n\n/* Icon Down */\n@-webkit-keyframes hvr-icon-down {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@keyframes hvr-icon-down {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n/* Icon Down */\n.hvr-icon-down {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-down .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-down:hover .hvr-icon, .hvr-icon-down:focus .hvr-icon, .hvr-icon-down:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-down;\n  animation-name: hvr-icon-down;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Up */\n@-webkit-keyframes hvr-icon-up {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@keyframes hvr-icon-up {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n/* Icon Up */\n.hvr-icon-up {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-up .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-up:hover .hvr-icon, .hvr-icon-up:focus .hvr-icon, .hvr-icon-up:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-up;\n  animation-name: hvr-icon-up;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Spin */\n.hvr-icon-spin {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-spin .hvr-icon {\n  transition-duration: 1s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-in-out;\n}\n.hvr-icon-spin:hover .hvr-icon, .hvr-icon-spin:focus .hvr-icon, .hvr-icon-spin:active .hvr-icon {\n  -webkit-transform: rotate(360deg);\n  transform: rotate(360deg);\n}\n\n/* Icon Drop */\n@-webkit-keyframes hvr-icon-drop {\n  0% {\n    opacity: 0;\n  }\n  50% {\n    opacity: 0;\n    -webkit-transform: translateY(-100%);\n    transform: translateY(-100%);\n  }\n  51%,\n\t100% {\n    opacity: 1;\n  }\n}\n@keyframes hvr-icon-drop {\n  0% {\n    opacity: 0;\n  }\n  50% {\n    opacity: 0;\n    -webkit-transform: translateY(-100%);\n    transform: translateY(-100%);\n  }\n  51%,\n\t100% {\n    opacity: 1;\n  }\n}\n/* Icon Drop */\n.hvr-icon-drop {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-drop .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-drop:hover .hvr-icon, .hvr-icon-drop:focus .hvr-icon, .hvr-icon-drop:active .hvr-icon {\n  opacity: 0;\n  transition-duration: 0.3s;\n  -webkit-animation-name: hvr-icon-drop;\n  animation-name: hvr-icon-drop;\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-animation-delay: 0.3s;\n  animation-delay: 0.3s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n  animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Icon Fade */\n.hvr-icon-fade {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-fade .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.5s;\n  transition-property: color;\n}\n.hvr-icon-fade:hover .hvr-icon, .hvr-icon-fade:focus .hvr-icon, .hvr-icon-fade:active .hvr-icon {\n  color: #0F9E5E;\n}\n\n/* Icon Float Away */\n@-webkit-keyframes hvr-icon-float-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(-1em);\n    transform: translateY(-1em);\n  }\n}\n@keyframes hvr-icon-float-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(-1em);\n    transform: translateY(-1em);\n  }\n}\n/* Icon Float Away */\n.hvr-icon-float-away {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-float-away .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n}\n.hvr-icon-float-away:hover .hvr-icon, .hvr-icon-float-away:focus .hvr-icon, .hvr-icon-float-away:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-float-away;\n  animation-name: hvr-icon-float-away;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Sink Away */\n@-webkit-keyframes hvr-icon-sink-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(1em);\n    transform: translateY(1em);\n  }\n}\n@keyframes hvr-icon-sink-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(1em);\n    transform: translateY(1em);\n  }\n}\n/* Icon Sink Away */\n.hvr-icon-sink-away {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-sink-away .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n}\n.hvr-icon-sink-away:hover .hvr-icon, .hvr-icon-sink-away:focus .hvr-icon, .hvr-icon-sink-away:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-sink-away;\n  animation-name: hvr-icon-sink-away;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Grow */\n.hvr-icon-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-grow .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-grow:hover .hvr-icon, .hvr-icon-grow:focus .hvr-icon, .hvr-icon-grow:active .hvr-icon {\n  -webkit-transform: scale(1.3) translateZ(0);\n  transform: scale(1.3) translateZ(0);\n}\n\n/* Icon Shrink */\n.hvr-icon-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-shrink .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-shrink:hover .hvr-icon, .hvr-icon-shrink:focus .hvr-icon, .hvr-icon-shrink:active .hvr-icon {\n  -webkit-transform: scale(0.8);\n  transform: scale(0.8);\n}\n\n/* Icon Pulse */\n@-webkit-keyframes hvr-icon-pulse {\n  25% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n  75% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n@keyframes hvr-icon-pulse {\n  25% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n  75% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n.hvr-icon-pulse {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-pulse .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pulse:hover .hvr-icon, .hvr-icon-pulse:focus .hvr-icon, .hvr-icon-pulse:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pulse;\n  animation-name: hvr-icon-pulse;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Icon Pulse Grow */\n@-webkit-keyframes hvr-icon-pulse-grow {\n  to {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n}\n@keyframes hvr-icon-pulse-grow {\n  to {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n}\n.hvr-icon-pulse-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-pulse-grow .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pulse-grow:hover .hvr-icon, .hvr-icon-pulse-grow:focus .hvr-icon, .hvr-icon-pulse-grow:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pulse-grow;\n  animation-name: hvr-icon-pulse-grow;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Icon Pulse Shrink */\n@-webkit-keyframes hvr-icon-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n@keyframes hvr-icon-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n.hvr-icon-pulse-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-pulse-shrink .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pulse-shrink:hover .hvr-icon, .hvr-icon-pulse-shrink:focus .hvr-icon, .hvr-icon-pulse-shrink:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pulse-shrink;\n  animation-name: hvr-icon-pulse-shrink;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Icon Push */\n@-webkit-keyframes hvr-icon-push {\n  50% {\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n  }\n}\n@keyframes hvr-icon-push {\n  50% {\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n  }\n}\n.hvr-icon-push {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-push .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-push:hover .hvr-icon, .hvr-icon-push:focus .hvr-icon, .hvr-icon-push:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-push;\n  animation-name: hvr-icon-push;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Pop */\n@-webkit-keyframes hvr-icon-pop {\n  50% {\n    -webkit-transform: scale(1.5);\n    transform: scale(1.5);\n  }\n}\n@keyframes hvr-icon-pop {\n  50% {\n    -webkit-transform: scale(1.5);\n    transform: scale(1.5);\n  }\n}\n.hvr-icon-pop {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-pop .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pop:hover .hvr-icon, .hvr-icon-pop:focus .hvr-icon, .hvr-icon-pop:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pop;\n  animation-name: hvr-icon-pop;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Bounce */\n.hvr-icon-bounce {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-bounce .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-bounce:hover .hvr-icon, .hvr-icon-bounce:focus .hvr-icon, .hvr-icon-bounce:active .hvr-icon {\n  -webkit-transform: scale(1.5);\n  transform: scale(1.5);\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\n}\n\n/* Icon Rotate */\n.hvr-icon-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-rotate .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-rotate:hover .hvr-icon, .hvr-icon-rotate:focus .hvr-icon, .hvr-icon-rotate:active .hvr-icon {\n  -webkit-transform: rotate(20deg);\n  transform: rotate(20deg);\n}\n\n/* Icon Grow Rotate */\n.hvr-icon-grow-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-grow-rotate .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-grow-rotate:hover .hvr-icon, .hvr-icon-grow-rotate:focus .hvr-icon, .hvr-icon-grow-rotate:active .hvr-icon {\n  -webkit-transform: scale(1.5) rotate(12deg);\n  transform: scale(1.5) rotate(12deg);\n}\n\n/* Icon Float */\n.hvr-icon-float {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-float .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-float:hover .hvr-icon, .hvr-icon-float:focus .hvr-icon, .hvr-icon-float:active .hvr-icon {\n  -webkit-transform: translateY(-4px);\n  transform: translateY(-4px);\n}\n\n/* Icon Sink */\n.hvr-icon-sink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-sink .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-sink:hover .hvr-icon, .hvr-icon-sink:focus .hvr-icon, .hvr-icon-sink:active .hvr-icon {\n  -webkit-transform: translateY(4px);\n  transform: translateY(4px);\n}\n\n/* Icon Bob */\n@-webkit-keyframes hvr-icon-bob {\n  0% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  50% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@keyframes hvr-icon-bob {\n  0% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  50% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@-webkit-keyframes hvr-icon-bob-float {\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@keyframes hvr-icon-bob-float {\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n.hvr-icon-bob {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-bob .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-bob:hover .hvr-icon, .hvr-icon-bob:focus .hvr-icon, .hvr-icon-bob:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-bob-float, hvr-icon-bob;\n  animation-name: hvr-icon-bob-float, hvr-icon-bob;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Icon Hang */\n@-webkit-keyframes hvr-icon-hang {\n  0% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  50% {\n    -webkit-transform: translateY(2px);\n    transform: translateY(2px);\n  }\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@keyframes hvr-icon-hang {\n  0% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  50% {\n    -webkit-transform: translateY(2px);\n    transform: translateY(2px);\n  }\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@-webkit-keyframes hvr-icon-hang-sink {\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@keyframes hvr-icon-hang-sink {\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n.hvr-icon-hang {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-hang .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-hang:hover .hvr-icon, .hvr-icon-hang:focus .hvr-icon, .hvr-icon-hang:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;\n  animation-name: hvr-icon-hang-sink, hvr-icon-hang;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Icon Wobble Horizontal */\n@-webkit-keyframes hvr-icon-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(6px);\n    transform: translateX(6px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-5px);\n    transform: translateX(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@keyframes hvr-icon-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(6px);\n    transform: translateX(6px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-5px);\n    transform: translateX(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.hvr-icon-wobble-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-wobble-horizontal .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-wobble-horizontal:hover .hvr-icon, .hvr-icon-wobble-horizontal:focus .hvr-icon, .hvr-icon-wobble-horizontal:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-wobble-horizontal;\n  animation-name: hvr-icon-wobble-horizontal;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Wobble Vertical */\n@-webkit-keyframes hvr-icon-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-5px);\n    transform: translateY(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n@keyframes hvr-icon-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-5px);\n    transform: translateY(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n.hvr-icon-wobble-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-wobble-vertical .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-wobble-vertical:hover .hvr-icon, .hvr-icon-wobble-vertical:focus .hvr-icon, .hvr-icon-wobble-vertical:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-wobble-vertical;\n  animation-name: hvr-icon-wobble-vertical;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Buzz */\n@-webkit-keyframes hvr-icon-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n@keyframes hvr-icon-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n.hvr-icon-buzz {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-buzz .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-buzz:hover .hvr-icon, .hvr-icon-buzz:focus .hvr-icon, .hvr-icon-buzz:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-buzz;\n  animation-name: hvr-icon-buzz;\n  -webkit-animation-duration: 0.15s;\n  animation-duration: 0.15s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Icon Buzz Out */\n@-webkit-keyframes hvr-icon-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n@keyframes hvr-icon-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n.hvr-icon-buzz-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-buzz-out .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-buzz-out:hover .hvr-icon, .hvr-icon-buzz-out:focus .hvr-icon, .hvr-icon-buzz-out:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-buzz-out;\n  animation-name: hvr-icon-buzz-out;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* CURLS */\n/* Curl Top Left */\n.hvr-curl-top-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-top-left:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  top: 0;\n  left: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(135deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#000000');\n  /*For IE7-8-9*/\n  z-index: 1000;\n  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-top-left:hover:before, .hvr-curl-top-left:focus:before, .hvr-curl-top-left:active:before {\n  width: 25px;\n  height: 25px;\n}\n\n/* Curl Top Right */\n.hvr-curl-top-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-top-right:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  top: 0;\n  right: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(225deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-top-right:hover:before, .hvr-curl-top-right:focus:before, .hvr-curl-top-right:active:before {\n  width: 25px;\n  height: 25px;\n}\n\n/* Curl Bottom Right */\n.hvr-curl-bottom-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-bottom-right:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  bottom: 0;\n  right: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(315deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-bottom-right:hover:before, .hvr-curl-bottom-right:focus:before, .hvr-curl-bottom-right:active:before {\n  width: 25px;\n  height: 25px;\n}\n\n/* Curl Bottom Left */\n.hvr-curl-bottom-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-bottom-left:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  bottom: 0;\n  left: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(45deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-bottom-left:hover:before, .hvr-curl-bottom-left:focus:before, .hvr-curl-bottom-left:active:before {\n  width: 25px;\n  height: 25px;\n}\n", ""]);
+exports.push([module.i, "/*!\r\n * Hover.css (http://ianlunn.github.io/Hover/)\r\n * Version: 2.3.2\r\n * Author: Ian Lunn @IanLunn\r\n * Author URL: http://ianlunn.co.uk/\r\n * Github: https://github.com/IanLunn/Hover\r\n\r\n * Hover.css Copyright Ian Lunn 2017. Generated with Sass.\r\n */\r\n/* 2D TRANSITIONS */\r\n/* Grow */\r\n.hvr-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\r\n}\r\n\r\n/* Shrink */\r\n.hvr-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-shrink:hover, .hvr-shrink:focus, .hvr-shrink:active {\r\n  -webkit-transform: scale(0.9);\r\n  transform: scale(0.9);\r\n}\r\n\r\n/* Pulse */\r\n@-webkit-keyframes hvr-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n@keyframes hvr-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n.hvr-pulse {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {\r\n  -webkit-animation-name: hvr-pulse;\r\n  animation-name: hvr-pulse;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Pulse Grow */\r\n@-webkit-keyframes hvr-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n}\r\n@keyframes hvr-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n}\r\n.hvr-pulse-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {\r\n  -webkit-animation-name: hvr-pulse-grow;\r\n  animation-name: hvr-pulse-grow;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Pulse Shrink */\r\n@-webkit-keyframes hvr-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n@keyframes hvr-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n.hvr-pulse-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pulse-shrink:hover, .hvr-pulse-shrink:focus, .hvr-pulse-shrink:active {\r\n  -webkit-animation-name: hvr-pulse-shrink;\r\n  animation-name: hvr-pulse-shrink;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Push */\r\n@-webkit-keyframes hvr-push {\r\n  50% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n  100% {\r\n    -webkit-transform: scale(1);\r\n    transform: scale(1);\r\n  }\r\n}\r\n@keyframes hvr-push {\r\n  50% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n  100% {\r\n    -webkit-transform: scale(1);\r\n    transform: scale(1);\r\n  }\r\n}\r\n.hvr-push {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-push:hover, .hvr-push:focus, .hvr-push:active {\r\n  -webkit-animation-name: hvr-push;\r\n  animation-name: hvr-push;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Pop */\r\n@-webkit-keyframes hvr-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.2);\r\n    transform: scale(1.2);\r\n  }\r\n}\r\n@keyframes hvr-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.2);\r\n    transform: scale(1.2);\r\n  }\r\n}\r\n.hvr-pop {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {\r\n  -webkit-animation-name: hvr-pop;\r\n  animation-name: hvr-pop;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Bounce In */\r\n.hvr-bounce-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {\r\n  -webkit-transform: scale(1.2);\r\n  transform: scale(1.2);\r\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\r\n}\r\n\r\n/* Bounce Out */\r\n.hvr-bounce-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-out:hover, .hvr-bounce-out:focus, .hvr-bounce-out:active {\r\n  -webkit-transform: scale(0.8);\r\n  transform: scale(0.8);\r\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\r\n}\r\n\r\n/* Rotate */\r\n.hvr-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-rotate:hover, .hvr-rotate:focus, .hvr-rotate:active {\r\n  -webkit-transform: rotate(4deg);\r\n  transform: rotate(4deg);\r\n}\r\n\r\n/* Grow Rotate */\r\n.hvr-grow-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-grow-rotate:hover, .hvr-grow-rotate:focus, .hvr-grow-rotate:active {\r\n  -webkit-transform: scale(1.1) rotate(4deg);\r\n  transform: scale(1.1) rotate(4deg);\r\n}\r\n\r\n/* Float */\r\n.hvr-float {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-float:hover, .hvr-float:focus, .hvr-float:active {\r\n  -webkit-transform: translateY(-8px);\r\n  transform: translateY(-8px);\r\n}\r\n\r\n/* Sink */\r\n.hvr-sink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {\r\n  -webkit-transform: translateY(8px);\r\n  transform: translateY(8px);\r\n}\r\n\r\n/* Bob */\r\n@-webkit-keyframes hvr-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-4px);\r\n    transform: translateY(-4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n@keyframes hvr-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-4px);\r\n    transform: translateY(-4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n@keyframes hvr-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n.hvr-bob {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {\r\n  -webkit-animation-name: hvr-bob-float, hvr-bob;\r\n  animation-name: hvr-bob-float, hvr-bob;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Hang */\r\n@-webkit-keyframes hvr-hang {\r\n  0% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n@keyframes hvr-hang {\r\n  0% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n@keyframes hvr-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n.hvr-hang {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-hang:hover, .hvr-hang:focus, .hvr-hang:active {\r\n  -webkit-animation-name: hvr-hang-sink, hvr-hang;\r\n  animation-name: hvr-hang-sink, hvr-hang;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Skew */\r\n.hvr-skew {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-skew:hover, .hvr-skew:focus, .hvr-skew:active {\r\n  -webkit-transform: skew(-10deg);\r\n  transform: skew(-10deg);\r\n}\r\n\r\n/* Skew Forward */\r\n.hvr-skew-forward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  -webkit-transform-origin: 0 100%;\r\n  transform-origin: 0 100%;\r\n}\r\n.hvr-skew-forward:hover, .hvr-skew-forward:focus, .hvr-skew-forward:active {\r\n  -webkit-transform: skew(-10deg);\r\n  transform: skew(-10deg);\r\n}\r\n\r\n/* Skew Backward */\r\n.hvr-skew-backward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  -webkit-transform-origin: 0 100%;\r\n  transform-origin: 0 100%;\r\n}\r\n.hvr-skew-backward:hover, .hvr-skew-backward:focus, .hvr-skew-backward:active {\r\n  -webkit-transform: skew(10deg);\r\n  transform: skew(10deg);\r\n}\r\n\r\n/* Wobble Vertical */\r\n@-webkit-keyframes hvr-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n.hvr-wobble-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-vertical:hover, .hvr-wobble-vertical:focus, .hvr-wobble-vertical:active {\r\n  -webkit-animation-name: hvr-wobble-vertical;\r\n  animation-name: hvr-wobble-vertical;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Horizontal */\r\n@-webkit-keyframes hvr-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(8px);\r\n    transform: translateX(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-6px);\r\n    transform: translateX(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(8px);\r\n    transform: translateX(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-6px);\r\n    transform: translateX(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n.hvr-wobble-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-horizontal:hover, .hvr-wobble-horizontal:focus, .hvr-wobble-horizontal:active {\r\n  -webkit-animation-name: hvr-wobble-horizontal;\r\n  animation-name: hvr-wobble-horizontal;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble To Bottom Right */\r\n@-webkit-keyframes hvr-wobble-to-bottom-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, 8px);\r\n    transform: translate(8px, 8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, -6px);\r\n    transform: translate(-6px, -6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, 4px);\r\n    transform: translate(4px, 4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, -2px);\r\n    transform: translate(-2px, -2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, 1px);\r\n    transform: translate(1px, 1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-to-bottom-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, 8px);\r\n    transform: translate(8px, 8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, -6px);\r\n    transform: translate(-6px, -6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, 4px);\r\n    transform: translate(4px, 4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, -2px);\r\n    transform: translate(-2px, -2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, 1px);\r\n    transform: translate(1px, 1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n.hvr-wobble-to-bottom-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-to-bottom-right:hover, .hvr-wobble-to-bottom-right:focus, .hvr-wobble-to-bottom-right:active {\r\n  -webkit-animation-name: hvr-wobble-to-bottom-right;\r\n  animation-name: hvr-wobble-to-bottom-right;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble To Top Right */\r\n@-webkit-keyframes hvr-wobble-to-top-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, -8px);\r\n    transform: translate(8px, -8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, 6px);\r\n    transform: translate(-6px, 6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, -4px);\r\n    transform: translate(4px, -4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, 2px);\r\n    transform: translate(-2px, 2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, -1px);\r\n    transform: translate(1px, -1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-to-top-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, -8px);\r\n    transform: translate(8px, -8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, 6px);\r\n    transform: translate(-6px, 6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, -4px);\r\n    transform: translate(4px, -4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, 2px);\r\n    transform: translate(-2px, 2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, -1px);\r\n    transform: translate(1px, -1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n.hvr-wobble-to-top-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-to-top-right:hover, .hvr-wobble-to-top-right:focus, .hvr-wobble-to-top-right:active {\r\n  -webkit-animation-name: hvr-wobble-to-top-right;\r\n  animation-name: hvr-wobble-to-top-right;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Top */\r\n@-webkit-keyframes hvr-wobble-top {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-top {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n.hvr-wobble-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  -webkit-transform-origin: 0 100%;\r\n  transform-origin: 0 100%;\r\n}\r\n.hvr-wobble-top:hover, .hvr-wobble-top:focus, .hvr-wobble-top:active {\r\n  -webkit-animation-name: hvr-wobble-top;\r\n  animation-name: hvr-wobble-top;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Bottom */\r\n@-webkit-keyframes hvr-wobble-bottom {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-bottom {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n.hvr-wobble-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  -webkit-transform-origin: 100% 0;\r\n  transform-origin: 100% 0;\r\n}\r\n.hvr-wobble-bottom:hover, .hvr-wobble-bottom:focus, .hvr-wobble-bottom:active {\r\n  -webkit-animation-name: hvr-wobble-bottom;\r\n  animation-name: hvr-wobble-bottom;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Skew */\r\n@-webkit-keyframes hvr-wobble-skew {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-skew {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n.hvr-wobble-skew {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-skew:hover, .hvr-wobble-skew:focus, .hvr-wobble-skew:active {\r\n  -webkit-animation-name: hvr-wobble-skew;\r\n  animation-name: hvr-wobble-skew;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Buzz */\r\n@-webkit-keyframes hvr-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n@keyframes hvr-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n.hvr-buzz {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {\r\n  -webkit-animation-name: hvr-buzz;\r\n  animation-name: hvr-buzz;\r\n  -webkit-animation-duration: 0.15s;\r\n  animation-duration: 0.15s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Buzz Out */\r\n@-webkit-keyframes hvr-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n@keyframes hvr-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n.hvr-buzz-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {\r\n  -webkit-animation-name: hvr-buzz-out;\r\n  animation-name: hvr-buzz-out;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Forward */\r\n.hvr-forward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {\r\n  -webkit-transform: translateX(8px);\r\n  transform: translateX(8px);\r\n}\r\n\r\n/* Backward */\r\n.hvr-backward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-backward:hover, .hvr-backward:focus, .hvr-backward:active {\r\n  -webkit-transform: translateX(-8px);\r\n  transform: translateX(-8px);\r\n}\r\n\r\n/* BACKGROUND TRANSITIONS */\r\n/* Fade */\r\n.hvr-fade {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  overflow: hidden;\r\n  transition-duration: 0.3s;\r\n  transition-property: color, background-color;\r\n}\r\n.hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {\r\n  background-color: #2098D1;\r\n  color: white;\r\n}\r\n\r\n/* Back Pulse */\r\n@-webkit-keyframes hvr-back-pulse {\r\n  50% {\r\n    background-color: rgba(32, 152, 209, 0.75);\r\n  }\r\n}\r\n@keyframes hvr-back-pulse {\r\n  50% {\r\n    background-color: rgba(32, 152, 209, 0.75);\r\n  }\r\n}\r\n.hvr-back-pulse {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  overflow: hidden;\r\n  transition-duration: 0.5s;\r\n  transition-property: color, background-color;\r\n}\r\n.hvr-back-pulse:hover, .hvr-back-pulse:focus, .hvr-back-pulse:active {\r\n  -webkit-animation-name: hvr-back-pulse;\r\n  animation-name: hvr-back-pulse;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-delay: 0.5s;\r\n  animation-delay: 0.5s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  background-color: #2098D1;\r\n  background-color: #2098d1;\r\n  color: white;\r\n}\r\n\r\n/* Sweep To Right */\r\n.hvr-sweep-to-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 0 50%;\r\n  transform-origin: 0 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n}\r\n\r\n/* Sweep To Left */\r\n.hvr-sweep-to-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 100% 50%;\r\n  transform-origin: 100% 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-left:hover, .hvr-sweep-to-left:focus, .hvr-sweep-to-left:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-left:hover:before, .hvr-sweep-to-left:focus:before, .hvr-sweep-to-left:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n}\r\n\r\n/* Sweep To Bottom */\r\n.hvr-sweep-to-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-bottom:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 0;\r\n  transform-origin: 50% 0;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-bottom:hover:before, .hvr-sweep-to-bottom:focus:before, .hvr-sweep-to-bottom:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n}\r\n\r\n/* Sweep To Top */\r\n.hvr-sweep-to-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-top:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 100%;\r\n  transform-origin: 50% 100%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-top:hover, .hvr-sweep-to-top:focus, .hvr-sweep-to-top:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-top:hover:before, .hvr-sweep-to-top:focus:before, .hvr-sweep-to-top:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n}\r\n\r\n/* Bounce To Right */\r\n.hvr-bounce-to-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 0 50%;\r\n  transform-origin: 0 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Bounce To Left */\r\n.hvr-bounce-to-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 100% 50%;\r\n  transform-origin: 100% 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-left:hover, .hvr-bounce-to-left:focus, .hvr-bounce-to-left:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-left:hover:before, .hvr-bounce-to-left:focus:before, .hvr-bounce-to-left:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Bounce To Bottom */\r\n.hvr-bounce-to-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-bottom:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 0;\r\n  transform-origin: 50% 0;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Bounce To Top */\r\n.hvr-bounce-to-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-top:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 100%;\r\n  transform-origin: 50% 100%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-top:hover, .hvr-bounce-to-top:focus, .hvr-bounce-to-top:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-top:hover:before, .hvr-bounce-to-top:focus:before, .hvr-bounce-to-top:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Radial Out */\r\n.hvr-radial-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-radial-out:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  border-radius: 100%;\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-radial-out:hover, .hvr-radial-out:focus, .hvr-radial-out:active {\r\n  color: white;\r\n}\r\n.hvr-radial-out:hover:before, .hvr-radial-out:focus:before, .hvr-radial-out:active:before {\r\n  -webkit-transform: scale(2);\r\n  transform: scale(2);\r\n}\r\n\r\n/* Radial In */\r\n.hvr-radial-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-radial-in:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #e1e1e1;\r\n  border-radius: 100%;\r\n  -webkit-transform: scale(2);\r\n  transform: scale(2);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-radial-in:hover, .hvr-radial-in:focus, .hvr-radial-in:active {\r\n  color: white;\r\n}\r\n.hvr-radial-in:hover:before, .hvr-radial-in:focus:before, .hvr-radial-in:active:before {\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n}\r\n\r\n/* Rectangle In */\r\n.hvr-rectangle-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-rectangle-in:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #e1e1e1;\r\n  -webkit-transform: scale(1);\r\n  transform: scale(1);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-rectangle-in:hover, .hvr-rectangle-in:focus, .hvr-rectangle-in:active {\r\n  color: white;\r\n}\r\n.hvr-rectangle-in:hover:before, .hvr-rectangle-in:focus:before, .hvr-rectangle-in:active:before {\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n}\r\n\r\n/* Rectangle Out */\r\n.hvr-rectangle-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-rectangle-out:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-rectangle-out:hover, .hvr-rectangle-out:focus, .hvr-rectangle-out:active {\r\n  color: white;\r\n}\r\n.hvr-rectangle-out:hover:before, .hvr-rectangle-out:focus:before, .hvr-rectangle-out:active:before {\r\n  -webkit-transform: scale(1);\r\n  transform: scale(1);\r\n}\r\n\r\n/* Shutter In Horizontal */\r\n.hvr-shutter-in-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-in-horizontal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #e1e1e1;\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-in-horizontal:hover, .hvr-shutter-in-horizontal:focus, .hvr-shutter-in-horizontal:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-in-horizontal:hover:before, .hvr-shutter-in-horizontal:focus:before, .hvr-shutter-in-horizontal:active:before {\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n}\r\n\r\n/* Shutter Out Horizontal */\r\n.hvr-shutter-out-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-out-horizontal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-out-horizontal:hover, .hvr-shutter-out-horizontal:focus, .hvr-shutter-out-horizontal:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-out-horizontal:hover:before, .hvr-shutter-out-horizontal:focus:before, .hvr-shutter-out-horizontal:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n}\r\n\r\n/* Shutter In Vertical */\r\n.hvr-shutter-in-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-in-vertical:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #e1e1e1;\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-in-vertical:hover, .hvr-shutter-in-vertical:focus, .hvr-shutter-in-vertical:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-in-vertical:hover:before, .hvr-shutter-in-vertical:focus:before, .hvr-shutter-in-vertical:active:before {\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n}\r\n\r\n/* Shutter Out Vertical */\r\n.hvr-shutter-out-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-out-vertical:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-out-vertical:hover, .hvr-shutter-out-vertical:focus, .hvr-shutter-out-vertical:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-out-vertical:hover:before, .hvr-shutter-out-vertical:focus:before, .hvr-shutter-out-vertical:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n}\r\n\r\n/* BORDER TRANSITIONS */\r\n/* Border Fade */\r\n.hvr-border-fade {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n.hvr-border-fade:hover, .hvr-border-fade:focus, .hvr-border-fade:active {\r\n  box-shadow: inset 0 0 0 4px #2098D1, 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n\r\n/* Hollow */\r\n.hvr-hollow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: background;\r\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n.hvr-hollow:hover, .hvr-hollow:focus, .hvr-hollow:active {\r\n  background: none;\r\n}\r\n\r\n/* Trim */\r\n.hvr-trim {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-trim:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: white solid 4px;\r\n  top: 4px;\r\n  left: 4px;\r\n  right: 4px;\r\n  bottom: 4px;\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: opacity;\r\n}\r\n.hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {\r\n  opacity: 1;\r\n}\r\n\r\n/* Ripple Out */\r\n@-webkit-keyframes hvr-ripple-out {\r\n  100% {\r\n    top: -12px;\r\n    right: -12px;\r\n    bottom: -12px;\r\n    left: -12px;\r\n    opacity: 0;\r\n  }\r\n}\r\n@keyframes hvr-ripple-out {\r\n  100% {\r\n    top: -12px;\r\n    right: -12px;\r\n    bottom: -12px;\r\n    left: -12px;\r\n    opacity: 0;\r\n  }\r\n}\r\n.hvr-ripple-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-ripple-out:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 6px;\r\n  top: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n}\r\n.hvr-ripple-out:hover:before, .hvr-ripple-out:focus:before, .hvr-ripple-out:active:before {\r\n  -webkit-animation-name: hvr-ripple-out;\r\n  animation-name: hvr-ripple-out;\r\n}\r\n\r\n/* Ripple In */\r\n@-webkit-keyframes hvr-ripple-in {\r\n  100% {\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    opacity: 1;\r\n  }\r\n}\r\n@keyframes hvr-ripple-in {\r\n  100% {\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    opacity: 1;\r\n  }\r\n}\r\n.hvr-ripple-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-ripple-in:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 4px;\r\n  top: -12px;\r\n  right: -12px;\r\n  bottom: -12px;\r\n  left: -12px;\r\n  opacity: 0;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n}\r\n.hvr-ripple-in:hover:before, .hvr-ripple-in:focus:before, .hvr-ripple-in:active:before {\r\n  -webkit-animation-name: hvr-ripple-in;\r\n  animation-name: hvr-ripple-in;\r\n}\r\n\r\n/* Outline Out */\r\n.hvr-outline-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-outline-out:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 4px;\r\n  top: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: top, right, bottom, left;\r\n}\r\n.hvr-outline-out:hover:before, .hvr-outline-out:focus:before, .hvr-outline-out:active:before {\r\n  top: -8px;\r\n  right: -8px;\r\n  bottom: -8px;\r\n  left: -8px;\r\n}\r\n\r\n/* Outline In */\r\n.hvr-outline-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-outline-in:before {\r\n  pointer-events: none;\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 4px;\r\n  top: -16px;\r\n  right: -16px;\r\n  bottom: -16px;\r\n  left: -16px;\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: top, right, bottom, left;\r\n}\r\n.hvr-outline-in:hover:before, .hvr-outline-in:focus:before, .hvr-outline-in:active:before {\r\n  top: -8px;\r\n  right: -8px;\r\n  bottom: -8px;\r\n  left: -8px;\r\n  opacity: 1;\r\n}\r\n\r\n/* Round Corners */\r\n.hvr-round-corners {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: border-radius;\r\n}\r\n.hvr-round-corners:hover, .hvr-round-corners:focus, .hvr-round-corners:active {\r\n  border-radius: 1em;\r\n}\r\n\r\n/* Underline From Left */\r\n.hvr-underline-from-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-from-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 100%;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {\r\n  right: 0;\r\n}\r\n\r\n/* Underline From Center */\r\n.hvr-underline-from-center {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-from-center:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 51%;\r\n  right: 51%;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left, right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n/* Underline From Right */\r\n.hvr-underline-from-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-from-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 100%;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-from-right:hover:before, .hvr-underline-from-right:focus:before, .hvr-underline-from-right:active:before {\r\n  left: 0;\r\n}\r\n\r\n/* Overline From Left */\r\n.hvr-overline-from-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-from-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 100%;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-from-left:hover:before, .hvr-overline-from-left:focus:before, .hvr-overline-from-left:active:before {\r\n  right: 0;\r\n}\r\n\r\n/* Overline From Center */\r\n.hvr-overline-from-center {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-from-center:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 51%;\r\n  right: 51%;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left, right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-from-center:hover:before, .hvr-overline-from-center:focus:before, .hvr-overline-from-center:active:before {\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n/* Overline From Right */\r\n.hvr-overline-from-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-from-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 100%;\r\n  right: 0;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-from-right:hover:before, .hvr-overline-from-right:focus:before, .hvr-overline-from-right:active:before {\r\n  left: 0;\r\n}\r\n\r\n/* Reveal */\r\n.hvr-reveal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-reveal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n  border-color: #2098D1;\r\n  border-style: solid;\r\n  border-width: 0;\r\n  transition-property: border-width;\r\n  transition-duration: 0.1s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-reveal:hover:before, .hvr-reveal:focus:before, .hvr-reveal:active:before {\r\n  -webkit-transform: translateY(0);\r\n  transform: translateY(0);\r\n  border-width: 4px;\r\n}\r\n\r\n/* Underline Reveal */\r\n.hvr-underline-reveal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-reveal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  -webkit-transform: translateY(4px);\r\n  transform: translateY(4px);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {\r\n  -webkit-transform: translateY(0);\r\n  transform: translateY(0);\r\n}\r\n\r\n/* Overline Reveal */\r\n.hvr-overline-reveal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-reveal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 0;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  -webkit-transform: translateY(-4px);\r\n  transform: translateY(-4px);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-reveal:hover:before, .hvr-overline-reveal:focus:before, .hvr-overline-reveal:active:before {\r\n  -webkit-transform: translateY(0);\r\n  transform: translateY(0);\r\n}\r\n\r\n/* SHADOW/GLOW TRANSITIONS */\r\n/* Glow */\r\n.hvr-glow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n}\r\n.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {\r\n  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\r\n}\r\n\r\n/* Shadow */\r\n.hvr-shadow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n}\r\n.hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {\r\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n/* Grow Shadow */\r\n.hvr-grow-shadow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow, -webkit-transform;\r\n  transition-property: box-shadow, transform;\r\n  transition-property: box-shadow, transform, -webkit-transform;\r\n}\r\n.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {\r\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\r\n}\r\n\r\n/* Box Shadow Outset */\r\n.hvr-box-shadow-outset {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n}\r\n.hvr-box-shadow-outset:hover, .hvr-box-shadow-outset:focus, .hvr-box-shadow-outset:active {\r\n  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);\r\n}\r\n\r\n/* Box Shadow Inset */\r\n.hvr-box-shadow-inset {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n.hvr-box-shadow-inset:hover, .hvr-box-shadow-inset:focus, .hvr-box-shadow-inset:active {\r\n  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n\r\n/* Float Shadow */\r\n.hvr-float-shadow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-float-shadow:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  top: 100%;\r\n  left: 5%;\r\n  height: 10px;\r\n  width: 90%;\r\n  opacity: 0;\r\n  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);\r\n  /* W3C */\r\n  transition-duration: 0.3s;\r\n  transition-property: opacity, -webkit-transform;\r\n  transition-property: transform, opacity;\r\n  transition-property: transform, opacity, -webkit-transform;\r\n}\r\n.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {\r\n  -webkit-transform: translateY(-5px);\r\n  transform: translateY(-5px);\r\n  /* move the element up by 5px */\r\n}\r\n.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {\r\n  opacity: 1;\r\n  -webkit-transform: translateY(5px);\r\n  transform: translateY(5px);\r\n  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */\r\n}\r\n\r\n/* Shadow Radial */\r\n.hvr-shadow-radial {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-shadow-radial:before, .hvr-shadow-radial:after {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  left: 0;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  background-repeat: no-repeat;\r\n  height: 5px;\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: opacity;\r\n}\r\n.hvr-shadow-radial:before {\r\n  bottom: 100%;\r\n  background: radial-gradient(ellipse at 50% 150%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\r\n}\r\n.hvr-shadow-radial:after {\r\n  top: 100%;\r\n  background: radial-gradient(ellipse at 50% -50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\r\n}\r\n.hvr-shadow-radial:hover:before, .hvr-shadow-radial:focus:before, .hvr-shadow-radial:active:before, .hvr-shadow-radial:hover:after, .hvr-shadow-radial:focus:after, .hvr-shadow-radial:active:after {\r\n  opacity: 1;\r\n}\r\n\r\n/* SPEECH BUBBLES */\r\n/* Bubble Top */\r\n.hvr-bubble-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-top:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  left: calc(50% - 10px);\r\n  top: 0;\r\n  border-width: 0 10px 10px 10px;\r\n  border-color: transparent transparent #e1e1e1 transparent;\r\n}\r\n.hvr-bubble-top:hover:before, .hvr-bubble-top:focus:before, .hvr-bubble-top:active:before {\r\n  -webkit-transform: translateY(-10px);\r\n  transform: translateY(-10px);\r\n}\r\n\r\n/* Bubble Right */\r\n.hvr-bubble-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-right:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  top: calc(50% - 10px);\r\n  right: 0;\r\n  border-width: 10px 0 10px 10px;\r\n  border-color: transparent transparent transparent #e1e1e1;\r\n}\r\n.hvr-bubble-right:hover:before, .hvr-bubble-right:focus:before, .hvr-bubble-right:active:before {\r\n  -webkit-transform: translateX(10px);\r\n  transform: translateX(10px);\r\n}\r\n\r\n/* Bubble Bottom */\r\n.hvr-bubble-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-bottom:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  left: calc(50% - 10px);\r\n  bottom: 0;\r\n  border-width: 10px 10px 0 10px;\r\n  border-color: #e1e1e1 transparent transparent transparent;\r\n}\r\n.hvr-bubble-bottom:hover:before, .hvr-bubble-bottom:focus:before, .hvr-bubble-bottom:active:before {\r\n  -webkit-transform: translateY(10px);\r\n  transform: translateY(10px);\r\n}\r\n\r\n/* Bubble Left */\r\n.hvr-bubble-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-left:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  top: calc(50% - 10px);\r\n  left: 0;\r\n  border-width: 10px 10px 10px 0;\r\n  border-color: transparent #e1e1e1 transparent transparent;\r\n}\r\n.hvr-bubble-left:hover:before, .hvr-bubble-left:focus:before, .hvr-bubble-left:active:before {\r\n  -webkit-transform: translateX(-10px);\r\n  transform: translateX(-10px);\r\n}\r\n\r\n/* Bubble Float Top */\r\n.hvr-bubble-float-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-top:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  left: calc(50% - 10px);\r\n  top: 0;\r\n  border-style: solid;\r\n  border-width: 0 10px 10px 10px;\r\n  border-color: transparent transparent #e1e1e1 transparent;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-top:hover, .hvr-bubble-float-top:focus, .hvr-bubble-float-top:active {\r\n  -webkit-transform: translateY(10px);\r\n  transform: translateY(10px);\r\n}\r\n.hvr-bubble-float-top:hover:before, .hvr-bubble-float-top:focus:before, .hvr-bubble-float-top:active:before {\r\n  -webkit-transform: translateY(-10px);\r\n  transform: translateY(-10px);\r\n}\r\n\r\n/* Bubble Float Right */\r\n.hvr-bubble-float-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-right:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: calc(50% - 10px);\r\n  right: 0;\r\n  content: '';\r\n  border-style: solid;\r\n  border-width: 10px 0 10px 10px;\r\n  border-color: transparent transparent transparent #e1e1e1;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-right:hover, .hvr-bubble-float-right:focus, .hvr-bubble-float-right:active {\r\n  -webkit-transform: translateX(-10px);\r\n  transform: translateX(-10px);\r\n}\r\n.hvr-bubble-float-right:hover:before, .hvr-bubble-float-right:focus:before, .hvr-bubble-float-right:active:before {\r\n  -webkit-transform: translateX(10px);\r\n  transform: translateX(10px);\r\n}\r\n\r\n/* Bubble Float Bottom */\r\n.hvr-bubble-float-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-bottom:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  left: calc(50% - 10px);\r\n  bottom: 0;\r\n  border-style: solid;\r\n  border-width: 10px 10px 0 10px;\r\n  border-color: #e1e1e1 transparent transparent transparent;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-bottom:hover, .hvr-bubble-float-bottom:focus, .hvr-bubble-float-bottom:active {\r\n  -webkit-transform: translateY(-10px);\r\n  transform: translateY(-10px);\r\n}\r\n.hvr-bubble-float-bottom:hover:before, .hvr-bubble-float-bottom:focus:before, .hvr-bubble-float-bottom:active:before {\r\n  -webkit-transform: translateY(10px);\r\n  transform: translateY(10px);\r\n}\r\n\r\n/* Bubble Float Left */\r\n.hvr-bubble-float-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-left:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  top: calc(50% - 10px);\r\n  left: 0;\r\n  border-style: solid;\r\n  border-width: 10px 10px 10px 0;\r\n  border-color: transparent #e1e1e1 transparent transparent;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-left:hover, .hvr-bubble-float-left:focus, .hvr-bubble-float-left:active {\r\n  -webkit-transform: translateX(10px);\r\n  transform: translateX(10px);\r\n}\r\n.hvr-bubble-float-left:hover:before, .hvr-bubble-float-left:focus:before, .hvr-bubble-float-left:active:before {\r\n  -webkit-transform: translateX(-10px);\r\n  transform: translateX(-10px);\r\n}\r\n\r\n/* ICONS */\r\n/* Icon Back */\r\n.hvr-icon-back {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.1s;\r\n}\r\n.hvr-icon-back .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.1s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-back:hover .hvr-icon, .hvr-icon-back:focus .hvr-icon, .hvr-icon-back:active .hvr-icon {\r\n  -webkit-transform: translateX(-4px);\r\n  transform: translateX(-4px);\r\n}\r\n\r\n/* Icon Forward */\r\n.hvr-icon-forward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.1s;\r\n}\r\n.hvr-icon-forward .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.1s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-forward:hover .hvr-icon, .hvr-icon-forward:focus .hvr-icon, .hvr-icon-forward:active .hvr-icon {\r\n  -webkit-transform: translateX(4px);\r\n  transform: translateX(4px);\r\n}\r\n\r\n/* Icon Down */\r\n@-webkit-keyframes hvr-icon-down {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-down {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n/* Icon Down */\r\n.hvr-icon-down {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-down .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-down:hover .hvr-icon, .hvr-icon-down:focus .hvr-icon, .hvr-icon-down:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-down;\r\n  animation-name: hvr-icon-down;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Up */\r\n@-webkit-keyframes hvr-icon-up {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-up {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n/* Icon Up */\r\n.hvr-icon-up {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-up .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-up:hover .hvr-icon, .hvr-icon-up:focus .hvr-icon, .hvr-icon-up:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-up;\r\n  animation-name: hvr-icon-up;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Spin */\r\n.hvr-icon-spin {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-spin .hvr-icon {\r\n  transition-duration: 1s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-in-out;\r\n}\r\n.hvr-icon-spin:hover .hvr-icon, .hvr-icon-spin:focus .hvr-icon, .hvr-icon-spin:active .hvr-icon {\r\n  -webkit-transform: rotate(360deg);\r\n  transform: rotate(360deg);\r\n}\r\n\r\n/* Icon Drop */\r\n@-webkit-keyframes hvr-icon-drop {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  50% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-100%);\r\n    transform: translateY(-100%);\r\n  }\r\n  51%,\r\n\t100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n@keyframes hvr-icon-drop {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  50% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-100%);\r\n    transform: translateY(-100%);\r\n  }\r\n  51%,\r\n\t100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n/* Icon Drop */\r\n.hvr-icon-drop {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-drop .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-drop:hover .hvr-icon, .hvr-icon-drop:focus .hvr-icon, .hvr-icon-drop:active .hvr-icon {\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  -webkit-animation-name: hvr-icon-drop;\r\n  animation-name: hvr-icon-drop;\r\n  -webkit-animation-duration: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-delay: 0.3s;\r\n  animation-delay: 0.3s;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n  animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Icon Fade */\r\n.hvr-icon-fade {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-fade .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.5s;\r\n  transition-property: color;\r\n}\r\n.hvr-icon-fade:hover .hvr-icon, .hvr-icon-fade:focus .hvr-icon, .hvr-icon-fade:active .hvr-icon {\r\n  color: #0F9E5E;\r\n}\r\n\r\n/* Icon Float Away */\r\n@-webkit-keyframes hvr-icon-float-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-1em);\r\n    transform: translateY(-1em);\r\n  }\r\n}\r\n@keyframes hvr-icon-float-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-1em);\r\n    transform: translateY(-1em);\r\n  }\r\n}\r\n/* Icon Float Away */\r\n.hvr-icon-float-away {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-float-away .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  -webkit-animation-duration: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n}\r\n.hvr-icon-float-away:hover .hvr-icon, .hvr-icon-float-away:focus .hvr-icon, .hvr-icon-float-away:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-float-away;\r\n  animation-name: hvr-icon-float-away;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Sink Away */\r\n@-webkit-keyframes hvr-icon-sink-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(1em);\r\n    transform: translateY(1em);\r\n  }\r\n}\r\n@keyframes hvr-icon-sink-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(1em);\r\n    transform: translateY(1em);\r\n  }\r\n}\r\n/* Icon Sink Away */\r\n.hvr-icon-sink-away {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-sink-away .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  -webkit-animation-duration: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n}\r\n.hvr-icon-sink-away:hover .hvr-icon, .hvr-icon-sink-away:focus .hvr-icon, .hvr-icon-sink-away:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-sink-away;\r\n  animation-name: hvr-icon-sink-away;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Grow */\r\n.hvr-icon-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-grow .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-grow:hover .hvr-icon, .hvr-icon-grow:focus .hvr-icon, .hvr-icon-grow:active .hvr-icon {\r\n  -webkit-transform: scale(1.3) translateZ(0);\r\n  transform: scale(1.3) translateZ(0);\r\n}\r\n\r\n/* Icon Shrink */\r\n.hvr-icon-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-shrink .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-shrink:hover .hvr-icon, .hvr-icon-shrink:focus .hvr-icon, .hvr-icon-shrink:active .hvr-icon {\r\n  -webkit-transform: scale(0.8);\r\n  transform: scale(0.8);\r\n}\r\n\r\n/* Icon Pulse */\r\n@-webkit-keyframes hvr-icon-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n@keyframes hvr-icon-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n.hvr-icon-pulse {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-pulse .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pulse:hover .hvr-icon, .hvr-icon-pulse:focus .hvr-icon, .hvr-icon-pulse:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pulse;\r\n  animation-name: hvr-icon-pulse;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Icon Pulse Grow */\r\n@-webkit-keyframes hvr-icon-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n}\r\n@keyframes hvr-icon-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n}\r\n.hvr-icon-pulse-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-pulse-grow .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pulse-grow:hover .hvr-icon, .hvr-icon-pulse-grow:focus .hvr-icon, .hvr-icon-pulse-grow:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pulse-grow;\r\n  animation-name: hvr-icon-pulse-grow;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Icon Pulse Shrink */\r\n@-webkit-keyframes hvr-icon-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n@keyframes hvr-icon-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n.hvr-icon-pulse-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-pulse-shrink .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pulse-shrink:hover .hvr-icon, .hvr-icon-pulse-shrink:focus .hvr-icon, .hvr-icon-pulse-shrink:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pulse-shrink;\r\n  animation-name: hvr-icon-pulse-shrink;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Icon Push */\r\n@-webkit-keyframes hvr-icon-push {\r\n  50% {\r\n    -webkit-transform: scale(0.5);\r\n    transform: scale(0.5);\r\n  }\r\n}\r\n@keyframes hvr-icon-push {\r\n  50% {\r\n    -webkit-transform: scale(0.5);\r\n    transform: scale(0.5);\r\n  }\r\n}\r\n.hvr-icon-push {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-push .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-push:hover .hvr-icon, .hvr-icon-push:focus .hvr-icon, .hvr-icon-push:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-push;\r\n  animation-name: hvr-icon-push;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Pop */\r\n@-webkit-keyframes hvr-icon-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.5);\r\n    transform: scale(1.5);\r\n  }\r\n}\r\n@keyframes hvr-icon-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.5);\r\n    transform: scale(1.5);\r\n  }\r\n}\r\n.hvr-icon-pop {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-pop .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pop:hover .hvr-icon, .hvr-icon-pop:focus .hvr-icon, .hvr-icon-pop:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pop;\r\n  animation-name: hvr-icon-pop;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Bounce */\r\n.hvr-icon-bounce {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-bounce .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-bounce:hover .hvr-icon, .hvr-icon-bounce:focus .hvr-icon, .hvr-icon-bounce:active .hvr-icon {\r\n  -webkit-transform: scale(1.5);\r\n  transform: scale(1.5);\r\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\r\n}\r\n\r\n/* Icon Rotate */\r\n.hvr-icon-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-rotate .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-rotate:hover .hvr-icon, .hvr-icon-rotate:focus .hvr-icon, .hvr-icon-rotate:active .hvr-icon {\r\n  -webkit-transform: rotate(20deg);\r\n  transform: rotate(20deg);\r\n}\r\n\r\n/* Icon Grow Rotate */\r\n.hvr-icon-grow-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-grow-rotate .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-grow-rotate:hover .hvr-icon, .hvr-icon-grow-rotate:focus .hvr-icon, .hvr-icon-grow-rotate:active .hvr-icon {\r\n  -webkit-transform: scale(1.5) rotate(12deg);\r\n  transform: scale(1.5) rotate(12deg);\r\n}\r\n\r\n/* Icon Float */\r\n.hvr-icon-float {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-float .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-float:hover .hvr-icon, .hvr-icon-float:focus .hvr-icon, .hvr-icon-float:active .hvr-icon {\r\n  -webkit-transform: translateY(-4px);\r\n  transform: translateY(-4px);\r\n}\r\n\r\n/* Icon Sink */\r\n.hvr-icon-sink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-sink .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-sink:hover .hvr-icon, .hvr-icon-sink:focus .hvr-icon, .hvr-icon-sink:active .hvr-icon {\r\n  -webkit-transform: translateY(4px);\r\n  transform: translateY(4px);\r\n}\r\n\r\n/* Icon Bob */\r\n@-webkit-keyframes hvr-icon-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-icon-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n.hvr-icon-bob {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-bob .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-bob:hover .hvr-icon, .hvr-icon-bob:focus .hvr-icon, .hvr-icon-bob:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-bob-float, hvr-icon-bob;\r\n  animation-name: hvr-icon-bob-float, hvr-icon-bob;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Icon Hang */\r\n@-webkit-keyframes hvr-icon-hang {\r\n  0% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(2px);\r\n    transform: translateY(2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-hang {\r\n  0% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(2px);\r\n    transform: translateY(2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-icon-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n.hvr-icon-hang {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-hang .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-hang:hover .hvr-icon, .hvr-icon-hang:focus .hvr-icon, .hvr-icon-hang:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;\r\n  animation-name: hvr-icon-hang-sink, hvr-icon-hang;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Icon Wobble Horizontal */\r\n@-webkit-keyframes hvr-icon-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(6px);\r\n    transform: translateX(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-5px);\r\n    transform: translateX(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n@keyframes hvr-icon-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(6px);\r\n    transform: translateX(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-5px);\r\n    transform: translateX(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n.hvr-icon-wobble-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-wobble-horizontal .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-wobble-horizontal:hover .hvr-icon, .hvr-icon-wobble-horizontal:focus .hvr-icon, .hvr-icon-wobble-horizontal:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-wobble-horizontal;\r\n  animation-name: hvr-icon-wobble-horizontal;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Wobble Vertical */\r\n@-webkit-keyframes hvr-icon-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-5px);\r\n    transform: translateY(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n@keyframes hvr-icon-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-5px);\r\n    transform: translateY(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n.hvr-icon-wobble-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-wobble-vertical .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-wobble-vertical:hover .hvr-icon, .hvr-icon-wobble-vertical:focus .hvr-icon, .hvr-icon-wobble-vertical:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-wobble-vertical;\r\n  animation-name: hvr-icon-wobble-vertical;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Buzz */\r\n@-webkit-keyframes hvr-icon-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n@keyframes hvr-icon-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n.hvr-icon-buzz {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-buzz .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-buzz:hover .hvr-icon, .hvr-icon-buzz:focus .hvr-icon, .hvr-icon-buzz:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-buzz;\r\n  animation-name: hvr-icon-buzz;\r\n  -webkit-animation-duration: 0.15s;\r\n  animation-duration: 0.15s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Icon Buzz Out */\r\n@-webkit-keyframes hvr-icon-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n@keyframes hvr-icon-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n.hvr-icon-buzz-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-buzz-out .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-buzz-out:hover .hvr-icon, .hvr-icon-buzz-out:focus .hvr-icon, .hvr-icon-buzz-out:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-buzz-out;\r\n  animation-name: hvr-icon-buzz-out;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* CURLS */\r\n/* Curl Top Left */\r\n.hvr-curl-top-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-top-left:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  top: 0;\r\n  left: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(135deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#000000');\r\n  /*For IE7-8-9*/\r\n  z-index: 1000;\r\n  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-top-left:hover:before, .hvr-curl-top-left:focus:before, .hvr-curl-top-left:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n\r\n/* Curl Top Right */\r\n.hvr-curl-top-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-top-right:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  top: 0;\r\n  right: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(225deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-top-right:hover:before, .hvr-curl-top-right:focus:before, .hvr-curl-top-right:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n\r\n/* Curl Bottom Right */\r\n.hvr-curl-bottom-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-bottom-right:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  bottom: 0;\r\n  right: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(315deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-bottom-right:hover:before, .hvr-curl-bottom-right:focus:before, .hvr-curl-bottom-right:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n\r\n/* Curl Bottom Left */\r\n.hvr-curl-bottom-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-bottom-left:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(45deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-bottom-left:hover:before, .hvr-curl-bottom-left:focus:before, .hvr-curl-bottom-left:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -3919,7 +3936,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-b3c25550]{\n    margin-top: 5px;\n}\n.notifications-header[data-v-b3c25550]{\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-b3c25550]{\r\n    margin-top: 5px;\n}\n.notifications-header[data-v-b3c25550]{\r\n    padding: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -3957,7 +3974,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-25e77581]{\n    margin-top: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-25e77581]{\r\n    margin-top: 5px;\n}\r\n", ""]);
 
 // exports
 
@@ -4033,7 +4050,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-740e7432]{\n    width: 900px;\n}\n.title[data-v-740e7432]{\n    font-size: 21px;\n    font-weight: 600;\n    margin: 15px;\n}\n.followers-banner[data-v-740e7432]{\n    width: auto;\n    height: 83px;\n    background-color: aliceblue;\n\n    border-width: 5px;\n    border-style: solid;\n    border-color: transparent;\n    border-radius: 5px;\n}\n.followers-img[data-v-740e7432]{\n    width: 65px;\n    border-radius: 50%;\n    border: 3px solid white;\n\n    position: absolute;\n    margin-top: 40px;\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\n    padding-top: 58px;\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\n    font-weight: 600;\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\n    height: 150px;\n    padding: 30px;\n}\n.description[data-v-740e7432]{\n    max-width: 230px;\n    min-width: 230px;\n\n    text-align: center;\n}\n.button[data-v-740e7432]{\n    width: 200px;\n    margin: 13px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-740e7432]{\r\n    width: 900px;\n}\n.title[data-v-740e7432]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.followers-banner[data-v-740e7432]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.followers-img[data-v-740e7432]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n\r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\r\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\r\n    height: 150px;\r\n    padding: 30px;\n}\n.description[data-v-740e7432]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n\r\n    text-align: center;\n}\n.button[data-v-740e7432]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -4052,7 +4069,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-dbd5933a]{\n    width: 900px;\n}\n.title[data-v-dbd5933a]{\n    font-size: 21px;\n    font-weight: 600;\n    margin: 15px;\n}\n.following-banner[data-v-dbd5933a]{\n    width: auto;\n    height: 83px;\n    background-color: aliceblue;\n\n    border-width: 5px;\n    border-style: solid;\n    border-color: transparent;\n    border-radius: 5px;\n}\n.following-img[data-v-dbd5933a]{\n    width: 65px;\n    border-radius: 50%;\n    border: 3px solid white;\n\n    position: absolute;\n    margin-top: 40px;\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\n    padding-top: 58px;\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\n    font-weight: 600;\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\n    height: 150px;\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\n    max-width: 230px;\n    min-width: 230px;\n\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\n    width: 200px;\n    margin: 13px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-dbd5933a]{\r\n    width: 900px;\n}\n.title[data-v-dbd5933a]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.following-banner[data-v-dbd5933a]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.following-img[data-v-dbd5933a]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n\r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\r\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\r\n    height: 150px;\r\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n\r\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -4109,7 +4126,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-68b0650a]{\n    margin: 5px;\n    width: 100% !important;\n}\n.settings-header[data-v-68b0650a]{\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-68b0650a]{\r\n    margin: 5px;\r\n    width: 100% !important;\n}\n.settings-header[data-v-68b0650a]{\r\n    padding: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -4185,7 +4202,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\n    background: white;\n}\n.woof-body[data-v-0338a699]{\n    padding: 5px;\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\n    margin-right: 20px;\n    color: #808695;\n}\n\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\n    margin-left: 60px;\n}\n\n\n\n\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\n    transition: opacity .5s;\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 5px;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -4204,7 +4221,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-d71bd506]{\n    padding: 10px 20px;\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\n    color: #765D69;\n    font-size: 14px;\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\n    color: #afb2b8;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-d71bd506]{\r\n    padding: 10px 20px;\r\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\r\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\r\n    color: #765D69;\r\n    font-size: 14px;\r\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\r\n    color: #afb2b8;\n}\r\n", ""]);
 
 // exports
 
@@ -47813,11 +47830,11 @@ var render = function() {
                         [
                           _c("DropdownItem", [
                             _c("p", { staticClass: "fullname" }, [
-                              _vm._v(_vm._s(_vm.loggedInUser.full_name))
+                              _vm._v(_vm._s(_vm.UserData.fullname))
                             ]),
                             _vm._v(" "),
                             _c("p", { staticClass: "username" }, [
-                              _vm._v("@" + _vm._s(_vm.loggedInUser.user_name))
+                              _vm._v("@" + _vm._s(_vm.UserData.username))
                             ])
                           ])
                         ],
@@ -48283,11 +48300,11 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "user-field" }, [
           _c("a", { staticClass: "name", attrs: { href: "#" } }, [
-            _vm._v(_vm._s(this.$root.UserDetails.full_name))
+            _vm._v(_vm._s(_vm.UserData.fullname))
           ]),
           _vm._v(" "),
           _c("a", { staticClass: "username", attrs: { href: "#" } }, [
-            _vm._v("@" + _vm._s(this.$root.UserDetails.user_name))
+            _vm._v("@" + _vm._s(_vm.UserData.username))
           ])
         ])
       ]),
@@ -48757,7 +48774,19 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "user-container" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "user-banner" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "user-field" }, [
+          _c("a", { staticClass: "name", attrs: { href: "/profile" } }, [
+            _vm._v(_vm._s(_vm.UserData.fullname))
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "username", attrs: { href: "/profile" } }, [
+            _vm._v("@" + _vm._s(_vm.UserData.username))
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "user-stats" }, [
         _c("ul", { staticClass: "row" }, [
@@ -48818,26 +48847,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "user-banner" }, [
-      _c("a", { attrs: { href: "/profile" } }, [
-        _c("img", {
-          staticClass: "user-img",
-          attrs: {
-            src: __webpack_require__(/*! ../../../../img/default-picture.png */ "./resources/img/default-picture.png"),
-            alt: ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "user-field" }, [
-        _c("a", { staticClass: "name", attrs: { href: "/profile" } }, [
-          _vm._v("David Peralta")
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "username", attrs: { href: "/profile" } }, [
-          _vm._v("@IamDavidMe")
-        ])
-      ])
+    return _c("a", { attrs: { href: "/profile" } }, [
+      _c("img", {
+        staticClass: "user-img",
+        attrs: { src: __webpack_require__(/*! ../../../../img/default-picture.png */ "./resources/img/default-picture.png"), alt: "" }
+      })
     ])
   }
 ]
@@ -49575,11 +49589,11 @@ var render = function() {
           autosize: { minRows: 1, maxRows: 4 }
         },
         model: {
-          value: this.$root.UserDetails.description,
+          value: _vm.UserData.description,
           callback: function($$v) {
-            _vm.$set(this.$root.UserDetails, "description", $$v)
+            _vm.$set(_vm.UserData, "description", $$v)
           },
-          expression: "this.$root.UserDetails.description"
+          expression: "UserData.description"
         }
       }),
       _vm._v(" "),
@@ -49613,11 +49627,11 @@ var render = function() {
         staticClass: "input",
         attrs: { placeholder: "Website" },
         model: {
-          value: this.$root.UserDetails.website,
+          value: _vm.UserData.website,
           callback: function($$v) {
-            _vm.$set(this.$root.UserDetails, "website", $$v)
+            _vm.$set(_vm.UserData, "website", $$v)
           },
-          expression: "this.$root.UserDetails.website"
+          expression: "UserData.website"
         }
       }),
       _vm._v(" "),
@@ -49630,11 +49644,11 @@ var render = function() {
           format: "MMMM dd yyyy"
         },
         model: {
-          value: this.$root.UserDetails.birthdate,
+          value: _vm.UserData.birthdate,
           callback: function($$v) {
-            _vm.$set(this.$root.UserDetails, "birthdate", $$v)
+            _vm.$set(_vm.UserData, "birthdate", $$v)
           },
-          expression: "this.$root.UserDetails.birthdate"
+          expression: "UserData.birthdate"
         }
       }),
       _vm._v(" "),
@@ -49847,11 +49861,11 @@ var render = function() {
                   }
                 },
                 model: {
-                  value: _vm.PrimaryDetails.full_name,
+                  value: _vm.UserData.fullname,
                   callback: function($$v) {
-                    _vm.$set(_vm.PrimaryDetails, "full_name", $$v)
+                    _vm.$set(_vm.UserData, "fullname", $$v)
                   },
-                  expression: "PrimaryDetails.full_name"
+                  expression: "UserData.fullname"
                 }
               })
             ],
@@ -49874,11 +49888,11 @@ var render = function() {
                   }
                 },
                 model: {
-                  value: _vm.PrimaryDetails.user_name,
+                  value: _vm.UserData.username,
                   callback: function($$v) {
-                    _vm.$set(_vm.PrimaryDetails, "user_name", $$v)
+                    _vm.$set(_vm.UserData, "username", $$v)
                   },
-                  expression: "PrimaryDetails.user_name"
+                  expression: "UserData.username"
                 }
               }),
               _vm._v(" "),
@@ -49887,7 +49901,7 @@ var render = function() {
                 { staticStyle: { "margin-left": "7px", color: "grey" } },
                 [_vm._v("https://woofr.com/")]
               ),
-              _vm._v(_vm._s(_vm.PrimaryDetails.user_name) + "\n        ")
+              _vm._v(_vm._s(_vm.UserData.username) + "\n        ")
             ],
             1
           ),
@@ -49905,11 +49919,11 @@ var render = function() {
                   }
                 },
                 model: {
-                  value: _vm.PrimaryDetails.user_email,
+                  value: _vm.UserData.email,
                   callback: function($$v) {
-                    _vm.$set(_vm.PrimaryDetails, "user_email", $$v)
+                    _vm.$set(_vm.UserData, "email", $$v)
                   },
-                  expression: "PrimaryDetails.user_email"
+                  expression: "UserData.email"
                 }
               }),
               _vm._v(" "),
@@ -50316,64 +50330,79 @@ var render = function() {
     "div",
     { staticClass: "box side-box user-description white woofr-border" },
     [
-      _c("div", { staticClass: "description" }, [
-        _vm._v(_vm._s(this.$root.UserDetails.description))
-      ]),
+      _vm.UserData.description != null
+        ? _c("div", { staticClass: "description" }, [
+            _vm._v(_vm._s(_vm.UserData.description))
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-pin-outline", size: "24" } }),
-          _vm._v(
-            "\n        Lived in " +
-              _vm._s(this.$root.UserDetails.country) +
-              "\n    "
+      _vm.UserData.country != null
+        ? _c(
+            "div",
+            { staticClass: "description-list" },
+            [
+              _c("Icon", { attrs: { type: "ios-pin-outline", size: "24" } }),
+              _vm._v(
+                "\n        Lived in " + _vm._s(_vm.UserData.country) + "\n    "
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-link-outline", size: "24" } }),
-          _vm._v(" "),
-          _c(
-            "a",
-            { attrs: { href: "http://" + this.$root.UserDetails.website } },
-            [_vm._v(_vm._s(this.$root.UserDetails.website))]
+      _vm.UserData.website != null
+        ? _c(
+            "div",
+            { staticClass: "description-list" },
+            [
+              _c("Icon", { attrs: { type: "ios-link-outline", size: "24" } }),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "http://" + _vm.UserData.website } }, [
+                _vm._v(_vm._s(_vm.UserData.website))
+              ])
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-calendar-outline", size: "24" } }),
-          _vm._v(
-            "\n        " + _vm._s(this.$root.UserDetails.created_at) + "\n    "
+      _vm.UserData.created_at != null
+        ? _c(
+            "div",
+            { staticClass: "description-list" },
+            [
+              _c("Icon", {
+                attrs: { type: "ios-calendar-outline", size: "24" }
+              }),
+              _vm._v(
+                "\n        Joined on " +
+                  _vm._s(
+                    _vm._f("moment")(
+                      _vm.UserData.created_at["date"],
+                      "MMMM DD YYYY"
+                    )
+                  ) +
+                  "\n    "
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "description-list" },
-        [
-          _c("Icon", { attrs: { type: "ios-ice-cream-outline", size: "24" } }),
-          _vm._v(
-            "\n        Born " +
-              _vm._s(this.$root.UserDetails.birthdate) +
-              "\n    "
+      _vm.UserData.birthdate != null
+        ? _c(
+            "div",
+            { staticClass: "description-list" },
+            [
+              _c("Icon", {
+                attrs: { type: "ios-ice-cream-outline", size: "24" }
+              }),
+              _vm._v(
+                "\n        Born " + _vm._s(_vm.UserData.birthdate) + "\n    "
+              )
+            ],
+            1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ]
   )
 }
@@ -51126,6 +51155,4721 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-moment/dist/vue-moment.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-moment/dist/vue-moment.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {(function (global, factory) {
+	 true ? factory(exports) :
+	undefined;
+}(this, (function (exports) { 'use strict';
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function commonjsRequire () {
+	throw new Error('Dynamic requires are not currently supported by rollup-plugin-commonjs');
+}
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var moment = createCommonjsModule(function (module, exports) {
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+//! moment.js
+//! version : 2.19.1
+//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! license : MIT
+//! momentjs.com
+
+(function (global, factory) {
+    (_typeof(exports)) === 'object' && 'object' !== 'undefined' ? module.exports = factory() :  false ? undefined : global.moment = factory();
+})(commonjsGlobal, function () {
+    var hookCallback;
+
+    function hooks() {
+        return hookCallback.apply(null, arguments);
+    }
+
+    // This is done to register the method called with moment()
+    // without creating circular dependencies.
+    function setHookCallback(callback) {
+        hookCallback = callback;
+    }
+
+    function isArray(input) {
+        return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]';
+    }
+
+    function isObject(input) {
+        // IE8 will treat undefined and null as object if it wasn't for
+        // input != null
+        return input != null && Object.prototype.toString.call(input) === '[object Object]';
+    }
+
+    function isObjectEmpty(obj) {
+        if (Object.getOwnPropertyNames) {
+            return Object.getOwnPropertyNames(obj).length === 0;
+        } else {
+            var k;
+            for (k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    function isUndefined(input) {
+        return input === void 0;
+    }
+
+    function isNumber(input) {
+        return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
+    }
+
+    function isDate(input) {
+        return input instanceof Date || Object.prototype.toString.call(input) === '[object Date]';
+    }
+
+    function map(arr, fn) {
+        var res = [],
+            i;
+        for (i = 0; i < arr.length; ++i) {
+            res.push(fn(arr[i], i));
+        }
+        return res;
+    }
+
+    function hasOwnProp(a, b) {
+        return Object.prototype.hasOwnProperty.call(a, b);
+    }
+
+    function extend(a, b) {
+        for (var i in b) {
+            if (hasOwnProp(b, i)) {
+                a[i] = b[i];
+            }
+        }
+
+        if (hasOwnProp(b, 'toString')) {
+            a.toString = b.toString;
+        }
+
+        if (hasOwnProp(b, 'valueOf')) {
+            a.valueOf = b.valueOf;
+        }
+
+        return a;
+    }
+
+    function createUTC(input, format, locale, strict) {
+        return createLocalOrUTC(input, format, locale, strict, true).utc();
+    }
+
+    function defaultParsingFlags() {
+        // We need to deep clone this object.
+        return {
+            empty: false,
+            unusedTokens: [],
+            unusedInput: [],
+            overflow: -2,
+            charsLeftOver: 0,
+            nullInput: false,
+            invalidMonth: null,
+            invalidFormat: false,
+            userInvalidated: false,
+            iso: false,
+            parsedDateParts: [],
+            meridiem: null,
+            rfc2822: false,
+            weekdayMismatch: false
+        };
+    }
+
+    function getParsingFlags(m) {
+        if (m._pf == null) {
+            m._pf = defaultParsingFlags();
+        }
+        return m._pf;
+    }
+
+    var some;
+    if (Array.prototype.some) {
+        some = Array.prototype.some;
+    } else {
+        some = function some(fun) {
+            var t = Object(this);
+            var len = t.length >>> 0;
+
+            for (var i = 0; i < len; i++) {
+                if (i in t && fun.call(this, t[i], i, t)) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+    }
+
+    function isValid(m) {
+        if (m._isValid == null) {
+            var flags = getParsingFlags(m);
+            var parsedParts = some.call(flags.parsedDateParts, function (i) {
+                return i != null;
+            });
+            var isNowValid = !isNaN(m._d.getTime()) && flags.overflow < 0 && !flags.empty && !flags.invalidMonth && !flags.invalidWeekday && !flags.weekdayMismatch && !flags.nullInput && !flags.invalidFormat && !flags.userInvalidated && (!flags.meridiem || flags.meridiem && parsedParts);
+
+            if (m._strict) {
+                isNowValid = isNowValid && flags.charsLeftOver === 0 && flags.unusedTokens.length === 0 && flags.bigHour === undefined;
+            }
+
+            if (Object.isFrozen == null || !Object.isFrozen(m)) {
+                m._isValid = isNowValid;
+            } else {
+                return isNowValid;
+            }
+        }
+        return m._isValid;
+    }
+
+    function createInvalid(flags) {
+        var m = createUTC(NaN);
+        if (flags != null) {
+            extend(getParsingFlags(m), flags);
+        } else {
+            getParsingFlags(m).userInvalidated = true;
+        }
+
+        return m;
+    }
+
+    // Plugins that add properties should also add the key here (null value),
+    // so we can properly clone ourselves.
+    var momentProperties = hooks.momentProperties = [];
+
+    function copyConfig(to, from) {
+        var i, prop, val;
+
+        if (!isUndefined(from._isAMomentObject)) {
+            to._isAMomentObject = from._isAMomentObject;
+        }
+        if (!isUndefined(from._i)) {
+            to._i = from._i;
+        }
+        if (!isUndefined(from._f)) {
+            to._f = from._f;
+        }
+        if (!isUndefined(from._l)) {
+            to._l = from._l;
+        }
+        if (!isUndefined(from._strict)) {
+            to._strict = from._strict;
+        }
+        if (!isUndefined(from._tzm)) {
+            to._tzm = from._tzm;
+        }
+        if (!isUndefined(from._isUTC)) {
+            to._isUTC = from._isUTC;
+        }
+        if (!isUndefined(from._offset)) {
+            to._offset = from._offset;
+        }
+        if (!isUndefined(from._pf)) {
+            to._pf = getParsingFlags(from);
+        }
+        if (!isUndefined(from._locale)) {
+            to._locale = from._locale;
+        }
+
+        if (momentProperties.length > 0) {
+            for (i = 0; i < momentProperties.length; i++) {
+                prop = momentProperties[i];
+                val = from[prop];
+                if (!isUndefined(val)) {
+                    to[prop] = val;
+                }
+            }
+        }
+
+        return to;
+    }
+
+    var updateInProgress = false;
+
+    // Moment prototype object
+    function Moment(config) {
+        copyConfig(this, config);
+        this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+        if (!this.isValid()) {
+            this._d = new Date(NaN);
+        }
+        // Prevent infinite loop in case updateOffset creates new moment
+        // objects.
+        if (updateInProgress === false) {
+            updateInProgress = true;
+            hooks.updateOffset(this);
+            updateInProgress = false;
+        }
+    }
+
+    function isMoment(obj) {
+        return obj instanceof Moment || obj != null && obj._isAMomentObject != null;
+    }
+
+    function absFloor(number) {
+        if (number < 0) {
+            // -0 -> 0
+            return Math.ceil(number) || 0;
+        } else {
+            return Math.floor(number);
+        }
+    }
+
+    function toInt(argumentForCoercion) {
+        var coercedNumber = +argumentForCoercion,
+            value = 0;
+
+        if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+            value = absFloor(coercedNumber);
+        }
+
+        return value;
+    }
+
+    // compare two arrays, return the number of differences
+    function compareArrays(array1, array2, dontConvert) {
+        var len = Math.min(array1.length, array2.length),
+            lengthDiff = Math.abs(array1.length - array2.length),
+            diffs = 0,
+            i;
+        for (i = 0; i < len; i++) {
+            if (dontConvert && array1[i] !== array2[i] || !dontConvert && toInt(array1[i]) !== toInt(array2[i])) {
+                diffs++;
+            }
+        }
+        return diffs + lengthDiff;
+    }
+
+    function warn(msg) {
+        if (hooks.suppressDeprecationWarnings === false && typeof console !== 'undefined' && console.warn) {
+            console.warn('Deprecation warning: ' + msg);
+        }
+    }
+
+    function deprecate(msg, fn) {
+        var firstTime = true;
+
+        return extend(function () {
+            if (hooks.deprecationHandler != null) {
+                hooks.deprecationHandler(null, msg);
+            }
+            if (firstTime) {
+                var args = [];
+                var arg;
+                for (var i = 0; i < arguments.length; i++) {
+                    arg = '';
+                    if (_typeof(arguments[i]) === 'object') {
+                        arg += '\n[' + i + '] ';
+                        for (var key in arguments[0]) {
+                            arg += key + ': ' + arguments[0][key] + ', ';
+                        }
+                        arg = arg.slice(0, -2); // Remove trailing comma and space
+                    } else {
+                        arg = arguments[i];
+                    }
+                    args.push(arg);
+                }
+                warn(msg + '\nArguments: ' + Array.prototype.slice.call(args).join('') + '\n' + new Error().stack);
+                firstTime = false;
+            }
+            return fn.apply(this, arguments);
+        }, fn);
+    }
+
+    var deprecations = {};
+
+    function deprecateSimple(name, msg) {
+        if (hooks.deprecationHandler != null) {
+            hooks.deprecationHandler(name, msg);
+        }
+        if (!deprecations[name]) {
+            warn(msg);
+            deprecations[name] = true;
+        }
+    }
+
+    hooks.suppressDeprecationWarnings = false;
+    hooks.deprecationHandler = null;
+
+    function isFunction(input) {
+        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+    }
+
+    function set(config) {
+        var prop, i;
+        for (i in config) {
+            prop = config[i];
+            if (isFunction(prop)) {
+                this[i] = prop;
+            } else {
+                this['_' + i] = prop;
+            }
+        }
+        this._config = config;
+        // Lenient ordinal parsing accepts just a number in addition to
+        // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
+        // TODO: Remove "ordinalParse" fallback in next major release.
+        this._dayOfMonthOrdinalParseLenient = new RegExp((this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) + '|' + /\d{1,2}/.source);
+    }
+
+    function mergeConfigs(parentConfig, childConfig) {
+        var res = extend({}, parentConfig),
+            prop;
+        for (prop in childConfig) {
+            if (hasOwnProp(childConfig, prop)) {
+                if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
+                    res[prop] = {};
+                    extend(res[prop], parentConfig[prop]);
+                    extend(res[prop], childConfig[prop]);
+                } else if (childConfig[prop] != null) {
+                    res[prop] = childConfig[prop];
+                } else {
+                    delete res[prop];
+                }
+            }
+        }
+        for (prop in parentConfig) {
+            if (hasOwnProp(parentConfig, prop) && !hasOwnProp(childConfig, prop) && isObject(parentConfig[prop])) {
+                // make sure changes to properties don't modify parent config
+                res[prop] = extend({}, res[prop]);
+            }
+        }
+        return res;
+    }
+
+    function Locale(config) {
+        if (config != null) {
+            this.set(config);
+        }
+    }
+
+    var keys;
+
+    if (Object.keys) {
+        keys = Object.keys;
+    } else {
+        keys = function keys(obj) {
+            var i,
+                res = [];
+            for (i in obj) {
+                if (hasOwnProp(obj, i)) {
+                    res.push(i);
+                }
+            }
+            return res;
+        };
+    }
+
+    var defaultCalendar = {
+        sameDay: '[Today at] LT',
+        nextDay: '[Tomorrow at] LT',
+        nextWeek: 'dddd [at] LT',
+        lastDay: '[Yesterday at] LT',
+        lastWeek: '[Last] dddd [at] LT',
+        sameElse: 'L'
+    };
+
+    function calendar(key, mom, now) {
+        var output = this._calendar[key] || this._calendar['sameElse'];
+        return isFunction(output) ? output.call(mom, now) : output;
+    }
+
+    var defaultLongDateFormat = {
+        LTS: 'h:mm:ss A',
+        LT: 'h:mm A',
+        L: 'MM/DD/YYYY',
+        LL: 'MMMM D, YYYY',
+        LLL: 'MMMM D, YYYY h:mm A',
+        LLLL: 'dddd, MMMM D, YYYY h:mm A'
+    };
+
+    function longDateFormat(key) {
+        var format = this._longDateFormat[key],
+            formatUpper = this._longDateFormat[key.toUpperCase()];
+
+        if (format || !formatUpper) {
+            return format;
+        }
+
+        this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
+            return val.slice(1);
+        });
+
+        return this._longDateFormat[key];
+    }
+
+    var defaultInvalidDate = 'Invalid date';
+
+    function invalidDate() {
+        return this._invalidDate;
+    }
+
+    var defaultOrdinal = '%d';
+    var defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+
+    function ordinal(number) {
+        return this._ordinal.replace('%d', number);
+    }
+
+    var defaultRelativeTime = {
+        future: 'in %s',
+        past: '%s ago',
+        s: 'a few seconds',
+        ss: '%d seconds',
+        m: 'a minute',
+        mm: '%d minutes',
+        h: 'an hour',
+        hh: '%d hours',
+        d: 'a day',
+        dd: '%d days',
+        M: 'a month',
+        MM: '%d months',
+        y: 'a year',
+        yy: '%d years'
+    };
+
+    function relativeTime(number, withoutSuffix, string, isFuture) {
+        var output = this._relativeTime[string];
+        return isFunction(output) ? output(number, withoutSuffix, string, isFuture) : output.replace(/%d/i, number);
+    }
+
+    function pastFuture(diff, output) {
+        var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+        return isFunction(format) ? format(output) : format.replace(/%s/i, output);
+    }
+
+    var aliases = {};
+
+    function addUnitAlias(unit, shorthand) {
+        var lowerCase = unit.toLowerCase();
+        aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
+    }
+
+    function normalizeUnits(units) {
+        return typeof units === 'string' ? aliases[units] || aliases[units.toLowerCase()] : undefined;
+    }
+
+    function normalizeObjectUnits(inputObject) {
+        var normalizedInput = {},
+            normalizedProp,
+            prop;
+
+        for (prop in inputObject) {
+            if (hasOwnProp(inputObject, prop)) {
+                normalizedProp = normalizeUnits(prop);
+                if (normalizedProp) {
+                    normalizedInput[normalizedProp] = inputObject[prop];
+                }
+            }
+        }
+
+        return normalizedInput;
+    }
+
+    var priorities = {};
+
+    function addUnitPriority(unit, priority) {
+        priorities[unit] = priority;
+    }
+
+    function getPrioritizedUnits(unitsObj) {
+        var units = [];
+        for (var u in unitsObj) {
+            units.push({ unit: u, priority: priorities[u] });
+        }
+        units.sort(function (a, b) {
+            return a.priority - b.priority;
+        });
+        return units;
+    }
+
+    function zeroFill(number, targetLength, forceSign) {
+        var absNumber = '' + Math.abs(number),
+            zerosToFill = targetLength - absNumber.length,
+            sign = number >= 0;
+        return (sign ? forceSign ? '+' : '' : '-') + Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
+    }
+
+    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+
+    var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
+
+    var formatFunctions = {};
+
+    var formatTokenFunctions = {};
+
+    // token:    'M'
+    // padded:   ['MM', 2]
+    // ordinal:  'Mo'
+    // callback: function () { this.month() + 1 }
+    function addFormatToken(token, padded, ordinal, callback) {
+        var func = callback;
+        if (typeof callback === 'string') {
+            func = function func() {
+                return this[callback]();
+            };
+        }
+        if (token) {
+            formatTokenFunctions[token] = func;
+        }
+        if (padded) {
+            formatTokenFunctions[padded[0]] = function () {
+                return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+            };
+        }
+        if (ordinal) {
+            formatTokenFunctions[ordinal] = function () {
+                return this.localeData().ordinal(func.apply(this, arguments), token);
+            };
+        }
+    }
+
+    function removeFormattingTokens(input) {
+        if (input.match(/\[[\s\S]/)) {
+            return input.replace(/^\[|\]$/g, '');
+        }
+        return input.replace(/\\/g, '');
+    }
+
+    function makeFormatFunction(format) {
+        var array = format.match(formattingTokens),
+            i,
+            length;
+
+        for (i = 0, length = array.length; i < length; i++) {
+            if (formatTokenFunctions[array[i]]) {
+                array[i] = formatTokenFunctions[array[i]];
+            } else {
+                array[i] = removeFormattingTokens(array[i]);
+            }
+        }
+
+        return function (mom) {
+            var output = '',
+                i;
+            for (i = 0; i < length; i++) {
+                output += isFunction(array[i]) ? array[i].call(mom, format) : array[i];
+            }
+            return output;
+        };
+    }
+
+    // format date using native date object
+    function formatMoment(m, format) {
+        if (!m.isValid()) {
+            return m.localeData().invalidDate();
+        }
+
+        format = expandFormat(format, m.localeData());
+        formatFunctions[format] = formatFunctions[format] || makeFormatFunction(format);
+
+        return formatFunctions[format](m);
+    }
+
+    function expandFormat(format, locale) {
+        var i = 5;
+
+        function replaceLongDateFormatTokens(input) {
+            return locale.longDateFormat(input) || input;
+        }
+
+        localFormattingTokens.lastIndex = 0;
+        while (i >= 0 && localFormattingTokens.test(format)) {
+            format = format.replace(localFormattingTokens, replaceLongDateFormatTokens);
+            localFormattingTokens.lastIndex = 0;
+            i -= 1;
+        }
+
+        return format;
+    }
+
+    var match1 = /\d/; //       0 - 9
+    var match2 = /\d\d/; //      00 - 99
+    var match3 = /\d{3}/; //     000 - 999
+    var match4 = /\d{4}/; //    0000 - 9999
+    var match6 = /[+-]?\d{6}/; // -999999 - 999999
+    var match1to2 = /\d\d?/; //       0 - 99
+    var match3to4 = /\d\d\d\d?/; //     999 - 9999
+    var match5to6 = /\d\d\d\d\d\d?/; //   99999 - 999999
+    var match1to3 = /\d{1,3}/; //       0 - 999
+    var match1to4 = /\d{1,4}/; //       0 - 9999
+    var match1to6 = /[+-]?\d{1,6}/; // -999999 - 999999
+
+    var matchUnsigned = /\d+/; //       0 - inf
+    var matchSigned = /[+-]?\d+/; //    -inf - inf
+
+    var matchOffset = /Z|[+-]\d\d:?\d\d/gi; // +00:00 -00:00 +0000 -0000 or Z
+    var matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi; // +00 -00 +00:00 -00:00 +0000 -0000 or Z
+
+    var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
+
+    // any word (or two) characters or numbers including two/three word month in arabic.
+    // includes scottish gaelic two word and hyphenated months
+    var matchWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
+
+    var regexes = {};
+
+    function addRegexToken(token, regex, strictRegex) {
+        regexes[token] = isFunction(regex) ? regex : function (isStrict, localeData) {
+            return isStrict && strictRegex ? strictRegex : regex;
+        };
+    }
+
+    function getParseRegexForToken(token, config) {
+        if (!hasOwnProp(regexes, token)) {
+            return new RegExp(unescapeFormat(token));
+        }
+
+        return regexes[token](config._strict, config._locale);
+    }
+
+    // Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
+    function unescapeFormat(s) {
+        return regexEscape(s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (matched, p1, p2, p3, p4) {
+            return p1 || p2 || p3 || p4;
+        }));
+    }
+
+    function regexEscape(s) {
+        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
+    var tokens = {};
+
+    function addParseToken(token, callback) {
+        var i,
+            func = callback;
+        if (typeof token === 'string') {
+            token = [token];
+        }
+        if (isNumber(callback)) {
+            func = function func(input, array) {
+                array[callback] = toInt(input);
+            };
+        }
+        for (i = 0; i < token.length; i++) {
+            tokens[token[i]] = func;
+        }
+    }
+
+    function addWeekParseToken(token, callback) {
+        addParseToken(token, function (input, array, config, token) {
+            config._w = config._w || {};
+            callback(input, config._w, config, token);
+        });
+    }
+
+    function addTimeToArrayFromToken(token, input, config) {
+        if (input != null && hasOwnProp(tokens, token)) {
+            tokens[token](input, config._a, config, token);
+        }
+    }
+
+    var YEAR = 0;
+    var MONTH = 1;
+    var DATE = 2;
+    var HOUR = 3;
+    var MINUTE = 4;
+    var SECOND = 5;
+    var MILLISECOND = 6;
+    var WEEK = 7;
+    var WEEKDAY = 8;
+
+    // FORMATTING
+
+    addFormatToken('Y', 0, 0, function () {
+        var y = this.year();
+        return y <= 9999 ? '' + y : '+' + y;
+    });
+
+    addFormatToken(0, ['YY', 2], 0, function () {
+        return this.year() % 100;
+    });
+
+    addFormatToken(0, ['YYYY', 4], 0, 'year');
+    addFormatToken(0, ['YYYYY', 5], 0, 'year');
+    addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+    // ALIASES
+
+    addUnitAlias('year', 'y');
+
+    // PRIORITIES
+
+    addUnitPriority('year', 1);
+
+    // PARSING
+
+    addRegexToken('Y', matchSigned);
+    addRegexToken('YY', match1to2, match2);
+    addRegexToken('YYYY', match1to4, match4);
+    addRegexToken('YYYYY', match1to6, match6);
+    addRegexToken('YYYYYY', match1to6, match6);
+
+    addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+    addParseToken('YYYY', function (input, array) {
+        array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+    });
+    addParseToken('YY', function (input, array) {
+        array[YEAR] = hooks.parseTwoDigitYear(input);
+    });
+    addParseToken('Y', function (input, array) {
+        array[YEAR] = parseInt(input, 10);
+    });
+
+    // HELPERS
+
+    function daysInYear(year) {
+        return isLeapYear(year) ? 366 : 365;
+    }
+
+    function isLeapYear(year) {
+        return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
+    }
+
+    // HOOKS
+
+    hooks.parseTwoDigitYear = function (input) {
+        return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+    };
+
+    // MOMENTS
+
+    var getSetYear = makeGetSet('FullYear', true);
+
+    function getIsLeapYear() {
+        return isLeapYear(this.year());
+    }
+
+    function makeGetSet(unit, keepTime) {
+        return function (value) {
+            if (value != null) {
+                set$1(this, unit, value);
+                hooks.updateOffset(this, keepTime);
+                return this;
+            } else {
+                return get(this, unit);
+            }
+        };
+    }
+
+    function get(mom, unit) {
+        return mom.isValid() ? mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
+    }
+
+    function set$1(mom, unit, value) {
+        if (mom.isValid() && !isNaN(value)) {
+            if (unit === 'FullYear' && isLeapYear(mom.year())) {
+                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
+            } else {
+                mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function stringGet(units) {
+        units = normalizeUnits(units);
+        if (isFunction(this[units])) {
+            return this[units]();
+        }
+        return this;
+    }
+
+    function stringSet(units, value) {
+        if ((typeof units === 'undefined' ? 'undefined' : _typeof(units)) === 'object') {
+            units = normalizeObjectUnits(units);
+            var prioritized = getPrioritizedUnits(units);
+            for (var i = 0; i < prioritized.length; i++) {
+                this[prioritized[i].unit](units[prioritized[i].unit]);
+            }
+        } else {
+            units = normalizeUnits(units);
+            if (isFunction(this[units])) {
+                return this[units](value);
+            }
+        }
+        return this;
+    }
+
+    function mod(n, x) {
+        return (n % x + x) % x;
+    }
+
+    var indexOf;
+
+    if (Array.prototype.indexOf) {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function indexOf(o) {
+            // I know
+            var i;
+            for (i = 0; i < this.length; ++i) {
+                if (this[i] === o) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+    }
+
+    function daysInMonth(year, month) {
+        if (isNaN(year) || isNaN(month)) {
+            return NaN;
+        }
+        var modMonth = mod(month, 12);
+        year += (month - modMonth) / 12;
+        return modMonth === 1 ? isLeapYear(year) ? 29 : 28 : 31 - modMonth % 7 % 2;
+    }
+
+    // FORMATTING
+
+    addFormatToken('M', ['MM', 2], 'Mo', function () {
+        return this.month() + 1;
+    });
+
+    addFormatToken('MMM', 0, 0, function (format) {
+        return this.localeData().monthsShort(this, format);
+    });
+
+    addFormatToken('MMMM', 0, 0, function (format) {
+        return this.localeData().months(this, format);
+    });
+
+    // ALIASES
+
+    addUnitAlias('month', 'M');
+
+    // PRIORITY
+
+    addUnitPriority('month', 8);
+
+    // PARSING
+
+    addRegexToken('M', match1to2);
+    addRegexToken('MM', match1to2, match2);
+    addRegexToken('MMM', function (isStrict, locale) {
+        return locale.monthsShortRegex(isStrict);
+    });
+    addRegexToken('MMMM', function (isStrict, locale) {
+        return locale.monthsRegex(isStrict);
+    });
+
+    addParseToken(['M', 'MM'], function (input, array) {
+        array[MONTH] = toInt(input) - 1;
+    });
+
+    addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
+        var month = config._locale.monthsParse(input, token, config._strict);
+        // if we didn't find a month name, mark the date as invalid.
+        if (month != null) {
+            array[MONTH] = month;
+        } else {
+            getParsingFlags(config).invalidMonth = input;
+        }
+    });
+
+    // LOCALES
+
+    var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
+    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
+    function localeMonths(m, format) {
+        if (!m) {
+            return isArray(this._months) ? this._months : this._months['standalone'];
+        }
+        return isArray(this._months) ? this._months[m.month()] : this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
+    }
+
+    var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
+    function localeMonthsShort(m, format) {
+        if (!m) {
+            return isArray(this._monthsShort) ? this._monthsShort : this._monthsShort['standalone'];
+        }
+        return isArray(this._monthsShort) ? this._monthsShort[m.month()] : this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
+    }
+
+    function handleStrictParse(monthName, format, strict) {
+        var i,
+            ii,
+            mom,
+            llc = monthName.toLocaleLowerCase();
+        if (!this._monthsParse) {
+            // this is not used
+            this._monthsParse = [];
+            this._longMonthsParse = [];
+            this._shortMonthsParse = [];
+            for (i = 0; i < 12; ++i) {
+                mom = createUTC([2000, i]);
+                this._shortMonthsParse[i] = this.monthsShort(mom, '').toLocaleLowerCase();
+                this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
+            }
+        }
+
+        if (strict) {
+            if (format === 'MMM') {
+                ii = indexOf.call(this._shortMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._longMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        } else {
+            if (format === 'MMM') {
+                ii = indexOf.call(this._shortMonthsParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._longMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._longMonthsParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._shortMonthsParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        }
+    }
+
+    function localeMonthsParse(monthName, format, strict) {
+        var i, mom, regex;
+
+        if (this._monthsParseExact) {
+            return handleStrictParse.call(this, monthName, format, strict);
+        }
+
+        if (!this._monthsParse) {
+            this._monthsParse = [];
+            this._longMonthsParse = [];
+            this._shortMonthsParse = [];
+        }
+
+        // TODO: add sorting
+        // Sorting makes sure if one month (or abbr) is a prefix of another
+        // see sorting in computeMonthsParse
+        for (i = 0; i < 12; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, i]);
+            if (strict && !this._longMonthsParse[i]) {
+                this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
+                this._shortMonthsParse[i] = new RegExp('^' + this.monthsShort(mom, '').replace('.', '') + '$', 'i');
+            }
+            if (!strict && !this._monthsParse[i]) {
+                regex = '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+                this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
+            }
+            // test the regex
+            if (strict && format === 'MMMM' && this._longMonthsParse[i].test(monthName)) {
+                return i;
+            } else if (strict && format === 'MMM' && this._shortMonthsParse[i].test(monthName)) {
+                return i;
+            } else if (!strict && this._monthsParse[i].test(monthName)) {
+                return i;
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function setMonth(mom, value) {
+        var dayOfMonth;
+
+        if (!mom.isValid()) {
+            // No op
+            return mom;
+        }
+
+        if (typeof value === 'string') {
+            if (/^\d+$/.test(value)) {
+                value = toInt(value);
+            } else {
+                value = mom.localeData().monthsParse(value);
+                // TODO: Another silent failure?
+                if (!isNumber(value)) {
+                    return mom;
+                }
+            }
+        }
+
+        dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
+        mom._d['set' + (mom._isUTC ? 'UTC' : '') + 'Month'](value, dayOfMonth);
+        return mom;
+    }
+
+    function getSetMonth(value) {
+        if (value != null) {
+            setMonth(this, value);
+            hooks.updateOffset(this, true);
+            return this;
+        } else {
+            return get(this, 'Month');
+        }
+    }
+
+    function getDaysInMonth() {
+        return daysInMonth(this.year(), this.month());
+    }
+
+    var defaultMonthsShortRegex = matchWord;
+    function monthsShortRegex(isStrict) {
+        if (this._monthsParseExact) {
+            if (!hasOwnProp(this, '_monthsRegex')) {
+                computeMonthsParse.call(this);
+            }
+            if (isStrict) {
+                return this._monthsShortStrictRegex;
+            } else {
+                return this._monthsShortRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_monthsShortRegex')) {
+                this._monthsShortRegex = defaultMonthsShortRegex;
+            }
+            return this._monthsShortStrictRegex && isStrict ? this._monthsShortStrictRegex : this._monthsShortRegex;
+        }
+    }
+
+    var defaultMonthsRegex = matchWord;
+    function monthsRegex(isStrict) {
+        if (this._monthsParseExact) {
+            if (!hasOwnProp(this, '_monthsRegex')) {
+                computeMonthsParse.call(this);
+            }
+            if (isStrict) {
+                return this._monthsStrictRegex;
+            } else {
+                return this._monthsRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_monthsRegex')) {
+                this._monthsRegex = defaultMonthsRegex;
+            }
+            return this._monthsStrictRegex && isStrict ? this._monthsStrictRegex : this._monthsRegex;
+        }
+    }
+
+    function computeMonthsParse() {
+        function cmpLenRev(a, b) {
+            return b.length - a.length;
+        }
+
+        var shortPieces = [],
+            longPieces = [],
+            mixedPieces = [],
+            i,
+            mom;
+        for (i = 0; i < 12; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, i]);
+            shortPieces.push(this.monthsShort(mom, ''));
+            longPieces.push(this.months(mom, ''));
+            mixedPieces.push(this.months(mom, ''));
+            mixedPieces.push(this.monthsShort(mom, ''));
+        }
+        // Sorting makes sure if one month (or abbr) is a prefix of another it
+        // will match the longer piece.
+        shortPieces.sort(cmpLenRev);
+        longPieces.sort(cmpLenRev);
+        mixedPieces.sort(cmpLenRev);
+        for (i = 0; i < 12; i++) {
+            shortPieces[i] = regexEscape(shortPieces[i]);
+            longPieces[i] = regexEscape(longPieces[i]);
+        }
+        for (i = 0; i < 24; i++) {
+            mixedPieces[i] = regexEscape(mixedPieces[i]);
+        }
+
+        this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+        this._monthsShortRegex = this._monthsRegex;
+        this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+        this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+    }
+
+    function createDate(y, m, d, h, M, s, ms) {
+        // can't just apply() to create a date:
+        // https://stackoverflow.com/q/181348
+        var date = new Date(y, m, d, h, M, s, ms);
+
+        // the date constructor remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0 && isFinite(date.getFullYear())) {
+            date.setFullYear(y);
+        }
+        return date;
+    }
+
+    function createUTCDate(y) {
+        var date = new Date(Date.UTC.apply(null, arguments));
+
+        // the Date.UTC function remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0 && isFinite(date.getUTCFullYear())) {
+            date.setUTCFullYear(y);
+        }
+        return date;
+    }
+
+    // start-of-first-week - start-of-year
+    function firstWeekOffset(year, dow, doy) {
+        var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+        fwd = 7 + dow - doy,
+
+        // first-week day local weekday -- which local weekday is fwd
+        fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
+
+        return -fwdlw + fwd - 1;
+    }
+
+    // https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
+    function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+        var localWeekday = (7 + weekday - dow) % 7,
+            weekOffset = firstWeekOffset(year, dow, doy),
+            dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
+            resYear,
+            resDayOfYear;
+
+        if (dayOfYear <= 0) {
+            resYear = year - 1;
+            resDayOfYear = daysInYear(resYear) + dayOfYear;
+        } else if (dayOfYear > daysInYear(year)) {
+            resYear = year + 1;
+            resDayOfYear = dayOfYear - daysInYear(year);
+        } else {
+            resYear = year;
+            resDayOfYear = dayOfYear;
+        }
+
+        return {
+            year: resYear,
+            dayOfYear: resDayOfYear
+        };
+    }
+
+    function weekOfYear(mom, dow, doy) {
+        var weekOffset = firstWeekOffset(mom.year(), dow, doy),
+            week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
+            resWeek,
+            resYear;
+
+        if (week < 1) {
+            resYear = mom.year() - 1;
+            resWeek = week + weeksInYear(resYear, dow, doy);
+        } else if (week > weeksInYear(mom.year(), dow, doy)) {
+            resWeek = week - weeksInYear(mom.year(), dow, doy);
+            resYear = mom.year() + 1;
+        } else {
+            resYear = mom.year();
+            resWeek = week;
+        }
+
+        return {
+            week: resWeek,
+            year: resYear
+        };
+    }
+
+    function weeksInYear(year, dow, doy) {
+        var weekOffset = firstWeekOffset(year, dow, doy),
+            weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+        return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
+    }
+
+    // FORMATTING
+
+    addFormatToken('w', ['ww', 2], 'wo', 'week');
+    addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+
+    // ALIASES
+
+    addUnitAlias('week', 'w');
+    addUnitAlias('isoWeek', 'W');
+
+    // PRIORITIES
+
+    addUnitPriority('week', 5);
+    addUnitPriority('isoWeek', 5);
+
+    // PARSING
+
+    addRegexToken('w', match1to2);
+    addRegexToken('ww', match1to2, match2);
+    addRegexToken('W', match1to2);
+    addRegexToken('WW', match1to2, match2);
+
+    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (input, week, config, token) {
+        week[token.substr(0, 1)] = toInt(input);
+    });
+
+    // HELPERS
+
+    // LOCALES
+
+    function localeWeek(mom) {
+        return weekOfYear(mom, this._week.dow, this._week.doy).week;
+    }
+
+    var defaultLocaleWeek = {
+        dow: 0, // Sunday is the first day of the week.
+        doy: 6 // The week that contains Jan 1st is the first week of the year.
+    };
+
+    function localeFirstDayOfWeek() {
+        return this._week.dow;
+    }
+
+    function localeFirstDayOfYear() {
+        return this._week.doy;
+    }
+
+    // MOMENTS
+
+    function getSetWeek(input) {
+        var week = this.localeData().week(this);
+        return input == null ? week : this.add((input - week) * 7, 'd');
+    }
+
+    function getSetISOWeek(input) {
+        var week = weekOfYear(this, 1, 4).week;
+        return input == null ? week : this.add((input - week) * 7, 'd');
+    }
+
+    // FORMATTING
+
+    addFormatToken('d', 0, 'do', 'day');
+
+    addFormatToken('dd', 0, 0, function (format) {
+        return this.localeData().weekdaysMin(this, format);
+    });
+
+    addFormatToken('ddd', 0, 0, function (format) {
+        return this.localeData().weekdaysShort(this, format);
+    });
+
+    addFormatToken('dddd', 0, 0, function (format) {
+        return this.localeData().weekdays(this, format);
+    });
+
+    addFormatToken('e', 0, 0, 'weekday');
+    addFormatToken('E', 0, 0, 'isoWeekday');
+
+    // ALIASES
+
+    addUnitAlias('day', 'd');
+    addUnitAlias('weekday', 'e');
+    addUnitAlias('isoWeekday', 'E');
+
+    // PRIORITY
+    addUnitPriority('day', 11);
+    addUnitPriority('weekday', 11);
+    addUnitPriority('isoWeekday', 11);
+
+    // PARSING
+
+    addRegexToken('d', match1to2);
+    addRegexToken('e', match1to2);
+    addRegexToken('E', match1to2);
+    addRegexToken('dd', function (isStrict, locale) {
+        return locale.weekdaysMinRegex(isStrict);
+    });
+    addRegexToken('ddd', function (isStrict, locale) {
+        return locale.weekdaysShortRegex(isStrict);
+    });
+    addRegexToken('dddd', function (isStrict, locale) {
+        return locale.weekdaysRegex(isStrict);
+    });
+
+    addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
+        var weekday = config._locale.weekdaysParse(input, token, config._strict);
+        // if we didn't get a weekday name, mark the date as invalid
+        if (weekday != null) {
+            week.d = weekday;
+        } else {
+            getParsingFlags(config).invalidWeekday = input;
+        }
+    });
+
+    addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
+        week[token] = toInt(input);
+    });
+
+    // HELPERS
+
+    function parseWeekday(input, locale) {
+        if (typeof input !== 'string') {
+            return input;
+        }
+
+        if (!isNaN(input)) {
+            return parseInt(input, 10);
+        }
+
+        input = locale.weekdaysParse(input);
+        if (typeof input === 'number') {
+            return input;
+        }
+
+        return null;
+    }
+
+    function parseIsoWeekday(input, locale) {
+        if (typeof input === 'string') {
+            return locale.weekdaysParse(input) % 7 || 7;
+        }
+        return isNaN(input) ? null : input;
+    }
+
+    // LOCALES
+
+    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
+    function localeWeekdays(m, format) {
+        if (!m) {
+            return isArray(this._weekdays) ? this._weekdays : this._weekdays['standalone'];
+        }
+        return isArray(this._weekdays) ? this._weekdays[m.day()] : this._weekdays[this._weekdays.isFormat.test(format) ? 'format' : 'standalone'][m.day()];
+    }
+
+    var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
+    function localeWeekdaysShort(m) {
+        return m ? this._weekdaysShort[m.day()] : this._weekdaysShort;
+    }
+
+    var defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
+    function localeWeekdaysMin(m) {
+        return m ? this._weekdaysMin[m.day()] : this._weekdaysMin;
+    }
+
+    function handleStrictParse$1(weekdayName, format, strict) {
+        var i,
+            ii,
+            mom,
+            llc = weekdayName.toLocaleLowerCase();
+        if (!this._weekdaysParse) {
+            this._weekdaysParse = [];
+            this._shortWeekdaysParse = [];
+            this._minWeekdaysParse = [];
+
+            for (i = 0; i < 7; ++i) {
+                mom = createUTC([2000, 1]).day(i);
+                this._minWeekdaysParse[i] = this.weekdaysMin(mom, '').toLocaleLowerCase();
+                this._shortWeekdaysParse[i] = this.weekdaysShort(mom, '').toLocaleLowerCase();
+                this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
+            }
+        }
+
+        if (strict) {
+            if (format === 'dddd') {
+                ii = indexOf.call(this._weekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else if (format === 'ddd') {
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        } else {
+            if (format === 'dddd') {
+                ii = indexOf.call(this._weekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else if (format === 'ddd') {
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._weekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            } else {
+                ii = indexOf.call(this._minWeekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._weekdaysParse, llc);
+                if (ii !== -1) {
+                    return ii;
+                }
+                ii = indexOf.call(this._shortWeekdaysParse, llc);
+                return ii !== -1 ? ii : null;
+            }
+        }
+    }
+
+    function localeWeekdaysParse(weekdayName, format, strict) {
+        var i, mom, regex;
+
+        if (this._weekdaysParseExact) {
+            return handleStrictParse$1.call(this, weekdayName, format, strict);
+        }
+
+        if (!this._weekdaysParse) {
+            this._weekdaysParse = [];
+            this._minWeekdaysParse = [];
+            this._shortWeekdaysParse = [];
+            this._fullWeekdaysParse = [];
+        }
+
+        for (i = 0; i < 7; i++) {
+            // make the regex if we don't have it already
+
+            mom = createUTC([2000, 1]).day(i);
+            if (strict && !this._fullWeekdaysParse[i]) {
+                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
+                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
+                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\.?') + '$', 'i');
+            }
+            if (!this._weekdaysParse[i]) {
+                regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
+                this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
+            }
+            // test the regex
+            if (strict && format === 'dddd' && this._fullWeekdaysParse[i].test(weekdayName)) {
+                return i;
+            } else if (strict && format === 'ddd' && this._shortWeekdaysParse[i].test(weekdayName)) {
+                return i;
+            } else if (strict && format === 'dd' && this._minWeekdaysParse[i].test(weekdayName)) {
+                return i;
+            } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
+                return i;
+            }
+        }
+    }
+
+    // MOMENTS
+
+    function getSetDayOfWeek(input) {
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+        var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+        if (input != null) {
+            input = parseWeekday(input, this.localeData());
+            return this.add(input - day, 'd');
+        } else {
+            return day;
+        }
+    }
+
+    function getSetLocaleDayOfWeek(input) {
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+        var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
+        return input == null ? weekday : this.add(input - weekday, 'd');
+    }
+
+    function getSetISODayOfWeek(input) {
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+
+        // behaves the same as moment#day except
+        // as a getter, returns 7 instead of 0 (1-7 range instead of 0-6)
+        // as a setter, sunday should belong to the previous week.
+
+        if (input != null) {
+            var weekday = parseIsoWeekday(input, this.localeData());
+            return this.day(this.day() % 7 ? weekday : weekday - 7);
+        } else {
+            return this.day() || 7;
+        }
+    }
+
+    var defaultWeekdaysRegex = matchWord;
+    function weekdaysRegex(isStrict) {
+        if (this._weekdaysParseExact) {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                computeWeekdaysParse.call(this);
+            }
+            if (isStrict) {
+                return this._weekdaysStrictRegex;
+            } else {
+                return this._weekdaysRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                this._weekdaysRegex = defaultWeekdaysRegex;
+            }
+            return this._weekdaysStrictRegex && isStrict ? this._weekdaysStrictRegex : this._weekdaysRegex;
+        }
+    }
+
+    var defaultWeekdaysShortRegex = matchWord;
+    function weekdaysShortRegex(isStrict) {
+        if (this._weekdaysParseExact) {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                computeWeekdaysParse.call(this);
+            }
+            if (isStrict) {
+                return this._weekdaysShortStrictRegex;
+            } else {
+                return this._weekdaysShortRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_weekdaysShortRegex')) {
+                this._weekdaysShortRegex = defaultWeekdaysShortRegex;
+            }
+            return this._weekdaysShortStrictRegex && isStrict ? this._weekdaysShortStrictRegex : this._weekdaysShortRegex;
+        }
+    }
+
+    var defaultWeekdaysMinRegex = matchWord;
+    function weekdaysMinRegex(isStrict) {
+        if (this._weekdaysParseExact) {
+            if (!hasOwnProp(this, '_weekdaysRegex')) {
+                computeWeekdaysParse.call(this);
+            }
+            if (isStrict) {
+                return this._weekdaysMinStrictRegex;
+            } else {
+                return this._weekdaysMinRegex;
+            }
+        } else {
+            if (!hasOwnProp(this, '_weekdaysMinRegex')) {
+                this._weekdaysMinRegex = defaultWeekdaysMinRegex;
+            }
+            return this._weekdaysMinStrictRegex && isStrict ? this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
+        }
+    }
+
+    function computeWeekdaysParse() {
+        function cmpLenRev(a, b) {
+            return b.length - a.length;
+        }
+
+        var minPieces = [],
+            shortPieces = [],
+            longPieces = [],
+            mixedPieces = [],
+            i,
+            mom,
+            minp,
+            shortp,
+            longp;
+        for (i = 0; i < 7; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, 1]).day(i);
+            minp = this.weekdaysMin(mom, '');
+            shortp = this.weekdaysShort(mom, '');
+            longp = this.weekdays(mom, '');
+            minPieces.push(minp);
+            shortPieces.push(shortp);
+            longPieces.push(longp);
+            mixedPieces.push(minp);
+            mixedPieces.push(shortp);
+            mixedPieces.push(longp);
+        }
+        // Sorting makes sure if one weekday (or abbr) is a prefix of another it
+        // will match the longer piece.
+        minPieces.sort(cmpLenRev);
+        shortPieces.sort(cmpLenRev);
+        longPieces.sort(cmpLenRev);
+        mixedPieces.sort(cmpLenRev);
+        for (i = 0; i < 7; i++) {
+            shortPieces[i] = regexEscape(shortPieces[i]);
+            longPieces[i] = regexEscape(longPieces[i]);
+            mixedPieces[i] = regexEscape(mixedPieces[i]);
+        }
+
+        this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+        this._weekdaysShortRegex = this._weekdaysRegex;
+        this._weekdaysMinRegex = this._weekdaysRegex;
+
+        this._weekdaysStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+        this._weekdaysShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+        this._weekdaysMinStrictRegex = new RegExp('^(' + minPieces.join('|') + ')', 'i');
+    }
+
+    // FORMATTING
+
+    function hFormat() {
+        return this.hours() % 12 || 12;
+    }
+
+    function kFormat() {
+        return this.hours() || 24;
+    }
+
+    addFormatToken('H', ['HH', 2], 0, 'hour');
+    addFormatToken('h', ['hh', 2], 0, hFormat);
+    addFormatToken('k', ['kk', 2], 0, kFormat);
+
+    addFormatToken('hmm', 0, 0, function () {
+        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+    });
+
+    addFormatToken('hmmss', 0, 0, function () {
+        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) + zeroFill(this.seconds(), 2);
+    });
+
+    addFormatToken('Hmm', 0, 0, function () {
+        return '' + this.hours() + zeroFill(this.minutes(), 2);
+    });
+
+    addFormatToken('Hmmss', 0, 0, function () {
+        return '' + this.hours() + zeroFill(this.minutes(), 2) + zeroFill(this.seconds(), 2);
+    });
+
+    function meridiem(token, lowercase) {
+        addFormatToken(token, 0, 0, function () {
+            return this.localeData().meridiem(this.hours(), this.minutes(), lowercase);
+        });
+    }
+
+    meridiem('a', true);
+    meridiem('A', false);
+
+    // ALIASES
+
+    addUnitAlias('hour', 'h');
+
+    // PRIORITY
+    addUnitPriority('hour', 13);
+
+    // PARSING
+
+    function matchMeridiem(isStrict, locale) {
+        return locale._meridiemParse;
+    }
+
+    addRegexToken('a', matchMeridiem);
+    addRegexToken('A', matchMeridiem);
+    addRegexToken('H', match1to2);
+    addRegexToken('h', match1to2);
+    addRegexToken('k', match1to2);
+    addRegexToken('HH', match1to2, match2);
+    addRegexToken('hh', match1to2, match2);
+    addRegexToken('kk', match1to2, match2);
+
+    addRegexToken('hmm', match3to4);
+    addRegexToken('hmmss', match5to6);
+    addRegexToken('Hmm', match3to4);
+    addRegexToken('Hmmss', match5to6);
+
+    addParseToken(['H', 'HH'], HOUR);
+    addParseToken(['k', 'kk'], function (input, array, config) {
+        var kInput = toInt(input);
+        array[HOUR] = kInput === 24 ? 0 : kInput;
+    });
+    addParseToken(['a', 'A'], function (input, array, config) {
+        config._isPm = config._locale.isPM(input);
+        config._meridiem = input;
+    });
+    addParseToken(['h', 'hh'], function (input, array, config) {
+        array[HOUR] = toInt(input);
+        getParsingFlags(config).bigHour = true;
+    });
+    addParseToken('hmm', function (input, array, config) {
+        var pos = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos));
+        array[MINUTE] = toInt(input.substr(pos));
+        getParsingFlags(config).bigHour = true;
+    });
+    addParseToken('hmmss', function (input, array, config) {
+        var pos1 = input.length - 4;
+        var pos2 = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos1));
+        array[MINUTE] = toInt(input.substr(pos1, 2));
+        array[SECOND] = toInt(input.substr(pos2));
+        getParsingFlags(config).bigHour = true;
+    });
+    addParseToken('Hmm', function (input, array, config) {
+        var pos = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos));
+        array[MINUTE] = toInt(input.substr(pos));
+    });
+    addParseToken('Hmmss', function (input, array, config) {
+        var pos1 = input.length - 4;
+        var pos2 = input.length - 2;
+        array[HOUR] = toInt(input.substr(0, pos1));
+        array[MINUTE] = toInt(input.substr(pos1, 2));
+        array[SECOND] = toInt(input.substr(pos2));
+    });
+
+    // LOCALES
+
+    function localeIsPM(input) {
+        // IE8 Quirks Mode & IE7 Standards Mode do not allow accessing strings like arrays
+        // Using charAt should be more compatible.
+        return (input + '').toLowerCase().charAt(0) === 'p';
+    }
+
+    var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i;
+    function localeMeridiem(hours, minutes, isLower) {
+        if (hours > 11) {
+            return isLower ? 'pm' : 'PM';
+        } else {
+            return isLower ? 'am' : 'AM';
+        }
+    }
+
+    // MOMENTS
+
+    // Setting the hour should keep the time, because the user explicitly
+    // specified which hour he wants. So trying to maintain the same hour (in
+    // a new timezone) makes sense. Adding/subtracting hours does not follow
+    // this rule.
+    var getSetHour = makeGetSet('Hours', true);
+
+    // months
+    // week
+    // weekdays
+    // meridiem
+    var baseConfig = {
+        calendar: defaultCalendar,
+        longDateFormat: defaultLongDateFormat,
+        invalidDate: defaultInvalidDate,
+        ordinal: defaultOrdinal,
+        dayOfMonthOrdinalParse: defaultDayOfMonthOrdinalParse,
+        relativeTime: defaultRelativeTime,
+
+        months: defaultLocaleMonths,
+        monthsShort: defaultLocaleMonthsShort,
+
+        week: defaultLocaleWeek,
+
+        weekdays: defaultLocaleWeekdays,
+        weekdaysMin: defaultLocaleWeekdaysMin,
+        weekdaysShort: defaultLocaleWeekdaysShort,
+
+        meridiemParse: defaultLocaleMeridiemParse
+    };
+
+    // internal storage for locale config files
+    var locales = {};
+    var localeFamilies = {};
+    var globalLocale;
+
+    function normalizeLocale(key) {
+        return key ? key.toLowerCase().replace('_', '-') : key;
+    }
+
+    // pick the locale from the array
+    // try ['en-au', 'en-gb'] as 'en-au', 'en-gb', 'en', as in move through the list trying each
+    // substring from most specific to least, but move to the next array item if it's a more specific variant than the current root
+    function chooseLocale(names) {
+        var i = 0,
+            j,
+            next,
+            locale,
+            split;
+
+        while (i < names.length) {
+            split = normalizeLocale(names[i]).split('-');
+            j = split.length;
+            next = normalizeLocale(names[i + 1]);
+            next = next ? next.split('-') : null;
+            while (j > 0) {
+                locale = loadLocale(split.slice(0, j).join('-'));
+                if (locale) {
+                    return locale;
+                }
+                if (next && next.length >= j && compareArrays(split, next, true) >= j - 1) {
+                    //the next array item is better than a shallower substring of this one
+                    break;
+                }
+                j--;
+            }
+            i++;
+        }
+        return null;
+    }
+
+    function loadLocale(name) {
+        var oldLocale = null;
+        // TODO: Find a better way to register and load all the locales in Node
+        if (!locales[name] && 'object' !== 'undefined' && module && module.exports) {
+            try {
+                oldLocale = globalLocale._abbr;
+                var aliasedRequire = commonjsRequire;
+                aliasedRequire('./locale/' + name);
+                getSetGlobalLocale(oldLocale);
+            } catch (e) {}
+        }
+        return locales[name];
+    }
+
+    // This function will load locale and then set the global locale.  If
+    // no arguments are passed in, it will simply return the current global
+    // locale key.
+    function getSetGlobalLocale(key, values) {
+        var data;
+        if (key) {
+            if (isUndefined(values)) {
+                data = getLocale(key);
+            } else {
+                data = defineLocale(key, values);
+            }
+
+            if (data) {
+                // moment.duration._locale = moment._locale = data;
+                globalLocale = data;
+            }
+        }
+
+        return globalLocale._abbr;
+    }
+
+    function defineLocale(name, config) {
+        if (config !== null) {
+            var parentConfig = baseConfig;
+            config.abbr = name;
+            if (locales[name] != null) {
+                deprecateSimple('defineLocaleOverride', 'use moment.updateLocale(localeName, config) to change ' + 'an existing locale. moment.defineLocale(localeName, ' + 'config) should only be used for creating a new locale ' + 'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
+                parentConfig = locales[name]._config;
+            } else if (config.parentLocale != null) {
+                if (locales[config.parentLocale] != null) {
+                    parentConfig = locales[config.parentLocale]._config;
+                } else {
+                    if (!localeFamilies[config.parentLocale]) {
+                        localeFamilies[config.parentLocale] = [];
+                    }
+                    localeFamilies[config.parentLocale].push({
+                        name: name,
+                        config: config
+                    });
+                    return null;
+                }
+            }
+            locales[name] = new Locale(mergeConfigs(parentConfig, config));
+
+            if (localeFamilies[name]) {
+                localeFamilies[name].forEach(function (x) {
+                    defineLocale(x.name, x.config);
+                });
+            }
+
+            // backwards compat for now: also set the locale
+            // make sure we set the locale AFTER all child locales have been
+            // created, so we won't end up with the child locale set.
+            getSetGlobalLocale(name);
+
+            return locales[name];
+        } else {
+            // useful for testing
+            delete locales[name];
+            return null;
+        }
+    }
+
+    function updateLocale(name, config) {
+        if (config != null) {
+            var locale,
+                parentConfig = baseConfig;
+            // MERGE
+            if (locales[name] != null) {
+                parentConfig = locales[name]._config;
+            }
+            config = mergeConfigs(parentConfig, config);
+            locale = new Locale(config);
+            locale.parentLocale = locales[name];
+            locales[name] = locale;
+
+            // backwards compat for now: also set the locale
+            getSetGlobalLocale(name);
+        } else {
+            // pass null for config to unupdate, useful for tests
+            if (locales[name] != null) {
+                if (locales[name].parentLocale != null) {
+                    locales[name] = locales[name].parentLocale;
+                } else if (locales[name] != null) {
+                    delete locales[name];
+                }
+            }
+        }
+        return locales[name];
+    }
+
+    // returns locale data
+    function getLocale(key) {
+        var locale;
+
+        if (key && key._locale && key._locale._abbr) {
+            key = key._locale._abbr;
+        }
+
+        if (!key) {
+            return globalLocale;
+        }
+
+        if (!isArray(key)) {
+            //short-circuit everything else
+            locale = loadLocale(key);
+            if (locale) {
+                return locale;
+            }
+            key = [key];
+        }
+
+        return chooseLocale(key);
+    }
+
+    function listLocales() {
+        return keys(locales);
+    }
+
+    function checkOverflow(m) {
+        var overflow;
+        var a = m._a;
+
+        if (a && getParsingFlags(m).overflow === -2) {
+            overflow = a[MONTH] < 0 || a[MONTH] > 11 ? MONTH : a[DATE] < 1 || a[DATE] > daysInMonth(a[YEAR], a[MONTH]) ? DATE : a[HOUR] < 0 || a[HOUR] > 24 || a[HOUR] === 24 && (a[MINUTE] !== 0 || a[SECOND] !== 0 || a[MILLISECOND] !== 0) ? HOUR : a[MINUTE] < 0 || a[MINUTE] > 59 ? MINUTE : a[SECOND] < 0 || a[SECOND] > 59 ? SECOND : a[MILLISECOND] < 0 || a[MILLISECOND] > 999 ? MILLISECOND : -1;
+
+            if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
+                overflow = DATE;
+            }
+            if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
+                overflow = WEEK;
+            }
+            if (getParsingFlags(m)._overflowWeekday && overflow === -1) {
+                overflow = WEEKDAY;
+            }
+
+            getParsingFlags(m).overflow = overflow;
+        }
+
+        return m;
+    }
+
+    // Pick the first defined of two or three arguments.
+    function defaults(a, b, c) {
+        if (a != null) {
+            return a;
+        }
+        if (b != null) {
+            return b;
+        }
+        return c;
+    }
+
+    function currentDateArray(config) {
+        // hooks is actually the exported moment object
+        var nowValue = new Date(hooks.now());
+        if (config._useUTC) {
+            return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
+        }
+        return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+    }
+
+    // convert an array to a date.
+    // the array should mirror the parameters below
+    // note: all values past the year are optional and will default to the lowest possible value.
+    // [year, month, day , hour, minute, second, millisecond]
+    function configFromArray(config) {
+        var i,
+            date,
+            input = [],
+            currentDate,
+            yearToUse;
+
+        if (config._d) {
+            return;
+        }
+
+        currentDate = currentDateArray(config);
+
+        //compute day of the year from weeks and weekdays
+        if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+            dayOfYearFromWeekInfo(config);
+        }
+
+        //if the day of the year is set, figure out what it is
+        if (config._dayOfYear != null) {
+            yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+
+            if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+                getParsingFlags(config)._overflowDayOfYear = true;
+            }
+
+            date = createUTCDate(yearToUse, 0, config._dayOfYear);
+            config._a[MONTH] = date.getUTCMonth();
+            config._a[DATE] = date.getUTCDate();
+        }
+
+        // Default to current date.
+        // * if no year, month, day of month are given, default to today
+        // * if day of month is given, default month and year
+        // * if month is given, default only year
+        // * if year is given, don't default anything
+        for (i = 0; i < 3 && config._a[i] == null; ++i) {
+            config._a[i] = input[i] = currentDate[i];
+        }
+
+        // Zero out whatever was not defaulted, including time
+        for (; i < 7; i++) {
+            config._a[i] = input[i] = config._a[i] == null ? i === 2 ? 1 : 0 : config._a[i];
+        }
+
+        // Check for 24:00:00.000
+        if (config._a[HOUR] === 24 && config._a[MINUTE] === 0 && config._a[SECOND] === 0 && config._a[MILLISECOND] === 0) {
+            config._nextDay = true;
+            config._a[HOUR] = 0;
+        }
+
+        config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+        // Apply timezone offset from input. The actual utcOffset can be changed
+        // with parseZone.
+        if (config._tzm != null) {
+            config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+        }
+
+        if (config._nextDay) {
+            config._a[HOUR] = 24;
+        }
+
+        // check for mismatching day of week
+        if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== config._d.getDay()) {
+            getParsingFlags(config).weekdayMismatch = true;
+        }
+    }
+
+    function dayOfYearFromWeekInfo(config) {
+        var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
+
+        w = config._w;
+        if (w.GG != null || w.W != null || w.E != null) {
+            dow = 1;
+            doy = 4;
+
+            // TODO: We need to take the current isoWeekYear, but that depends on
+            // how we interpret now (local, utc, fixed offset). So create
+            // a now version of current config (take local/utc/offset flags, and
+            // create now).
+            weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
+            week = defaults(w.W, 1);
+            weekday = defaults(w.E, 1);
+            if (weekday < 1 || weekday > 7) {
+                weekdayOverflow = true;
+            }
+        } else {
+            dow = config._locale._week.dow;
+            doy = config._locale._week.doy;
+
+            var curWeek = weekOfYear(createLocal(), dow, doy);
+
+            weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
+
+            // Default to current week.
+            week = defaults(w.w, curWeek.week);
+
+            if (w.d != null) {
+                // weekday -- low day numbers are considered next week
+                weekday = w.d;
+                if (weekday < 0 || weekday > 6) {
+                    weekdayOverflow = true;
+                }
+            } else if (w.e != null) {
+                // local weekday -- counting starts from begining of week
+                weekday = w.e + dow;
+                if (w.e < 0 || w.e > 6) {
+                    weekdayOverflow = true;
+                }
+            } else {
+                // default to begining of week
+                weekday = dow;
+            }
+        }
+        if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+            getParsingFlags(config)._overflowWeeks = true;
+        } else if (weekdayOverflow != null) {
+            getParsingFlags(config)._overflowWeekday = true;
+        } else {
+            temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+            config._a[YEAR] = temp.year;
+            config._dayOfYear = temp.dayOfYear;
+        }
+    }
+
+    // iso 8601 regex
+    // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
+    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+    var basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+
+    var tzRegex = /Z|[+-]\d\d(?::?\d\d)?/;
+
+    var isoDates = [['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/], ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/], ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/], ['GGGG-[W]WW', /\d{4}-W\d\d/, false], ['YYYY-DDD', /\d{4}-\d{3}/], ['YYYY-MM', /\d{4}-\d\d/, false], ['YYYYYYMMDD', /[+-]\d{10}/], ['YYYYMMDD', /\d{8}/],
+    // YYYYMM is NOT allowed by the standard
+    ['GGGG[W]WWE', /\d{4}W\d{3}/], ['GGGG[W]WW', /\d{4}W\d{2}/, false], ['YYYYDDD', /\d{7}/]];
+
+    // iso time formats and regexes
+    var isoTimes = [['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/], ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/], ['HH:mm:ss', /\d\d:\d\d:\d\d/], ['HH:mm', /\d\d:\d\d/], ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/], ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/], ['HHmmss', /\d\d\d\d\d\d/], ['HHmm', /\d\d\d\d/], ['HH', /\d\d/]];
+
+    var aspNetJsonRegex = /^\/?Date\((\-?\d+)/i;
+
+    // date from iso format
+    function configFromISO(config) {
+        var i,
+            l,
+            string = config._i,
+            match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
+            allowTime,
+            dateFormat,
+            timeFormat,
+            tzFormat;
+
+        if (match) {
+            getParsingFlags(config).iso = true;
+
+            for (i = 0, l = isoDates.length; i < l; i++) {
+                if (isoDates[i][1].exec(match[1])) {
+                    dateFormat = isoDates[i][0];
+                    allowTime = isoDates[i][2] !== false;
+                    break;
+                }
+            }
+            if (dateFormat == null) {
+                config._isValid = false;
+                return;
+            }
+            if (match[3]) {
+                for (i = 0, l = isoTimes.length; i < l; i++) {
+                    if (isoTimes[i][1].exec(match[3])) {
+                        // match[2] should be 'T' or space
+                        timeFormat = (match[2] || ' ') + isoTimes[i][0];
+                        break;
+                    }
+                }
+                if (timeFormat == null) {
+                    config._isValid = false;
+                    return;
+                }
+            }
+            if (!allowTime && timeFormat != null) {
+                config._isValid = false;
+                return;
+            }
+            if (match[4]) {
+                if (tzRegex.exec(match[4])) {
+                    tzFormat = 'Z';
+                } else {
+                    config._isValid = false;
+                    return;
+                }
+            }
+            config._f = dateFormat + (timeFormat || '') + (tzFormat || '');
+            configFromStringAndFormat(config);
+        } else {
+            config._isValid = false;
+        }
+    }
+
+    // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
+    var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;
+
+    function extractFromRFC2822Strings(yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
+        var result = [untruncateYear(yearStr), defaultLocaleMonthsShort.indexOf(monthStr), parseInt(dayStr, 10), parseInt(hourStr, 10), parseInt(minuteStr, 10)];
+
+        if (secondStr) {
+            result.push(parseInt(secondStr, 10));
+        }
+
+        return result;
+    }
+
+    function untruncateYear(yearStr) {
+        var year = parseInt(yearStr, 10);
+        if (year <= 49) {
+            return 2000 + year;
+        } else if (year <= 999) {
+            return 1900 + year;
+        }
+        return year;
+    }
+
+    function preprocessRFC2822(s) {
+        // Remove comments and folding whitespace and replace multiple-spaces with a single space
+        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').trim();
+    }
+
+    function checkWeekday(weekdayStr, parsedInput, config) {
+        if (weekdayStr) {
+            // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
+            var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
+                weekdayActual = new Date(parsedInput[0], parsedInput[1], parsedInput[2]).getDay();
+            if (weekdayProvided !== weekdayActual) {
+                getParsingFlags(config).weekdayMismatch = true;
+                config._isValid = false;
+                return false;
+            }
+        }
+        return true;
+    }
+
+    var obsOffsets = {
+        UT: 0,
+        GMT: 0,
+        EDT: -4 * 60,
+        EST: -5 * 60,
+        CDT: -5 * 60,
+        CST: -6 * 60,
+        MDT: -6 * 60,
+        MST: -7 * 60,
+        PDT: -7 * 60,
+        PST: -8 * 60
+    };
+
+    function calculateOffset(obsOffset, militaryOffset, numOffset) {
+        if (obsOffset) {
+            return obsOffsets[obsOffset];
+        } else if (militaryOffset) {
+            // the only allowed military tz is Z
+            return 0;
+        } else {
+            var hm = parseInt(numOffset, 10);
+            var m = hm % 100,
+                h = (hm - m) / 100;
+            return h * 60 + m;
+        }
+    }
+
+    // date and time from ref 2822 format
+    function configFromRFC2822(config) {
+        var match = rfc2822.exec(preprocessRFC2822(config._i));
+        if (match) {
+            var parsedArray = extractFromRFC2822Strings(match[4], match[3], match[2], match[5], match[6], match[7]);
+            if (!checkWeekday(match[1], parsedArray, config)) {
+                return;
+            }
+
+            config._a = parsedArray;
+            config._tzm = calculateOffset(match[8], match[9], match[10]);
+
+            config._d = createUTCDate.apply(null, config._a);
+            config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+
+            getParsingFlags(config).rfc2822 = true;
+        } else {
+            config._isValid = false;
+        }
+    }
+
+    // date from iso format or fallback
+    function configFromString(config) {
+        var matched = aspNetJsonRegex.exec(config._i);
+
+        if (matched !== null) {
+            config._d = new Date(+matched[1]);
+            return;
+        }
+
+        configFromISO(config);
+        if (config._isValid === false) {
+            delete config._isValid;
+        } else {
+            return;
+        }
+
+        configFromRFC2822(config);
+        if (config._isValid === false) {
+            delete config._isValid;
+        } else {
+            return;
+        }
+
+        // Final attempt, use Input Fallback
+        hooks.createFromInputFallback(config);
+    }
+
+    hooks.createFromInputFallback = deprecate('value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' + 'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' + 'discouraged and will be removed in an upcoming major release. Please refer to ' + 'http://momentjs.com/guides/#/warnings/js-date/ for more info.', function (config) {
+        config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
+    });
+
+    // constant that refers to the ISO standard
+    hooks.ISO_8601 = function () {};
+
+    // constant that refers to the RFC 2822 form
+    hooks.RFC_2822 = function () {};
+
+    // date from string and format string
+    function configFromStringAndFormat(config) {
+        // TODO: Move this to another part of the creation flow to prevent circular deps
+        if (config._f === hooks.ISO_8601) {
+            configFromISO(config);
+            return;
+        }
+        if (config._f === hooks.RFC_2822) {
+            configFromRFC2822(config);
+            return;
+        }
+        config._a = [];
+        getParsingFlags(config).empty = true;
+
+        // This array is used to make a Date, either with `new Date` or `Date.UTC`
+        var string = '' + config._i,
+            i,
+            parsedInput,
+            tokens,
+            token,
+            skipped,
+            stringLength = string.length,
+            totalParsedInputLength = 0;
+
+        tokens = expandFormat(config._f, config._locale).match(formattingTokens) || [];
+
+        for (i = 0; i < tokens.length; i++) {
+            token = tokens[i];
+            parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
+            // console.log('token', token, 'parsedInput', parsedInput,
+            //         'regex', getParseRegexForToken(token, config));
+            if (parsedInput) {
+                skipped = string.substr(0, string.indexOf(parsedInput));
+                if (skipped.length > 0) {
+                    getParsingFlags(config).unusedInput.push(skipped);
+                }
+                string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
+                totalParsedInputLength += parsedInput.length;
+            }
+            // don't parse if it's not a known token
+            if (formatTokenFunctions[token]) {
+                if (parsedInput) {
+                    getParsingFlags(config).empty = false;
+                } else {
+                    getParsingFlags(config).unusedTokens.push(token);
+                }
+                addTimeToArrayFromToken(token, parsedInput, config);
+            } else if (config._strict && !parsedInput) {
+                getParsingFlags(config).unusedTokens.push(token);
+            }
+        }
+
+        // add remaining unparsed input length to the string
+        getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
+        if (string.length > 0) {
+            getParsingFlags(config).unusedInput.push(string);
+        }
+
+        // clear _12h flag if hour is <= 12
+        if (config._a[HOUR] <= 12 && getParsingFlags(config).bigHour === true && config._a[HOUR] > 0) {
+            getParsingFlags(config).bigHour = undefined;
+        }
+
+        getParsingFlags(config).parsedDateParts = config._a.slice(0);
+        getParsingFlags(config).meridiem = config._meridiem;
+        // handle meridiem
+        config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
+
+        configFromArray(config);
+        checkOverflow(config);
+    }
+
+    function meridiemFixWrap(locale, hour, meridiem) {
+        var isPm;
+
+        if (meridiem == null) {
+            // nothing to do
+            return hour;
+        }
+        if (locale.meridiemHour != null) {
+            return locale.meridiemHour(hour, meridiem);
+        } else if (locale.isPM != null) {
+            // Fallback
+            isPm = locale.isPM(meridiem);
+            if (isPm && hour < 12) {
+                hour += 12;
+            }
+            if (!isPm && hour === 12) {
+                hour = 0;
+            }
+            return hour;
+        } else {
+            // this is not supposed to happen
+            return hour;
+        }
+    }
+
+    // date from string and array of format strings
+    function configFromStringAndArray(config) {
+        var tempConfig, bestMoment, scoreToBeat, i, currentScore;
+
+        if (config._f.length === 0) {
+            getParsingFlags(config).invalidFormat = true;
+            config._d = new Date(NaN);
+            return;
+        }
+
+        for (i = 0; i < config._f.length; i++) {
+            currentScore = 0;
+            tempConfig = copyConfig({}, config);
+            if (config._useUTC != null) {
+                tempConfig._useUTC = config._useUTC;
+            }
+            tempConfig._f = config._f[i];
+            configFromStringAndFormat(tempConfig);
+
+            if (!isValid(tempConfig)) {
+                continue;
+            }
+
+            // if there is any input that was not parsed add a penalty for that format
+            currentScore += getParsingFlags(tempConfig).charsLeftOver;
+
+            //or tokens
+            currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
+
+            getParsingFlags(tempConfig).score = currentScore;
+
+            if (scoreToBeat == null || currentScore < scoreToBeat) {
+                scoreToBeat = currentScore;
+                bestMoment = tempConfig;
+            }
+        }
+
+        extend(config, bestMoment || tempConfig);
+    }
+
+    function configFromObject(config) {
+        if (config._d) {
+            return;
+        }
+
+        var i = normalizeObjectUnits(config._i);
+        config._a = map([i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond], function (obj) {
+            return obj && parseInt(obj, 10);
+        });
+
+        configFromArray(config);
+    }
+
+    function createFromConfig(config) {
+        var res = new Moment(checkOverflow(prepareConfig(config)));
+        if (res._nextDay) {
+            // Adding is smart enough around DST
+            res.add(1, 'd');
+            res._nextDay = undefined;
+        }
+
+        return res;
+    }
+
+    function prepareConfig(config) {
+        var input = config._i,
+            format = config._f;
+
+        config._locale = config._locale || getLocale(config._l);
+
+        if (input === null || format === undefined && input === '') {
+            return createInvalid({ nullInput: true });
+        }
+
+        if (typeof input === 'string') {
+            config._i = input = config._locale.preparse(input);
+        }
+
+        if (isMoment(input)) {
+            return new Moment(checkOverflow(input));
+        } else if (isDate(input)) {
+            config._d = input;
+        } else if (isArray(format)) {
+            configFromStringAndArray(config);
+        } else if (format) {
+            configFromStringAndFormat(config);
+        } else {
+            configFromInput(config);
+        }
+
+        if (!isValid(config)) {
+            config._d = null;
+        }
+
+        return config;
+    }
+
+    function configFromInput(config) {
+        var input = config._i;
+        if (isUndefined(input)) {
+            config._d = new Date(hooks.now());
+        } else if (isDate(input)) {
+            config._d = new Date(input.valueOf());
+        } else if (typeof input === 'string') {
+            configFromString(config);
+        } else if (isArray(input)) {
+            config._a = map(input.slice(0), function (obj) {
+                return parseInt(obj, 10);
+            });
+            configFromArray(config);
+        } else if (isObject(input)) {
+            configFromObject(config);
+        } else if (isNumber(input)) {
+            // from milliseconds
+            config._d = new Date(input);
+        } else {
+            hooks.createFromInputFallback(config);
+        }
+    }
+
+    function createLocalOrUTC(input, format, locale, strict, isUTC) {
+        var c = {};
+
+        if (locale === true || locale === false) {
+            strict = locale;
+            locale = undefined;
+        }
+
+        if (isObject(input) && isObjectEmpty(input) || isArray(input) && input.length === 0) {
+            input = undefined;
+        }
+        // object construction must be done this way.
+        // https://github.com/moment/moment/issues/1423
+        c._isAMomentObject = true;
+        c._useUTC = c._isUTC = isUTC;
+        c._l = locale;
+        c._i = input;
+        c._f = format;
+        c._strict = strict;
+
+        return createFromConfig(c);
+    }
+
+    function createLocal(input, format, locale, strict) {
+        return createLocalOrUTC(input, format, locale, strict, false);
+    }
+
+    var prototypeMin = deprecate('moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/', function () {
+        var other = createLocal.apply(null, arguments);
+        if (this.isValid() && other.isValid()) {
+            return other < this ? this : other;
+        } else {
+            return createInvalid();
+        }
+    });
+
+    var prototypeMax = deprecate('moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/', function () {
+        var other = createLocal.apply(null, arguments);
+        if (this.isValid() && other.isValid()) {
+            return other > this ? this : other;
+        } else {
+            return createInvalid();
+        }
+    });
+
+    // Pick a moment m from moments so that m[fn](other) is true for all
+    // other. This relies on the function fn to be transitive.
+    //
+    // moments should either be an array of moment objects or an array, whose
+    // first element is an array of moment objects.
+    function pickBy(fn, moments) {
+        var res, i;
+        if (moments.length === 1 && isArray(moments[0])) {
+            moments = moments[0];
+        }
+        if (!moments.length) {
+            return createLocal();
+        }
+        res = moments[0];
+        for (i = 1; i < moments.length; ++i) {
+            if (!moments[i].isValid() || moments[i][fn](res)) {
+                res = moments[i];
+            }
+        }
+        return res;
+    }
+
+    // TODO: Use [].sort instead?
+    function min() {
+        var args = [].slice.call(arguments, 0);
+
+        return pickBy('isBefore', args);
+    }
+
+    function max() {
+        var args = [].slice.call(arguments, 0);
+
+        return pickBy('isAfter', args);
+    }
+
+    var now = function now() {
+        return Date.now ? Date.now() : +new Date();
+    };
+
+    var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'];
+
+    function isDurationValid(m) {
+        for (var key in m) {
+            if (!(indexOf.call(ordering, key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
+                return false;
+            }
+        }
+
+        var unitHasDecimal = false;
+        for (var i = 0; i < ordering.length; ++i) {
+            if (m[ordering[i]]) {
+                if (unitHasDecimal) {
+                    return false; // only allow non-integers for smallest unit
+                }
+                if (parseFloat(m[ordering[i]]) !== toInt(m[ordering[i]])) {
+                    unitHasDecimal = true;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    function isValid$1() {
+        return this._isValid;
+    }
+
+    function createInvalid$1() {
+        return createDuration(NaN);
+    }
+
+    function Duration(duration) {
+        var normalizedInput = normalizeObjectUnits(duration),
+            years = normalizedInput.year || 0,
+            quarters = normalizedInput.quarter || 0,
+            months = normalizedInput.month || 0,
+            weeks = normalizedInput.week || 0,
+            days = normalizedInput.day || 0,
+            hours = normalizedInput.hour || 0,
+            minutes = normalizedInput.minute || 0,
+            seconds = normalizedInput.second || 0,
+            milliseconds = normalizedInput.millisecond || 0;
+
+        this._isValid = isDurationValid(normalizedInput);
+
+        // representation for dateAddRemove
+        this._milliseconds = +milliseconds + seconds * 1e3 + // 1000
+        minutes * 6e4 + // 1000 * 60
+        hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
+        // Because of dateAddRemove treats 24 hours as different from a
+        // day when working around DST, we need to store them separately
+        this._days = +days + weeks * 7;
+        // It is impossible to translate months into days without knowing
+        // which months you are are talking about, so we have to store
+        // it separately.
+        this._months = +months + quarters * 3 + years * 12;
+
+        this._data = {};
+
+        this._locale = getLocale();
+
+        this._bubble();
+    }
+
+    function isDuration(obj) {
+        return obj instanceof Duration;
+    }
+
+    function absRound(number) {
+        if (number < 0) {
+            return Math.round(-1 * number) * -1;
+        } else {
+            return Math.round(number);
+        }
+    }
+
+    // FORMATTING
+
+    function offset(token, separator) {
+        addFormatToken(token, 0, 0, function () {
+            var offset = this.utcOffset();
+            var sign = '+';
+            if (offset < 0) {
+                offset = -offset;
+                sign = '-';
+            }
+            return sign + zeroFill(~~(offset / 60), 2) + separator + zeroFill(~~offset % 60, 2);
+        });
+    }
+
+    offset('Z', ':');
+    offset('ZZ', '');
+
+    // PARSING
+
+    addRegexToken('Z', matchShortOffset);
+    addRegexToken('ZZ', matchShortOffset);
+    addParseToken(['Z', 'ZZ'], function (input, array, config) {
+        config._useUTC = true;
+        config._tzm = offsetFromString(matchShortOffset, input);
+    });
+
+    // HELPERS
+
+    // timezone chunker
+    // '+10:00' > ['10',  '00']
+    // '-1530'  > ['-15', '30']
+    var chunkOffset = /([\+\-]|\d\d)/gi;
+
+    function offsetFromString(matcher, string) {
+        var matches = (string || '').match(matcher);
+
+        if (matches === null) {
+            return null;
+        }
+
+        var chunk = matches[matches.length - 1] || [];
+        var parts = (chunk + '').match(chunkOffset) || ['-', 0, 0];
+        var minutes = +(parts[1] * 60) + toInt(parts[2]);
+
+        return minutes === 0 ? 0 : parts[0] === '+' ? minutes : -minutes;
+    }
+
+    // Return a moment from input, that is local/utc/zone equivalent to model.
+    function cloneWithOffset(input, model) {
+        var res, diff;
+        if (model._isUTC) {
+            res = model.clone();
+            diff = (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res.valueOf();
+            // Use low-level api, because this fn is low-level api.
+            res._d.setTime(res._d.valueOf() + diff);
+            hooks.updateOffset(res, false);
+            return res;
+        } else {
+            return createLocal(input).local();
+        }
+    }
+
+    function getDateOffset(m) {
+        // On Firefox.24 Date#getTimezoneOffset returns a floating point.
+        // https://github.com/moment/moment/pull/1871
+        return -Math.round(m._d.getTimezoneOffset() / 15) * 15;
+    }
+
+    // HOOKS
+
+    // This function will be called whenever a moment is mutated.
+    // It is intended to keep the offset in sync with the timezone.
+    hooks.updateOffset = function () {};
+
+    // MOMENTS
+
+    // keepLocalTime = true means only change the timezone, without
+    // affecting the local hour. So 5:31:26 +0300 --[utcOffset(2, true)]-->
+    // 5:31:26 +0200 It is possible that 5:31:26 doesn't exist with offset
+    // +0200, so we adjust the time as needed, to be valid.
+    //
+    // Keeping the time actually adds/subtracts (one hour)
+    // from the actual represented time. That is why we call updateOffset
+    // a second time. In case it wants us to change the offset again
+    // _changeInProgress == true case, then we have to adjust, because
+    // there is no such time in the given timezone.
+    function getSetOffset(input, keepLocalTime, keepMinutes) {
+        var offset = this._offset || 0,
+            localAdjust;
+        if (!this.isValid()) {
+            return input != null ? this : NaN;
+        }
+        if (input != null) {
+            if (typeof input === 'string') {
+                input = offsetFromString(matchShortOffset, input);
+                if (input === null) {
+                    return this;
+                }
+            } else if (Math.abs(input) < 16 && !keepMinutes) {
+                input = input * 60;
+            }
+            if (!this._isUTC && keepLocalTime) {
+                localAdjust = getDateOffset(this);
+            }
+            this._offset = input;
+            this._isUTC = true;
+            if (localAdjust != null) {
+                this.add(localAdjust, 'm');
+            }
+            if (offset !== input) {
+                if (!keepLocalTime || this._changeInProgress) {
+                    addSubtract(this, createDuration(input - offset, 'm'), 1, false);
+                } else if (!this._changeInProgress) {
+                    this._changeInProgress = true;
+                    hooks.updateOffset(this, true);
+                    this._changeInProgress = null;
+                }
+            }
+            return this;
+        } else {
+            return this._isUTC ? offset : getDateOffset(this);
+        }
+    }
+
+    function getSetZone(input, keepLocalTime) {
+        if (input != null) {
+            if (typeof input !== 'string') {
+                input = -input;
+            }
+
+            this.utcOffset(input, keepLocalTime);
+
+            return this;
+        } else {
+            return -this.utcOffset();
+        }
+    }
+
+    function setOffsetToUTC(keepLocalTime) {
+        return this.utcOffset(0, keepLocalTime);
+    }
+
+    function setOffsetToLocal(keepLocalTime) {
+        if (this._isUTC) {
+            this.utcOffset(0, keepLocalTime);
+            this._isUTC = false;
+
+            if (keepLocalTime) {
+                this.subtract(getDateOffset(this), 'm');
+            }
+        }
+        return this;
+    }
+
+    function setOffsetToParsedOffset() {
+        if (this._tzm != null) {
+            this.utcOffset(this._tzm, false, true);
+        } else if (typeof this._i === 'string') {
+            var tZone = offsetFromString(matchOffset, this._i);
+            if (tZone != null) {
+                this.utcOffset(tZone);
+            } else {
+                this.utcOffset(0, true);
+            }
+        }
+        return this;
+    }
+
+    function hasAlignedHourOffset(input) {
+        if (!this.isValid()) {
+            return false;
+        }
+        input = input ? createLocal(input).utcOffset() : 0;
+
+        return (this.utcOffset() - input) % 60 === 0;
+    }
+
+    function isDaylightSavingTime() {
+        return this.utcOffset() > this.clone().month(0).utcOffset() || this.utcOffset() > this.clone().month(5).utcOffset();
+    }
+
+    function isDaylightSavingTimeShifted() {
+        if (!isUndefined(this._isDSTShifted)) {
+            return this._isDSTShifted;
+        }
+
+        var c = {};
+
+        copyConfig(c, this);
+        c = prepareConfig(c);
+
+        if (c._a) {
+            var other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
+            this._isDSTShifted = this.isValid() && compareArrays(c._a, other.toArray()) > 0;
+        } else {
+            this._isDSTShifted = false;
+        }
+
+        return this._isDSTShifted;
+    }
+
+    function isLocal() {
+        return this.isValid() ? !this._isUTC : false;
+    }
+
+    function isUtcOffset() {
+        return this.isValid() ? this._isUTC : false;
+    }
+
+    function isUtc() {
+        return this.isValid() ? this._isUTC && this._offset === 0 : false;
+    }
+
+    // ASP.NET json date format regex
+    var aspNetRegex = /^(\-|\+)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
+
+    // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
+    // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
+    // and further modified to allow for strings containing both week and day
+    var isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+
+    function createDuration(input, key) {
+        var duration = input,
+
+        // matching against regexp is expensive, do it on demand
+        match = null,
+            sign,
+            ret,
+            diffRes;
+
+        if (isDuration(input)) {
+            duration = {
+                ms: input._milliseconds,
+                d: input._days,
+                M: input._months
+            };
+        } else if (isNumber(input)) {
+            duration = {};
+            if (key) {
+                duration[key] = input;
+            } else {
+                duration.milliseconds = input;
+            }
+        } else if (!!(match = aspNetRegex.exec(input))) {
+            sign = match[1] === '-' ? -1 : 1;
+            duration = {
+                y: 0,
+                d: toInt(match[DATE]) * sign,
+                h: toInt(match[HOUR]) * sign,
+                m: toInt(match[MINUTE]) * sign,
+                s: toInt(match[SECOND]) * sign,
+                ms: toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
+            };
+        } else if (!!(match = isoRegex.exec(input))) {
+            sign = match[1] === '-' ? -1 : match[1] === '+' ? 1 : 1;
+            duration = {
+                y: parseIso(match[2], sign),
+                M: parseIso(match[3], sign),
+                w: parseIso(match[4], sign),
+                d: parseIso(match[5], sign),
+                h: parseIso(match[6], sign),
+                m: parseIso(match[7], sign),
+                s: parseIso(match[8], sign)
+            };
+        } else if (duration == null) {
+            // checks for null or undefined
+            duration = {};
+        } else if ((typeof duration === 'undefined' ? 'undefined' : _typeof(duration)) === 'object' && ('from' in duration || 'to' in duration)) {
+            diffRes = momentsDifference(createLocal(duration.from), createLocal(duration.to));
+
+            duration = {};
+            duration.ms = diffRes.milliseconds;
+            duration.M = diffRes.months;
+        }
+
+        ret = new Duration(duration);
+
+        if (isDuration(input) && hasOwnProp(input, '_locale')) {
+            ret._locale = input._locale;
+        }
+
+        return ret;
+    }
+
+    createDuration.fn = Duration.prototype;
+    createDuration.invalid = createInvalid$1;
+
+    function parseIso(inp, sign) {
+        // We'd normally use ~~inp for this, but unfortunately it also
+        // converts floats to ints.
+        // inp may be undefined, so careful calling replace on it.
+        var res = inp && parseFloat(inp.replace(',', '.'));
+        // apply sign while we're at it
+        return (isNaN(res) ? 0 : res) * sign;
+    }
+
+    function positiveMomentsDifference(base, other) {
+        var res = { milliseconds: 0, months: 0 };
+
+        res.months = other.month() - base.month() + (other.year() - base.year()) * 12;
+        if (base.clone().add(res.months, 'M').isAfter(other)) {
+            --res.months;
+        }
+
+        res.milliseconds = +other - +base.clone().add(res.months, 'M');
+
+        return res;
+    }
+
+    function momentsDifference(base, other) {
+        var res;
+        if (!(base.isValid() && other.isValid())) {
+            return { milliseconds: 0, months: 0 };
+        }
+
+        other = cloneWithOffset(other, base);
+        if (base.isBefore(other)) {
+            res = positiveMomentsDifference(base, other);
+        } else {
+            res = positiveMomentsDifference(other, base);
+            res.milliseconds = -res.milliseconds;
+            res.months = -res.months;
+        }
+
+        return res;
+    }
+
+    // TODO: remove 'name' arg after deprecation is removed
+    function createAdder(direction, name) {
+        return function (val, period) {
+            var dur, tmp;
+            //invert the arguments, but complain about it
+            if (period !== null && !isNaN(+period)) {
+                deprecateSimple(name, 'moment().' + name + '(period, number) is deprecated. Please use moment().' + name + '(number, period). ' + 'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.');
+                tmp = val;val = period;period = tmp;
+            }
+
+            val = typeof val === 'string' ? +val : val;
+            dur = createDuration(val, period);
+            addSubtract(this, dur, direction);
+            return this;
+        };
+    }
+
+    function addSubtract(mom, duration, isAdding, updateOffset) {
+        var milliseconds = duration._milliseconds,
+            days = absRound(duration._days),
+            months = absRound(duration._months);
+
+        if (!mom.isValid()) {
+            // No op
+            return;
+        }
+
+        updateOffset = updateOffset == null ? true : updateOffset;
+
+        if (months) {
+            setMonth(mom, get(mom, 'Month') + months * isAdding);
+        }
+        if (days) {
+            set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
+        }
+        if (milliseconds) {
+            mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
+        }
+        if (updateOffset) {
+            hooks.updateOffset(mom, days || months);
+        }
+    }
+
+    var add = createAdder(1, 'add');
+    var subtract = createAdder(-1, 'subtract');
+
+    function getCalendarFormat(myMoment, now) {
+        var diff = myMoment.diff(now, 'days', true);
+        return diff < -6 ? 'sameElse' : diff < -1 ? 'lastWeek' : diff < 0 ? 'lastDay' : diff < 1 ? 'sameDay' : diff < 2 ? 'nextDay' : diff < 7 ? 'nextWeek' : 'sameElse';
+    }
+
+    function calendar$1(time, formats) {
+        // We want to compare the start of today, vs this.
+        // Getting start-of-today depends on whether we're local/utc/offset or not.
+        var now = time || createLocal(),
+            sod = cloneWithOffset(now, this).startOf('day'),
+            format = hooks.calendarFormat(this, sod) || 'sameElse';
+
+        var output = formats && (isFunction(formats[format]) ? formats[format].call(this, now) : formats[format]);
+
+        return this.format(output || this.localeData().calendar(format, this, createLocal(now)));
+    }
+
+    function clone() {
+        return new Moment(this);
+    }
+
+    function isAfter(input, units) {
+        var localInput = isMoment(input) ? input : createLocal(input);
+        if (!(this.isValid() && localInput.isValid())) {
+            return false;
+        }
+        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+        if (units === 'millisecond') {
+            return this.valueOf() > localInput.valueOf();
+        } else {
+            return localInput.valueOf() < this.clone().startOf(units).valueOf();
+        }
+    }
+
+    function isBefore(input, units) {
+        var localInput = isMoment(input) ? input : createLocal(input);
+        if (!(this.isValid() && localInput.isValid())) {
+            return false;
+        }
+        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+        if (units === 'millisecond') {
+            return this.valueOf() < localInput.valueOf();
+        } else {
+            return this.clone().endOf(units).valueOf() < localInput.valueOf();
+        }
+    }
+
+    function isBetween(from, to, units, inclusivity) {
+        inclusivity = inclusivity || '()';
+        return (inclusivity[0] === '(' ? this.isAfter(from, units) : !this.isBefore(from, units)) && (inclusivity[1] === ')' ? this.isBefore(to, units) : !this.isAfter(to, units));
+    }
+
+    function isSame(input, units) {
+        var localInput = isMoment(input) ? input : createLocal(input),
+            inputMs;
+        if (!(this.isValid() && localInput.isValid())) {
+            return false;
+        }
+        units = normalizeUnits(units || 'millisecond');
+        if (units === 'millisecond') {
+            return this.valueOf() === localInput.valueOf();
+        } else {
+            inputMs = localInput.valueOf();
+            return this.clone().startOf(units).valueOf() <= inputMs && inputMs <= this.clone().endOf(units).valueOf();
+        }
+    }
+
+    function isSameOrAfter(input, units) {
+        return this.isSame(input, units) || this.isAfter(input, units);
+    }
+
+    function isSameOrBefore(input, units) {
+        return this.isSame(input, units) || this.isBefore(input, units);
+    }
+
+    function diff(input, units, asFloat) {
+        var that, zoneDelta, delta, output;
+
+        if (!this.isValid()) {
+            return NaN;
+        }
+
+        that = cloneWithOffset(input, this);
+
+        if (!that.isValid()) {
+            return NaN;
+        }
+
+        zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
+
+        units = normalizeUnits(units);
+
+        switch (units) {
+            case 'year':
+                output = monthDiff(this, that) / 12;break;
+            case 'month':
+                output = monthDiff(this, that);break;
+            case 'quarter':
+                output = monthDiff(this, that) / 3;break;
+            case 'second':
+                output = (this - that) / 1e3;break; // 1000
+            case 'minute':
+                output = (this - that) / 6e4;break; // 1000 * 60
+            case 'hour':
+                output = (this - that) / 36e5;break; // 1000 * 60 * 60
+            case 'day':
+                output = (this - that - zoneDelta) / 864e5;break; // 1000 * 60 * 60 * 24, negate dst
+            case 'week':
+                output = (this - that - zoneDelta) / 6048e5;break; // 1000 * 60 * 60 * 24 * 7, negate dst
+            default:
+                output = this - that;
+        }
+
+        return asFloat ? output : absFloor(output);
+    }
+
+    function monthDiff(a, b) {
+        // difference in months
+        var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month()),
+
+        // b is in (anchor - 1 month, anchor + 1 month)
+        anchor = a.clone().add(wholeMonthDiff, 'months'),
+            anchor2,
+            adjust;
+
+        if (b - anchor < 0) {
+            anchor2 = a.clone().add(wholeMonthDiff - 1, 'months');
+            // linear across the month
+            adjust = (b - anchor) / (anchor - anchor2);
+        } else {
+            anchor2 = a.clone().add(wholeMonthDiff + 1, 'months');
+            // linear across the month
+            adjust = (b - anchor) / (anchor2 - anchor);
+        }
+
+        //check for negative zero, return zero if negative zero
+        return -(wholeMonthDiff + adjust) || 0;
+    }
+
+    hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+    hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
+
+    function toString() {
+        return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+    }
+
+    function toISOString() {
+        if (!this.isValid()) {
+            return null;
+        }
+        var m = this.clone().utc();
+        if (m.year() < 0 || m.year() > 9999) {
+            return formatMoment(m, 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+        }
+        if (isFunction(Date.prototype.toISOString)) {
+            // native implementation is ~50x faster, use it when we can
+            return this.toDate().toISOString();
+        }
+        return formatMoment(m, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+    }
+
+    /**
+     * Return a human readable representation of a moment that can
+     * also be evaluated to get a new moment which is the same
+     *
+     * @link https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects
+     */
+    function inspect() {
+        if (!this.isValid()) {
+            return 'moment.invalid(/* ' + this._i + ' */)';
+        }
+        var func = 'moment';
+        var zone = '';
+        if (!this.isLocal()) {
+            func = this.utcOffset() === 0 ? 'moment.utc' : 'moment.parseZone';
+            zone = 'Z';
+        }
+        var prefix = '[' + func + '("]';
+        var year = 0 <= this.year() && this.year() <= 9999 ? 'YYYY' : 'YYYYYY';
+        var datetime = '-MM-DD[T]HH:mm:ss.SSS';
+        var suffix = zone + '[")]';
+
+        return this.format(prefix + year + datetime + suffix);
+    }
+
+    function format(inputString) {
+        if (!inputString) {
+            inputString = this.isUtc() ? hooks.defaultFormatUtc : hooks.defaultFormat;
+        }
+        var output = formatMoment(this, inputString);
+        return this.localeData().postformat(output);
+    }
+
+    function from(time, withoutSuffix) {
+        if (this.isValid() && (isMoment(time) && time.isValid() || createLocal(time).isValid())) {
+            return createDuration({ to: this, from: time }).locale(this.locale()).humanize(!withoutSuffix);
+        } else {
+            return this.localeData().invalidDate();
+        }
+    }
+
+    function fromNow(withoutSuffix) {
+        return this.from(createLocal(), withoutSuffix);
+    }
+
+    function to(time, withoutSuffix) {
+        if (this.isValid() && (isMoment(time) && time.isValid() || createLocal(time).isValid())) {
+            return createDuration({ from: this, to: time }).locale(this.locale()).humanize(!withoutSuffix);
+        } else {
+            return this.localeData().invalidDate();
+        }
+    }
+
+    function toNow(withoutSuffix) {
+        return this.to(createLocal(), withoutSuffix);
+    }
+
+    // If passed a locale key, it will set the locale for this
+    // instance.  Otherwise, it will return the locale configuration
+    // variables for this instance.
+    function locale(key) {
+        var newLocaleData;
+
+        if (key === undefined) {
+            return this._locale._abbr;
+        } else {
+            newLocaleData = getLocale(key);
+            if (newLocaleData != null) {
+                this._locale = newLocaleData;
+            }
+            return this;
+        }
+    }
+
+    var lang = deprecate('moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.', function (key) {
+        if (key === undefined) {
+            return this.localeData();
+        } else {
+            return this.locale(key);
+        }
+    });
+
+    function localeData() {
+        return this._locale;
+    }
+
+    function startOf(units) {
+        units = normalizeUnits(units);
+        // the following switch intentionally omits break keywords
+        // to utilize falling through the cases.
+        switch (units) {
+            case 'year':
+                this.month(0);
+            /* falls through */
+            case 'quarter':
+            case 'month':
+                this.date(1);
+            /* falls through */
+            case 'week':
+            case 'isoWeek':
+            case 'day':
+            case 'date':
+                this.hours(0);
+            /* falls through */
+            case 'hour':
+                this.minutes(0);
+            /* falls through */
+            case 'minute':
+                this.seconds(0);
+            /* falls through */
+            case 'second':
+                this.milliseconds(0);
+        }
+
+        // weeks are a special case
+        if (units === 'week') {
+            this.weekday(0);
+        }
+        if (units === 'isoWeek') {
+            this.isoWeekday(1);
+        }
+
+        // quarters are also special
+        if (units === 'quarter') {
+            this.month(Math.floor(this.month() / 3) * 3);
+        }
+
+        return this;
+    }
+
+    function endOf(units) {
+        units = normalizeUnits(units);
+        if (units === undefined || units === 'millisecond') {
+            return this;
+        }
+
+        // 'date' is an alias for 'day', so it should be considered as such.
+        if (units === 'date') {
+            units = 'day';
+        }
+
+        return this.startOf(units).add(1, units === 'isoWeek' ? 'week' : units).subtract(1, 'ms');
+    }
+
+    function valueOf() {
+        return this._d.valueOf() - (this._offset || 0) * 60000;
+    }
+
+    function unix() {
+        return Math.floor(this.valueOf() / 1000);
+    }
+
+    function toDate() {
+        return new Date(this.valueOf());
+    }
+
+    function toArray() {
+        var m = this;
+        return [m.year(), m.month(), m.date(), m.hour(), m.minute(), m.second(), m.millisecond()];
+    }
+
+    function toObject() {
+        var m = this;
+        return {
+            years: m.year(),
+            months: m.month(),
+            date: m.date(),
+            hours: m.hours(),
+            minutes: m.minutes(),
+            seconds: m.seconds(),
+            milliseconds: m.milliseconds()
+        };
+    }
+
+    function toJSON() {
+        // new Date(NaN).toJSON() === null
+        return this.isValid() ? this.toISOString() : null;
+    }
+
+    function isValid$2() {
+        return isValid(this);
+    }
+
+    function parsingFlags() {
+        return extend({}, getParsingFlags(this));
+    }
+
+    function invalidAt() {
+        return getParsingFlags(this).overflow;
+    }
+
+    function creationData() {
+        return {
+            input: this._i,
+            format: this._f,
+            locale: this._locale,
+            isUTC: this._isUTC,
+            strict: this._strict
+        };
+    }
+
+    // FORMATTING
+
+    addFormatToken(0, ['gg', 2], 0, function () {
+        return this.weekYear() % 100;
+    });
+
+    addFormatToken(0, ['GG', 2], 0, function () {
+        return this.isoWeekYear() % 100;
+    });
+
+    function addWeekYearFormatToken(token, getter) {
+        addFormatToken(0, [token, token.length], 0, getter);
+    }
+
+    addWeekYearFormatToken('gggg', 'weekYear');
+    addWeekYearFormatToken('ggggg', 'weekYear');
+    addWeekYearFormatToken('GGGG', 'isoWeekYear');
+    addWeekYearFormatToken('GGGGG', 'isoWeekYear');
+
+    // ALIASES
+
+    addUnitAlias('weekYear', 'gg');
+    addUnitAlias('isoWeekYear', 'GG');
+
+    // PRIORITY
+
+    addUnitPriority('weekYear', 1);
+    addUnitPriority('isoWeekYear', 1);
+
+    // PARSING
+
+    addRegexToken('G', matchSigned);
+    addRegexToken('g', matchSigned);
+    addRegexToken('GG', match1to2, match2);
+    addRegexToken('gg', match1to2, match2);
+    addRegexToken('GGGG', match1to4, match4);
+    addRegexToken('gggg', match1to4, match4);
+    addRegexToken('GGGGG', match1to6, match6);
+    addRegexToken('ggggg', match1to6, match6);
+
+    addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (input, week, config, token) {
+        week[token.substr(0, 2)] = toInt(input);
+    });
+
+    addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
+        week[token] = hooks.parseTwoDigitYear(input);
+    });
+
+    // MOMENTS
+
+    function getSetWeekYear(input) {
+        return getSetWeekYearHelper.call(this, input, this.week(), this.weekday(), this.localeData()._week.dow, this.localeData()._week.doy);
+    }
+
+    function getSetISOWeekYear(input) {
+        return getSetWeekYearHelper.call(this, input, this.isoWeek(), this.isoWeekday(), 1, 4);
+    }
+
+    function getISOWeeksInYear() {
+        return weeksInYear(this.year(), 1, 4);
+    }
+
+    function getWeeksInYear() {
+        var weekInfo = this.localeData()._week;
+        return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
+    }
+
+    function getSetWeekYearHelper(input, week, weekday, dow, doy) {
+        var weeksTarget;
+        if (input == null) {
+            return weekOfYear(this, dow, doy).year;
+        } else {
+            weeksTarget = weeksInYear(input, dow, doy);
+            if (week > weeksTarget) {
+                week = weeksTarget;
+            }
+            return setWeekAll.call(this, input, week, weekday, dow, doy);
+        }
+    }
+
+    function setWeekAll(weekYear, week, weekday, dow, doy) {
+        var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+            date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
+
+        this.year(date.getUTCFullYear());
+        this.month(date.getUTCMonth());
+        this.date(date.getUTCDate());
+        return this;
+    }
+
+    // FORMATTING
+
+    addFormatToken('Q', 0, 'Qo', 'quarter');
+
+    // ALIASES
+
+    addUnitAlias('quarter', 'Q');
+
+    // PRIORITY
+
+    addUnitPriority('quarter', 7);
+
+    // PARSING
+
+    addRegexToken('Q', match1);
+    addParseToken('Q', function (input, array) {
+        array[MONTH] = (toInt(input) - 1) * 3;
+    });
+
+    // MOMENTS
+
+    function getSetQuarter(input) {
+        return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
+    }
+
+    // FORMATTING
+
+    addFormatToken('D', ['DD', 2], 'Do', 'date');
+
+    // ALIASES
+
+    addUnitAlias('date', 'D');
+
+    // PRIOROITY
+    addUnitPriority('date', 9);
+
+    // PARSING
+
+    addRegexToken('D', match1to2);
+    addRegexToken('DD', match1to2, match2);
+    addRegexToken('Do', function (isStrict, locale) {
+        // TODO: Remove "ordinalParse" fallback in next major release.
+        return isStrict ? locale._dayOfMonthOrdinalParse || locale._ordinalParse : locale._dayOfMonthOrdinalParseLenient;
+    });
+
+    addParseToken(['D', 'DD'], DATE);
+    addParseToken('Do', function (input, array) {
+        array[DATE] = toInt(input.match(match1to2)[0], 10);
+    });
+
+    // MOMENTS
+
+    var getSetDayOfMonth = makeGetSet('Date', true);
+
+    // FORMATTING
+
+    addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
+
+    // ALIASES
+
+    addUnitAlias('dayOfYear', 'DDD');
+
+    // PRIORITY
+    addUnitPriority('dayOfYear', 4);
+
+    // PARSING
+
+    addRegexToken('DDD', match1to3);
+    addRegexToken('DDDD', match3);
+    addParseToken(['DDD', 'DDDD'], function (input, array, config) {
+        config._dayOfYear = toInt(input);
+    });
+
+    // HELPERS
+
+    // MOMENTS
+
+    function getSetDayOfYear(input) {
+        var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
+        return input == null ? dayOfYear : this.add(input - dayOfYear, 'd');
+    }
+
+    // FORMATTING
+
+    addFormatToken('m', ['mm', 2], 0, 'minute');
+
+    // ALIASES
+
+    addUnitAlias('minute', 'm');
+
+    // PRIORITY
+
+    addUnitPriority('minute', 14);
+
+    // PARSING
+
+    addRegexToken('m', match1to2);
+    addRegexToken('mm', match1to2, match2);
+    addParseToken(['m', 'mm'], MINUTE);
+
+    // MOMENTS
+
+    var getSetMinute = makeGetSet('Minutes', false);
+
+    // FORMATTING
+
+    addFormatToken('s', ['ss', 2], 0, 'second');
+
+    // ALIASES
+
+    addUnitAlias('second', 's');
+
+    // PRIORITY
+
+    addUnitPriority('second', 15);
+
+    // PARSING
+
+    addRegexToken('s', match1to2);
+    addRegexToken('ss', match1to2, match2);
+    addParseToken(['s', 'ss'], SECOND);
+
+    // MOMENTS
+
+    var getSetSecond = makeGetSet('Seconds', false);
+
+    // FORMATTING
+
+    addFormatToken('S', 0, 0, function () {
+        return ~~(this.millisecond() / 100);
+    });
+
+    addFormatToken(0, ['SS', 2], 0, function () {
+        return ~~(this.millisecond() / 10);
+    });
+
+    addFormatToken(0, ['SSS', 3], 0, 'millisecond');
+    addFormatToken(0, ['SSSS', 4], 0, function () {
+        return this.millisecond() * 10;
+    });
+    addFormatToken(0, ['SSSSS', 5], 0, function () {
+        return this.millisecond() * 100;
+    });
+    addFormatToken(0, ['SSSSSS', 6], 0, function () {
+        return this.millisecond() * 1000;
+    });
+    addFormatToken(0, ['SSSSSSS', 7], 0, function () {
+        return this.millisecond() * 10000;
+    });
+    addFormatToken(0, ['SSSSSSSS', 8], 0, function () {
+        return this.millisecond() * 100000;
+    });
+    addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
+        return this.millisecond() * 1000000;
+    });
+
+    // ALIASES
+
+    addUnitAlias('millisecond', 'ms');
+
+    // PRIORITY
+
+    addUnitPriority('millisecond', 16);
+
+    // PARSING
+
+    addRegexToken('S', match1to3, match1);
+    addRegexToken('SS', match1to3, match2);
+    addRegexToken('SSS', match1to3, match3);
+
+    var token;
+    for (token = 'SSSS'; token.length <= 9; token += 'S') {
+        addRegexToken(token, matchUnsigned);
+    }
+
+    function parseMs(input, array) {
+        array[MILLISECOND] = toInt(('0.' + input) * 1000);
+    }
+
+    for (token = 'S'; token.length <= 9; token += 'S') {
+        addParseToken(token, parseMs);
+    }
+    // MOMENTS
+
+    var getSetMillisecond = makeGetSet('Milliseconds', false);
+
+    // FORMATTING
+
+    addFormatToken('z', 0, 0, 'zoneAbbr');
+    addFormatToken('zz', 0, 0, 'zoneName');
+
+    // MOMENTS
+
+    function getZoneAbbr() {
+        return this._isUTC ? 'UTC' : '';
+    }
+
+    function getZoneName() {
+        return this._isUTC ? 'Coordinated Universal Time' : '';
+    }
+
+    var proto = Moment.prototype;
+
+    proto.add = add;
+    proto.calendar = calendar$1;
+    proto.clone = clone;
+    proto.diff = diff;
+    proto.endOf = endOf;
+    proto.format = format;
+    proto.from = from;
+    proto.fromNow = fromNow;
+    proto.to = to;
+    proto.toNow = toNow;
+    proto.get = stringGet;
+    proto.invalidAt = invalidAt;
+    proto.isAfter = isAfter;
+    proto.isBefore = isBefore;
+    proto.isBetween = isBetween;
+    proto.isSame = isSame;
+    proto.isSameOrAfter = isSameOrAfter;
+    proto.isSameOrBefore = isSameOrBefore;
+    proto.isValid = isValid$2;
+    proto.lang = lang;
+    proto.locale = locale;
+    proto.localeData = localeData;
+    proto.max = prototypeMax;
+    proto.min = prototypeMin;
+    proto.parsingFlags = parsingFlags;
+    proto.set = stringSet;
+    proto.startOf = startOf;
+    proto.subtract = subtract;
+    proto.toArray = toArray;
+    proto.toObject = toObject;
+    proto.toDate = toDate;
+    proto.toISOString = toISOString;
+    proto.inspect = inspect;
+    proto.toJSON = toJSON;
+    proto.toString = toString;
+    proto.unix = unix;
+    proto.valueOf = valueOf;
+    proto.creationData = creationData;
+
+    // Year
+    proto.year = getSetYear;
+    proto.isLeapYear = getIsLeapYear;
+
+    // Week Year
+    proto.weekYear = getSetWeekYear;
+    proto.isoWeekYear = getSetISOWeekYear;
+
+    // Quarter
+    proto.quarter = proto.quarters = getSetQuarter;
+
+    // Month
+    proto.month = getSetMonth;
+    proto.daysInMonth = getDaysInMonth;
+
+    // Week
+    proto.week = proto.weeks = getSetWeek;
+    proto.isoWeek = proto.isoWeeks = getSetISOWeek;
+    proto.weeksInYear = getWeeksInYear;
+    proto.isoWeeksInYear = getISOWeeksInYear;
+
+    // Day
+    proto.date = getSetDayOfMonth;
+    proto.day = proto.days = getSetDayOfWeek;
+    proto.weekday = getSetLocaleDayOfWeek;
+    proto.isoWeekday = getSetISODayOfWeek;
+    proto.dayOfYear = getSetDayOfYear;
+
+    // Hour
+    proto.hour = proto.hours = getSetHour;
+
+    // Minute
+    proto.minute = proto.minutes = getSetMinute;
+
+    // Second
+    proto.second = proto.seconds = getSetSecond;
+
+    // Millisecond
+    proto.millisecond = proto.milliseconds = getSetMillisecond;
+
+    // Offset
+    proto.utcOffset = getSetOffset;
+    proto.utc = setOffsetToUTC;
+    proto.local = setOffsetToLocal;
+    proto.parseZone = setOffsetToParsedOffset;
+    proto.hasAlignedHourOffset = hasAlignedHourOffset;
+    proto.isDST = isDaylightSavingTime;
+    proto.isLocal = isLocal;
+    proto.isUtcOffset = isUtcOffset;
+    proto.isUtc = isUtc;
+    proto.isUTC = isUtc;
+
+    // Timezone
+    proto.zoneAbbr = getZoneAbbr;
+    proto.zoneName = getZoneName;
+
+    // Deprecations
+    proto.dates = deprecate('dates accessor is deprecated. Use date instead.', getSetDayOfMonth);
+    proto.months = deprecate('months accessor is deprecated. Use month instead', getSetMonth);
+    proto.years = deprecate('years accessor is deprecated. Use year instead', getSetYear);
+    proto.zone = deprecate('moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/', getSetZone);
+    proto.isDSTShifted = deprecate('isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information', isDaylightSavingTimeShifted);
+
+    function createUnix(input) {
+        return createLocal(input * 1000);
+    }
+
+    function createInZone() {
+        return createLocal.apply(null, arguments).parseZone();
+    }
+
+    function preParsePostFormat(string) {
+        return string;
+    }
+
+    var proto$1 = Locale.prototype;
+
+    proto$1.calendar = calendar;
+    proto$1.longDateFormat = longDateFormat;
+    proto$1.invalidDate = invalidDate;
+    proto$1.ordinal = ordinal;
+    proto$1.preparse = preParsePostFormat;
+    proto$1.postformat = preParsePostFormat;
+    proto$1.relativeTime = relativeTime;
+    proto$1.pastFuture = pastFuture;
+    proto$1.set = set;
+
+    // Month
+    proto$1.months = localeMonths;
+    proto$1.monthsShort = localeMonthsShort;
+    proto$1.monthsParse = localeMonthsParse;
+    proto$1.monthsRegex = monthsRegex;
+    proto$1.monthsShortRegex = monthsShortRegex;
+
+    // Week
+    proto$1.week = localeWeek;
+    proto$1.firstDayOfYear = localeFirstDayOfYear;
+    proto$1.firstDayOfWeek = localeFirstDayOfWeek;
+
+    // Day of Week
+    proto$1.weekdays = localeWeekdays;
+    proto$1.weekdaysMin = localeWeekdaysMin;
+    proto$1.weekdaysShort = localeWeekdaysShort;
+    proto$1.weekdaysParse = localeWeekdaysParse;
+
+    proto$1.weekdaysRegex = weekdaysRegex;
+    proto$1.weekdaysShortRegex = weekdaysShortRegex;
+    proto$1.weekdaysMinRegex = weekdaysMinRegex;
+
+    // Hours
+    proto$1.isPM = localeIsPM;
+    proto$1.meridiem = localeMeridiem;
+
+    function get$1(format, index, field, setter) {
+        var locale = getLocale();
+        var utc = createUTC().set(setter, index);
+        return locale[field](utc, format);
+    }
+
+    function listMonthsImpl(format, index, field) {
+        if (isNumber(format)) {
+            index = format;
+            format = undefined;
+        }
+
+        format = format || '';
+
+        if (index != null) {
+            return get$1(format, index, field, 'month');
+        }
+
+        var i;
+        var out = [];
+        for (i = 0; i < 12; i++) {
+            out[i] = get$1(format, i, field, 'month');
+        }
+        return out;
+    }
+
+    // ()
+    // (5)
+    // (fmt, 5)
+    // (fmt)
+    // (true)
+    // (true, 5)
+    // (true, fmt, 5)
+    // (true, fmt)
+    function listWeekdaysImpl(localeSorted, format, index, field) {
+        if (typeof localeSorted === 'boolean') {
+            if (isNumber(format)) {
+                index = format;
+                format = undefined;
+            }
+
+            format = format || '';
+        } else {
+            format = localeSorted;
+            index = format;
+            localeSorted = false;
+
+            if (isNumber(format)) {
+                index = format;
+                format = undefined;
+            }
+
+            format = format || '';
+        }
+
+        var locale = getLocale(),
+            shift = localeSorted ? locale._week.dow : 0;
+
+        if (index != null) {
+            return get$1(format, (index + shift) % 7, field, 'day');
+        }
+
+        var i;
+        var out = [];
+        for (i = 0; i < 7; i++) {
+            out[i] = get$1(format, (i + shift) % 7, field, 'day');
+        }
+        return out;
+    }
+
+    function listMonths(format, index) {
+        return listMonthsImpl(format, index, 'months');
+    }
+
+    function listMonthsShort(format, index) {
+        return listMonthsImpl(format, index, 'monthsShort');
+    }
+
+    function listWeekdays(localeSorted, format, index) {
+        return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
+    }
+
+    function listWeekdaysShort(localeSorted, format, index) {
+        return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
+    }
+
+    function listWeekdaysMin(localeSorted, format, index) {
+        return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
+    }
+
+    getSetGlobalLocale('en', {
+        dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+        ordinal: function ordinal(number) {
+            var b = number % 10,
+                output = toInt(number % 100 / 10) === 1 ? 'th' : b === 1 ? 'st' : b === 2 ? 'nd' : b === 3 ? 'rd' : 'th';
+            return number + output;
+        }
+    });
+
+    // Side effect imports
+    hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
+    hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
+
+    var mathAbs = Math.abs;
+
+    function abs() {
+        var data = this._data;
+
+        this._milliseconds = mathAbs(this._milliseconds);
+        this._days = mathAbs(this._days);
+        this._months = mathAbs(this._months);
+
+        data.milliseconds = mathAbs(data.milliseconds);
+        data.seconds = mathAbs(data.seconds);
+        data.minutes = mathAbs(data.minutes);
+        data.hours = mathAbs(data.hours);
+        data.months = mathAbs(data.months);
+        data.years = mathAbs(data.years);
+
+        return this;
+    }
+
+    function addSubtract$1(duration, input, value, direction) {
+        var other = createDuration(input, value);
+
+        duration._milliseconds += direction * other._milliseconds;
+        duration._days += direction * other._days;
+        duration._months += direction * other._months;
+
+        return duration._bubble();
+    }
+
+    // supports only 2.0-style add(1, 's') or add(duration)
+    function add$1(input, value) {
+        return addSubtract$1(this, input, value, 1);
+    }
+
+    // supports only 2.0-style subtract(1, 's') or subtract(duration)
+    function subtract$1(input, value) {
+        return addSubtract$1(this, input, value, -1);
+    }
+
+    function absCeil(number) {
+        if (number < 0) {
+            return Math.floor(number);
+        } else {
+            return Math.ceil(number);
+        }
+    }
+
+    function bubble() {
+        var milliseconds = this._milliseconds;
+        var days = this._days;
+        var months = this._months;
+        var data = this._data;
+        var seconds, minutes, hours, years, monthsFromDays;
+
+        // if we have a mix of positive and negative values, bubble down first
+        // check: https://github.com/moment/moment/issues/2166
+        if (!(milliseconds >= 0 && days >= 0 && months >= 0 || milliseconds <= 0 && days <= 0 && months <= 0)) {
+            milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
+            days = 0;
+            months = 0;
+        }
+
+        // The following code bubbles up values, see the tests for
+        // examples of what that means.
+        data.milliseconds = milliseconds % 1000;
+
+        seconds = absFloor(milliseconds / 1000);
+        data.seconds = seconds % 60;
+
+        minutes = absFloor(seconds / 60);
+        data.minutes = minutes % 60;
+
+        hours = absFloor(minutes / 60);
+        data.hours = hours % 24;
+
+        days += absFloor(hours / 24);
+
+        // convert days to months
+        monthsFromDays = absFloor(daysToMonths(days));
+        months += monthsFromDays;
+        days -= absCeil(monthsToDays(monthsFromDays));
+
+        // 12 months -> 1 year
+        years = absFloor(months / 12);
+        months %= 12;
+
+        data.days = days;
+        data.months = months;
+        data.years = years;
+
+        return this;
+    }
+
+    function daysToMonths(days) {
+        // 400 years have 146097 days (taking into account leap year rules)
+        // 400 years have 12 months === 4800
+        return days * 4800 / 146097;
+    }
+
+    function monthsToDays(months) {
+        // the reverse of daysToMonths
+        return months * 146097 / 4800;
+    }
+
+    function as(units) {
+        if (!this.isValid()) {
+            return NaN;
+        }
+        var days;
+        var months;
+        var milliseconds = this._milliseconds;
+
+        units = normalizeUnits(units);
+
+        if (units === 'month' || units === 'year') {
+            days = this._days + milliseconds / 864e5;
+            months = this._months + daysToMonths(days);
+            return units === 'month' ? months : months / 12;
+        } else {
+            // handle milliseconds separately because of floating point math errors (issue #1867)
+            days = this._days + Math.round(monthsToDays(this._months));
+            switch (units) {
+                case 'week':
+                    return days / 7 + milliseconds / 6048e5;
+                case 'day':
+                    return days + milliseconds / 864e5;
+                case 'hour':
+                    return days * 24 + milliseconds / 36e5;
+                case 'minute':
+                    return days * 1440 + milliseconds / 6e4;
+                case 'second':
+                    return days * 86400 + milliseconds / 1000;
+                // Math.floor prevents floating point math errors here
+                case 'millisecond':
+                    return Math.floor(days * 864e5) + milliseconds;
+                default:
+                    throw new Error('Unknown unit ' + units);
+            }
+        }
+    }
+
+    // TODO: Use this.as('ms')?
+    function valueOf$1() {
+        if (!this.isValid()) {
+            return NaN;
+        }
+        return this._milliseconds + this._days * 864e5 + this._months % 12 * 2592e6 + toInt(this._months / 12) * 31536e6;
+    }
+
+    function makeAs(alias) {
+        return function () {
+            return this.as(alias);
+        };
+    }
+
+    var asMilliseconds = makeAs('ms');
+    var asSeconds = makeAs('s');
+    var asMinutes = makeAs('m');
+    var asHours = makeAs('h');
+    var asDays = makeAs('d');
+    var asWeeks = makeAs('w');
+    var asMonths = makeAs('M');
+    var asYears = makeAs('y');
+
+    function clone$1() {
+        return createDuration(this);
+    }
+
+    function get$2(units) {
+        units = normalizeUnits(units);
+        return this.isValid() ? this[units + 's']() : NaN;
+    }
+
+    function makeGetter(name) {
+        return function () {
+            return this.isValid() ? this._data[name] : NaN;
+        };
+    }
+
+    var milliseconds = makeGetter('milliseconds');
+    var seconds = makeGetter('seconds');
+    var minutes = makeGetter('minutes');
+    var hours = makeGetter('hours');
+    var days = makeGetter('days');
+    var months = makeGetter('months');
+    var years = makeGetter('years');
+
+    function weeks() {
+        return absFloor(this.days() / 7);
+    }
+
+    var round = Math.round;
+    var thresholds = {
+        ss: 44, // a few seconds to seconds
+        s: 45, // seconds to minute
+        m: 45, // minutes to hour
+        h: 22, // hours to day
+        d: 26, // days to month
+        M: 11 // months to year
+    };
+
+    // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
+    function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
+        return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
+    }
+
+    function relativeTime$1(posNegDuration, withoutSuffix, locale) {
+        var duration = createDuration(posNegDuration).abs();
+        var seconds = round(duration.as('s'));
+        var minutes = round(duration.as('m'));
+        var hours = round(duration.as('h'));
+        var days = round(duration.as('d'));
+        var months = round(duration.as('M'));
+        var years = round(duration.as('y'));
+
+        var a = seconds <= thresholds.ss && ['s', seconds] || seconds < thresholds.s && ['ss', seconds] || minutes <= 1 && ['m'] || minutes < thresholds.m && ['mm', minutes] || hours <= 1 && ['h'] || hours < thresholds.h && ['hh', hours] || days <= 1 && ['d'] || days < thresholds.d && ['dd', days] || months <= 1 && ['M'] || months < thresholds.M && ['MM', months] || years <= 1 && ['y'] || ['yy', years];
+
+        a[2] = withoutSuffix;
+        a[3] = +posNegDuration > 0;
+        a[4] = locale;
+        return substituteTimeAgo.apply(null, a);
+    }
+
+    // This function allows you to set the rounding function for relative time strings
+    function getSetRelativeTimeRounding(roundingFunction) {
+        if (roundingFunction === undefined) {
+            return round;
+        }
+        if (typeof roundingFunction === 'function') {
+            round = roundingFunction;
+            return true;
+        }
+        return false;
+    }
+
+    // This function allows you to set a threshold for relative time strings
+    function getSetRelativeTimeThreshold(threshold, limit) {
+        if (thresholds[threshold] === undefined) {
+            return false;
+        }
+        if (limit === undefined) {
+            return thresholds[threshold];
+        }
+        thresholds[threshold] = limit;
+        if (threshold === 's') {
+            thresholds.ss = limit - 1;
+        }
+        return true;
+    }
+
+    function humanize(withSuffix) {
+        if (!this.isValid()) {
+            return this.localeData().invalidDate();
+        }
+
+        var locale = this.localeData();
+        var output = relativeTime$1(this, !withSuffix, locale);
+
+        if (withSuffix) {
+            output = locale.pastFuture(+this, output);
+        }
+
+        return locale.postformat(output);
+    }
+
+    var abs$1 = Math.abs;
+
+    function sign(x) {
+        return (x > 0) - (x < 0) || +x;
+    }
+
+    function toISOString$1() {
+        // for ISO strings we do not use the normal bubbling rules:
+        //  * milliseconds bubble up until they become hours
+        //  * days do not bubble at all
+        //  * months bubble up until they become years
+        // This is because there is no context-free conversion between hours and days
+        // (think of clock changes)
+        // and also not between days and months (28-31 days per month)
+        if (!this.isValid()) {
+            return this.localeData().invalidDate();
+        }
+
+        var seconds = abs$1(this._milliseconds) / 1000;
+        var days = abs$1(this._days);
+        var months = abs$1(this._months);
+        var minutes, hours, years;
+
+        // 3600 seconds -> 60 minutes -> 1 hour
+        minutes = absFloor(seconds / 60);
+        hours = absFloor(minutes / 60);
+        seconds %= 60;
+        minutes %= 60;
+
+        // 12 months -> 1 year
+        years = absFloor(months / 12);
+        months %= 12;
+
+        // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
+        var Y = years;
+        var M = months;
+        var D = days;
+        var h = hours;
+        var m = minutes;
+        var s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
+        var total = this.asSeconds();
+
+        if (!total) {
+            // this is the same as C#'s (Noda) and python (isodate)...
+            // but not other JS (goog.date)
+            return 'P0D';
+        }
+
+        var totalSign = total < 0 ? '-' : '';
+        var ymSign = sign(this._months) !== sign(total) ? '-' : '';
+        var daysSign = sign(this._days) !== sign(total) ? '-' : '';
+        var hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
+
+        return totalSign + 'P' + (Y ? ymSign + Y + 'Y' : '') + (M ? ymSign + M + 'M' : '') + (D ? daysSign + D + 'D' : '') + (h || m || s ? 'T' : '') + (h ? hmsSign + h + 'H' : '') + (m ? hmsSign + m + 'M' : '') + (s ? hmsSign + s + 'S' : '');
+    }
+
+    var proto$2 = Duration.prototype;
+
+    proto$2.isValid = isValid$1;
+    proto$2.abs = abs;
+    proto$2.add = add$1;
+    proto$2.subtract = subtract$1;
+    proto$2.as = as;
+    proto$2.asMilliseconds = asMilliseconds;
+    proto$2.asSeconds = asSeconds;
+    proto$2.asMinutes = asMinutes;
+    proto$2.asHours = asHours;
+    proto$2.asDays = asDays;
+    proto$2.asWeeks = asWeeks;
+    proto$2.asMonths = asMonths;
+    proto$2.asYears = asYears;
+    proto$2.valueOf = valueOf$1;
+    proto$2._bubble = bubble;
+    proto$2.clone = clone$1;
+    proto$2.get = get$2;
+    proto$2.milliseconds = milliseconds;
+    proto$2.seconds = seconds;
+    proto$2.minutes = minutes;
+    proto$2.hours = hours;
+    proto$2.days = days;
+    proto$2.weeks = weeks;
+    proto$2.months = months;
+    proto$2.years = years;
+    proto$2.humanize = humanize;
+    proto$2.toISOString = toISOString$1;
+    proto$2.toString = toISOString$1;
+    proto$2.toJSON = toISOString$1;
+    proto$2.locale = locale;
+    proto$2.localeData = localeData;
+
+    // Deprecations
+    proto$2.toIsoString = deprecate('toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)', toISOString$1);
+    proto$2.lang = lang;
+
+    // Side effect imports
+
+    // FORMATTING
+
+    addFormatToken('X', 0, 0, 'unix');
+    addFormatToken('x', 0, 0, 'valueOf');
+
+    // PARSING
+
+    addRegexToken('x', matchSigned);
+    addRegexToken('X', matchTimestamp);
+    addParseToken('X', function (input, array, config) {
+        config._d = new Date(parseFloat(input, 10) * 1000);
+    });
+    addParseToken('x', function (input, array, config) {
+        config._d = new Date(toInt(input));
+    });
+
+    // Side effect imports
+
+
+    hooks.version = '2.19.1';
+
+    setHookCallback(createLocal);
+
+    hooks.fn = proto;
+    hooks.min = min;
+    hooks.max = max;
+    hooks.now = now;
+    hooks.utc = createUTC;
+    hooks.unix = createUnix;
+    hooks.months = listMonths;
+    hooks.isDate = isDate;
+    hooks.locale = getSetGlobalLocale;
+    hooks.invalid = createInvalid;
+    hooks.duration = createDuration;
+    hooks.isMoment = isMoment;
+    hooks.weekdays = listWeekdays;
+    hooks.parseZone = createInZone;
+    hooks.localeData = getLocale;
+    hooks.isDuration = isDuration;
+    hooks.monthsShort = listMonthsShort;
+    hooks.weekdaysMin = listWeekdaysMin;
+    hooks.defineLocale = defineLocale;
+    hooks.updateLocale = updateLocale;
+    hooks.locales = listLocales;
+    hooks.weekdaysShort = listWeekdaysShort;
+    hooks.normalizeUnits = normalizeUnits;
+    hooks.relativeTimeRounding = getSetRelativeTimeRounding;
+    hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
+    hooks.calendarFormat = getCalendarFormat;
+    hooks.prototype = proto;
+
+    return hooks;
+});
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+function _toConsumableArray(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }return arr2;
+  } else {
+    return Array.from(arr);
+  }
+}
+
+var vueMoment = {
+  install: function install(Vue, options) {
+    var moment$$1 = options && options.moment ? options.moment : moment;
+
+    Object.defineProperties(Vue.prototype, {
+      $moment: {
+        get: function get() {
+          return moment$$1;
+        }
+      }
+    });
+
+    Vue.moment = moment$$1;
+
+    Vue.filter('moment', function () {
+      var arguments$1 = arguments;
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments$1[_key];
+      }
+
+      args = Array.prototype.slice.call(args);
+      var input = args.shift();
+      var date = void 0;
+
+      if (Array.isArray(input) && typeof input[0] === 'string') {
+        // If input is array, assume we're being passed a format pattern to parse against.
+        // Format pattern will accept an array of potential formats to parse against.
+        // Date string should be at [0], format pattern(s) should be at [1]
+        date = moment$$1(input[0], input[1], true);
+      } else if (typeof input === 'number') {
+        if (input.toString().length < 12) {
+          // If input is an integer with fewer than 12 digits, assume Unix seconds...
+          date = moment$$1.unix(input);
+        } else {
+          // ..otherwise, assume milliseconds.
+          date = moment$$1(input);
+        }
+      } else {
+        // Otherwise, throw the input at moment and see what happens...
+        date = moment$$1(input);
+      }
+
+      if (!input || !date.isValid()) {
+        // Log a warning if moment couldn't reconcile the input. Better than throwing an error?
+        console.warn('Could not build a valid `moment` object from input.');
+        return input;
+      }
+
+      function parse() {
+        var arguments$1 = arguments;
+
+        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments$1[_key2];
+        }
+
+        args = Array.prototype.slice.call(args);
+        var method = args.shift();
+
+        switch (method) {
+          case 'add':
+            {
+              /*
+              * Mutates the original moment by adding time.
+              * http://momentjs.com/docs/#/manipulating/add/
+              */
+
+              var addends = args.shift().split(',').map(Function.prototype.call, String.prototype.trim);
+              var obj = {};
+
+              for (var n = 0; n < addends.length; n++) {
+                var addend = addends[n].split(' ');
+                obj[addend[1]] = addend[0];
+              }
+              date.add(obj);
+              break;
+            }
+
+          case 'subtract':
+            {
+              /*
+              * Mutates the original moment by subtracting time.
+              * http://momentjs.com/docs/#/manipulating/subtract/
+              */
+
+              var subtrahends = args.shift().split(',').map(Function.prototype.call, String.prototype.trim);
+              var _obj = {};
+
+              for (var _n = 0; _n < subtrahends.length; _n++) {
+                var subtrahend = subtrahends[_n].split(' ');
+                _obj[subtrahend[1]] = subtrahend[0];
+              }
+              date.subtract(_obj);
+              break;
+            }
+
+          case 'from':
+            {
+              /*
+              * Display a moment in relative time, either from now or from a specified date.
+              * http://momentjs.com/docs/#/displaying/fromnow/
+              */
+
+              var from = 'now';
+              var removeSuffix = false;
+
+              if (args[0] === 'now') { args.shift(); }
+              // If valid, assume it is a date we want the output computed against.
+              if (moment$$1(args[0]).isValid()) { from = moment$$1(args.shift()); }
+
+              if (args[0] === true) {
+                args.shift();
+                removeSuffix = true;
+              }
+
+              if (from !== 'now') {
+                date = date.from(from, removeSuffix);
+              } else {
+                date = date.fromNow(removeSuffix);
+              }
+              break;
+            }
+
+          case 'diff':
+            {
+              /*
+              * Mutates the original moment by doing a difference with another date.
+              * http://momentjs.com/docs/#/displaying/difference/
+              */
+
+              var referenceTime = moment$$1();
+              var units = '';
+              var float = false;
+
+              if (moment$$1(args[0]).isValid()) {
+                // If valid, assume it is a date we want the output computed against.
+                referenceTime = moment$$1(args.shift());
+              } else if (args[0] === null || args[0] === 'now') {
+                // If null or 'now', remove argument and proceed with default referenceTime.
+                args.shift();
+              }
+
+              if (args[0]) { units = args.shift(); }
+
+              if (args[0] === true) { float = args.shift(); }
+
+              date = date.diff(referenceTime, units, float);
+              break;
+            }
+
+          case 'calendar':
+            {
+              /*
+              * Formats a date with different strings depending on how close
+              * to a certain date (today by default) the date is.
+              * http://momentjs.com/docs/#/displaying/calendar-time/
+              */
+
+              var _referenceTime = moment$$1();
+              var formats = {};
+
+              if (moment$$1(args[0]).isValid()) {
+                // If valid, assume it is a date we want the output computed against.
+                _referenceTime = moment$$1(args.shift());
+              } else if (args[0] === null || args[0] === 'now') {
+                // If null or 'now', remove argument and proceed with default referenceTime.
+                args.shift();
+              }
+
+              if (_typeof(args[0]) === 'object') { formats = args.shift(); }
+
+              date = date.calendar(_referenceTime, formats);
+              break;
+            }
+
+          case 'utc':
+            {
+              /*
+              * Mutates the original moment by converting to UTC
+              * https://momentjs.com/docs/#/manipulating/utc/
+              */
+              date.utc();
+              break;
+            }
+
+          case 'timezone':
+            {
+              /*
+              * Mutates the original moment by converting to a new timezone.
+              * https://momentjs.com/timezone/docs/#/using-timezones/converting-to-zone/
+              */
+              date.tz(args.shift());
+              break;
+            }
+
+          default:
+            {
+              /*
+              * Formats a date by taking a string of tokens and replacing
+              * them with their corresponding values.
+              * http://momentjs.com/docs/#/displaying/format/
+              */
+
+              var format = method;
+              date = date.format(format);
+            }
+        }
+
+        if (args.length) { parse.apply(parse, args); }
+      }
+
+      parse.apply(parse, args);
+
+      return date;
+    });
+
+    Vue.filter('duration', function () {
+      var arguments$1 = arguments;
+
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments$1[_key3];
+      }
+
+      /*
+      * Basic pass-through filter for leveraging moment.js's ability
+      * to manipulate and display durations.
+      * https://momentjs.com/docs/#/durations/
+      */
+      args = Array.prototype.slice.call(args);
+      var input = args.shift();
+      var method = args.shift();
+
+      function createDuration(time) {
+        if (!Array.isArray(time)) { time = [time]; }
+        var result = moment$$1.duration.apply(moment$$1, _toConsumableArray(time));
+        if (!result.isValid()) { console.warn('Could not build a valid `duration` object from input.'); }
+        return result;
+      }
+      var duration = createDuration(input);
+
+      if (method === 'add' || method === 'subtract') {
+        // Generates a duration object and either adds or subtracts it
+        // from our original duration.
+        var durationChange = createDuration(args);
+        duration[method](durationChange);
+      } else if (duration && duration[method]) {
+        var _duration;
+
+        // This gives a full proxy to moment.duration functions.
+        duration = (_duration = duration)[method].apply(_duration, _toConsumableArray(args));
+      }
+
+      return duration;
+    });
+  }
+};
+
+var vueMoment_1 = vueMoment.install;
+
+exports['default'] = vueMoment;
+exports.install = vueMoment_1;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -66877,6 +71621,15 @@ __webpack_require__.r(__webpack_exports__);
         context.error.message = error.response.data.errors.message[0];
         context.hidden = true;
       });
+    },
+    setUser: function setUser() {
+      axios.get('/api/auth/user', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(function (response) {
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_USER', response.data);
+      });
     }
   };
 });
@@ -66961,9 +71714,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuebar__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(vuebar__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _js_api_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../js/api/auth */ "./resources/js/api/auth.js");
-/* harmony import */ var _js_api_reset__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../js/api/reset */ "./resources/js/api/reset.js");
+/* harmony import */ var vue_moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js");
+/* harmony import */ var vue_moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue_moment__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _js_api_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../js/api/auth */ "./resources/js/api/auth.js");
+/* harmony import */ var _js_api_reset__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../js/api/reset */ "./resources/js/api/reset.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 
@@ -66995,10 +71751,11 @@ Vue.use(hover_css__WEBPACK_IMPORTED_MODULE_7___default.a);
 Vue.use(country_list__WEBPACK_IMPORTED_MODULE_8___default.a);
 Vue.use(vuebar__WEBPACK_IMPORTED_MODULE_9___default.a);
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_10___default.a, options);
+Vue.use(vue_moment__WEBPACK_IMPORTED_MODULE_11___default.a);
 
 
-Vue.use(_js_api_auth__WEBPACK_IMPORTED_MODULE_11__["default"]);
-Vue.use(_js_api_reset__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.use(_js_api_auth__WEBPACK_IMPORTED_MODULE_12__["default"]);
+Vue.use(_js_api_reset__WEBPACK_IMPORTED_MODULE_13__["default"]);
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 var app = new Vue({
   el: '#app',
@@ -69699,9 +74456,16 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    isLoggedIn: !!localStorage.getItem('token')
+    isLoggedIn: !!localStorage.getItem('token'),
+    userDetails: [],
+    woofList: [],
+    commentList: [],
+    usersList: []
   },
-  getters: {//
+  getters: {
+    UserData: function UserData(state) {
+      return state.userDetails;
+    }
   },
   mutations: {
     loginUser: function loginUser(state) {
@@ -69709,9 +74473,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     logoutUser: function logoutUser(state) {
       state.isLoggedIn = false;
+    },
+    SET_USER: function SET_USER(state, data) {
+      state.userDetails = data;
     }
   },
-  actions: {//
+  actions: {
+    GET_USER: function GET_USER(_ref) {
+      var commit = _ref.commit;
+      commit('SET_USER');
+    }
   }
 }));
 
@@ -69735,8 +74506,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\peral\dev\woofr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\peral\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

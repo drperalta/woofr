@@ -12,6 +12,7 @@ import Hover from 'hover.css'
 import CountryList from 'country-list'
 import Vuebar from 'vuebar'
 import VueProgressBar from 'vue-progressbar'
+import Moment from 'vue-moment'
 
 const options = {
     color: 'white',
@@ -32,6 +33,7 @@ Vue.use(Hover)
 Vue.use(CountryList)
 Vue.use(Vuebar)
 Vue.use(VueProgressBar, options)
+Vue.use(Moment)
 
 
 import Auth from '../js/api/auth'

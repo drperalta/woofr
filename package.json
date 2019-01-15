@@ -29,6 +29,7 @@
     "dependencies": {
         "hover.css": "^2.3.2",
         "vue-breakpoints": "^1.1.0",
+        "vue-moment": "^4.0.0",
         "vue-progressbar": "^0.7.5",
         "vuebar": "0.0.20",
         "vuex": "^3.0.1"
