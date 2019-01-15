@@ -39,6 +39,7 @@ export default function(Vue){
                 context.$root.$emit('login:success')
                 store.commit('loginUser')
                 localStorage.setItem('token', response.data.access_token)
+
                 router.push({ name: 'timeline' })
 
             }).catch(error => {
@@ -93,6 +94,12 @@ export default function(Vue){
                 context.error.error = true;
                 context.error.message = error.response.data.errors.message[0];
                 context.hidden = true;
+            })
+        },
+        setUser(){
+            axios.get('/api/auth/user', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } } )
+            .then(response => {
+                store.commit('SET_USER', response.data)
             })
         }
     }
