@@ -10,7 +10,9 @@
                 </a>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <a href="/profile" class="name">{{ UserData.fullname }}</a>
+                    <div class="name">
+                        <a href="/profile" >{{ UserData.fullname }}</a>
+                    </div>
                     <a href="/profile" class="username">@{{UserData.username}}</a>
                 </div>
             </div>
@@ -85,6 +87,11 @@ background-color: white;
     padding-top: 85px;
 }
 .name{
+    max-width: 100px;
+    max-height: 26px;
+    overflow: hidden !important;
+}
+.name a{
     font-size: 18px;
     font-weight: 600;
     color: #17233d;
