@@ -89,6 +89,19 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
+    //FOR EDITING
+    protected function edit_user_primary(Request $request){
+        
+    }
+    protected function edit_user_profile(Request $request){
+        
+    }
+
+    protected function edit_user_password(Request $request)
+    {
+
+    }
+
     protected function respondWithToken($token, $add)
     {
         return response()->json([
@@ -130,6 +143,7 @@ class AuthController extends Controller
         $user = $this->guard()->user();
 
         return response()->json([
+            'id' => $user->id,
             'fullname' => $user->fullname,
             'username' => $user->username,
             'email' => $user->email,
