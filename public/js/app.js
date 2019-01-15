@@ -3017,6 +3017,7 @@ var countryList = __webpack_require__(/*! country-list */ "./node_modules/countr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3036,6 +3037,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3043,7 +3045,8 @@ __webpack_require__.r(__webpack_exports__);
       PasswordDetails: {
         password: '',
         new_password: '',
-        confirm_new_password: ''
+        confirm_new_password: '',
+        id: 2
       },
       UserPasswordDetails: {
         password: '',
@@ -3059,8 +3062,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.disabled = true;
       }
+    },
+    save: function save() {
+      Vue.auth.save_password(this, this.PasswordDetails);
     }
-  }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
 });
 
 /***/ }),
@@ -49779,15 +49786,11 @@ var render = function() {
                   }
                 },
                 model: {
-                  value: _vm.PasswordDetails.confirm_current_pasword,
+                  value: _vm.PasswordDetails.confirm_new_password,
                   callback: function($$v) {
-                    _vm.$set(
-                      _vm.PasswordDetails,
-                      "confirm_current_pasword",
-                      $$v
-                    )
+                    _vm.$set(_vm.PasswordDetails, "confirm_new_password", $$v)
                   },
-                  expression: "PasswordDetails.confirm_current_pasword"
+                  expression: "PasswordDetails.confirm_new_password"
                 }
               })
             ],
@@ -49805,7 +49808,8 @@ var render = function() {
                     type: "primary",
                     shape: "circle",
                     disabled: this.disabled
-                  }
+                  },
+                  on: { click: _vm.save }
                 },
                 [_vm._v("Change Password")]
               )
@@ -71633,6 +71637,13 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_USER', response.data);
+      });
+    },
+    save_password: function save_password(context, data) {
+      axios.post('/api/auth/save_password', data).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   };

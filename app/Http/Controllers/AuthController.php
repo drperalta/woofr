@@ -90,14 +90,26 @@ class AuthController extends Controller
     }
 
     //FOR EDITING
-    protected function edit_user_primary(Request $request){
-        
+    protected function save_password(Request $request)
+    {
+        $request->validate([
+            'new_password' => 'required|min:6|same:confirm_new_password',
+            'confirm_new_password' => 'sometimes'
+        ]);
+
+        $user = User::where('id', $request->id)->first();
+        $user->update('password', bcrypt($request->new_password));
+
+        return response()->json([
+            ['message' => 'Successfully Updated!']
+        ]);
     }
-    protected function edit_user_profile(Request $request){
+    protected function save_profile(Request $request)
+    {
         
     }
 
-    protected function edit_user_password(Request $request)
+    protected function save_primary(Request $request)
     {
 
     }

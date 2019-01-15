@@ -8,16 +8,18 @@
                 <Input class="input" v-model="PasswordDetails.new_password" size="large" @on-change="changed()"/>
             </FormItem>
             <FormItem class="form-item" label="Confirm Password">
-                <Input class="input" v-model="PasswordDetails.confirm_current_pasword" size="large" @on-change="changed()"/>
+                <Input class="input" v-model="PasswordDetails.confirm_new_password" size="large" @on-change="changed()"/>
             </FormItem>
             <FormItem>
-                <Button  class="button" type="primary" shape="circle" :disabled="this.disabled">Change Password</Button>
+                <Button  class="button" type="primary" shape="circle" :disabled="this.disabled" @click="save">Change Password</Button>
             </FormItem>
         </Form>
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
     data(){
         return{
@@ -26,6 +28,7 @@ export default {
                 password: '',
                 new_password: '',
                 confirm_new_password: '',
+                id: 2
             },
             UserPasswordDetails:{
                 password: '',
@@ -40,8 +43,14 @@ export default {
                 this.UserPasswordDetails.confirm_new_password != this.PasswordDetails.confirm_new_password){
                     this.disabled = false;
             }else{ this.disabled = true; }
+        },
+        save(){
+            Vue.auth.save_password(this, this.PasswordDetails)
         }
-    }
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 
