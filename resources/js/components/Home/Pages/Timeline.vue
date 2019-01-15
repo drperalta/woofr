@@ -32,7 +32,7 @@ export default {
     },
     created(){
         this.$root.active_name = window.location.href.split('/')[3];
-    }
+    },
 }
 </script>
 

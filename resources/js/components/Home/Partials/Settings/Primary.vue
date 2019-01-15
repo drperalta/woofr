@@ -2,14 +2,14 @@
     <div class="content">
         <Form label-position="right" :label-width="111">
             <FormItem class="form-item" label="Full Name">
-                <Input class="input" v-model="PrimaryDetails.full_name" placeholder="Enter your Full Name here" size="large" @on-change="changed()"/>
+                <Input class="input" v-model="UserData.fullname" placeholder="Enter your Full Name here" size="large" @on-change="changed()"/>
             </FormItem>
             <FormItem class="form-item" label="Username">
-                <Input class="input" v-model="PrimaryDetails.user_name" placeholder="Enter your Username here" size="large" @on-change="changed()"/>
-                <span style="margin-left: 7px; color: grey">https://woofr.com/</span>{{PrimaryDetails.user_name}}
+                <Input class="input" v-model="UserData.username" placeholder="Enter your Username here" size="large" @on-change="changed()"/>
+                <span style="margin-left: 7px; color: grey">https://woofr.com/</span>{{UserData.username}}
             </FormItem>
             <FormItem class="form-item" label="Email">
-                <Input class="input" v-model="PrimaryDetails.user_email" placeholder="Enter your Email her" size="large" @on-change="changed()"/>
+                <Input class="input" v-model="UserData.email" placeholder="Enter your Email her" size="large" @on-change="changed()"/>
                 <span style="margin-left: 7px; color: grey;">Email will not be publicly displayed.</span>
             </FormItem>
             <FormItem>
@@ -20,32 +20,31 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
     data(){
         return{
             disabled: true,
-            PrimaryDetails:{
-                full_name: 'David Peralta',
-                user_name: 'IamDavidMe',
-                user_email: 'peraltadavidr@outlook.com',
-            },
-            UserDetails:{
-                full_name: 'David Peralta',
-                user_name: 'IamDavidMe',
-                user_email: 'peraltadavidr@outlook.com',
-            },
-            
+            User:{
+                fullname: '',
+                email: '',
+                username: '',
+            }
         }
     },
     methods:{
         changed(){
-            if(this.UserDetails.full_name != this.PrimaryDetails.full_name ||
-                this.UserDetails.user_name != this.PrimaryDetails.user_name ||
-                this.UserDetails.user_email != this.PrimaryDetails.user_email){
-                    this.disabled = false;
-            }else{ this.disabled = true; }
+            // if(this.UserDetails.full_name != this.PrimaryDetails.full_name ||
+            //     this.UserDetails.user_name != this.PrimaryDetails.user_name ||
+            //     this.UserDetails.user_email != this.PrimaryDetails.user_email){
+            //         this.disabled = false;
+            // }else{ this.disabled = true; }
+            this.disabled = false
         }
-    }
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

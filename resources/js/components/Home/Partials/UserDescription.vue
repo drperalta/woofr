@@ -1,32 +1,36 @@
 <template>
     <div class="box side-box user-description white woofr-border">
-        <div class="description">{{this.$root.UserDetails.description}}</div>
-        <div class="description-list">
+        <div class="description" v-if="UserData.description != null">{{UserData.description}}</div>
+        <div class="description-list" v-if="UserData.country != null">
             <Icon type="ios-pin-outline" size="24"/>
-            Lived in {{this.$root.UserDetails.country}}
+            Lived in {{UserData.country}}
         </div>
-        <div class="description-list" >
+        <div class="description-list" v-if="UserData.website != null">
             <Icon type="ios-link-outline" size="24"/>
-            <a :href="'http://'+this.$root.UserDetails.website">{{this.$root.UserDetails.website}}</a>
+            <a :href="'http://'+UserData.website">{{UserData.website}}</a>
         </div>
-        <div class="description-list">
+        <div class="description-list" v-if="UserData.created_at != null">
             <Icon type="ios-calendar-outline" size="24"/>
-            {{this.$root.UserDetails.created_at}}
+            Joined on {{UserData.created_at['date'] | moment('MMMM DD YYYY')}}
         </div>
-        <div class="description-list">
+        <div class="description-list" v-if="UserData.birthdate != null">
             <Icon type="ios-ice-cream-outline" size="24"/>
-            Born {{this.$root.UserDetails.birthdate}}
+            Born {{UserData.birthdate}}
         </div>
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
     data(){
         return{
             
         }
-    }
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

@@ -32,8 +32,8 @@
                     <DropdownMenu slot="list">
                         <router-link to="/profile">
                             <DropdownItem>
-                                <p class="fullname">{{loggedInUser.full_name}}</p>
-                                <p class="username">@{{loggedInUser.user_name}}</p>
+                                <p class="fullname">{{UserData.fullname}}</p>
+                                <p class="username">@{{UserData.username}}</p>
                             </DropdownItem>
                         </router-link>
                         <Divider class="idivider"/>
@@ -83,19 +83,15 @@
 
 <script>
 import Messages from './Modals/Messages'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
     components: {Messages},
     data(){
         return{
             modal: false,
             search: '',
-            filteredUsers: [],
-            loggedInUser:{
-                full_name: 'David Peralta',
-                user_name: 'IamDavidMe',
-
-            },
-            
+            filteredUsers: []
         }
     },
     methods:{
@@ -113,7 +109,13 @@ export default {
         logout(){
             Vue.auth.logout();
         }
-    }
+    },
+    mounted() {
+        Vue.auth.setUser();
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

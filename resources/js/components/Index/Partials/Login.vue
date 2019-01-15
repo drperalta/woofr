@@ -45,7 +45,6 @@ export default {
         }
     },
     mounted(){
-
         this.$root.$on('login:success', () => {
             this.isLoading = false
         })

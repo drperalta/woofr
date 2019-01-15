@@ -10,8 +10,8 @@
                 </a>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <a href="/profile" class="name">David Peralta</a>
-                    <a href="/profile" class="username">@IamDavidMe</a>
+                    <a href="/profile" class="name">{{ UserData.fullname }}</a>
+                    <a href="/profile" class="username">@{{UserData.username}}</a>
                 </div>
             </div>
             <!-- USER STATS -->
@@ -45,8 +45,17 @@
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex'
 
+export default {
+    data(){
+        return{
+
+        }
+    }, 
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

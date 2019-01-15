@@ -1,7 +1,7 @@
 <template>
     <div class="box side-box user-description white woofr-border">
 
-        <Input class="description" v-model="this.$root.UserDetails.description" :value="search" type="textarea" :maxlength="110" placeholder="Bio" :autosize="{minRows: 1,maxRows: 4}"/>
+        <Input class="description" v-model="UserData.description" :value="search" type="textarea" :maxlength="110" placeholder="Bio" :autosize="{minRows: 1,maxRows: 4}"/>
         
         <AutoComplete clearable class="country-bar input" v-model="search" @on-change="filterList()" placeholder="Location">
             <Option v-for="(country, index) in filteredCountries" :value="country.name" :key="index">
@@ -9,8 +9,8 @@
             </Option>
         </AutoComplete>
 
-        <Input class="input" v-model="this.$root.UserDetails.website" placeholder="Website"/>
-        <DatePicker class="input" v-model="this.$root.UserDetails.birthdate" type="date" placeholder="Birthdate" format="MMMM dd yyyy" style="width: 100%;"></DatePicker>
+        <Input class="input" v-model="UserData.website" placeholder="Website"/>
+        <DatePicker class="input" v-model="UserData.birthdate" type="date" placeholder="Birthdate" format="MMMM dd yyyy" style="width: 100%;"></DatePicker>
 
         <div class="button">
             <Button shape="circle" @click="cancel()">Cancel</Button>
@@ -22,12 +22,13 @@
 
 <script>
 const countryList = require('country-list');
+import {mapGetters} from 'vuex'
 
 export default {
     data(){
         return{
             filteredCountries: [],
-            search: this.$root.UserDetails.country
+            search: ''
         }
     },
     methods:{
@@ -55,7 +56,10 @@ export default {
     },
     created(){
         console.log(countryList.getData());
-    }
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

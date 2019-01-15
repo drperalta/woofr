@@ -8,8 +8,8 @@
                 </a>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <a href="#" class="name">{{this.$root.UserDetails.full_name}}</a>
-                    <a href="#" class="username">@{{this.$root.UserDetails.user_name}}</a>
+                    <a href="#" class="name">{{ UserData.fullname }}</a>
+                    <a href="#" class="username">@{{ UserData.username }}</a>
                 </div>
             </div>
 
@@ -63,6 +63,8 @@ import Trending from '../Partials/Trending'
 import UserDescription from '../Partials/UserDescription'
 import EditProfile from '../Partials/Settings/EditProfile'
 
+import { mapGetters } from 'vuex'
+
 export default {
     components: {Trending, UserDescription, EditProfile},
     data(){
@@ -89,7 +91,10 @@ export default {
                 return true;
             } return false; 
         }
-    }
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

@@ -6,11 +6,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state:{
-        isLoggedIn: !!localStorage.getItem('token')
+        isLoggedIn: !!localStorage.getItem('token'),
+        userDetails: [],
+        woofList: [],
+        commentList: [],
+        usersList: [],
+
     },
 
     getters: {
-        //
+        UserData: state => {
+            return  state.userDetails;
+        }
+
     },
 
     mutations:{
@@ -20,10 +28,15 @@ export default new Vuex.Store({
         logoutUser (state) {
             state.isLoggedIn = false
         },
+        SET_USER: (state, data) => {
+            state.userDetails = data
+        }
     },
 
     actions:{
-        //
+        GET_USER({commit}) {
+            commit('SET_USER');
+        }
     }
 
 
