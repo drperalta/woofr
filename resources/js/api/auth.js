@@ -101,6 +101,14 @@ export default function(Vue){
             .then(response => {
                 store.commit('SET_USER', response.data)
             })
+        },
+        save_password(context, data){
+            axios.post('/api/auth/save_password', data)
+            .then(response => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
         }
     }
 }
