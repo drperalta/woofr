@@ -31,6 +31,10 @@ Route::group([ 'prefix' => 'auth' ], function ()
 
     Route::get('user', 'AuthController@user');
     
+    Route::post('edit_password', 'AuthController@edit_user_password');
+    Route::post('edit_profile', 'AuthController@edit_user_profile');
+    Route::post('edit_primary', 'AuthController@edit_user_primary');
+
 });
 
 // PASSWORD RESET ROUTES
