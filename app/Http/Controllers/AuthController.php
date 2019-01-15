@@ -53,6 +53,7 @@ class AuthController extends Controller
 
             $credentials['is_active'] = 1;
             $credentials['deleted_at'] = null;
+            $credentials['role'] = 2;
 
             //Will check if Email is Verified
             if($token = auth()->attempt($credentials)){
@@ -92,6 +93,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
+            'user' => $this->guard()->user(),
             'token_type'   => 'bearer',
             'expires_in'   => auth()->factory()->getTTL() * 60 * $add
         ]);
@@ -123,9 +125,20 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function me()
-    {
-        return response()->json(auth()->user());
+    public function user()
+    {   
+        $user = $this->guard()->user();
+
+        return response()->json([
+            'fullname' => $user->fullname,
+            'username' => $user->username,
+            'email' => $user->email,
+            'description' => $user->description,
+            'country' => $user->country,
+            'website' => $user->website,
+            'birthdate' => $user->birthdate,
+            'created_at' => $user->created_at,
+        ]);
     }
 
     public function validate_token($token){
@@ -139,5 +152,8 @@ class AuthController extends Controller
         }else{
             return $user->email;
         }
+    }
+    public function guard(){
+        return \Auth::Guard('api');
     }
 }
