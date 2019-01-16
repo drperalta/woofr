@@ -125,11 +125,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     logout: function logout() {
       Vue.auth.logout();
+    },
+    searchUser: function searchUser() {
+      Vue.user.setUserList();
     }
   },
   mounted: function mounted() {
     Vue.auth.setUser();
-    Vue.user.setUserList();
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['UserData', 'UserList'])
 });
@@ -655,7 +657,8 @@ var render = function() {
                       on: {
                         "on-search": function($event) {
                           _vm.filterList()
-                        }
+                        },
+                        "on-change": _vm.searchUser
                       },
                       model: {
                         value: _vm.search,

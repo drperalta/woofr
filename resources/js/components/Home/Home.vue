@@ -58,7 +58,7 @@
 
                 <div class="nav-right">
                     <!-- SEARCH BAR -->
-                    <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
+                    <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" @on-change="searchUser" v-model="search">
                         <Option v-for="user in filteredUsers" :value="user.fullname" :key="user.id">
                                 <router-link :to="'/'+user.username">
                                     <Avatar icon="ios-person" size="small" style="margin-right: 5px;"/>
@@ -108,11 +108,13 @@ export default {
         },
         logout(){
             Vue.auth.logout();
+        },
+        searchUser(){
+            Vue.user.setUserList();
         }
     },
     mounted() {
         Vue.auth.setUser();
-        Vue.user.setUserList();
     },
     computed: mapGetters([
         'UserData',
