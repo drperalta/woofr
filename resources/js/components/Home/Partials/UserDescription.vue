@@ -15,7 +15,7 @@
         </div>
         <div class="description-list" v-if="data().birthdate != null">
             <Icon type="ios-ice-cream-outline" size="24"/>
-            Born {{data().birthdate | moment('MMMM DD YYYY')}}
+            Born on {{data().birthdate | moment('MMMM DD YYYY')}}
         </div>
     </div>
 </template>

@@ -996,7 +996,7 @@ var render = function() {
                 attrs: { type: "ios-ice-cream-outline", size: "24" }
               }),
               _vm._v(
-                "\n        Born " +
+                "\n        Born on " +
                   _vm._s(
                     _vm._f("moment")(_vm.data().birthdate, "MMMM DD YYYY")
                   ) +
