@@ -3121,7 +3121,10 @@ __webpack_require__.r(__webpack_exports__);
       //     this.UserDetails.user_email != this.PrimaryDetails.user_email){
       //         this.disabled = false;
       // }else{ this.disabled = true; }
-      this.disabled = false;
+      Vue.user.primary_onchange(this, this.UserData);
+    },
+    save: function save() {
+      Vue.user.edit_primary(this, this.UserData);
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
@@ -71720,11 +71723,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
   Vue.user = {
     edit_password: function edit_password(context, data) {
-      axios.post('/api/user/edit/password', data, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }).then(function (response) {
+      axios.post('/api/user/edit/password', data, this.auth()).then(function (response) {
         context.$Message.success('Your password is successfully updated!');
         context.PasswordDetails.password = '';
         context.PasswordDetails.new_password = '';
@@ -71732,9 +71731,35 @@ __webpack_require__.r(__webpack_exports__);
         context.disabled = true;
         console.log(response);
       }).catch(function (error) {
-        context.$Message.error(error.response.data.errors[0]);
+        var errorArray = Object.values(error.response.data.errors);
+        context.$Message.error({
+          content: errorArray[0][0],
+          duration: 5,
+          closable: true
+        });
         console.log(error.response.data.errors);
       });
+    },
+    edit_primary: function edit_primary(context, data) {
+      axios.post('/api/user/edit/primary', data, this.auth()).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    primary_onchange: function primary_onchange(context, data) {
+      axios.post('/api/user/edit/primary_onchange', data, this.auth()).then(function (response) {
+        context.disabled = false;
+      }).catch(function (error) {
+        context.disabled = true;
+      });
+    },
+    auth: function auth() {
+      return {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      };
     }
   };
 });

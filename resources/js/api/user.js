@@ -5,7 +5,7 @@ export default function(Vue){
     Vue.user = {
 
         edit_password(context, data){
-            axios.post('/api/user/edit/password', data, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+            axios.post('/api/user/edit/password', data, this.auth())
             .then(response => {
 
                 context.$Message.success('Your password is successfully updated!');
@@ -17,10 +17,29 @@ export default function(Vue){
 
                 console.log(response)
             }).catch(error => {
-                
-                context.$Message.error(error.response.data.errors[0]);
+                var errorArray = Object.values(error.response.data.errors);
+                context.$Message.error({content: errorArray[0][0] ,duration: 5, closable: true});
                 console.log(error.response.data.errors)
             })
+        },
+        edit_primary(context, data){
+            axios.post('/api/user/edit/primary', data, this.auth())
+            .then(response => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        primary_onchange(context,data){
+            axios.post('/api/user/edit/primary_onchange', data, this.auth())
+            .then(response => {
+                context.disabled = false;
+            }).catch(error => {
+                context.disabled = true;
+            })
+        },
+        auth(){
+            return { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } }
         }
     }
 }

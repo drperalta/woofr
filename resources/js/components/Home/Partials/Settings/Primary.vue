@@ -39,7 +39,10 @@ export default {
             //     this.UserDetails.user_email != this.PrimaryDetails.user_email){
             //         this.disabled = false;
             // }else{ this.disabled = true; }
-            this.disabled = false
+            Vue.user.primary_onchange(this, this.UserData);
+        },
+        save(){
+            Vue.user.edit_primary(this, this.UserData)
         }
     },
     computed: mapGetters([

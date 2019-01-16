@@ -29,8 +29,8 @@ class UserController extends Controller
 
         }else{
             return response()->json([
-                'errors' => [ 'message' => ['Your current password is incorrect.'] ]
-            ], 404);   
+                'errors' => ['password' => ['Your current password is incorrect.']]
+            ], 406);   
         }
     }
     protected function description(){
@@ -38,6 +38,20 @@ class UserController extends Controller
     }
     protected function primary(){
         
+    }
+    protected function primary_onchange(Request $request){
+
+        $user = $this->guard()->user();
+
+        if($user->fullname != $request->fullname || $user->email != $request->email || $user->username != $request->username){
+            return response()->json([
+                
+            ],200);
+        }else{
+            return response()->json([
+                
+            ],404);
+        }
     }
     public function guard(){
         return \Auth::Guard('api');

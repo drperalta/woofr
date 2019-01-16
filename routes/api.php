@@ -43,6 +43,7 @@ Route::group([ 'prefix' => 'user' ], function()
         Route::post('password', 'UserController@password');
         Route::post('description', 'UserController@description');
         Route::post('primary', 'UserController@primary');
+        Route::post('primary_onchange', 'UserController@primary_onchange');
     }); 
 });
 
