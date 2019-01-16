@@ -4,30 +4,31 @@ import store from '../store/index'
 
 Vue.use(VueRouter)
 
-import Index from '../components/Index/Index'
-import Login from '../components/Index/Partials/Login'
-import SignUp from '../components/Index/Partials/SignUp'
 
-import ResetPasswordRequest from '../components/Index/Partials/ResetPasswordRequest'
-import ResetPassword from '../components/Index/Partials/ResetPassword'
-import VerifyEmail from '../components/Index/Partials/VerifyEmail'
+const Index = () => import('../components/Index/Index')
+const Login = () => import('../components/Index/Partials/Login')
+const SignUp = () => import('../components/Index/Partials/SignUp')
 
-import Home from '../components/Home/Home'
-import Timeline from '../components/Home/Pages/Timeline.vue'
-import Notifications from '../components/Home/Pages/Notifications.vue'
-import Profile from '../components/Home/Pages/Profile'
+const ResetPasswordRequest = () => import('../components/Index/Partials/ResetPasswordRequest')
+const ResetPassword  = () => import( '../components/Index/Partials/ResetPassword')
+const VerifyEmail = () => import('../components/Index/Partials/VerifyEmail')
 
-import Notifs from '../components/Home/Partials/Notifications/Notifs'
-import Mentions from '../components/Home/Partials/Notifications/Mentions'
+const Home = () => import('../components/Home/Home.vue')
+const Timeline = () => import('../components/Home/Pages/Timeline.vue')
+const Notifications = () => import('../components/Home/Pages/Notifications.vue')
+const Profile = () => import('../components/Home/Pages/Profile')
 
-import Woofs from '../components/Home/Partials/Profile/Woofs'
-import Followers from '../components/Home/Partials/Profile/Followers'
-import Following from '../components/Home/Partials/Profile/Following'
-import Likes from '../components/Home/Partials/Profile/Likes'
-import Settings from '../components/Home/Partials/Settings'
+const Notifs = () => import('../components/Home/Partials/Notifications/Notifs')
+const Mentions = () => import('../components/Home/Partials/Notifications/Mentions')
 
-import Primary from '../components/Home/Partials/Settings/Primary'
-import Password from '../components/Home/Partials/Settings/Password'
+const Woofs = () => import('../components/Home/Partials/Profile/Woofs')
+const Followers = () => import('../components/Home/Partials/Profile/Followers')
+const Following = () => import('../components/Home/Partials/Profile/Following')
+const Likes = () => import('../components/Home/Partials/Profile/Likes')
+const Settings = () => import('../components/Home/Partials/Settings')
+
+const Primary = () => import('../components/Home/Partials/Settings/Primary')
+const Password = () => import('../components/Home/Partials/Settings/Password')
 
 let router = new VueRouter({
 
