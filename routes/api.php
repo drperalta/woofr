@@ -29,13 +29,21 @@ Route::group([ 'prefix' => 'auth' ], function ()
     Route::get('verify_email/{activation_token}', 'AuthController@verify_email');
     Route::get('verify_email/validate/{activation_token}', 'AuthController@validate_token');
 
-    Route::get('user', 'AuthController@user');
-    
-    Route::post('save_password', 'AuthController@save_password');
-    Route::post('save_profile', 'AuthController@save_profile');
-    Route::post('save_primary', 'AuthController@save_primary');
-
 });
+
+// USER ROUTES
+Route::group([ 'prefix' => 'user' ], function()
+{   
+    Route::get('data', 'AuthController@data');
+
+    Route::group([ 'prefix' => 'edit' ], function()
+    {
+        Route::post('password', 'AuthController@password');
+        Route::post('description', 'AuthController@description');
+        Route::post('primary', 'AuthController@primary');
+    }); 
+});
+
 
 // PASSWORD RESET ROUTES
 Route::group([ 'middleware' => 'api', 'prefix' => 'password'], function ()
