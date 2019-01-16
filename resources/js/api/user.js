@@ -22,6 +22,7 @@ export default function(Vue){
         edit_primary(context, data){
             axios.post('/api/user/edit/primary', data, this.auth())
             .then(response => {
+                context.disabled = true;
                 context.$Message.success(response.data.message);
             }).catch(error => {
                 var errorArray = Object.values(error.response.data.errors);

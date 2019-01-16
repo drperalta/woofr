@@ -65230,6 +65230,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     edit_primary: function edit_primary(context, data) {
       axios.post('/api/user/edit/primary', data, this.auth()).then(function (response) {
+        context.disabled = true;
         context.$Message.success(response.data.message);
       }).catch(function (error) {
         var errorArray = Object.values(error.response.data.errors);
