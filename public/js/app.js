@@ -71607,11 +71607,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //This is to check if the Activation Token is Valid
     check: function check(context, data) {
-      axios.get('/api/auth/check/', data).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
+      axios.get('/api/auth/check/', data).then(function (response) {}).catch(function (error) {});
     },
     //This is when confirming email verification
     verify: function verify(context, token) {
@@ -71620,7 +71616,6 @@ __webpack_require__.r(__webpack_exports__);
         context.success.success = true;
         context.success.message = response.data.message;
         context.hidden = true;
-        console.log(response);
       }).catch(function (error) {
         context.$root.$emit('verify:error');
         context.error.error = true;
@@ -71647,11 +71642,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     save_password: function save_password(context, data) {
-      axios.post('/api/auth/save_password', data).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
+      axios.post('/api/auth/save_password', data).then(function (response) {}).catch(function (error) {});
     }
   };
 });
@@ -71730,7 +71721,6 @@ __webpack_require__.r(__webpack_exports__);
         context.PasswordDetails.new_password = '';
         context.PasswordDetails.confirm_new_password = '';
         context.disabled = true;
-        console.log(response);
       }).catch(function (error) {
         var errorArray = Object.values(error.response.data.errors);
         context.$Message.error({
@@ -71738,7 +71728,6 @@ __webpack_require__.r(__webpack_exports__);
           duration: 5,
           closable: true
         });
-        console.log(error.response.data.errors);
       });
     },
     edit_primary: function edit_primary(context, data) {
@@ -71757,9 +71746,17 @@ __webpack_require__.r(__webpack_exports__);
         birthdate: data.birthdate
       }, this.auth()).then(function (response) {
         context.$Message.success(response.data.message);
-        console.log(response);
       }).catch(function (error) {
         console.log(error);
+      });
+    },
+    userList: function userList() {
+      axios.get('/api/user/list', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(function (response) {
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_USER_LIST', response.data);
       });
     },
     primary_onchange: function primary_onchange(context, data) {
@@ -71875,7 +71872,7 @@ var app = new Vue({
       }, {
         id: 2,
         full_name: 'David Peralta',
-        user_name: 'IamDavidMe',
+        user_name: 'iamdavidme',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
         following: true
       }, {
@@ -74558,11 +74555,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     userDetails: [],
     woofList: [],
     commentList: [],
-    usersList: []
+    usersList: [],
+    visitedUserData: []
   },
   getters: {
     UserData: function UserData(state) {
       return state.userDetails;
+    },
+    visitedData: function visitedData(state) {
+      return state.visitedUserData;
+    },
+    UserList: function UserList(state) {
+      return state.usersList;
     }
   },
   mutations: {
@@ -74574,12 +74578,26 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     SET_USER: function SET_USER(state, data) {
       state.userDetails = data;
+    },
+    SET_VISITED_USER: function SET_VISITED_USER(state, data) {
+      state.visitedUserData = data;
+    },
+    SET_USER_LIST: function SET_USER_LIST(state, data) {
+      state.usersList = data;
     }
   },
   actions: {
     GET_USER: function GET_USER(_ref) {
       var commit = _ref.commit;
       commit('SET_USER');
+    },
+    GET_VISITED_USER: function GET_VISITED_USER(_ref2) {
+      var commit = _ref2.commit;
+      commit('SET_VISITED_USER');
+    },
+    GET_USER_LIST: function GET_USER_LIST(_ref3) {
+      var commit = _ref3.commit;
+      commit('SET_USER_LIST');
     }
   }
 }));

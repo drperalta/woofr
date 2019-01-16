@@ -37,7 +37,10 @@ Route::group([ 'prefix' => 'auth' ], function ()
 
 // USER ROUTES
 Route::group([ 'prefix' => 'user' ], function()
-{   
+{      
+    Route::get('visited/{username}', 'UserController@visited');
+    Route::get('list', 'UserController@list');
+
     Route::group([ 'middleware' => 'auth:api' , 'prefix' => 'edit' ], function()
     {
         Route::post('password', 'UserController@password');

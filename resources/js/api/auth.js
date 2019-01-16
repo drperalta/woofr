@@ -62,9 +62,7 @@ export default function(Vue){
         check(context, data){
             axios.get('/api/auth/check/', data)
             .then(response => {
-                console.log(response)
             }).catch(error => {
-                console.log(error)
             })
         },
         //This is when confirming email verification
@@ -75,7 +73,6 @@ export default function(Vue){
                 context.success.success = true;
                 context.success.message = response.data.message;
                 context.hidden = true;
-                console.log(response)
 
             }).catch(error => {
                 context.$root.$emit('verify:error')
@@ -104,9 +101,7 @@ export default function(Vue){
         save_password(context, data){
             axios.post('/api/auth/save_password', data)
             .then(response => {
-                console.log(response)
             }).catch(error => {
-                console.log(error)
             })
         }
     }
