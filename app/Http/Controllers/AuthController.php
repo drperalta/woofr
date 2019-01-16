@@ -114,7 +114,7 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json([
                 'errors' => [ 'message' => ['This activation token is invalid.'] ]
-            ], 404);
+            ], 401);
         }
 
         $user->is_active = true;
@@ -150,7 +150,7 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json([
                 'errors' => [ 'message' => ['This activation token is invalid.'] ]
-            ], 404);
+            ], 401);
         }else{
             return $user->email;
         }
