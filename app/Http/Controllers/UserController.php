@@ -10,7 +10,22 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
-{
+{   
+    protected function visited($username){
+        $user = User::where('username', $username)->first();
+
+        return response()->json([
+            'id' => $user->id,
+            'fullname' => $user->fullname,
+            'username' => $user->username,
+            'email' => $user->email,
+            'description' => $user->description,
+            'country' => $user->country,
+            'website' => $user->website,
+            'birthdate' => $user->birthdate,
+            'created_at' => $user->created_at,
+        ]);
+    }
     protected function password(Request $request){
         
         $user = $this->guard()->user();
@@ -74,6 +89,9 @@ class UserController extends Controller
             'message' => 'Successfully saved changes!'
         ],200);
 
+    }
+    protected function list(Request $request){
+        return User::all();
     }
     protected function primary_onchange(Request $request){
 
