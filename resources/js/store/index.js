@@ -19,7 +19,7 @@ export default new Vuex.Store({
         UserData: state => {
             return  state.userDetails;
         },
-        visitedData: state => {
+        VisitedData: state => {
             return state.visitedUserData;
         },
         UserList: state => {

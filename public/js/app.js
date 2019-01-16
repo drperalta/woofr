@@ -74562,7 +74562,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     UserData: function UserData(state) {
       return state.userDetails;
     },
-    visitedData: function visitedData(state) {
+    VisitedData: function VisitedData(state) {
       return state.visitedUserData;
     },
     UserList: function UserList(state) {
