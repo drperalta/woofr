@@ -87,7 +87,7 @@ background-color: white;
     padding-top: 85px;
 }
 .name{
-    max-width: 100px;
+    max-width: 200px;
     max-height: 26px;
     overflow: hidden !important;
 }
