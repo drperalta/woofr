@@ -23,24 +23,26 @@ Route::group([ 'prefix' => 'auth' ], function ()
 {
     Route::post('signup', 'AuthController@signup');
     Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-
+    
     Route::get('link/{activation_token}', 'AuthController@link');
     Route::get('verify_email/{activation_token}', 'AuthController@verify_email');
     Route::get('verify_email/validate/{activation_token}', 'AuthController@validate_token');
 
+    Route::group([ 'middleware' => 'auth:api' ], function()
+    {
+        Route::post('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+    });
 });
 
 // USER ROUTES
 Route::group([ 'prefix' => 'user' ], function()
 {   
-    Route::get('data', 'AuthController@data');
-
-    Route::group([ 'prefix' => 'edit' ], function()
+    Route::group([ 'middleware' => 'auth:api' , 'prefix' => 'edit' ], function()
     {
-        Route::post('password', 'AuthController@password');
-        Route::post('description', 'AuthController@description');
-        Route::post('primary', 'AuthController@primary');
+        Route::post('password', 'UserController@password');
+        Route::post('description', 'UserController@description');
+        Route::post('primary', 'UserController@primary');
     }); 
 });
 

@@ -38,10 +38,11 @@ Vue.use(Moment)
 
 import Auth from '../js/api/auth'
 import Reset from '../js/api/reset'
+import User from '../js/api/user'
 
 Vue.use(Auth)
 Vue.use(Reset)
-
+Vue.use(User)
 
 
 

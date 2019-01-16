@@ -85,7 +85,6 @@ export default function(Vue){
 
             })
         },
-
         validate(context, token){
             axios.get('/api/auth/verify_email/validate/'+token)
             .then(response => {

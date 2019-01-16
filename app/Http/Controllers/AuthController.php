@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -27,7 +28,7 @@ class AuthController extends Controller
             'fullname' => $request->fullname,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => bcrypt($request['password']),
+            'password' => Hash::make($request->password),
             'activation_token' => str_random(60)
         ]);
 
@@ -84,34 +85,9 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->logout();
+        $this->guard()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    //FOR EDITING
-    protected function save_password(Request $request)
-    {
-        $request->validate([
-            'new_password' => 'required|min:6|same:confirm_new_password',
-            'confirm_new_password' => 'sometimes'
-        ]);
-
-        $user = User::where('id', $request->id)->first();
-        $user->update('password', bcrypt($request->new_password));
-
-        return response()->json([
-            ['message' => 'Successfully Updated!']
-        ]);
-    }
-    protected function save_profile(Request $request)
-    {
-        
-    }
-
-    protected function save_primary(Request $request)
-    {
-
     }
 
     protected function respondWithToken($token, $add)

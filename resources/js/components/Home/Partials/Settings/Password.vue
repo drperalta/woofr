@@ -2,13 +2,13 @@
     <div class="content">
         <Form label-position="right" :label-width="111">
             <FormItem class="form-item" label="Current Password">
-                <Input class="input" v-model="PasswordDetails.password" size="large"/>
+                <Input class="input" v-model="PasswordDetails.password" size="large" type="password"/>
             </FormItem>
             <FormItem class="form-item" label="New Password">
-                <Input class="input" v-model="PasswordDetails.new_password" size="large" @on-change="changed()"/>
+                <Input class="input" v-model="PasswordDetails.new_password" size="large" type="password" @on-change="changed()"/>
             </FormItem>
             <FormItem class="form-item" label="Confirm Password">
-                <Input class="input" v-model="PasswordDetails.confirm_new_password" size="large" @on-change="changed()"/>
+                <Input class="input" v-model="PasswordDetails.confirm_new_password" size="large" type="password" @on-change="changed()"/>
             </FormItem>
             <FormItem>
                 <Button  class="button" type="primary" shape="circle" :disabled="this.disabled" @click="save">Change Password</Button>
@@ -27,8 +27,7 @@ export default {
             PasswordDetails:{
                 password: '',
                 new_password: '',
-                confirm_new_password: '',
-                id: 2
+                confirm_new_password: ''
             },
             UserPasswordDetails:{
                 password: '',
@@ -45,7 +44,7 @@ export default {
             }else{ this.disabled = true; }
         },
         save(){
-            Vue.auth.save_password(this, this.PasswordDetails)
+            Vue.user.edit_password(this, this.PasswordDetails)
         }
     },
     computed: mapGetters([

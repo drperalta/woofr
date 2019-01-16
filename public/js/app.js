@@ -3045,8 +3045,7 @@ __webpack_require__.r(__webpack_exports__);
       PasswordDetails: {
         password: '',
         new_password: '',
-        confirm_new_password: '',
-        id: 2
+        confirm_new_password: ''
       },
       UserPasswordDetails: {
         password: '',
@@ -3064,7 +3063,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     save: function save() {
-      Vue.auth.save_password(this, this.PasswordDetails);
+      Vue.user.edit_password(this, this.PasswordDetails);
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
@@ -49736,7 +49735,7 @@ var render = function() {
             [
               _c("Input", {
                 staticClass: "input",
-                attrs: { size: "large" },
+                attrs: { size: "large", type: "password" },
                 model: {
                   value: _vm.PasswordDetails.password,
                   callback: function($$v) {
@@ -49755,7 +49754,7 @@ var render = function() {
             [
               _c("Input", {
                 staticClass: "input",
-                attrs: { size: "large" },
+                attrs: { size: "large", type: "password" },
                 on: {
                   "on-change": function($event) {
                     _vm.changed()
@@ -49779,7 +49778,7 @@ var render = function() {
             [
               _c("Input", {
                 staticClass: "input",
-                attrs: { size: "large" },
+                attrs: { size: "large", type: "password" },
                 on: {
                   "on-change": function($event) {
                     _vm.changed()
@@ -50405,7 +50404,11 @@ var render = function() {
                 attrs: { type: "ios-ice-cream-outline", size: "24" }
               }),
               _vm._v(
-                "\n        Born " + _vm._s(_vm.UserData.birthdate) + "\n    "
+                "\n        Born " +
+                  _vm._s(
+                    _vm._f("moment")(_vm.UserData.birthdate, "MMMM DD YYYY")
+                  ) +
+                  "\n    "
               )
             ],
             1
@@ -71701,6 +71704,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/user.js":
+/*!**********************************!*\
+  !*** ./resources/js/api/user.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../router/index */ "./resources/js/router/index.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
+  Vue.user = {
+    edit_password: function edit_password(context, data) {
+      axios.post('/api/user/edit/password', data, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(function (response) {
+        context.$Message.success('Your password is successfully updated!');
+        context.PasswordDetails.password = '';
+        context.PasswordDetails.new_password = '';
+        context.PasswordDetails.confirm_new_password = '';
+        context.disabled = true;
+        console.log(response);
+      }).catch(function (error) {
+        context.$Message.error(error.response.data.errors[0]);
+        console.log(error.response.data.errors);
+      });
+    }
+  };
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -71733,6 +71773,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vue_moment__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _js_api_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../js/api/auth */ "./resources/js/api/auth.js");
 /* harmony import */ var _js_api_reset__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../js/api/reset */ "./resources/js/api/reset.js");
+/* harmony import */ var _js_api_user__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../js/api/user */ "./resources/js/api/user.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
@@ -71769,8 +71810,10 @@ Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_10___default.a, options);
 Vue.use(vue_moment__WEBPACK_IMPORTED_MODULE_11___default.a);
 
 
+
 Vue.use(_js_api_auth__WEBPACK_IMPORTED_MODULE_12__["default"]);
 Vue.use(_js_api_reset__WEBPACK_IMPORTED_MODULE_13__["default"]);
+Vue.use(_js_api_user__WEBPACK_IMPORTED_MODULE_14__["default"]);
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 var app = new Vue({
   el: '#app',
