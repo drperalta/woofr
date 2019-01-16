@@ -49957,7 +49957,8 @@ var render = function() {
                     type: "primary",
                     shape: "circle",
                     disabled: this.disabled
-                  }
+                  },
+                  on: { click: _vm.save }
                 },
                 [_vm._v("Save Changes")]
               )
@@ -71742,9 +71743,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     edit_primary: function edit_primary(context, data) {
       axios.post('/api/user/edit/primary', data, this.auth()).then(function (response) {
-        console.log(response);
+        context.$Message.success(response.data.message);
       }).catch(function (error) {
-        console.log(error);
+        var errorArray = Object.values(error.response.data.errors);
+        context.$Message.error(errorArray[0][0]);
       });
     },
     primary_onchange: function primary_onchange(context, data) {

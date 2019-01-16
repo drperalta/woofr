@@ -13,7 +13,7 @@
                 <span style="margin-left: 7px; color: grey;">Email will not be publicly displayed.</span>
             </FormItem>
             <FormItem>
-                <Button class="button" type="primary" shape="circle" :disabled="this.disabled">Save Changes</Button>
+                <Button class="button" type="primary" shape="circle" :disabled="this.disabled" @click="save">Save Changes</Button>
             </FormItem>
         </Form>
     </div>

@@ -25,9 +25,10 @@ export default function(Vue){
         edit_primary(context, data){
             axios.post('/api/user/edit/primary', data, this.auth())
             .then(response => {
-                console.log(response)
+                context.$Message.success(response.data.message);
             }).catch(error => {
-                console.log(error)
+                var errorArray = Object.values(error.response.data.errors);
+                context.$Message.error(errorArray[0][0])
             })
         },
         primary_onchange(context,data){
