@@ -14,12 +14,9 @@ export default function(Vue){
                 context.PasswordDetails.new_password  = '';
                 context.PasswordDetails.confirm_new_password  = '';
                 context.disabled = true;
-
-                console.log(response)
             }).catch(error => {
                 var errorArray = Object.values(error.response.data.errors);
                 context.$Message.error({content: errorArray[0][0] ,duration: 5, closable: true});
-                console.log(error.response.data.errors)
             })
         },
         edit_primary(context, data){
@@ -42,9 +39,14 @@ export default function(Vue){
             , this.auth())
             .then(response => {
                 context.$Message.success(response.data.message);
-                console.log(response)
             }).catch(error => {
                 console.log(error)
+            })
+        },
+        userList(){
+            axios.get('/api/user/list', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } } )
+            .then(response => {
+                store.commit('SET_USER_LIST', response.data)
             })
         },
         primary_onchange(context,data){
