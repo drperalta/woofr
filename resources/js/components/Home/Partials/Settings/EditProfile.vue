@@ -1,20 +1,21 @@
 <template>
     <div class="box side-box user-description white woofr-border">
 
-        <Input class="description" v-model="UserData.description" :value="search" type="textarea" :maxlength="110" placeholder="Bio" :autosize="{minRows: 1,maxRows: 4}"/>
+        <Input class="description" v-model="UserData.description" :value="country" type="textarea" :maxlength="110" placeholder="Bio" :autosize="{minRows: 1,maxRows: 4}"/>
         
-        <AutoComplete clearable class="country-bar input" v-model="search" @on-change="filterList()" placeholder="Location">
+        <AutoComplete clearable class="country-bar input" v-model="country" @on-change="filterList()" placeholder="Location">
             <Option v-for="(country, index) in filteredCountries" :value="country.name" :key="index">
                 {{ country.name }}
             </Option>
         </AutoComplete>
 
         <Input class="input" v-model="UserData.website" placeholder="Website"/>
-        <DatePicker class="input" v-model="UserData.birthdate" type="date" placeholder="Birthdate" format="MMMM dd yyyy" style="width: 100%;"></DatePicker>
+
+        <DatePicker class="input" v-model="UserData.birthdate" type="date" placeholder="Birthdate" style="width: 100%;"></DatePicker>
 
         <div class="button">
             <Button shape="circle" @click="cancel()">Cancel</Button>
-            <Button type="primary" shape="circle" style="float: right" @click="save()">Save Changes</Button>
+            <Button type="primary" shape="circle" style="float: right" @click="save">Save Changes</Button>
         </div>
         
     </div>
@@ -28,13 +29,13 @@ export default {
     data(){
         return{
             filteredCountries: [],
-            search: ''
+            country: ''
         }
     },
     methods:{
         filterList(){
             var vm=this;
-            this.filteredCountries = countryList.getData().filter(function(data){return data.name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;})
+            this.filteredCountries = countryList.getData().filter(function(data){return data.name.toLowerCase().indexOf(vm.country.toLowerCase())>=0;})
         },
         handleReachBottom () {
                 return new Promise(resolve => {
@@ -51,6 +52,7 @@ export default {
             this.$root.toggleEditProfile = false;
         },
         save(){
+            Vue.user.edit_description(this, this.UserData, this.country)
             this.$root.toggleEditProfile = false;
         }
     },
@@ -59,7 +61,10 @@ export default {
     },
     computed: mapGetters([
         'UserData'
-    ])
+    ]),
+    mounted(){
+        this.country = this.UserData.country
+    }
 }
 </script>
 

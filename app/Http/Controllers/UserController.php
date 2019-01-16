@@ -33,12 +33,22 @@ class UserController extends Controller
             ], 406);   
         }
     }
-    protected function description(){
+    protected function description(Request $request){
         $user = $this->guard()->user();
+
+        $user->description = $request->description;
+        $user->country = $request->country;
+        $user->website = $request->website;
+        $user->birthdate = $request->birthdate;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Successfully saved changes!'
+        ]);
     }
     protected function primary(Request $request){
         $user = $this->guard()->user();
-        
+
         if($request->fullname != $user->fullname){
             $request->validate([
                 'fullname' => 'required|string',

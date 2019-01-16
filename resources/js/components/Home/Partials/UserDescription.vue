@@ -30,7 +30,10 @@ export default {
     },
     computed: mapGetters([
         'UserData'
-    ])
+    ]),
+    mounted(){
+        Vue.auth.setUser();
+    }
 }
 </script>
 
@@ -42,6 +45,9 @@ export default {
 .description{
     font-size: 13px;
     margin-bottom: 20px;
+    
+    align-content: center;
+    text-align: center;
 }
 .description-list{
     margin-bottom: 6px;

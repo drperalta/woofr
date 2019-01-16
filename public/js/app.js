@@ -2961,6 +2961,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var countryList = __webpack_require__(/*! country-list */ "./node_modules/country-list/country-list.js");
 
 
@@ -2968,14 +2969,14 @@ var countryList = __webpack_require__(/*! country-list */ "./node_modules/countr
   data: function data() {
     return {
       filteredCountries: [],
-      search: ''
+      country: ''
     };
   },
   methods: {
     filterList: function filterList() {
       var vm = this;
       this.filteredCountries = countryList.getData().filter(function (data) {
-        return data.name.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
+        return data.name.toLowerCase().indexOf(vm.country.toLowerCase()) >= 0;
       });
     },
     handleReachBottom: function handleReachBottom() {
@@ -2997,13 +2998,17 @@ var countryList = __webpack_require__(/*! country-list */ "./node_modules/countr
       this.$root.toggleEditProfile = false;
     },
     save: function save() {
+      Vue.user.edit_description(this, this.UserData, this.country);
       this.$root.toggleEditProfile = false;
     }
   },
   created: function created() {
     console.log(countryList.getData());
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData']),
+  mounted: function mounted() {
+    this.country = this.UserData.country;
+  }
 });
 
 /***/ }),
@@ -3367,7 +3372,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData'])
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['UserData']),
+  mounted: function mounted() {
+    Vue.auth.setUser();
+  }
 });
 
 /***/ }),
@@ -4251,7 +4259,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.user-description[data-v-779775ee]{\r\n    padding: 40px 25px 20px 25px;\r\n    margin-bottom: 10px;\n}\n.description[data-v-779775ee]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\n}\n.description-list[data-v-779775ee]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
+exports.push([module.i, "\n.user-description[data-v-779775ee]{\r\n    padding: 40px 25px 20px 25px;\r\n    margin-bottom: 10px;\n}\n.description[data-v-779775ee]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\r\n    \r\n    align-content: center;\r\n    text-align: center;\n}\n.description-list[data-v-779775ee]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
 
 // exports
 
@@ -49595,7 +49603,7 @@ var render = function() {
       _c("Input", {
         staticClass: "description",
         attrs: {
-          value: _vm.search,
+          value: _vm.country,
           type: "textarea",
           maxlength: 110,
           placeholder: "Bio",
@@ -49621,11 +49629,11 @@ var render = function() {
             }
           },
           model: {
-            value: _vm.search,
+            value: _vm.country,
             callback: function($$v) {
-              _vm.search = $$v
+              _vm.country = $$v
             },
-            expression: "search"
+            expression: "country"
           }
         },
         _vm._l(_vm.filteredCountries, function(country, index) {
@@ -49651,11 +49659,7 @@ var render = function() {
       _c("DatePicker", {
         staticClass: "input",
         staticStyle: { width: "100%" },
-        attrs: {
-          type: "date",
-          placeholder: "Birthdate",
-          format: "MMMM dd yyyy"
-        },
+        attrs: { type: "date", placeholder: "Birthdate" },
         model: {
           value: _vm.UserData.birthdate,
           callback: function($$v) {
@@ -49687,11 +49691,7 @@ var render = function() {
             {
               staticStyle: { float: "right" },
               attrs: { type: "primary", shape: "circle" },
-              on: {
-                click: function($event) {
-                  _vm.save()
-                }
-              }
+              on: { click: _vm.save }
             },
             [_vm._v("Save Changes")]
           )
@@ -71747,6 +71747,19 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (error) {
         var errorArray = Object.values(error.response.data.errors);
         context.$Message.error(errorArray[0][0]);
+      });
+    },
+    edit_description: function edit_description(context, data, country, toggle) {
+      axios.post('/api/user/edit/description', {
+        description: data.description,
+        country: country,
+        website: data.website,
+        birthdate: data.birthdate
+      }, this.auth()).then(function (response) {
+        context.$Message.success(response.data.message);
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
       });
     },
     primary_onchange: function primary_onchange(context, data) {

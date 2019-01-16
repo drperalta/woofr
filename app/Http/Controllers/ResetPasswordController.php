@@ -8,6 +8,7 @@ use App\Mail\ResetPasswordSuccess;
 use App\User;
 use App\ResetPassword;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
@@ -117,7 +118,7 @@ class ResetPasswordController extends Controller
 
         $user = User::where('email', $email->email)->first();
 
-        $user->password = bcrypt($request->password);
+        $user->password = Hash::make($request->password);
         $user->save();
 
         $resetPassword = ResetPassword::where('token', $request->token)->first();    

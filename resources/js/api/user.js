@@ -31,6 +31,22 @@ export default function(Vue){
                 context.$Message.error(errorArray[0][0])
             })
         },
+        edit_description(context, data, country, toggle){
+            axios.post('/api/user/edit/description', 
+                {
+                    description: data.description,
+                    country: country,
+                    website: data.website,
+                    birthdate: data.birthdate
+                }
+            , this.auth())
+            .then(response => {
+                context.$Message.success(response.data.message);
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         primary_onchange(context,data){
             axios.post('/api/user/edit/primary_onchange', data, this.auth())
             .then(response => {
