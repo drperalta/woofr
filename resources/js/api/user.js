@@ -9,7 +9,7 @@ export default function(Vue){
             .then(response => {
 
                 context.$Message.success('Your password is successfully updated!');
-                
+
                 context.PasswordDetails.password  = '';
                 context.PasswordDetails.new_password  = '';
                 context.PasswordDetails.confirm_new_password  = '';
@@ -28,8 +28,8 @@ export default function(Vue){
                 context.$Message.error(errorArray[0][0])
             })
         },
-        edit_description(context, data, country, toggle){
-            axios.post('/api/user/edit/description', 
+        edit_description(context, data, country){
+            axios.post('/api/user/edit/description',
                 {
                     description: data.description,
                     country: country,
@@ -43,8 +43,16 @@ export default function(Vue){
                 console.log(error)
             })
         },
-        userList(){
-            axios.get('/api/user/list', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } } )
+        setVisitedUser(data){
+            axios.get('/api/user/visited/'+data, this.auth())
+            .then(response => {
+                store.commit('SET_VISITED_USER', response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        setUserList(){
+            axios.get('/api/user/list', this.auth() )
             .then(response => {
                 store.commit('SET_USER_LIST', response.data)
             })

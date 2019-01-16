@@ -5,9 +5,9 @@
         <i-menu class="navbar" mode="horizontal" theme="dark" :active-name="this.$root.active_name">
             <div class="navbar-items">
                 <!-- LOGO -->
-                <a href="/">
+                <router-link to="/">
                     <img class="logo" src="../../../img/woofr-logo.png" alt="Woofr">
-                </a>
+                </router-link>
 
                 <!-- MENU ITEMS -->
                 <menu-item class="menu-item" name="timeline" to="/">
@@ -30,20 +30,20 @@
                         <img class="user-picture" src="../../../img/default-picture.png" alt="DP">
                     </a>
                     <DropdownMenu slot="list">
-                        <router-link to="/profile">
+                        <router-link :to="'/'+UserData.username">
                             <DropdownItem>
                                 <p class="fullname">{{UserData.fullname}}</p>
                                 <p class="username">@{{UserData.username}}</p>
                             </DropdownItem>
                         </router-link>
                         <Divider class="idivider"/>
-                        <router-link to="/profile">
+                        <router-link :to="'/'+UserData.username">
                             <DropdownItem>
                                 <Icon type="ios-contact" size="16" style="float:left; margin-right: 5px" />
                                 <p class="item">Profile</p>
                             </DropdownItem>
                         </router-link>
-                        <router-link to="/profile/settings">
+                        <router-link :to="'/'+UserData.username+'/settings'">
                             <DropdownItem>
                                 <Icon type="ios-settings" size="16" style="float:left; margin-right: 5px"/>
                                 <p class="item">Settings</p>
@@ -59,12 +59,12 @@
                 <div class="nav-right">
                     <!-- SEARCH BAR -->
                     <AutoComplete clearable class="search-bar" icon="ios-search" placeholder="Search Woofr" @on-search="filterList()" v-model="search">
-                        <Option v-for="user in filteredUsers" :value="user.full_name" :key="user.id">
-                                <router-link :to="user.user_name">
+                        <Option v-for="user in filteredUsers" :value="user.fullname" :key="user.id">
+                                <router-link :to="'/'+user.username">
                                     <Avatar icon="ios-person" size="small" style="margin-right: 5px;"/>
-                                    {{ user.full_name }}
+                                    {{ user.fullname }}
                                 </router-link>
-                                <span>@{{ user.user_name }}</span>
+                                <span>@{{ user.username }}</span>
                         </Option>
                     </AutoComplete>
                 </div>
@@ -98,8 +98,8 @@ export default {
         filterList(){
 
             var vm=this;
-            var listByUsername = this.$root.users.filter(function(data){return data.user_name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
-            var listByName = this.$root.users.filter(function(data){return data.full_name.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByUsername = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByName = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
 
             if(listByUsername == ''){
                 this.filteredUsers = listByName
@@ -112,9 +112,11 @@ export default {
     },
     mounted() {
         Vue.auth.setUser();
+        Vue.user.setUserList();
     },
     computed: mapGetters([
-        'UserData'
+        'UserData',
+        'UserList'
     ])
 }
 </script>

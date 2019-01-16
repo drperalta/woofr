@@ -10,8 +10,9 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
-{   
+{
     protected function visited($username){
+
         $user = User::where('username', $username)->first();
 
         return response()->json([
@@ -27,7 +28,7 @@ class UserController extends Controller
         ]);
     }
     protected function password(Request $request){
-        
+
         $user = $this->guard()->user();
 
         if(Hash::check($request->password, $user->password)){
@@ -36,16 +37,16 @@ class UserController extends Controller
                 'new_password' => 'required|min:6|same:confirm_new_password',
                 'confirm_new_password' => 'sometimes'
             ]);
-    
+
             $user->password = Hash::make($request->new_password);
             $user->save();
-    
+
             return response()->json(['message' => 'Successfully Updated!']);
 
         }else{
             return response()->json([
                 'errors' => ['password' => ['Your current password is incorrect.']]
-            ], 406);   
+            ], 406);
         }
     }
     protected function description(Request $request){
@@ -99,11 +100,11 @@ class UserController extends Controller
 
         if($user->fullname != $request->fullname || $user->email != $request->email || $user->username != $request->username){
             return response()->json([
-                
+
             ],200);
         }else{
             return response()->json([
-                
+
             ],404);
         }
     }

@@ -7,7 +7,7 @@ export default new Vuex.Store({
 
     state:{
         isLoggedIn: !!localStorage.getItem('token'),
-        userDetails: [],
+        userData: [],
         woofList: [],
         commentList: [],
         usersList: [],
@@ -17,7 +17,7 @@ export default new Vuex.Store({
 
     getters: {
         UserData: state => {
-            return  state.userDetails;
+            return  state.userData;
         },
         VisitedData: state => {
             return state.visitedUserData;
@@ -35,7 +35,7 @@ export default new Vuex.Store({
             state.isLoggedIn = false
         },
         SET_USER: (state, data) => {
-            state.userDetails = data
+            state.userData = data
         },
         SET_VISITED_USER: (state, data) => {
             state.visitedUserData = data

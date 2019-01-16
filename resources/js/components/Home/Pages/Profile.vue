@@ -3,13 +3,13 @@
         <div class="profile-top woofr-border">
             <div class="profile-banner box-shadow-in">
                 <!-- PROFILE PICTURE -->
-                <a href="#">
+                <router-link :to="'/'+UserData.username">
                     <img class="user-img" src="../../../../img/default-picture1.png" alt="">
-                </a>
+                </router-link>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <a href="#" class="name">{{ UserData.fullname }}</a>
-                    <a href="#" class="username">@{{ UserData.username }}</a>
+                    <router-link :to="'/'+UserData.username" class="name">{{ data().fullname }}</router-link>
+                    <router-link :to="'/'+UserData.username" class="username">@{{ data().username }}</router-link>
                 </div>
             </div>
 
@@ -17,25 +17,25 @@
                 <div class="profile-menu-items">
                     <ul class="row">
                         <li>
-                            <router-link class="item" to="/profile/woofs">
+                            <router-link class="item" :to="'/'+UserData.username">
                                 <span class="span menu-title">Woofs</span>
                                 <span class="span counts">{{this.$root.UserDetails.woof_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" to="/profile/following">
+                            <router-link class="item" :to="'/'+UserData.username+'/following'">
                                 <span class="span menu-title">Following</span>
                                 <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" to="/profile/followers">
+                            <router-link class="item" :to="'/'+UserData.username+'/followers'">
                                 <span class="span menu-title">Followers</span>
                                 <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" to="/profile/likes">
+                            <router-link class="item" :to="'/'+UserData.username+'/likes'">
                                 <span class="span menu-title">Likes</span>
                                 <span class="span counts">{{this.$root.UserDetails.like_counts}}</span>
                             </router-link>
@@ -70,13 +70,6 @@ export default {
     data(){
         return{
             UserDetails:{
-                full_name: 'David Peralta',
-                user_name: 'IamDavidMe',
-                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-                country:'Philippines',
-                created_at: 'January 2019',
-                website: 'facebook.com/peraltadavidr',
-                birthdate: 'April 20, 1998',
                 woof_counts: '120',
                 follower_counts: '210',
                 following_counts: '400',
@@ -85,16 +78,33 @@ export default {
             page: this.$root.profile_active_page ,
         }
     },
+    watch:{
+        '$route': 'username'
+    },
     methods:{
         trend(){
             if(this.$root.profile_active_page == 'followers' || this.$root.profile_active_page == 'following' ){
                 return true;
-            } return false; 
+            } return false;
+        },
+        username(){
+            Vue.user.setVisitedUser(this.$route.params.username);
+        },
+        data(){
+            if(this.$route.params.username != this.UserData.username){
+                return this.VisitedData;
+            }else{
+                return this.UserData;
+            }
         }
     },
     computed: mapGetters([
-        'UserData'
-    ])
+        'UserData',
+        'VisitedData'
+    ]),
+    created(){
+        this.username();
+    }
 }
 </script>
 

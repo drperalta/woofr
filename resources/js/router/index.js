@@ -74,9 +74,10 @@ let router = new VueRouter({
                     ]
                 },
                 {   //PROFILE
-                    path: 'profile', component: Profile, redirect: {path: 'profile/woofs'}, meta: { requiresAuth: true }, children: [
+                    path: '/:username', component: Profile, redirect: {name: 'woofs'}, meta: { requiresAuth: true },
+                    children: [
                         {   //WOOFS
-                            path: 'woofs', component: Woofs, meta: { requiresAuth: true }
+                            path: '/', component: Woofs, name: 'woofs', meta: { requiresAuth: true }
                         },
                         {   //FOLLOWING
                             path: 'following', component: Following, meta: { requiresAuth: true }
@@ -88,7 +89,8 @@ let router = new VueRouter({
                             path: 'likes', component: Likes, meta: { requiresAuth: true }
                         },
                         {
-                            path: 'settings', component: Settings, meta: { requiresAuth: true }, children: [
+                            path: 'settings', component: Settings, meta: { requiresAuth: true },
+                            children: [
                                 {
                                     path: '/', component: Primary, meta: { requiresAuth: true }
                                 },

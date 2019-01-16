@@ -2,8 +2,8 @@
     <div class="box woofr-border white">
         <div class="settings-header">
             <ButtonGroup>
-                <Button size="large" to="/profile/settings">Username and Email</Button>
-                <Button size="large" to="/profile/settings/password">Password</Button>
+                <Button size="large" :to="'/'+UserData.username+'/settings'" @click="off">Username and Email</Button>
+                <Button size="large" :to="'/'+UserData.username+'/settings/password'" @click="off">Password</Button>
                 <Button size="large" @click="toggle()">Edit Profile</Button>
             </ButtonGroup>
         </div>
@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
     data(){
         return{
@@ -22,11 +24,17 @@ export default {
     methods:{
         toggle(){
             this.$root.toggleEditProfile = true;
+        },
+        off(){
+            this.$root.toggleEditProfile = false;
         }
     },
     created(){
         this.$root.profile_active_page = window.location.href.split('/')[4];
-    }
+    },
+    computed: mapGetters([
+        'UserData'
+    ])
 }
 </script>
 

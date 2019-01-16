@@ -5,15 +5,15 @@
             <!-- BANNER -->
             <div class="user-banner">
                 <!-- PROFILE PICTURE -->
-                <a href="/profile">
+                <router-link :to="'/'+UserData.username">
                     <img class="user-img" src="../../../../img/default-picture.png" alt="">
-                </a>
+                </router-link>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
                     <div class="name">
-                        <a href="/profile" >{{ UserData.fullname }}</a>
+                        <router-link :to="'/'+UserData.username" >{{ UserData.fullname }}</router-link>
                     </div>
-                    <a href="/profile" class="username">@{{UserData.username}}</a>
+                    <router-link :to="'/'+UserData.username" class="username">@{{UserData.username}}</router-link>
                 </div>
             </div>
             <!-- USER STATS -->
@@ -21,21 +21,21 @@
                 <ul class="row">
                     <!-- TWEETS -->
                     <li>
-                        <router-link to="/profile/woofs">
+                        <router-link :to="'/'+UserData.username">
                             <span class="span stats-name">Woofs</span>
                             <span class="span stats-counts">120</span>
                         </router-link>
                     </li>
                     <!-- FOLLOWING -->
                     <li>
-                        <router-link to="/profile/following">
+                        <router-link :to="'/'+UserData.username+'/following'">
                             <span class="span stats-name">Following</span>
                             <span class="span stats-counts">210</span>
                         </router-link>
                     </li>
                     <!-- FOLLOWERS -->
                     <li>
-                        <router-link to="/profile/followers">
+                        <router-link :to="'/'+UserData.username+'/followers'">
                             <span class="span stats-name">Followers</span>
                             <span class="span stats-counts">400</span>
                         </router-link>
@@ -54,7 +54,7 @@ export default {
         return{
 
         }
-    }, 
+    },
     computed: mapGetters([
         'UserData'
     ])

@@ -23,7 +23,7 @@ Route::group([ 'prefix' => 'auth' ], function ()
 {
     Route::post('signup', 'AuthController@signup');
     Route::post('login', 'AuthController@login');
-    
+
     Route::get('link/{activation_token}', 'AuthController@link');
     Route::get('verify_email/{activation_token}', 'AuthController@verify_email');
     Route::get('verify_email/validate/{activation_token}', 'AuthController@validate_token');
@@ -37,7 +37,7 @@ Route::group([ 'prefix' => 'auth' ], function ()
 
 // USER ROUTES
 Route::group([ 'prefix' => 'user' ], function()
-{      
+{
     Route::get('visited/{username}', 'UserController@visited');
     Route::get('list', 'UserController@list');
 
@@ -47,7 +47,7 @@ Route::group([ 'prefix' => 'user' ], function()
         Route::post('description', 'UserController@description');
         Route::post('primary', 'UserController@primary');
         Route::post('primary_onchange', 'UserController@primary_onchange');
-    }); 
+    });
 });
 
 

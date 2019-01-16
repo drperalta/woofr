@@ -2,7 +2,7 @@
     <div class="box side-box user-description white woofr-border">
 
         <Input class="description" v-model="UserData.description" :value="country" type="textarea" :maxlength="110" placeholder="Bio" :autosize="{minRows: 1,maxRows: 4}"/>
-        
+
         <AutoComplete clearable class="country-bar input" v-model="country" @on-change="filterList()" placeholder="Location">
             <Option v-for="(country, index) in filteredCountries" :value="country.name" :key="index">
                 {{ country.name }}
@@ -17,7 +17,7 @@
             <Button shape="circle" @click="cancel()">Cancel</Button>
             <Button type="primary" shape="circle" style="float: right" @click="save">Save Changes</Button>
         </div>
-        
+
     </div>
 </template>
 
