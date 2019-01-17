@@ -54,7 +54,8 @@ Route::group([ 'prefix' => 'user' ], function()
 Route::group(['middleware' => 'auth:api', 'prefix' => 'woof'], function(){
 
     Route::post('send', 'WoofController@send');
-    Route::get('selected', 'WoofController@selected');
+    Route::get('selected/{woof_id}', 'WoofController@selected');
+    Route::get('all', 'WoofController@all');
 
 });
 
