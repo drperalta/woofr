@@ -19,7 +19,7 @@
         <!-- LIST OF ALL WOOFS -->
         <div class="woof-list woofr-border">
             <ul>
-                <li v-for="(woof, index) in this.$root.Woofs" :key="woof.id">
+                <li v-for="(woof, index) in WoofList" :key="woof.id">
                     <div class="woof-body" @click="open(woof.id)" style="padding: 16px !important;">
                         <ul class="row" >
                             <!-- USER'S AVATAR -->
@@ -29,10 +29,10 @@
                             <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                             <li>
                                 <div class="user-woof-details left">
-                                    <a :href="'/'+woof.user_name" style="font-size: 14px; font-weight: 600; color: black" >{{woof.full_name}}</a>
-                                    <span style="color: grey;">@{{woof.user_name}}</span>
+                                    <a :href="'/'+woof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.user.fullname}}</a>
+                                    <span style="color: grey;">@{{woof.user.username}}</span>
                                     <div style="font-size: 13px; ">
-                                        {{woof.woof_text}}
+                                        {{woof.text}}
                                     </div>
                                 </div>
                             </li>
@@ -80,6 +80,8 @@
 
 <script>
 import store from '../../../store/index'
+import { mapGetters } from 'vuex';
+
 export default {
     data(){
         return{
@@ -127,9 +129,14 @@ export default {
             }
         },
         open(id){
-            Vue.user.get_selected_woof(id);
-            store.commit('onWoofModal')
+            Vue.woof.selected(id);
         }
+    },
+    computed: mapGetters([
+        'WoofList'
+    ]),
+    mounted(){
+        Vue.woof.all();
     }
 }
 </script>

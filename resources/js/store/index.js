@@ -37,6 +37,9 @@ export default new Vuex.Store({
         },
         WoofModal: state => {
             return state.selectedWoofModal;
+        },
+        WoofList: state => {
+            return state.woofList;
         }
     },
 
@@ -62,6 +65,15 @@ export default new Vuex.Store({
         SET_USER_LIST: (state, data) => {
             state.usersList = data
         },
+
+
+        SET_WOOF_SELECTED: (state, data) => {
+            state.selectedWoofData = data;
+        },
+        SET_WOOF_LIST: (state, data) => {
+            state.woofList = data;
+        },
+
 
         SET_USER_WOOFS: (state, data) => {
             state.userWoofs = data;

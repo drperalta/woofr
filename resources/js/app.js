@@ -39,11 +39,12 @@ Vue.use(Moment)
 import Auth from '../js/api/auth'
 import Reset from '../js/api/reset'
 import User from '../js/api/user'
+import Woof from '../js/api/woof'
 
 Vue.use(Auth)
 Vue.use(Reset)
 Vue.use(User)
-
+Vue.use(Woof)
 
 
 

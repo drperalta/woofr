@@ -3201,6 +3201,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3282,6 +3283,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3324,9 +3326,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     open: function open(id) {
-      Vue.user.get_selected_woof(id);
-      _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('onWoofModal');
+      Vue.woof.selected(id);
     }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['WoofList']),
+  mounted: function mounted() {
+    Vue.woof.all();
   }
 });
 
@@ -50308,7 +50313,7 @@ var render = function() {
     _c("div", { staticClass: "woof-list woofr-border" }, [
       _c(
         "ul",
-        _vm._l(this.$root.Woofs, function(woof, index) {
+        _vm._l(_vm.WoofList, function(woof, index) {
           return _c(
             "li",
             { key: woof.id },
@@ -50347,19 +50352,19 @@ var render = function() {
                               "font-weight": "600",
                               color: "black"
                             },
-                            attrs: { href: "/" + woof.user_name }
+                            attrs: { href: "/" + woof.user.username }
                           },
-                          [_vm._v(_vm._s(woof.full_name))]
+                          [_vm._v(_vm._s(woof.user.fullname))]
                         ),
                         _vm._v(" "),
                         _c("span", { staticStyle: { color: "grey" } }, [
-                          _vm._v("@" + _vm._s(woof.user_name))
+                          _vm._v("@" + _vm._s(woof.user.username))
                         ]),
                         _vm._v(" "),
                         _c("div", { staticStyle: { "font-size": "13px" } }, [
                           _vm._v(
                             "\n                                    " +
-                              _vm._s(woof.woof_text) +
+                              _vm._s(woof.text) +
                               "\n                                "
                           )
                         ])
@@ -72009,10 +72014,45 @@ __webpack_require__.r(__webpack_exports__);
         context.disabled = true;
       });
     },
+    auth: function auth() {
+      return {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      };
+    }
+  };
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/woof.js":
+/*!**********************************!*\
+  !*** ./resources/js/api/woof.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../router/index */ "./resources/js/router/index.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
+  Vue.woof = {
     //WOOFS
-    get_selected_woof: function get_selected_woof(id) {
-      axios.get("/api/user/selected_woof/".concat(id)).then(function (response) {
-        console.log(response);
+    selected: function selected(id) {
+      axios.get("/api/woof/selected/".concat(id), this.auth()).then(function (response) {
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_WOOF_SELECTED', response.data);
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('onWoofModal');
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    all: function all() {
+      axios.get("/api/woof/all", this.auth()).then(function (response) {
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_WOOF_LIST', response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -72062,6 +72102,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_api_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../js/api/auth */ "./resources/js/api/auth.js");
 /* harmony import */ var _js_api_reset__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../js/api/reset */ "./resources/js/api/reset.js");
 /* harmony import */ var _js_api_user__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../js/api/user */ "./resources/js/api/user.js");
+/* harmony import */ var _js_api_woof__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../js/api/woof */ "./resources/js/api/woof.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
@@ -72099,9 +72140,11 @@ Vue.use(vue_moment__WEBPACK_IMPORTED_MODULE_11___default.a);
 
 
 
+
 Vue.use(_js_api_auth__WEBPACK_IMPORTED_MODULE_12__["default"]);
 Vue.use(_js_api_reset__WEBPACK_IMPORTED_MODULE_13__["default"]);
 Vue.use(_js_api_user__WEBPACK_IMPORTED_MODULE_14__["default"]);
+Vue.use(_js_api_woof__WEBPACK_IMPORTED_MODULE_15__["default"]);
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 var app = new Vue({
   el: '#app',
@@ -74915,6 +74958,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     WoofModal: function WoofModal(state) {
       return state.selectedWoofModal;
+    },
+    WoofList: function WoofList(state) {
+      return state.woofList;
     }
   },
   mutations: {
@@ -74938,6 +74984,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     SET_USER_LIST: function SET_USER_LIST(state, data) {
       state.usersList = data;
+    },
+    SET_WOOF_SELECTED: function SET_WOOF_SELECTED(state, data) {
+      state.selectedWoofData = data;
+    },
+    SET_WOOF_LIST: function SET_WOOF_LIST(state, data) {
+      state.woofList = data;
     },
     SET_USER_WOOFS: function SET_USER_WOOFS(state, data) {
       state.userWoofs = data;
