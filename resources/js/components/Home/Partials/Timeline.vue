@@ -8,7 +8,7 @@
                 </li>
                 <li class="woof-box-middle">
                     <Input class="woof-textarea" v-model="WoofDetails.Woof" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
-                    <Button class="woof-button" shape="circle" :disabled="woof_length == 0" v-if="focused">Woof</Button>
+                    <Button class="woof-button" shape="circle" :disabled="woof_length == 0" v-if="focused" @click.prevent="send">Woof</Button>
                 </li>
                 <li>
                     <i-circle class="woof-counter" :percent="percent" stroke-color="#765d69" :size="25"></i-circle>
@@ -110,6 +110,9 @@ export default {
                 this.focused = false;
             }
         },
+        send(){
+            Vue.woof.send(this, this.WoofDetails);
+        },
         comment(){
 
         },
@@ -188,7 +191,7 @@ ul{
 }
 .user-woof-avatar{
     float: left;
-    margin: 10px;
+    margin: 10px 10px 10px  0px;
 }
 .user-woof-details{
     width: 100%;

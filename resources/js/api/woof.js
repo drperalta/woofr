@@ -5,6 +5,18 @@ export default function(Vue){
     Vue.woof = {
 
         //WOOFS
+        send(context, data){
+            axios.post('/api/woof/send', data, this.auth())
+            .then(response => {
+                this.all()
+                context.focused = false;
+                context.percent = 0;
+                context.woof_length = 0;
+                context.WoofDetails.Woof = '';
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         selected(id){
             axios.get(`/api/woof/selected/${id}`, this.auth())
             .then(response => {
@@ -22,6 +34,7 @@ export default function(Vue){
                 console.log(error)
             })
         },
+
         auth(){
             return { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } }
         }
