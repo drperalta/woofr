@@ -126,7 +126,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-b3c25550]{\n    margin-top: 5px;\n}\n.notifications-header[data-v-b3c25550]{\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-b3c25550]{\r\n    margin-top: 5px;\n}\n.notifications-header[data-v-b3c25550]{\r\n    padding: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -145,7 +145,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-d71bd506]{\n    padding: 10px 20px;\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\n    color: #765D69;\n    font-size: 14px;\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\n    color: #afb2b8;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-d71bd506]{\r\n    padding: 10px 20px;\r\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\r\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\r\n    color: #765D69;\r\n    font-size: 14px;\r\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\r\n    color: #afb2b8;\n}\r\n", ""]);
 
 // exports
 
