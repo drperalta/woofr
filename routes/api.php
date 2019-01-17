@@ -54,8 +54,18 @@ Route::group([ 'prefix' => 'user' ], function()
 Route::group(['middleware' => 'auth:api', 'prefix' => 'woof'], function(){
 
     Route::post('send', 'WoofController@send');
+    Route::post('delete', 'WoofController@delete');
     Route::get('selected/{woof_id}', 'WoofController@selected');
     Route::get('all', 'WoofController@all');
+
+});
+//WOOFS
+Route::group(['middleware' => 'auth:api', 'prefix' => 'comment'], function(){
+
+    Route::post('send', 'CommentController@send');
+    Route::post('delete', 'CommentController@delete');
+    Route::get('selected/{woof_id}', 'CommentController@selected');
+    Route::get('all', 'CommentController@all');
 
 });
 

@@ -17,6 +17,16 @@ export default function(Vue){
                 console.log(error)
             })
         },
+        delete(context,id){
+            axios.post('/api/woof/delete',{id: id}, this.auth())
+            .then(response => {
+                this.all();
+                context.$Message.success('Succefully Deleted!');
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         selected(id){
             axios.get(`/api/woof/selected/${id}`, this.auth())
             .then(response => {

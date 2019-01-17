@@ -3,7 +3,7 @@
         <div class="profile-top woofr-border">
             <div class="profile-banner box-shadow-in">
                 <!-- PROFILE PICTURE -->
-                <router-link :to="'/'+UserData.username">
+                <router-link :to="'/'+data().username">
                     <img class="user-img" src="../../../../img/default-picture1.png" alt="">
                 </router-link>
                 <!-- USER FULLNAME AND USERNAME -->

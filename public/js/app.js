@@ -2120,16 +2120,80 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
-  }
+    return {
+      focused: false,
+      percent: 0,
+      reply_length: 0,
+      CommentDetails: {
+        woof_id: '',
+        reply: ''
+      }
+    };
+  },
+  methods: {
+    count: function count() {
+      var quotient = this.CommentDetails.reply.length / 140;
+      this.percent = quotient * 100;
+      this.reply_length = this.CommentDetails.reply.length;
+    },
+    onFocus: function onFocus() {
+      this.focused = true;
+    },
+    onBlur: function onBlur() {
+      if (this.reply_length != 0) {
+        this.focused = true;
+      } else {
+        this.focused = false;
+      }
+    },
+    send_reply: function send_reply(woof_id) {
+      this.CommentDetails.woof_id = woof_id;
+      Vue.comment.send(this, this.CommentDetails);
+    }
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['SelectedWoofData'])
 });
 
 /***/ }),
@@ -3282,6 +3346,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3311,6 +3385,9 @@ __webpack_require__.r(__webpack_exports__);
         this.focused = false;
       }
     },
+    send: function send() {
+      Vue.woof.send(this, this.WoofDetails);
+    },
     comment: function comment() {},
     reWoof: function reWoof() {},
     like: function like(index) {
@@ -3327,9 +3404,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     open: function open(id) {
       Vue.woof.selected(id);
+    },
+    myWoof: function myWoof(user_id) {
+      if (this.UserData.id == user_id) {
+        return true;
+      }
+    },
+    delete_woof: function delete_woof(id) {
+      Vue.woof.delete(this, id);
     }
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['WoofList']),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['WoofList', 'UserData']),
   mounted: function mounted() {
     Vue.woof.all();
   }
@@ -4029,7 +4114,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 10px 20px;\r\n    background-color: whitesmoke;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n", ""]);
 
 // exports
 
@@ -4314,7 +4399,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 5px;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 5px;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px 10px 10px  0px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-0338a699]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\r\n\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -48388,7 +48473,155 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [_vm._v("\n    WOOFS\n")])
+  return _c(
+    "div",
+    { staticClass: "content" },
+    [
+      _c("Card", { staticClass: "card", attrs: { "dis-hover": "" } }, [
+        _c(
+          "div",
+          [
+            _c("Avatar", {
+              staticClass: "user-avatar left",
+              attrs: { icon: "ios-person", size: "large" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "user-details left" }, [
+              _c(
+                "a",
+                {
+                  staticStyle: {
+                    "font-size": "16px",
+                    "font-weight": "600",
+                    color: "black",
+                    display: "block"
+                  },
+                  attrs: { href: "/" + _vm.SelectedWoofData.user.username }
+                },
+                [_vm._v(_vm._s(_vm.SelectedWoofData.user.fullname))]
+              ),
+              _vm._v(" "),
+              _c("a", { staticStyle: { color: "grey", display: "block" } }, [
+                _vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "woof-text" }, [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.SelectedWoofData.text) +
+                  "\n            "
+              )
+            ])
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "comment-box", staticStyle: { "padding-top": "8px" } },
+        [
+          _c("span", { staticStyle: { "padding-left": "60px" } }, [
+            _vm._v("replying to "),
+            _c("a", [_vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "reply-box" }, [
+            _c("ul", { staticClass: "row" }, [
+              _c(
+                "li",
+                [
+                  _c("Avatar", {
+                    staticClass: "avatar",
+                    attrs: { icon: "ios-person", size: "large" }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "reply-box-middle",
+                  staticStyle: { "margin-left": "10px", "margin-top": "5px" }
+                },
+                [
+                  _c("Input", {
+                    staticClass: "reply-textarea",
+                    attrs: {
+                      type: "textarea",
+                      maxlength: 140,
+                      placeholder: "What's happening...",
+                      autosize: { minRows: 1, maxRows: 5 }
+                    },
+                    on: {
+                      "on-change": function($event) {
+                        _vm.count()
+                      },
+                      "on-blur": function($event) {
+                        _vm.onBlur()
+                      },
+                      "on-focus": function($event) {
+                        _vm.onFocus()
+                      }
+                    },
+                    model: {
+                      value: _vm.CommentDetails.reply,
+                      callback: function($$v) {
+                        _vm.$set(_vm.CommentDetails, "reply", $$v)
+                      },
+                      expression: "CommentDetails.reply"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.focused
+                    ? _c(
+                        "Button",
+                        {
+                          staticClass: "reply-button",
+                          attrs: {
+                            shape: "circle",
+                            disabled: _vm.reply_length == 0
+                          },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.send_reply(_vm.SelectedWoofData.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Reply")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticStyle: { "margin-left": "10px", "margin-top": "7px" } },
+                [
+                  _c("i-circle", {
+                    staticClass: "reply-counter",
+                    attrs: {
+                      percent: _vm.percent,
+                      "stroke-color": "#765d69",
+                      size: 25
+                    }
+                  })
+                ],
+                1
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("Card", { staticClass: "comment-list", attrs: { "dis-hover": "" } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48487,7 +48720,7 @@ var render = function() {
         "div",
         { staticClass: "profile-banner box-shadow-in" },
         [
-          _c("router-link", { attrs: { to: "/" + _vm.UserData.username } }, [
+          _c("router-link", { attrs: { to: "/" + _vm.data().username } }, [
             _c("img", {
               staticClass: "user-img",
               attrs: {
@@ -50239,7 +50472,7 @@ var render = function() {
         _c(
           "li",
           [
-            _c("Avatar", {
+            _c("i-avatar", {
               staticClass: "user-avatar",
               attrs: { icon: "ios-person", size: "medium" }
             })
@@ -50284,7 +50517,13 @@ var render = function() {
                   "Button",
                   {
                     staticClass: "woof-button",
-                    attrs: { shape: "circle", disabled: _vm.woof_length == 0 }
+                    attrs: { shape: "circle", disabled: _vm.woof_length == 0 },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.send($event)
+                      }
+                    }
                   },
                   [_vm._v("Woof")]
                 )
@@ -50318,6 +50557,54 @@ var render = function() {
             "li",
             { key: woof.id },
             [
+              _c(
+                "Dropdown",
+                {
+                  staticClass: "woof-dropdown",
+                  attrs: { trigger: "click", placement: "bottom-end" }
+                },
+                [
+                  _c(
+                    "a",
+                    { attrs: { href: "javascript:void(0)" } },
+                    [
+                      _c("Icon", {
+                        attrs: {
+                          type: "ios-arrow-down",
+                          size: "18",
+                          color: "#765d69"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "DropdownMenu",
+                    { attrs: { slot: "list" }, slot: "list" },
+                    [
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.delete_woof(woof.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm.myWoof(woof.user.id)
+                            ? _c("DropdownItem", [_vm._v("Delete Woof")])
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c(
                 "div",
                 {
@@ -71893,6 +72180,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/comment.js":
+/*!*************************************!*\
+  !*** ./resources/js/api/comment.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../router/index */ "./resources/js/router/index.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
+  Vue.comment = {
+    send: function send(context, data) {
+      axios.post('/api/comment/send', data, this.auth()).then(function (response) {
+        context.focused = false;
+        context.percent = 0;
+        context.reply_length = 0;
+        context.CommentDetails.reply = '', console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    auth: function auth() {
+      return {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      };
+    }
+  };
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/reset.js":
 /*!***********************************!*\
   !*** ./resources/js/api/reset.js ***!
@@ -72042,6 +72366,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
   Vue.woof = {
     //WOOFS
+    send: function send(context, data) {
+      var _this = this;
+
+      axios.post('/api/woof/send', data, this.auth()).then(function (response) {
+        _this.all();
+
+        context.focused = false;
+        context.percent = 0;
+        context.woof_length = 0;
+        context.WoofDetails.Woof = '';
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    delete: function _delete(context, id) {
+      var _this2 = this;
+
+      axios.post('/api/woof/delete', {
+        id: id
+      }, this.auth()).then(function (response) {
+        _this2.all();
+
+        context.$Message.success('Succefully Deleted!');
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
     selected: function selected(id) {
       axios.get("/api/woof/selected/".concat(id), this.auth()).then(function (response) {
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_WOOF_SELECTED', response.data);
@@ -72103,6 +72455,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_api_reset__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../js/api/reset */ "./resources/js/api/reset.js");
 /* harmony import */ var _js_api_user__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../js/api/user */ "./resources/js/api/user.js");
 /* harmony import */ var _js_api_woof__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../js/api/woof */ "./resources/js/api/woof.js");
+/* harmony import */ var _js_api_comment__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../js/api/comment */ "./resources/js/api/comment.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
@@ -72141,10 +72494,12 @@ Vue.use(vue_moment__WEBPACK_IMPORTED_MODULE_11___default.a);
 
 
 
+
 Vue.use(_js_api_auth__WEBPACK_IMPORTED_MODULE_12__["default"]);
 Vue.use(_js_api_reset__WEBPACK_IMPORTED_MODULE_13__["default"]);
 Vue.use(_js_api_user__WEBPACK_IMPORTED_MODULE_14__["default"]);
 Vue.use(_js_api_woof__WEBPACK_IMPORTED_MODULE_15__["default"]);
+Vue.use(_js_api_comment__WEBPACK_IMPORTED_MODULE_16__["default"]);
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 var app = new Vue({
   el: '#app',
@@ -74961,6 +75316,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     WoofList: function WoofList(state) {
       return state.woofList;
+    },
+    SelectedWoofData: function SelectedWoofData(state) {
+      return state.selectedWoofData;
     }
   },
   mutations: {

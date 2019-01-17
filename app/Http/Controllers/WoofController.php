@@ -23,11 +23,20 @@ class WoofController extends Controller
         ], 201);
 
     }
+    protected function delete(Request $request){
+        $woof = Woof::where('id', $request->id);
+        $woof->delete();
+
+        return response()->json([
+            'message' => 'Successfully Deleted!'
+        ], 201);
+
+    }
     protected function selected($woof_id){
         $user = new MyUser();
 
+
         $woof = Woof::where('id', $woof_id)->first();
-        
         $arr = array(
             'id' => $woof->id,
             'user_id' => $woof->user_id,
@@ -46,7 +55,7 @@ class WoofController extends Controller
 
         $user = new MyUser();
 
-        $woofs = Woof::orderBy('created_at', 'DESC')->get();
+        $woofs = Woof::orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
         //$arrWoof = array($woofs);
         $woofList = array();
 

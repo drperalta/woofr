@@ -40,6 +40,9 @@ export default new Vuex.Store({
         },
         WoofList: state => {
             return state.woofList;
+        },
+        SelectedWoofData: state => {
+            return state.selectedWoofData;
         }
     },
 

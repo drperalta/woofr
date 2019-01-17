@@ -4,7 +4,7 @@
         <div class="woof-box woofr-border">
             <ul class="row">
                 <li>
-                    <Avatar class="user-avatar" icon="ios-person" size="medium" />
+                    <i-avatar class="user-avatar" icon="ios-person" size="medium" />
                 </li>
                 <li class="woof-box-middle">
                     <Input class="woof-textarea" v-model="WoofDetails.Woof" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
@@ -20,6 +20,16 @@
         <div class="woof-list woofr-border">
             <ul>
                 <li v-for="(woof, index) in WoofList" :key="woof.id">
+                    <Dropdown class="woof-dropdown" trigger="click" placement="bottom-end">
+                        <a href="javascript:void(0)">
+                            <Icon type="ios-arrow-down" size="18" color="#765d69"/>
+                        </a>
+                        <DropdownMenu slot="list">
+                            <a @click="delete_woof(woof.id)">
+                                <DropdownItem v-if="myWoof(woof.user.id)">Delete Woof</DropdownItem>
+                            </a>
+                        </DropdownMenu>
+                    </Dropdown>
                     <div class="woof-body" @click="open(woof.id)" style="padding: 16px !important;">
                         <ul class="row" >
                             <!-- USER'S AVATAR -->
@@ -133,10 +143,19 @@ export default {
         },
         open(id){
             Vue.woof.selected(id);
+        },
+        myWoof(user_id){
+            if(this.UserData.id == user_id){
+                return true;
+            }
+        },
+        delete_woof(id){
+            Vue.woof.delete(this,id);
         }
     },
     computed: mapGetters([
-        'WoofList'
+        'WoofList',
+        'UserData'
     ]),
     mounted(){
         Vue.woof.all();
@@ -156,6 +175,11 @@ ul{
     background-color: white;
     padding: 5px;
     margin-bottom: 10px;
+}
+.woof-dropdown{
+    float: right;
+    margin-right: 10px;
+    margin-top: 18px;
 }
 .woof-box-middle{
     width: 100%;
