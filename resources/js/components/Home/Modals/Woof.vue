@@ -1,6 +1,6 @@
 <template>
-    <div>
-
+    <div class="content">
+        WOOFS
     </div>
 </template>
 

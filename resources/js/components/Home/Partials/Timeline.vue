@@ -20,8 +20,8 @@
         <div class="woof-list woofr-border">
             <ul>
                 <li v-for="(woof, index) in this.$root.Woofs" :key="woof.id">
-                    <Card dis-hover :bordered="false" class="woof-body">
-                        <ul class="row">
+                    <div class="woof-body" @click="open(woof.id)" style="padding: 16px !important;">
+                        <ul class="row" >
                             <!-- USER'S AVATAR -->
                             <li>
                                 <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
@@ -61,7 +61,7 @@
                                 <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
                             </a>
                         </div>
-                    </Card>
+                    </div>
 
                     <div class="woof-comments">
                         <div class="comment-box">
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import store from '../../../store/index'
 export default {
     data(){
         return{
@@ -124,6 +125,10 @@ export default {
                 this.$root.Woofs[index].liked = true;
                 this.$root.Woofs[index].likes += 1;
             }
+        },
+        open(id){
+            Vue.user.get_selected_woof(id);
+            store.commit('onWoofModal')
         }
     }
 }

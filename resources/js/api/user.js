@@ -66,6 +66,17 @@ export default function(Vue){
                 context.disabled = true;
             })
         },
+
+
+        //WOOFS
+        get_selected_woof(id){
+            axios.get(`/api/user/selected_woof/${id}`)
+            .then(response => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         auth(){
             return { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } }
         }

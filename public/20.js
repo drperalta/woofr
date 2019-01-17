@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[20],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Home/Pages/Timeline.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
@@ -251,7 +251,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     open: function open(id) {
-      Vue.user.get_selected_woof(id);
+      _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch;
       _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('onWoofModal');
     }
   }

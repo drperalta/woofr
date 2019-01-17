@@ -7,11 +7,21 @@ export default new Vuex.Store({
 
     state:{
         isLoggedIn: !!localStorage.getItem('token'),
+
+        selectedWoofModal: false,
+        selectedWoofData: [],
+
         userData: [],
+        userWoofs: [],
+        userFollowers: [],
+        userFollowing: [],
+        userLikes: [],
+
         woofList: [],
         commentList: [],
         usersList: [],
-        visitedUserData: []
+        visitedUserData: [],
+        
 
     },
 
@@ -24,6 +34,9 @@ export default new Vuex.Store({
         },
         UserList: state => {
             return state.usersList;
+        },
+        WoofModal: state => {
+            return state.selectedWoofModal;
         }
     },
 
@@ -34,6 +47,12 @@ export default new Vuex.Store({
         logoutUser (state) {
             state.isLoggedIn = false
         },
+        onWoofModal: (state) => {
+            state.selectedWoofModal = true
+        },
+        offWoofModal: (state) => {
+            state.selectedWoofModal = false
+        },
         SET_USER: (state, data) => {
             state.userData = data
         },
@@ -42,7 +61,21 @@ export default new Vuex.Store({
         },
         SET_USER_LIST: (state, data) => {
             state.usersList = data
+        },
+
+        SET_USER_WOOFS: (state, data) => {
+            state.userWoofs = data;
+        },
+        SET_USER_FOLLOWING: (state, data) => {
+            state.userFollowing = data;
+        },
+        SET_USER_FOLLOWERS: (state, data) => {
+            state.userFollowers = data;
+        },
+        SET_USER_LIKES: (state, data) => {
+            state.userLikes = data;
         }
+        
     },
 
     actions:{
@@ -54,7 +87,7 @@ export default new Vuex.Store({
         },
         GET_USER_LIST({commit}){
             commit('SET_USER_LIST');
-        }
+        },
     }
 
 
