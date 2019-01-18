@@ -3,7 +3,7 @@ import router from '../router/index'
 
 export default function(Vue){
     Vue.comment = {
-        send(context, data){
+        send(context, data,show){
             axios.post('/api/comment/send', data, this.auth())
             .then(response => {
                 context.focused = false;
@@ -11,7 +11,16 @@ export default function(Vue){
                 context.reply_length = 0;
                 context.CommentDetails.reply = '',
                 
-                Vue.woof.selected(data.woof_id)
+                Vue.woof.selected(data.woof_id,show)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        set(id){
+            axios.get(`/api/woof/selected/${id}`, this.auth())
+            .then(response => {
+                store.commit('SET_COMMENT_DATA', response.data)
+                store.commit('onCommentModal')
             }).catch(error => {
                 console.log(error)
             })

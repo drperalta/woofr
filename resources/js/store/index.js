@@ -11,6 +11,11 @@ export default new Vuex.Store({
         selectedWoofModal: false,
         selectedWoofData: [],
 
+        comment: false,
+        commentData: [],
+        rewoof: false,
+        rewoofData: [],
+
         userData: [],
         userWoofs: [],
         userFollowers: [],
@@ -21,8 +26,6 @@ export default new Vuex.Store({
         commentList: [],
         usersList: [],
         visitedUserData: [],
-        
-
     },
 
     getters: {
@@ -43,6 +46,19 @@ export default new Vuex.Store({
         },
         SelectedWoofData: state => {
             return state.selectedWoofData;
+        },
+        CommentData: state => {
+            return state.commentData;
+        },
+        ReWoofData: state => {
+            return state.rewoofData;
+        },
+        ShowWoofModal: state => {
+            if(state.comment){
+                return false;
+            }else{
+                return true;
+            }
         }
     },
 
@@ -58,6 +74,18 @@ export default new Vuex.Store({
         },
         offWoofModal: (state) => {
             state.selectedWoofModal = false
+        },
+        onCommentModal: (state) => {
+            state.comment = true
+        },
+        offCommentModal: (state) => {
+            state.comment = false
+        },
+        onReWoofModal: (state) => {
+            state.rewoof = true
+        },
+        offReWoofModal: (state) => {
+            state.rewoof = false
         },
         SET_USER: (state, data) => {
             state.userData = data
@@ -89,6 +117,13 @@ export default new Vuex.Store({
         },
         SET_USER_LIKES: (state, data) => {
             state.userLikes = data;
+        },
+
+        SET_COMMENT_DATA: (state, data) => {
+            state.commentData = data
+        },
+        SET_REWOOF_DATA: (state, data) => {
+            state.rewoofData = data
         }
         
     },

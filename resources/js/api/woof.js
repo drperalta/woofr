@@ -27,11 +27,13 @@ export default function(Vue){
                 console.log(error)
             })
         },
-        selected(id){
+        selected(id, show){
             axios.get(`/api/woof/selected/${id}`, this.auth())
             .then(response => {
                 store.commit('SET_WOOF_SELECTED', response.data)
-                store.commit('onWoofModal')
+                if(show){
+                    store.commit('onWoofModal')
+                }
             }).catch(error => {
                 console.log(error)
             })

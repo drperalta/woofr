@@ -34,7 +34,7 @@
         </div>
         <!-- COMMENT LIST -->
         <Card class="comment-list" dis-hover v-if="SelectedWoofData.comments != ''" :padding="0">
-            <div v-for="comment in SelectedWoofData.comments" :key="comment.id">
+            <div  v-for="comment in SelectedWoofData.comments" :key="comment.id">
                 <ul class="row" style="padding: 18px">
                     <!-- USER'S AVATAR -->
                     <li>
@@ -92,7 +92,7 @@ export default {
 
             this.CommentDetails.woof_id = woof_id;
             
-            Vue.comment.send(this,this.CommentDetails)
+            Vue.comment.send(this,this.CommentDetails, true)
         }
     },
     computed: mapGetters([
@@ -102,6 +102,9 @@ export default {
 </script>
 
 <style scoped>
+.content{
+    
+}
 .card{
     padding: 20px !important;
 }
@@ -140,9 +143,13 @@ export default {
     color: #765d69;
 }
 .comment-details{
+    width: 100%;
     margin-left: 10px;
 }
 li{
     list-style: none;
+}
+.comment{
+    max-width: 300px;
 }
 </style>

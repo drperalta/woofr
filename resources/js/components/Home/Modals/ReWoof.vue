@@ -1,6 +1,8 @@
 <template>
     <div>
+        <Card dis-hover :bordered="false">
 
+        </Card>
     </div>
 </template>
 
@@ -10,7 +12,8 @@ export default {
         return{
 
         }
-    }
+    },
+    
 }
 </script>
 

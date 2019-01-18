@@ -4,7 +4,7 @@
         <div class="woof-box woofr-border">
             <ul class="row">
                 <li>
-                    <Avatar class="user-avatar" icon="ios-person" size="medium" />
+                    <Avatar class="user-avatar" icon="ios-person"/>
                 </li>
                 <li class="woof-box-middle">
                     <Input class="woof-textarea" v-model="WoofDetails.Woof" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
@@ -19,7 +19,7 @@
         <!-- LIST OF ALL WOOFS -->
         <div class="woof-list woofr-border">
             <ul>
-                <li v-for="(woof, index) in WoofList" :key="woof.id">
+                <li class="whole-woof" v-for="(woof, index) in WoofList" :key="woof.id">
                     <Dropdown class="woof-dropdown" trigger="click" placement="bottom-end">
                         <a href="javascript:void(0)">
                             <Icon type="ios-arrow-down" size="18" color="#765d69"/>
@@ -27,6 +27,10 @@
                         <DropdownMenu slot="list">
                             <a @click="delete_woof(woof.id)">
                                 <DropdownItem v-if="myWoof(woof.user.id)">Delete Woof</DropdownItem>
+                            </a>
+                            <Divider v-if="!myWoof(woof.user.id)" style="margin: 3px 0px;" />
+                            <a @click="direct_message(woof.user.id)">
+                                <DropdownItem v-if="!myWoof(woof.user.id)">Direct Message <a>@{{woof.user.username}}</a></DropdownItem>
                             </a>
                         </DropdownMenu>
                     </Dropdown>
@@ -51,39 +55,55 @@
                         <!-- WOOF ACTIONS -->
                         <div class="woof-actions">
                             <!-- COMMENT ACTION -->
-                            <a @click="comment()">
-                                <Icon type="ios-text-outline" size="24"/>
-                                {{woof.comment_counts}}
-                            </a>
+                            <div @click="comment(woof.id)" class="icon_comment">
+                                <a>
+                                    <Icon class="a" type="ios-text-outline" size="24"/>
+                                    {{woof.comment_counts}}
+                                </a>
+                            </div>
                             <!-- RE-WOOF ACTION -->
-                            <a @click="reWoof()">
-                                <Icon type="ios-repeat" size="24"/>
-                                {{woof.re_woof}}
-                            </a>
+                            <div @click="reWoof(woof_id)" class="icon_rewoof">
+                                <a>
+                                    <Icon class="b" type="ios-repeat" size="24"/>
+                                    {{woof.re_woof}}
+                                </a>
+                            </div>
                             <!-- LIKE ACTION -->
-                            <a @click="like(index)">
-                                <transition name="bounce">
-                                    <Icon type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;" color="#db5353"/>
-                                </transition>
-                                <Icon type="ios-heart-outline" v-if="!woof.liked" size="24" />
+                            <div @click="like(index)" class="icon_like">
+                                <a>
+                                    <transition name="bounce">
+                                        <Icon  type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;" color="#db5353"/>
+                                    </transition>
+                                    <Icon class="c" type="ios-heart-outline" v-if="!woof.liked" size="24" />
 
-                                <!-- this span is to add margin left when liking because the solid icon is absolute  -->
-                                <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
-                            </a>
+                                    <!-- this span is to add margin left when liking because the solid icon is absolute  -->
+                                    <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <Divider style="margin: 0;"/>
                 </li>
             </ul>
         </div>
+        <!-- MODALS -->
+        <Modal v-model="this.$store.state.comment" footer-hide width="600" @on-cancel="commentCancel">
+            <Comments></Comments>
+        </Modal>
+        <Modal v-model="this.$store.state.rewoof" footer-hide width="600" @on-cancel="rewoofCancel">
+            <ReWoof></ReWoof>
+        </Modal>
     </div>
 </template>
 
 <script>
 import store from '../../../store/index'
+import Comments from '../Modals/Comments'
+import ReWoof from '../Modals/ReWoof'
 import { mapGetters } from 'vuex';
 
 export default {
+    components: {Comments, ReWoof},
     data(){
         return{
             focused: false,
@@ -92,6 +112,8 @@ export default {
             WoofDetails:{
                 Woof: '',
             },
+            comment_modal: false,
+            rewoof_modal: false
         }
     },
     methods:{
@@ -114,13 +136,14 @@ export default {
         send(){
             Vue.woof.send(this, this.WoofDetails);
         },
-        comment(){
-
+        comment(id){
+            Vue.comment.set(id);
         },
-        reWoof(){
-
+        reWoof(id){
+            Vue.rewoof.set(id);
         },
         like(index){
+            store.commit('offWoofModal')
             // Check if liked is true
             if(this.$root.Woofs[index].liked){
                 // if liked is true, then make it false and minus 1 the counts
@@ -133,7 +156,15 @@ export default {
             }
         },
         open(id){
-            Vue.woof.selected(id);
+            // if(!this.rewoof_modal){
+            //     if(!this.comment_modal){
+            //         Vue.woof.selected(id);
+            //     }
+            // }
+
+            if(this.ShowWoofModal == true){
+                Vue.woof.selected(id,true);
+            }
         },
         myWoof(user_id){
             if(this.UserData.id == user_id){
@@ -142,11 +173,27 @@ export default {
         },
         delete_woof(id){
             Vue.woof.delete(this,id);
+        },
+        direct_message(id){
+            console.log(id)
+        },
+        commentCancel(){
+            if(store.state.comment == true){
+                store.commit('offCommentModal')
+            }
+        },
+        rewoofCancel(){
+            if(store.state.rewoof == true){
+                store.commit('offReWoofModal')
+            }
         }
     },
     computed: mapGetters([
         'WoofList',
-        'UserData'
+        'SelectedWoofData',
+        'CommentData',
+        'UserData',
+        'ShowWoofModal'
     ]),
     mounted(){
         Vue.woof.all();
@@ -213,20 +260,39 @@ ul{
     margin: 5px 10px 15px 0px ;
 }
 .woof-actions{
-    margin-left: 57px;
-    margin-bottom: 10px;
+    margin-left: 50px;
+    margin-bottom: 20px;
 }
 .woof-actions a{
-    margin-right: 20px;
     color: #808695;
 }
-
+.woof-actions div{
+    float: left;
+    width: 70px;
+    height: 23px;
+    display: block;
+}
+.whole-woof:hover{
+    background-color: rgba(240, 234, 234, 0.20);
+}
 /* COMMENTS */
 .woof-comments{
     margin-left: 60px;
 }
 
-
+/* ICON */
+.icon_comment:hover .a{
+    font-weight: 600;
+    color:  #45B1F3;
+}
+.icon_rewoof:hover .b{
+    font-weight: 600;
+    color: #23C26B;
+}
+.icon_like:hover .c{
+    font-weight: 600;
+    color: #db5353;
+}
 
 
 /* TRANSITION ANIMATION */
