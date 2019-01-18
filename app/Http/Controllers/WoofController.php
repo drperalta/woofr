@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Woof;
+use App\Library\Comment as MyComment;
 use App\Library\User as MyUser;
 
 class WoofController extends Controller
@@ -34,9 +35,10 @@ class WoofController extends Controller
     }
     protected function selected($woof_id){
         $user = new MyUser();
-
+        $comments = new MyComment();
 
         $woof = Woof::where('id', $woof_id)->first();
+
         $arr = array(
             'id' => $woof->id,
             'user_id' => $woof->user_id,
@@ -46,7 +48,8 @@ class WoofController extends Controller
             // 'like_counts' =>
             'created_at' => $woof->created_at,
             'updated_at' => $woof->updated_at,
-            'user' => $user->all($woof->user_id)
+            'user' => $user->all($woof->user_id),
+            'comments' => $comments->all($woof->id,$woof->user_id)
         );
         return $arr;
 
@@ -54,8 +57,9 @@ class WoofController extends Controller
     protected function all(){
 
         $user = new MyUser();
-
+        $comments = new MyComment();
         $woofs = Woof::orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
+
         //$arrWoof = array($woofs);
         $woofList = array();
 
@@ -65,9 +69,13 @@ class WoofController extends Controller
                 'id' => $woof->id,
                 'user_id' => $woof->user_id,
                 'text' => $woof->text,
+                'comment_counts' => $comments->counts($woof->id),
+                // 'rewoof_counts' =>
+                // 'like_counts' =>
                 'created_at' => $woof->created_at,
                 'updated_at' => $woof->updated_at,
-                'user' => $user->all($woof->user_id)
+                'user' => $user->all($woof->user_id),
+
             );
 
             array_push($woofList, $arr);

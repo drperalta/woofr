@@ -11,7 +11,7 @@ export default function(Vue){
                 context.reply_length = 0;
                 context.CommentDetails.reply = '',
                 
-                console.log(response.data)
+                Vue.woof.selected(data.woof_id)
             }).catch(error => {
                 console.log(error)
             })

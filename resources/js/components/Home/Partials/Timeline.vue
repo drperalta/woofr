@@ -4,7 +4,7 @@
         <div class="woof-box woofr-border">
             <ul class="row">
                 <li>
-                    <i-avatar class="user-avatar" icon="ios-person" size="medium" />
+                    <Avatar class="user-avatar" icon="ios-person" size="medium" />
                 </li>
                 <li class="woof-box-middle">
                     <Input class="woof-textarea" v-model="WoofDetails.Woof" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
@@ -53,7 +53,7 @@
                             <!-- COMMENT ACTION -->
                             <a @click="comment()">
                                 <Icon type="ios-text-outline" size="24"/>
-                                {{woof.comments}}
+                                {{woof.comment_counts}}
                             </a>
                             <!-- RE-WOOF ACTION -->
                             <a @click="reWoof()">
@@ -70,15 +70,6 @@
                                 <!-- this span is to add margin left when liking because the solid icon is absolute  -->
                                 <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
                             </a>
-                        </div>
-                    </div>
-
-                    <div class="woof-comments">
-                        <div class="comment-box">
-
-                        </div>
-                        <div class="comment-list">
-
                         </div>
                     </div>
                     <Divider style="margin: 0;"/>

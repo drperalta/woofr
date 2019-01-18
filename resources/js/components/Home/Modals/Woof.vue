@@ -1,8 +1,9 @@
 <template>
     <div class="content">
+        <!-- WOOF POST -->
         <Card class="card" dis-hover>
             <div>
-                <Avatar class="user-avatar left" icon="ios-person" size="large"/>
+                <Avatar class="left" icon="ios-person" size="large"/>
                 <div class="user-details left">
                     <a :href="'/'+SelectedWoofData.user.username" style="font-size: 16px; font-weight: 600; color: black;display: block" >{{SelectedWoofData.user.fullname}}</a>
                     <a style="color: grey; display: block">@{{SelectedWoofData.user.username}}</a>
@@ -13,14 +14,15 @@
             </div>
             
         </Card>
+        <!-- COMMENT BOX -->
         <div class="comment-box" style="padding-top: 8px;">
-            <span style="padding-left: 60px;">replying to <a>@{{SelectedWoofData.user.username}}</a></span>
+            <span v-if="focused" style="padding-left: 49px; color: grey;">replying to <a>@{{SelectedWoofData.user.username}}</a></span>
             <div class="reply-box">
                 <ul class="row">
                     <li>
-                        <Avatar class="avatar" icon="ios-person" size="large" />
+                        <Avatar class="avatar" icon="ios-person" size="medium" />
                     </li>
-                    <li class="reply-box-middle" style="margin-left: 10px; margin-top: 5px; ">
+                    <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
                         <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
                         <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(SelectedWoofData.id)">Reply</Button>
                     </li>
@@ -30,8 +32,27 @@
                 </ul>
             </div>
         </div>
-        <Card class="comment-list" dis-hover>
-            
+        <!-- COMMENT LIST -->
+        <Card class="comment-list" dis-hover v-if="SelectedWoofData.comments != ''" :padding="0">
+            <div v-for="comment in SelectedWoofData.comments" :key="comment.id">
+                <ul class="row" style="padding: 18px">
+                    <!-- USER'S AVATAR -->
+                    <li>
+                        <Avatar class="comment-avatar" icon="ios-person" size="large"/>
+                    </li>
+                    <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
+                    <li>
+                        <div class="comment-details left">
+                            <a href="#" style="font-size: 14px; font-weight: 600; color: black">{{comment.user.fullname}}</a>
+                            <span style="color: grey;">@{{comment.user.username}}</span>
+                            <div style="font-size: 13px; ">
+                                {{comment.text}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <Divider style="margin: 0;"/>
+            </div>
         </Card>
     </div>
 </template>
@@ -85,7 +106,7 @@ export default {
     padding: 20px !important;
 }
 .user-avatar{
-    
+
 }
 .user-details{
     display: block;
@@ -98,12 +119,14 @@ export default {
     padding-top: 55px;    
 }
 .comment-box{
-    padding: 5px 20px 10px 20px;
+    padding: 5px 20px 5px 20px;
     background-color: whitesmoke;
+}
+.comment-list{
+    padding: 0px !important;
 }
 .reply-box{
     padding: 5px;
-    margin-bottom: 10px;
 }
 .reply-textarea{
     width: 475px;
@@ -115,5 +138,11 @@ export default {
     font-weight: 600;
 
     color: #765d69;
+}
+.comment-details{
+    margin-left: 10px;
+}
+li{
+    list-style: none;
 }
 </style>

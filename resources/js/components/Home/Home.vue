@@ -121,6 +121,8 @@ export default {
             if(store.state.selectedWoofModal == true){
                 store.commit('offWoofModal')
             }
+
+            Vue.woof.all();
         }
     },
     mounted() {

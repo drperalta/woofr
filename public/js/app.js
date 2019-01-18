@@ -1915,6 +1915,8 @@ __webpack_require__.r(__webpack_exports__);
       if (_store_index__WEBPACK_IMPORTED_MODULE_3__["default"].state.selectedWoofModal == true) {
         _store_index__WEBPACK_IMPORTED_MODULE_3__["default"].commit('offWoofModal');
       }
+
+      Vue.woof.all();
     }
   },
   mounted: function mounted() {
@@ -2121,6 +2123,27 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3347,15 +3370,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4114,7 +4128,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 10px 20px;\r\n    background-color: whitesmoke;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n", ""]);
+exports.push([module.i, "\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\r\n", ""]);
 
 // exports
 
@@ -48482,7 +48496,7 @@ var render = function() {
           "div",
           [
             _c("Avatar", {
-              staticClass: "user-avatar left",
+              staticClass: "left",
               attrs: { icon: "ios-person", size: "large" }
             }),
             _vm._v(" "),
@@ -48522,10 +48536,18 @@ var render = function() {
         "div",
         { staticClass: "comment-box", staticStyle: { "padding-top": "8px" } },
         [
-          _c("span", { staticStyle: { "padding-left": "60px" } }, [
-            _vm._v("replying to "),
-            _c("a", [_vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))])
-          ]),
+          _vm.focused
+            ? _c(
+                "span",
+                { staticStyle: { "padding-left": "49px", color: "grey" } },
+                [
+                  _vm._v("replying to "),
+                  _c("a", [
+                    _vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))
+                  ])
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "reply-box" }, [
             _c("ul", { staticClass: "row" }, [
@@ -48534,7 +48556,7 @@ var render = function() {
                 [
                   _c("Avatar", {
                     staticClass: "avatar",
-                    attrs: { icon: "ios-person", size: "large" }
+                    attrs: { icon: "ios-person", size: "medium" }
                   })
                 ],
                 1
@@ -48544,7 +48566,7 @@ var render = function() {
                 "li",
                 {
                   staticClass: "reply-box-middle",
-                  staticStyle: { "margin-left": "10px", "margin-top": "5px" }
+                  staticStyle: { "margin-left": "10px", "margin-top": "1px" }
                 },
                 [
                   _c("Input", {
@@ -48618,7 +48640,72 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("Card", { staticClass: "comment-list", attrs: { "dis-hover": "" } })
+      _vm.SelectedWoofData.comments != ""
+        ? _c(
+            "Card",
+            {
+              staticClass: "comment-list",
+              attrs: { "dis-hover": "", padding: 0 }
+            },
+            _vm._l(_vm.SelectedWoofData.comments, function(comment) {
+              return _c(
+                "div",
+                { key: comment.id },
+                [
+                  _c(
+                    "ul",
+                    { staticClass: "row", staticStyle: { padding: "18px" } },
+                    [
+                      _c(
+                        "li",
+                        [
+                          _c("Avatar", {
+                            staticClass: "comment-avatar",
+                            attrs: { icon: "ios-person", size: "large" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("div", { staticClass: "comment-details left" }, [
+                          _c(
+                            "a",
+                            {
+                              staticStyle: {
+                                "font-size": "14px",
+                                "font-weight": "600",
+                                color: "black"
+                              },
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v(_vm._s(comment.user.fullname))]
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticStyle: { color: "grey" } }, [
+                            _vm._v("@" + _vm._s(comment.user.username))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "font-size": "13px" } }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(comment.text) +
+                                "\n                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("Divider", { staticStyle: { margin: "0" } })
+                ],
+                1
+              )
+            }),
+            0
+          )
+        : _vm._e()
     ],
     1
   )
@@ -50472,7 +50559,7 @@ var render = function() {
         _c(
           "li",
           [
-            _c("i-avatar", {
+            _c("Avatar", {
               staticClass: "user-avatar",
               attrs: { icon: "ios-person", size: "medium" }
             })
@@ -50675,7 +50762,7 @@ var render = function() {
                         }),
                         _vm._v(
                           "\n                            " +
-                            _vm._s(woof.comments) +
+                            _vm._s(woof.comment_counts) +
                             "\n                        "
                         )
                       ],
@@ -50753,8 +50840,6 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(0, true),
-              _vm._v(" "),
               _c("Divider", { staticStyle: { margin: "0" } })
             ],
             1
@@ -50765,18 +50850,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "woof-comments" }, [
-      _c("div", { staticClass: "comment-box" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "comment-list" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -72200,7 +72274,7 @@ __webpack_require__.r(__webpack_exports__);
         context.focused = false;
         context.percent = 0;
         context.reply_length = 0;
-        context.CommentDetails.reply = '', console.log(response.data);
+        context.CommentDetails.reply = '', Vue.woof.selected(data.woof_id);
       }).catch(function (error) {
         console.log(error);
       });
