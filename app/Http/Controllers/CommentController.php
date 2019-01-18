@@ -17,7 +17,7 @@ class CommentController extends Controller
             'woof_id' => $request->woof_id,
             'text' => $request->reply
         ]);
-        
+
         return response()->json([
             'message' => 'Succefully Replied!'
         ], 201);

@@ -78,17 +78,18 @@
         <Modal v-model="modal" title="Direct Messages" footer-hide width="900">
             <Messages></Messages>
         </Modal>
-        <Modal v-model="this.$store.state.selectedWoofModal" title="" footer-hide width="600" @on-cancel="woofChange">
+        <Modal v-model="this.$root.WoofModal" title="" footer-hide width="600" @on-cancel="woofChange">
             <Woof></Woof>
         </Modal>
     </div>
 </template>
 
 <script>
-import Messages from './Modals/Messages'
-import Woof from './Modals/Woof'
-import { mapActions, mapGetters } from 'vuex'
-import store from '../../store/index'
+import Messages         from './Modals/Messages'
+import Woof             from './Modals/Woof'
+import { mapActions,
+        mapGetters }    from 'vuex'
+import store            from '../../store/index'
 
 export default {
     components: {Messages, Woof},
@@ -99,12 +100,13 @@ export default {
             filteredUsers: []
         }
     },
+
     methods:{
         filterList(){
 
             var vm=this;
             var listByUsername = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
-            var listByName = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByName  = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
 
             if(listByUsername == ''){
                 this.filteredUsers = listByName
@@ -118,16 +120,17 @@ export default {
             Vue.user.setUserList();
         },
         woofChange(){
-            if(store.state.selectedWoofModal == true){
-                store.commit('offWoofModal')
+            if(this.$root.WoofModal){
+                this.$root.WoofModal = false
             }
-
             Vue.woof.all();
         }
     },
+
     mounted() {
         Vue.auth.setUser();
     },
+
     computed: mapGetters([
         'UserData',
         'UserList'

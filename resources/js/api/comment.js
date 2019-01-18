@@ -3,15 +3,16 @@ import router from '../router/index'
 
 export default function(Vue){
     Vue.comment = {
-        send(context, data,show){
+        send(context, data){
             axios.post('/api/comment/send', data, this.auth())
             .then(response => {
                 context.focused = false;
                 context.percent = 0;
                 context.reply_length = 0;
                 context.CommentDetails.reply = '',
-                
-                Vue.woof.selected(data.woof_id,show)
+
+                Vue.woof.selected(data.woof_id)
+                context.$Message.success(`You successfully send a reply to @${data.username}`)
             }).catch(error => {
                 console.log(error)
             })
@@ -20,7 +21,6 @@ export default function(Vue){
             axios.get(`/api/woof/selected/${id}`, this.auth())
             .then(response => {
                 store.commit('SET_COMMENT_DATA', response.data)
-                store.commit('onCommentModal')
             }).catch(error => {
                 console.log(error)
             })

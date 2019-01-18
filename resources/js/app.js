@@ -277,7 +277,11 @@ const app = new Vue({
                 following_counts: '400',
                 like_counts: '390'
             },
-            toggleEditProfile: false
+            toggleEditProfile: false,
+
+            WoofModal: false,
+            CommentModal: false,
+            ReWoofModal: false,
         }
     }
 });

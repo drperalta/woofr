@@ -34,6 +34,7 @@
                             </a>
                         </DropdownMenu>
                     </Dropdown>
+
                     <div class="woof-body" @click="open(woof.id)" style="padding: 16px !important;">
                         <ul class="row" >
                             <!-- USER'S AVATAR -->
@@ -87,10 +88,10 @@
             </ul>
         </div>
         <!-- MODALS -->
-        <Modal v-model="this.$store.state.comment" footer-hide width="600" @on-cancel="commentCancel">
+        <Modal v-model="this.root().CommentModal" footer-hide width="600" @on-cancel="commentCancel">
             <Comments></Comments>
         </Modal>
-        <Modal v-model="this.$store.state.rewoof" footer-hide width="600" @on-cancel="rewoofCancel">
+        <Modal v-model="this.root().ReWoofModal" footer-hide width="600" @on-cancel="rewoofCancel">
             <ReWoof></ReWoof>
         </Modal>
     </div>
@@ -112,11 +113,11 @@ export default {
             WoofDetails:{
                 Woof: '',
             },
-            comment_modal: false,
-            rewoof_modal: false
         }
     },
+
     methods:{
+        //This is for the Text Area in Woof Box
         count(){
             var quotient = this.WoofDetails.Woof.length / 140;
             this.percent = quotient * 100;
@@ -133,17 +134,33 @@ export default {
                 this.focused = false;
             }
         },
+        // Sending Woofs
         send(){
             Vue.woof.send(this, this.WoofDetails);
         },
+        //to open the comment box
         comment(id){
-            Vue.comment.set(id);
+            this.root().CommentModal = false
+            Vue.comment.set(id);   //to set selected woof data
+            this.root().CommentModal = true
         },
+        //this will call when the comment modal is closed
+        commentCancel(){
+            this.root().CommentModal = false
+        },
+        //to open the rewoof box
         reWoof(id){
             Vue.rewoof.set(id);
+            this.$root.ReWoofModal = true
         },
+        //this will call when the rewoof modal is closed
+        rewoofCancel(){
+            if(this.$root.ReWoofModal){
+                this.$root.ReWoofModal = false
+            }
+        },
+        //to like a woof
         like(index){
-            store.commit('offWoofModal')
             // Check if liked is true
             if(this.$root.Woofs[index].liked){
                 // if liked is true, then make it false and minus 1 the counts
@@ -155,36 +172,34 @@ export default {
                 this.$root.Woofs[index].likes += 1;
             }
         },
+        //Open Woof Modal
         open(id){
-            // if(!this.rewoof_modal){
-            //     if(!this.comment_modal){
-            //         Vue.woof.selected(id);
-            //     }
-            // }
-
-            if(this.ShowWoofModal == true){
-                Vue.woof.selected(id,true);
+            if(this.$root.CommentModal != true){
+                Vue.woof.selected(id);
+                this.$root.WoofModal = true;
+            }else if(!this.$root.ReWoofModal != true){
+                Vue.woof.selected(id);
+                this.$root.WoofModal = true;
             }
         },
+        //To know if the woof is mine
         myWoof(user_id){
             if(this.UserData.id == user_id){
                 return true;
             }
         },
+        //To delete woof
         delete_woof(id){
             Vue.woof.delete(this,id);
         },
+        //to show direct message modal
         direct_message(id){
             console.log(id)
         },
-        commentCancel(){
-            if(store.state.comment == true){
-                store.commit('offCommentModal')
-            }
-        },
-        rewoofCancel(){
-            if(store.state.rewoof == true){
-                store.commit('offReWoofModal')
+
+        root(){
+            if(this.$root != null){
+                return this.$root
             }
         }
     },
@@ -196,6 +211,7 @@ export default {
         'ShowWoofModal'
     ]),
     mounted(){
+        //when mounted all the woofs will set to store and display it to timeline
         Vue.woof.all();
     }
 }

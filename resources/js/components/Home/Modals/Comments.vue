@@ -24,11 +24,11 @@
             <div class="reply-box">
                 <ul class="row">
                     <li>
-                        <Avatar class="avatar" icon="ios-person" size="medium" />
+                        <Avatar class="avatar" icon="ios-person" />
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
                         <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
-                        <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(CommentData.id)">Reply</Button>
+                        <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(CommentData.id, CommentData.user.username)">Reply</Button>
                     </li>
                     <li style="margin-left: 10px; margin-top: 7px; ">
                         <i-circle class="reply-counter" :percent="percent" stroke-color="#765d69" :size="25"></i-circle>
@@ -50,7 +50,8 @@ export default {
             reply_length: 0,
             CommentDetails:{
                 woof_id: '',
-                reply:''
+                reply:'',
+                username:''
             }
         }
     },
@@ -74,11 +75,15 @@ export default {
                 this.focused = false;
             }
         },
-        send_reply(woof_id){
+        send_reply(woof_id, username){
 
+            this.CommentDetails.username = username;
             this.CommentDetails.woof_id = woof_id;
-            
-            Vue.comment.send(this,this.CommentDetails,false)
+
+
+            if(this.CommentDetails.username != '' && this.CommentDetails.woof_id != ''){
+                Vue.comment.send(this,this.CommentDetails)
+            }
         }
     }
 }

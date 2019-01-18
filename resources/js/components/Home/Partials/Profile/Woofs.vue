@@ -11,7 +11,7 @@
             <!-- LIST OF ALL WOOFS -->
             <div class="woof-list">
                 <ul>
-                    <li v-for="(woof, index) in this.$root.Woofs" :key="woof.id">
+                    <li v-for="(woof, index) in UserWoofs" :key="woof.id">
                         <div class="woof-body">
                             <ul class="row">
                                 <!-- USER'S AVATAR -->
@@ -21,10 +21,10 @@
                                 <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                                 <li>
                                     <div class="user-woof-details">
-                                        <a :href="'/'+woof.user_name" style="font-size: 14px; font-weight: 600; color: black" >{{woof.full_name}}</a>
-                                        <span style="color: grey;">@{{woof.user_name}}</span>
+                                        <a :href="'/'+woof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.user.fullname}}</a>
+                                        <span style="color: grey;">@{{woof.user.username}}</span>
                                         <div style="font-size: 13px; ">
-                                            {{woof.woof_text}}
+                                            {{woof.text}}
                                         </div>
                                     </div>
                                 </li>
@@ -35,12 +35,12 @@
                                 <!-- COMMENT ACTION -->
                                 <a @click="comment()">
                                     <Icon type="ios-text-outline" size="24"/>
-                                    {{woof.comments}}
+                                    {{woof.comment_counts}}
                                 </a>
                                 <!-- RE-WOOF ACTION -->
                                 <a @click="reWoof()">
                                     <Icon type="ios-repeat" size="24"/>
-                                    {{woof.re_woof}}
+                                    {{woof.rewoof_counts}}
                                 </a>
                                 <!-- LIKE ACTION -->
                                 <a @click="like(index)">
@@ -50,17 +50,8 @@
                                     <Icon type="ios-heart-outline" v-if="!woof.liked" size="24" />
 
                                     <!-- this span is to add margin left when liking because the solid icon is absolute  -->
-                                    <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
+                                    <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.like_counts}}
                                 </a>
-                            </div>
-                        </div>
-
-                        <div class="woof-comments">
-                            <div class="comment-box">
-
-                            </div>
-                            <div class="comment-list">
-
                             </div>
                         </div>
                         <Divider style="margin: 0;"/>
@@ -76,6 +67,8 @@
 
 <script>
 import Trending from '../Trending'
+import {mapGetters} from 'vuex'
+
 export default {
     components: {Trending},
     data(){
@@ -85,6 +78,13 @@ export default {
     },
     created(){
         this.$root.profile_active_page = window.location.href.split('/')[4];
+    },
+    computed: mapGetters([
+        'UserData',
+        'UserWoofs'
+    ]),
+    mounted(){
+        Vue.woof.my_woofs(13)
     }
 }
 </script>

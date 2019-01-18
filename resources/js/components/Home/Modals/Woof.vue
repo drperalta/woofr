@@ -12,7 +12,7 @@
                     {{SelectedWoofData.text}}
                 </div>
             </div>
-            
+
         </Card>
         <!-- COMMENT BOX -->
         <div class="comment-box" style="padding-top: 8px;">
@@ -20,7 +20,7 @@
             <div class="reply-box">
                 <ul class="row">
                     <li>
-                        <Avatar class="avatar" icon="ios-person" size="medium" />
+                        <Avatar class="avatar" icon="ios-person"/>
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
                         <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
@@ -91,7 +91,7 @@ export default {
         send_reply(woof_id){
 
             this.CommentDetails.woof_id = woof_id;
-            
+
             Vue.comment.send(this,this.CommentDetails, true)
         }
     },
@@ -103,7 +103,7 @@ export default {
 
 <style scoped>
 .content{
-    
+
 }
 .card{
     padding: 20px !important;
@@ -119,7 +119,7 @@ export default {
 .woof-text{
     font-size: 18px;
     font-weight: 500;
-    padding-top: 55px;    
+    padding-top: 55px;
 }
 .comment-box{
     padding: 5px 20px 5px 20px;

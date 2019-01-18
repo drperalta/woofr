@@ -27,13 +27,10 @@ export default function(Vue){
                 console.log(error)
             })
         },
-        selected(id, show){
+        selected(id){
             axios.get(`/api/woof/selected/${id}`, this.auth())
             .then(response => {
                 store.commit('SET_WOOF_SELECTED', response.data)
-                if(show){
-                    store.commit('onWoofModal')
-                }
             }).catch(error => {
                 console.log(error)
             })
@@ -42,6 +39,14 @@ export default function(Vue){
             axios.get(`/api/woof/all`, this.auth())
             .then(response => {
                 store.commit('SET_WOOF_LIST', response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        my_woofs(id){
+            axios.get(`/api/woof/my_woofs`, this.auth())
+            .then(response => {
+                store.commit('SET_USER_WOOFS', response.data)
             }).catch(error => {
                 console.log(error)
             })

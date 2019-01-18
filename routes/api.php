@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'woof'], function(){
     Route::post('delete', 'WoofController@delete');
     Route::get('selected/{woof_id}', 'WoofController@selected');
     Route::get('all', 'WoofController@all');
+    Route::get('my_woofs', 'WoofController@my_woofs');
 
 });
 //WOOFS

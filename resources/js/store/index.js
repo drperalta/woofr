@@ -59,7 +59,11 @@ export default new Vuex.Store({
             }else{
                 return true;
             }
+        },
+        UserWoofs: state => {
+            return state.userWoofs;
         }
+
     },
 
     mutations:{
@@ -125,7 +129,7 @@ export default new Vuex.Store({
         SET_REWOOF_DATA: (state, data) => {
             state.rewoofData = data
         }
-        
+
     },
 
     actions:{

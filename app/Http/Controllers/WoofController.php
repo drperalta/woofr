@@ -9,16 +9,16 @@ use App\Library\Comment as MyComment;
 use App\Library\User as MyUser;
 
 class WoofController extends Controller
-{      
+{
     protected function send(Request $request){
 
         $user = $this->guard()->user();
-        
+
         $woof = Woof::create([
             'user_id' => $user->id,
             'text' => $request->Woof
         ]);
-        
+
         return response()->json([
             'message' => 'Woof posted!'
         ], 201);
@@ -43,7 +43,7 @@ class WoofController extends Controller
             'id' => $woof->id,
             'user_id' => $woof->user_id,
             'text' => $woof->text,
-            // 'comment_counts' => 
+            // 'comment_counts' =>
             // 'rewoof_counts' =>
             // 'like_counts' =>
             'created_at' => $woof->created_at,
@@ -76,6 +76,34 @@ class WoofController extends Controller
                 'updated_at' => $woof->updated_at,
                 'user' => $user->all($woof->user_id),
 
+            );
+
+            array_push($woofList, $arr);
+        }
+
+        return $woofList;
+    }
+    protected function my_woofs(){
+
+        $user = $this->guard()->user();
+        $comments = new MyComment();
+        $woofs = Woof::where('user_id',$user->id)->orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
+
+        //$arrWoof = array($woofs);
+        $woofList = array();
+
+        foreach ($woofs as $woof) {
+
+            $arr = array(
+                'id' => $woof->id,
+                'user_id' => $woof->user_id,
+                'text' => $woof->text,
+                'comment_counts' => $comments->counts($woof->id),
+                // 'rewoof_counts' =>
+                // 'like_counts' =>
+                'created_at' => $woof->created_at,
+                'updated_at' => $woof->updated_at,
+                'user' => $user,
             );
 
             array_push($woofList, $arr);
