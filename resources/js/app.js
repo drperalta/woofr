@@ -13,6 +13,7 @@ import CountryList from 'country-list'
 import Vuebar from 'vuebar'
 import VueProgressBar from 'vue-progressbar'
 import Moment from 'vue-moment'
+import VueEmoji from 'emoji-vue'
 
 const options = {
     color: 'white',
@@ -34,6 +35,7 @@ Vue.use(CountryList)
 Vue.use(Vuebar)
 Vue.use(VueProgressBar, options)
 Vue.use(Moment)
+Vue.use(VueEmoji)
 
 
 import Auth from '../js/api/auth'
