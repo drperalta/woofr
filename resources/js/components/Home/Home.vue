@@ -106,11 +106,13 @@ export default {
 
             var vm=this;
             var listByUsername = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
-            var listByName  = this.UserList.filter(function(data){return data.username.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+            var listByName  = this.UserList.filter(function(data){return data.fullname.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
 
-            if(listByUsername == ''){
+            if(listByUsername != ''){
+                this.filteredUsers = listByUsername
+            }else{
                 this.filteredUsers = listByName
-            } this.filteredUsers = listByUsername
+                }
 
         },
         logout(){
