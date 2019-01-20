@@ -21,7 +21,7 @@
                                 <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                                 <li>
                                     <div class="user-woof-details">
-                                        <a :href="'/'+woof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.user.fullname}}</a>
+                                        <router-link :to="'/'+woof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.user.fullname}}</router-link>
                                         <span style="color: grey;">@{{woof.user.username}}</span>
                                         <div style="font-size: 13px; ">
                                             {{woof.text}}
@@ -77,14 +77,14 @@ export default {
         }
     },
     created(){
-        this.$root.profile_active_page = window.location.href.split('/')[4];
+        this.$root.profile_active_page = window.location.href.split('/')[3];
     },
     computed: mapGetters([
-        'UserData',
+        'VisitedData',
         'UserWoofs'
     ]),
     mounted(){
-        Vue.woof.my_woofs(13)
+
     }
 }
 </script>

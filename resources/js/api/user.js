@@ -48,6 +48,8 @@ export default function(Vue){
             axios.get('/api/user/visited/'+data, this.auth())
             .then(response => {
                 store.commit('SET_VISITED_USER', response.data)
+
+                Vue.woof.my_woofs(response.data.id)
             }).catch(error => {
                 console.log(error)
             })

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Woof;
+use App\User;
 use App\Library\Comment as MyComment;
 use App\Library\User as MyUser;
 
@@ -83,11 +84,11 @@ class WoofController extends Controller
 
         return $woofList;
     }
-    protected function my_woofs(){
+    protected function my_woofs($id){
 
-        $user = $this->guard()->user();
+        $user = User::where('id', $id)->first();
         $comments = new MyComment();
-        $woofs = Woof::where('user_id',$user->id)->orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
+        $woofs = Woof::where('user_id',$id)->orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
 
         //$arrWoof = array($woofs);
         $woofList = array();

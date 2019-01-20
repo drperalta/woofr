@@ -44,7 +44,7 @@ export default function(Vue){
             })
         },
         my_woofs(id){
-            axios.get(`/api/woof/my_woofs`, this.auth())
+            axios.get(`/api/woof/my_woofs/${id}`, this.auth())
             .then(response => {
                 store.commit('SET_USER_WOOFS', response.data)
             }).catch(error => {

@@ -147,6 +147,7 @@ export default {
         //this will call when the comment modal is closed
         commentCancel(){
             this.root().CommentModal = false
+            Vue.woof.all();
         },
         //to open the rewoof box
         reWoof(id){
@@ -158,6 +159,7 @@ export default {
             if(this.$root.ReWoofModal){
                 this.$root.ReWoofModal = false
             }
+            Vue.woof.all();
         },
         //to like a woof
         like(index){

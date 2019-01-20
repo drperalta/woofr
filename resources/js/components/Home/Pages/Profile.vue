@@ -8,8 +8,8 @@
                 </router-link>
                 <!-- USER FULLNAME AND USERNAME -->
                 <div class="user-field">
-                    <router-link :to="'/'+UserData.username" class="name">{{ data().fullname }}</router-link>
-                    <router-link :to="'/'+UserData.username" class="username">@{{ data().username }}</router-link>
+                    <router-link :to="'/'+data().username" class="name">{{ data().fullname }}</router-link>
+                    <router-link :to="'/'+data().username" class="username">@{{ data().username }}</router-link>
                 </div>
             </div>
 
@@ -17,25 +17,25 @@
                 <div class="profile-menu-items">
                     <ul class="row">
                         <li>
-                            <router-link class="item" :to="'/'+UserData.username">
+                            <router-link class="item" :to="'/'+data().username">
                                 <span class="span menu-title">Woofs</span>
                                 <span class="span counts">{{this.$root.UserDetails.woof_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" :to="'/'+UserData.username+'/following'">
+                            <router-link class="item" :to="'/'+data().username+'/following'">
                                 <span class="span menu-title">Following</span>
                                 <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" :to="'/'+UserData.username+'/followers'">
+                            <router-link class="item" :to="'/'+data().username+'/followers'">
                                 <span class="span menu-title">Followers</span>
                                 <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link class="item" :to="'/'+UserData.username+'/likes'">
+                            <router-link class="item" :to="'/'+data().username+'/likes'">
                                 <span class="span menu-title">Likes</span>
                                 <span class="span counts">{{this.$root.UserDetails.like_counts}}</span>
                             </router-link>
@@ -103,7 +103,7 @@ export default {
         'VisitedData'
     ]),
     created(){
-        this.username();
+        Vue.user.setVisitedUser(this.$route.params.username);
     }
 }
 </script>

@@ -1896,14 +1896,14 @@ __webpack_require__.r(__webpack_exports__);
         return data.username.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
       });
       var listByName = this.UserList.filter(function (data) {
-        return data.username.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
+        return data.fullname.toLowerCase().indexOf(vm.search.toLowerCase()) >= 0;
       });
 
-      if (listByUsername == '') {
+      if (listByUsername != '') {
+        this.filteredUsers = listByUsername;
+      } else {
         this.filteredUsers = listByName;
       }
-
-      this.filteredUsers = listByUsername;
     },
     logout: function logout() {
       Vue.auth.logout();
@@ -2510,7 +2510,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['UserData', 'VisitedData']),
   created: function created() {
-    this.username();
+    Vue.user.setVisitedUser(this.$route.params.username);
   }
 });
 
@@ -3132,12 +3132,10 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   created: function created() {
-    this.$root.profile_active_page = window.location.href.split('/')[4];
+    this.$root.profile_active_page = window.location.href.split('/')[3];
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['UserData', 'UserWoofs']),
-  mounted: function mounted() {
-    Vue.woof.my_woofs(13);
-  }
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['VisitedData', 'UserWoofs']),
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -3557,6 +3555,7 @@ __webpack_require__.r(__webpack_exports__);
     //this will call when the comment modal is closed
     commentCancel: function commentCancel() {
       this.root().CommentModal = false;
+      Vue.woof.all();
     },
     //to open the rewoof box
     reWoof: function reWoof(id) {
@@ -3568,6 +3567,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$root.ReWoofModal) {
         this.$root.ReWoofModal = false;
       }
+
+      Vue.woof.all();
     },
     //to like a woof
     like: function like(index) {
@@ -67814,7 +67815,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "name",
-                  attrs: { to: "/" + _vm.UserData.username }
+                  attrs: { to: "/" + _vm.data().username }
                 },
                 [_vm._v(_vm._s(_vm.data().fullname))]
               ),
@@ -67823,7 +67824,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "username",
-                  attrs: { to: "/" + _vm.UserData.username }
+                  attrs: { to: "/" + _vm.data().username }
                 },
                 [_vm._v("@" + _vm._s(_vm.data().username))]
               )
@@ -67844,7 +67845,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "item",
-                    attrs: { to: "/" + _vm.UserData.username }
+                    attrs: { to: "/" + _vm.data().username }
                   },
                   [
                     _c("span", { staticClass: "span menu-title" }, [
@@ -67867,7 +67868,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "item",
-                    attrs: { to: "/" + _vm.UserData.username + "/following" }
+                    attrs: { to: "/" + _vm.data().username + "/following" }
                   },
                   [
                     _c("span", { staticClass: "span menu-title" }, [
@@ -67890,7 +67891,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "item",
-                    attrs: { to: "/" + _vm.UserData.username + "/followers" }
+                    attrs: { to: "/" + _vm.data().username + "/followers" }
                   },
                   [
                     _c("span", { staticClass: "span menu-title" }, [
@@ -67913,7 +67914,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "item",
-                    attrs: { to: "/" + _vm.UserData.username + "/likes" }
+                    attrs: { to: "/" + _vm.data().username + "/likes" }
                   },
                   [
                     _c("span", { staticClass: "span menu-title" }, [
@@ -68880,32 +68881,41 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("li", [
-                        _c("div", { staticClass: "user-woof-details" }, [
-                          _c(
-                            "a",
-                            {
-                              staticStyle: {
-                                "font-size": "14px",
-                                "font-weight": "600",
-                                color: "black"
+                        _c(
+                          "div",
+                          { staticClass: "user-woof-details" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticStyle: {
+                                  "font-size": "14px",
+                                  "font-weight": "600",
+                                  color: "black"
+                                },
+                                attrs: { to: "/" + woof.user.username }
                               },
-                              attrs: { href: "/" + woof.user.username }
-                            },
-                            [_vm._v(_vm._s(woof.user.fullname))]
-                          ),
-                          _vm._v(" "),
-                          _c("span", { staticStyle: { color: "grey" } }, [
-                            _vm._v("@" + _vm._s(woof.user.username))
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticStyle: { "font-size": "13px" } }, [
-                            _vm._v(
-                              "\n                                        " +
-                                _vm._s(woof.text) +
-                                "\n                                    "
+                              [_vm._v(_vm._s(woof.user.fullname))]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticStyle: { color: "grey" } }, [
+                              _vm._v("@" + _vm._s(woof.user.username))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticStyle: { "font-size": "13px" } },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(woof.text) +
+                                    "\n                                    "
+                                )
+                              ]
                             )
-                          ])
-                        ])
+                          ],
+                          1
+                        )
                       ])
                     ]),
                     _vm._v(" "),
@@ -91476,6 +91486,7 @@ __webpack_require__.r(__webpack_exports__);
     setVisitedUser: function setVisitedUser(data) {
       axios.get('/api/user/visited/' + data, this.auth()).then(function (response) {
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_VISITED_USER', response.data);
+        Vue.woof.my_woofs(response.data.id);
       }).catch(function (error) {
         console.log(error);
       });
@@ -91563,7 +91574,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     my_woofs: function my_woofs(id) {
-      axios.get("/api/woof/my_woofs", this.auth()).then(function (response) {
+      axios.get("/api/woof/my_woofs/".concat(id), this.auth()).then(function (response) {
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_USER_WOOFS', response.data);
       }).catch(function (error) {
         console.log(error);
