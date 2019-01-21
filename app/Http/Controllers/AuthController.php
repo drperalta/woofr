@@ -129,7 +129,7 @@ class AuthController extends Controller
     public function user()
     {
         $user = $this->guard()->user();
-        $woof_counts = Woof::where('user_id', $user->id)->where('type', 'woof')->count();
+        $woof_counts = Woof::where('user_id', $user->id)->where('type', 'woof')->orWhere('type', 'rewoof')->count();
 
         return response()->json([
             'id' => $user->id,

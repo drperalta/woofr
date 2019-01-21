@@ -15,8 +15,8 @@
                 </div>
             </div>
             <!-- REWOOF -->
-            <Card v-if="SelectedWoofData.type == 'rewoof'" :padding="16" style="margin-bottom: 10px; margin-top: 10px">
-                <ul class="row" >
+            <Card v-if="SelectedWoofData.type == 'rewoof'" :padding="16" style="margin-bottom: 10px; margin-top: 10px; cursor: pointer" >
+                <ul class="row" @on-click="open(SelectedWoofData.id)">
                     <!-- USER'S AVATAR -->
                     <li>
                         <Avatar class="user-avatar" icon="ios-person" size="large"/>
@@ -33,7 +33,35 @@
                     </li>
                 </ul>
             </Card>
+            <!-- WOOF ACTIONS -->
+            <div class="woof-actions">
+                <!-- COMMENT ACTION -->
+                <div @click="comment(SelectedWoofData.id)" class="icon_comment">
+                    <a>
+                        <Icon class="a" type="ios-text-outline" size="24"/>
+                        {{SelectedWoofData.comment_counts}}
+                    </a>
+                </div>
+                <!-- RE-WOOF ACTION -->
+                <div @click="rewoof(SelectedWoofData.id)" class="icon_rewoof">
+                    <a>
+                        <Icon class="b" type="ios-repeat" size="24"/>
+                        {{SelectedWoofData.rewoof_counts}}
+                    </a>
+                </div>
+                <!-- LIKE ACTION -->
+                <div @click="like(SelectedWoofData.id)" class="icon_like">
+                    <a>
+                        <transition name="bounce">
+                            <Icon  type="ios-heart" v-if="SelectedWoofData.liked" size="24" style="position: absolute;" color="#db5353"/>
+                        </transition>
+                        <Icon class="c" type="ios-heart-outline" v-if="!SelectedWoofData.liked" size="24" />
 
+                        <!-- this span is to add margin left when liking because the solid icon is absolute  -->
+                        <span style="margin-left: 28px;" v-if="SelectedWoofData.liked"></span>{{SelectedWoofData.likes}}
+                    </a>
+                </div>
+            </div>
         </Card>
         <!-- COMMENT BOX -->
         <div class="comment-box" style="padding-top: 8px;">
@@ -44,7 +72,7 @@
                         <Avatar class="user-avatar" icon="ios-person"/>
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
-                        <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
+                        <Input class="reply-textarea" ref="textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
                         <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(SelectedWoofData.id, SelectedWoofData.user.username)">Reply</Button>
                     </li>
                     <li style="margin-left: 10px; margin-top: 7px; ">
@@ -120,6 +148,69 @@ export default {
             if(this.CommentDetails.username != '' && this.CommentDetails.woof_id != ''){
                 Vue.woof.send_comment(this,this.CommentDetails)
             }
+        },
+        // Sending Woofs
+        send(){
+            Vue.woof.send_woof(this, this.WoofDetails);
+        },
+        //to open the comment box
+        comment(id){
+            this.$refs.textarea.focus();
+        },
+        //this will call when the comment modal is closed
+        commentCancel(){
+            
+            this.root().CommentModal = false
+            Vue.woof.all();
+        },
+        //to open the rewoof box
+        rewoof(id){
+            this.root().ReWoofModal = false
+            Vue.rewoof.set(id);
+            this.root().ReWoofModal = true
+        },
+        //this will call when the rewoof modal is closed
+        rewoofCancel(){
+            this.root().ReWoofModal = false
+            Vue.woof.all();
+        },
+        //to like a woof
+        like(index){
+            // Check if liked is true
+            if(this.$root.Woofs[index].liked){
+                // if liked is true, then make it false and minus 1 the counts
+                this.$root.Woofs[index].liked = false;
+                this.$root.Woofs[index].likes -= 1;
+            }else{
+                // if liked is false, then make it true and plus 1 the counts
+                this.$root.Woofs[index].liked = true;
+                this.$root.Woofs[index].likes += 1;
+            }
+        },
+        //Open Woof Modal
+        open(id){
+            Vue.woof.selected(id, 'woof');
+            this.$root.WoofModal = true;
+        },
+        //To know if the woof is mine
+        myWoof(user_id){
+            if(this.UserData.id == user_id){
+                return true;
+            }
+        },
+        //To delete woof
+        delete_woof(id){
+            Vue.woof.delete(this,id);
+        },
+        //to show direct message modal
+        direct_message(id){
+            console.log(id)
+        },
+
+        root(){
+            if(this.$root != null){
+                return this.$root
+            }
         }
     },
     computed: mapGetters([
@@ -179,5 +270,41 @@ li{
 }
 .comment{
     max-width: 300px;
+}
+
+.woof-actions{
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 30px !important;
+}
+.woof-actions a{
+    color: #808695;
+}
+.woof-actions div{
+    float: left;
+    width: 70px;
+    height: 23px;
+    display: block;
+}
+.whole-woof:hover{
+    background-color: rgba(240, 234, 234, 0.20);
+}
+/* COMMENTS */
+.woof-comments{
+    margin-left: 60px;
+}
+
+/* ICON */
+.icon_comment:hover .a{
+    font-weight: 600;
+    color:  #45B1F3;
+}
+.icon_rewoof:hover .b{
+    font-weight: 600;
+    color: #23C26B;
+}
+.icon_like:hover .c{
+    font-weight: 600;
+    color: #db5353;
 }
 </style>

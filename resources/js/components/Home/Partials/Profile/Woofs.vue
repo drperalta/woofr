@@ -166,7 +166,7 @@ export default {
         },
         //To delete woof
         delete_woof(id){
-            Vue.woof.delete(this,id);
+            Vue.woof.delete(this,id,this.UserData.id);
         },
         //to show direct message modal
         direct_message(id){

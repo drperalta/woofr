@@ -11,6 +11,7 @@ use App\Library\Comment as MyComment;
 use App\Library\User as MyUser;
 use App\Library\Woof as MyWoof;
 use App\Library\ReWoof as MyRewoof;
+use App\Library\Like as MyLike;
 
 class WoofController extends Controller
 {
@@ -71,6 +72,9 @@ class WoofController extends Controller
 
         $user = new MyUser();
         $rewoof = new MyWoof();
+        $rewoof_counts = new MyRewoof();
+        $like = new MyLike();
+
         $comments = new MyComment();
 
         $woof = Woof::where('id', $woof_id)->first();
@@ -79,9 +83,9 @@ class WoofController extends Controller
             'id' => $woof->id,
             'user_id' => $woof->user_id,
             'text' => $woof->text,
-            // 'comment_counts' =>
-            // 'rewoof_counts' =>
-            // 'like_counts' =>
+            'comment_counts' => $comments->counts($woof->id),
+            'rewoof_counts' => $rewoof_counts->counts($woof->id),
+            'like_counts' => $like->counts($woof->id),
             'created_at' => $woof->created_at,
             'updated_at' => $woof->updated_at,
             'user' => $user->all($woof->user_id),
@@ -97,6 +101,7 @@ class WoofController extends Controller
         $user = new MyUser();
         $rewoof = new MyWoof();
         $rewoof_counts = new MyRewoof();
+        $like = new MyLike();
 
         $comments = new MyComment();
 
@@ -115,11 +120,12 @@ class WoofController extends Controller
                 'type' => $woof->type,
                 'comment_counts' => $comments->counts($woof->id),
                 'rewoof_counts' => $rewoof_counts->counts($woof->id),
-                // 'like_counts' =>
+                'like_counts' => $like->counts($woof->id),
                 'created_at' => $woof->created_at,
                 'updated_at' => $woof->updated_at,
                 'user' => $user->all($woof->user_id),
                 'rewoof' => $rewoof->get_rewoof($woof->woof_id),
+                'liked' => $like->check($woof->woof_id,$this->guard()->user()->id)
 
             );
 

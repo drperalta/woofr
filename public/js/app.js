@@ -1919,7 +1919,7 @@ __webpack_require__.r(__webpack_exports__);
       Vue.woof.all();
     },
     show: function show() {
-      if (this.$root.CommentModal == true || this.$root.ReWoofModal == true) {
+      if (this.$root.CommentModal == true || this.$root.ReWoofModal == true || this.$root.Liked == true) {
         this.$root.WoofModal = false;
         return false;
       } else {
@@ -2406,6 +2406,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2443,6 +2471,67 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.CommentDetails.username != '' && this.CommentDetails.woof_id != '') {
         Vue.woof.send_comment(this, this.CommentDetails);
+      }
+    },
+    // Sending Woofs
+    send: function send() {
+      Vue.woof.send_woof(this, this.WoofDetails);
+    },
+    //to open the comment box
+    comment: function comment(id) {
+      this.$refs.textarea.focus();
+    },
+    //this will call when the comment modal is closed
+    commentCancel: function commentCancel() {
+      this.root().CommentModal = false;
+      Vue.woof.all();
+    },
+    //to open the rewoof box
+    rewoof: function rewoof(id) {
+      this.root().ReWoofModal = false;
+      Vue.rewoof.set(id);
+      this.root().ReWoofModal = true;
+    },
+    //this will call when the rewoof modal is closed
+    rewoofCancel: function rewoofCancel() {
+      this.root().ReWoofModal = false;
+      Vue.woof.all();
+    },
+    //to like a woof
+    like: function like(index) {
+      // Check if liked is true
+      if (this.$root.Woofs[index].liked) {
+        // if liked is true, then make it false and minus 1 the counts
+        this.$root.Woofs[index].liked = false;
+        this.$root.Woofs[index].likes -= 1;
+      } else {
+        // if liked is false, then make it true and plus 1 the counts
+        this.$root.Woofs[index].liked = true;
+        this.$root.Woofs[index].likes += 1;
+      }
+    },
+    //Open Woof Modal
+    open: function open(id) {
+      Vue.woof.selected(id, 'woof');
+      this.$root.WoofModal = true;
+    },
+    //To know if the woof is mine
+    myWoof: function myWoof(user_id) {
+      if (this.UserData.id == user_id) {
+        return true;
+      }
+    },
+    //To delete woof
+    delete_woof: function delete_woof(id) {
+      Vue.woof.delete(this, id);
+    },
+    //to show direct message modal
+    direct_message: function direct_message(id) {
+      console.log(id);
+    },
+    root: function root() {
+      if (this.$root != null) {
+        return this.$root;
       }
     }
   },
@@ -3333,7 +3422,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //To delete woof
     delete_woof: function delete_woof(id) {
-      Vue.woof.delete(this, id);
+      Vue.woof.delete(this, id, this.UserData.id);
     },
     //to show direct message modal
     direct_message: function direct_message(id) {
@@ -3759,6 +3848,10 @@ __webpack_require__.r(__webpack_exports__);
       WoofDetails: {
         Woof: '',
         type: 'woof'
+      },
+      LikeDetails: {
+        user_id: '',
+        woof_id: ''
       }
     };
   },
@@ -3807,22 +3900,26 @@ __webpack_require__.r(__webpack_exports__);
       Vue.woof.all();
     },
     //to like a woof
-    like: function like(index) {
-      // Check if liked is true
-      if (this.$root.Woofs[index].liked) {
+    like: function like(index, id) {
+      this.LikeDetails.user_id = this.UserData.id;
+      this.LikeDetails.woof_id = id; // Check if liked is true
+
+      if (this.WoofList[index].liked) {
         // if liked is true, then make it false and minus 1 the counts
-        this.$root.Woofs[index].liked = false;
-        this.$root.Woofs[index].likes -= 1;
+        this.WoofList[index].liked = false;
+        this.WoofList[index].likes -= 1;
+        Vue.woof.dislike(this, this.LikeDetails);
       } else {
         // if liked is false, then make it true and plus 1 the counts
-        this.$root.Woofs[index].liked = true;
-        this.$root.Woofs[index].likes += 1;
-      }
+        this.WoofList[index].liked = true;
+        this.WoofList[index].likes += 1;
+        Vue.woof.like(this, this.LikeDetails);
+      } //console.log(this.LikeDetails)
+
     },
     //Open Woof Modal
-    open: function open(id) {
-      Vue.woof.selected(id, 'woof');
-      this.$root.WoofModal = true;
+    open: function open(id) {// Vue.woof.selected(id, 'woof');
+      // this.$root.WoofModal = true;
     },
     //To know if the woof is mine
     myWoof: function myWoof(user_id) {
@@ -4641,7 +4738,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\n.woof-actions[data-v-48d810f3]{\r\n    margin-top: 15px;\r\n    margin-left: 10px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-48d810f3]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-48d810f3]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-48d810f3]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-48d810f3]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n", ""]);
 
 // exports
 
@@ -67949,65 +68046,193 @@ var render = function() {
                 {
                   staticStyle: {
                     "margin-bottom": "10px",
-                    "margin-top": "10px"
+                    "margin-top": "10px",
+                    cursor: "pointer"
                   },
                   attrs: { padding: 16 }
                 },
                 [
-                  _c("ul", { staticClass: "row" }, [
+                  _c(
+                    "ul",
+                    {
+                      staticClass: "row",
+                      on: {
+                        "on-click": function($event) {
+                          _vm.open(_vm.SelectedWoofData.id)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "li",
+                        [
+                          _c("Avatar", {
+                            staticClass: "user-avatar",
+                            attrs: { icon: "ios-person", size: "large" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c("div", { staticClass: "user-woof-details left" }, [
+                          _c(
+                            "a",
+                            {
+                              staticStyle: {
+                                "font-size": "14px",
+                                "font-weight": "600",
+                                color: "black"
+                              },
+                              attrs: {
+                                href:
+                                  "/" +
+                                  _vm.SelectedWoofData.rewoof.user.username
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.SelectedWoofData.rewoof.user.fullname
+                                )
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticStyle: { color: "grey" } }, [
+                            _vm._v(
+                              "@" +
+                                _vm._s(
+                                  _vm.SelectedWoofData.rewoof.user.username
+                                )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "font-size": "13px" } }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.SelectedWoofData.rewoof.text) +
+                                "\n                        "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "woof-actions" }, [
+            _c(
+              "div",
+              {
+                staticClass: "icon_comment",
+                on: {
+                  click: function($event) {
+                    _vm.comment(_vm.SelectedWoofData.id)
+                  }
+                }
+              },
+              [
+                _c(
+                  "a",
+                  [
+                    _c("Icon", {
+                      staticClass: "a",
+                      attrs: { type: "ios-text-outline", size: "24" }
+                    }),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.SelectedWoofData.comment_counts) +
+                        "\n                "
+                    )
+                  ],
+                  1
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "icon_rewoof",
+                on: {
+                  click: function($event) {
+                    _vm.rewoof(_vm.SelectedWoofData.id)
+                  }
+                }
+              },
+              [
+                _c(
+                  "a",
+                  [
+                    _c("Icon", {
+                      staticClass: "b",
+                      attrs: { type: "ios-repeat", size: "24" }
+                    }),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.SelectedWoofData.rewoof_counts) +
+                        "\n                "
+                    )
+                  ],
+                  1
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "icon_like",
+                on: {
+                  click: function($event) {
+                    _vm.like(_vm.SelectedWoofData.id)
+                  }
+                }
+              },
+              [
+                _c(
+                  "a",
+                  [
                     _c(
-                      "li",
+                      "transition",
+                      { attrs: { name: "bounce" } },
                       [
-                        _c("Avatar", {
-                          staticClass: "user-avatar",
-                          attrs: { icon: "ios-person", size: "large" }
-                        })
+                        _vm.SelectedWoofData.liked
+                          ? _c("Icon", {
+                              staticStyle: { position: "absolute" },
+                              attrs: {
+                                type: "ios-heart",
+                                size: "24",
+                                color: "#db5353"
+                              }
+                            })
+                          : _vm._e()
                       ],
                       1
                     ),
                     _vm._v(" "),
-                    _c("li", [
-                      _c("div", { staticClass: "user-woof-details left" }, [
-                        _c(
-                          "a",
-                          {
-                            staticStyle: {
-                              "font-size": "14px",
-                              "font-weight": "600",
-                              color: "black"
-                            },
-                            attrs: {
-                              href:
-                                "/" + _vm.SelectedWoofData.rewoof.user.username
-                            }
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.SelectedWoofData.rewoof.user.fullname)
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("span", { staticStyle: { color: "grey" } }, [
-                          _vm._v(
-                            "@" +
-                              _vm._s(_vm.SelectedWoofData.rewoof.user.username)
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticStyle: { "font-size": "13px" } }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(_vm.SelectedWoofData.rewoof.text) +
-                              "\n                        "
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            : _vm._e()
+                    !_vm.SelectedWoofData.liked
+                      ? _c("Icon", {
+                          staticClass: "c",
+                          attrs: { type: "ios-heart-outline", size: "24" }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.SelectedWoofData.liked
+                      ? _c("span", { staticStyle: { "margin-left": "28px" } })
+                      : _vm._e(),
+                    _vm._v(
+                      _vm._s(_vm.SelectedWoofData.likes) + "\n                "
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ])
         ],
         1
       ),
@@ -68050,6 +68275,7 @@ var render = function() {
                 },
                 [
                   _c("Input", {
+                    ref: "textarea",
                     staticClass: "reply-textarea",
                     attrs: {
                       type: "textarea",
@@ -70428,7 +70654,8 @@ var render = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.UserData.username != woof.user.username
+                              _vm.UserData.username != woof.user.username &&
+                              woof.rewoof != null
                                 ? _c(
                                     "span",
                                     { staticStyle: { color: "grey" } },
@@ -70610,7 +70837,7 @@ var render = function() {
                           staticClass: "icon_like",
                           on: {
                             click: function($event) {
-                              _vm.like(index)
+                              _vm.like(index, woof.id)
                             }
                           }
                         },
@@ -70652,7 +70879,7 @@ var render = function() {
                                   })
                                 : _vm._e(),
                               _vm._v(
-                                _vm._s(woof.likes) +
+                                _vm._s(woof.like_counts) +
                                   "\n                            "
                               )
                             ],
@@ -92392,6 +92619,24 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    like: function like(context, data) {
+      var _this3 = this;
+
+      axios.post('/api/woof/like', data, this.auth()).then(function (response) {
+        _this3.all();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    dislike: function dislike(context, data) {
+      var _this4 = this;
+
+      axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {
+        _this4.all();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
     selected: function selected(id) {
       axios.get("/api/woof/selected/".concat(id), this.auth()).then(function (response) {
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_WOOF_SELECTED', response.data);
@@ -92399,13 +92644,15 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    delete: function _delete(context, id) {
-      var _this3 = this;
+    delete: function _delete(context, id, user_id) {
+      var _this5 = this;
 
       axios.post('/api/woof/delete', {
         id: id
       }, this.auth()).then(function (response) {
-        _this3.all();
+        _this5.my_woofs(user_id);
+
+        _this5.all();
 
         context.$Message.success('Succefully Deleted!');
         console.log(response.data);
@@ -92733,7 +92980,8 @@ var app = new Vue({
       toggleEditProfile: false,
       WoofModal: false,
       CommentModal: false,
-      ReWoofModal: false
+      ReWoofModal: false,
+      Liked: false
     };
   }
 });

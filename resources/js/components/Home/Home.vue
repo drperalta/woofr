@@ -128,7 +128,7 @@ export default {
             Vue.woof.all();
         },
         show(){
-            if(this.$root.CommentModal == true || this.$root.ReWoofModal == true){
+            if(this.$root.CommentModal == true || this.$root.ReWoofModal == true || this.$root.Liked == true){
                 this.$root.WoofModal = false
                 return false;
             }else{

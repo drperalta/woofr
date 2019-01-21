@@ -47,6 +47,22 @@ export default function(Vue){
                 console.log(error)
             })
         },
+        like(context,data){
+            axios.post('/api/woof/like',data, this.auth())
+            .then(response => {
+                this.all();
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        dislike(context, data){
+            axios.post('/api/woof/dislike',data, this.auth())
+            .then(response => {
+                this.all();
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         selected(id){
             axios.get(`/api/woof/selected/${id}`, this.auth())
             .then(response => {
@@ -55,9 +71,11 @@ export default function(Vue){
                 console.log(error)
             })
         },
-        delete(context,id){
+        delete(context,id,user_id){
+
             axios.post('/api/woof/delete',{id: id}, this.auth())
             .then(response => {
+                this.my_woofs(user_id)
                 this.all();
                 context.$Message.success('Succefully Deleted!');
                 console.log(response.data)

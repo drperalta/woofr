@@ -284,6 +284,7 @@ const app = new Vue({
             WoofModal: false,
             CommentModal: false,
             ReWoofModal: false,
+            Liked: false
         }
     }
 });

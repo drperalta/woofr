@@ -57,6 +57,9 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'woof'], function(){
     Route::post('send_rewoof', 'WoofController@send_rewoof');
     Route::post('send_comment', 'WoofController@send_comment');
 
+    Route::post('like', 'LikeController@like');
+    Route::post('dislike', 'LikeController@dislike');
+
     Route::post('delete', 'WoofController@delete');
 
     Route::get('selected/{woof_id}', 'WoofController@selected');

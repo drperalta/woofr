@@ -18,6 +18,7 @@ class Likes extends Migration
             $table->integer('user_id');
             $table->integer('woof_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
