@@ -10,8 +10,29 @@
                 </div>
                 <div class="woof-text">
                     {{SelectedWoofData.text}}
+                    <span v-if="(UserData.username == SelectedWoofData.user.username) && (SelectedWoofData.text == '') " style="color: grey; font-size: 12px"><Icon type="md-repeat" />You Rewoofed</span>
+                    <span v-if="UserData.username != SelectedWoofData.user.username" style="color: grey; font-size: 12px"><Icon type="md-repeat" />{{ SelectedWoofData.user.fullname }} rewoofed</span>
                 </div>
             </div>
+            <!-- REWOOF -->
+            <Card v-if="SelectedWoofData.type == 'rewoof'" :padding="16" style="margin-bottom: 10px; margin-top: 10px">
+                <ul class="row" >
+                    <!-- USER'S AVATAR -->
+                    <li>
+                        <Avatar class="user-avatar" icon="ios-person" size="large"/>
+                    </li>
+                    <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
+                    <li>
+                        <div class="user-woof-details left">
+                            <a :href="'/'+SelectedWoofData.rewoof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{SelectedWoofData.rewoof.user.fullname}}</a>
+                            <span style="color: grey;">@{{SelectedWoofData.rewoof.user.username}}</span>
+                            <div style="font-size: 13px; ">
+                                {{SelectedWoofData.rewoof.text}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </Card>
 
         </Card>
         <!-- COMMENT BOX -->
@@ -20,7 +41,7 @@
             <div class="reply-box">
                 <ul class="row">
                     <li>
-                        <Avatar class="avatar" icon="ios-person"/>
+                        <Avatar class="user-avatar" icon="ios-person"/>
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
                         <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
@@ -38,7 +59,7 @@
                 <ul class="row" style="padding: 18px">
                     <!-- USER'S AVATAR -->
                     <li>
-                        <Avatar class="comment-avatar" icon="ios-person" size="large"/>
+                        <Avatar class="avatar" icon="ios-person" size="large"/>
                     </li>
                     <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                     <li>
@@ -102,7 +123,8 @@ export default {
         }
     },
     computed: mapGetters([
-        'SelectedWoofData'
+        'SelectedWoofData',
+        'UserData'
     ])
 }
 </script>
@@ -115,7 +137,7 @@ export default {
     padding: 20px !important;
 }
 .user-avatar{
-
+    margin-right: 10px;
 }
 .user-details{
     display: block;

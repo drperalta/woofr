@@ -48,30 +48,31 @@
                                     <span style="color: grey;">@{{woof.user.username}}</span>
                                     <div style="font-size: 13px; ">
                                         {{woof.text}}
+                                        <span v-if="(UserData.username == woof.user.username) && (woof.text == '') " style="color: grey;"><Icon type="md-repeat" />You Rewoofed</span>
+                                        <span v-if="UserData.username != woof.user.username" style="color: grey;"><Icon type="md-repeat" />{{ woof.user.fullname }} rewoofed</span>
+                                        <!-- REWOOF -->
+                                        <Card v-if="woof.type == 'rewoof'" :padding="16" style="min-width: 474px !important;">
+                                            <ul class="row" >
+                                                <!-- USER'S AVATAR -->
+                                                <li>
+                                                    <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
+                                                </li>
+                                                <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
+                                                <li>
+                                                    <div class="user-woof-details left">
+                                                        <a :href="'/'+woof.rewoof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.rewoof.user.fullname}}</a>
+                                                        <span style="color: grey;">@{{woof.rewoof.user.username}}</span>
+                                                        <div style="font-size: 13px; ">
+                                                            {{woof.rewoof.text}}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </Card>
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                        <!-- REWOOF -->
-                        <Card v-if="woof.type == 'rewoof'" :padding="6">
-                            <ul class="row" >
-                                <!-- USER'S AVATAR -->
-                                <li>
-                                    <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
-                                </li>
-                                <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
-                                <li>
-                                    <div class="user-woof-details left">
-                                        <a :href="'/'+woof.rewoof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.rewoof.user.fullname}}</a>
-                                        <span style="color: grey;">@{{woof.rewoof.user.username}}</span>
-                                        <div style="font-size: 13px; ">
-                                            {{woof.rewoof.text}}
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </Card>
-
                         <!-- WOOF ACTIONS -->
                         <div class="woof-actions">
                             <!-- COMMENT ACTION -->
@@ -85,7 +86,7 @@
                             <div @click="rewoof(woof.id)" class="icon_rewoof">
                                 <a>
                                     <Icon class="b" type="ios-repeat" size="24"/>
-                                    {{woof.re_woof}}
+                                    {{woof.rewoof_counts}}
                                 </a>
                             </div>
                             <!-- LIKE ACTION -->
@@ -289,12 +290,13 @@ ul{
     margin: 10px 10px 10px  0px;
 }
 .user-woof-details{
-    width: 100%;
-    margin: 5px 10px 15px 0px ;
+    width: auto;
+    margin: 5px 10px 0px 0px ;
 }
 .woof-actions{
+    margin-top: 15px;
     margin-left: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 30px !important;
 }
 .woof-actions a{
     color: #808695;

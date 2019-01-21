@@ -9,8 +9,7 @@
                             <Avatar class="avatar" icon="ios-person" />
                         </li>
                         <li class="comment-box-middle" style="margin-left: 10px; margin-top: 1px; ">
-                            <Input class="comment-textarea" v-model="ReWoofDetails.comment" type="textarea" :maxlength="145" placeholder="Add Comment..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
-                            <Button class="comment-button" shape="circle" :disabled="comment_length == 0" v-if="focused" @click.prevent="send_rewoof(ReWoofData.id, ReWoofData.user.username)">ReWoof</Button>
+                            <Input class="comment-textarea" v-model="ReWoofDetails.comment" type="textarea" :maxlength="145" placeholder="Comment Something..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
                         </li>
                         <li style="margin-right: 10px; margin-top: 7px; ">
                             <i-circle class="comment-counter" :percent="percent" stroke-color="#765d69" :size="25"></i-circle>
@@ -19,7 +18,7 @@
                 </div>
             </div>
             
-            <Card>
+            <Card :padding="25" dis-hover>
                 <ul class="row" >
                     <!-- USER'S AVATAR -->
                     <li>
@@ -37,7 +36,7 @@
                     </li>
                 </ul>
             </Card>
-
+            <Button class="comment-button" shape="circle" @click.prevent="send_rewoof(ReWoofData.id, ReWoofData.user.username)">ReWoof</Button>
         </Card>
         
     </div>
@@ -117,12 +116,17 @@ export default {
 }
 .comment-textarea{
     width: 475px;
+    
+}
+.comment-counter{
+    margin-left: 15px;
 }
 .comment-button{
-    width: 90px;
-    float: right;
-    margin-top: 15px;
+    width: 150px;
     font-weight: 600;
+    margin-left: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     color: #765d69;
 }

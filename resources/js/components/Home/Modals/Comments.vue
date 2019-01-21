@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Card :title="'Reply to '+ SelectedWoofData.user.fullname" dis-hover :bordered="false">
+        <Card :title="'Reply to '+ SelectedWoofData.user.fullname" dis-hover :bordered="false" :padding="25">
             <ul class="row" >
                 <!-- USER'S AVATAR -->
                 <li>
@@ -27,7 +27,7 @@
                         <Avatar class="avatar" icon="ios-person" />
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
-                        <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
+                        <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="Comment Something..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
                         <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(SelectedWoofData.id, SelectedWoofData.user.username)">Reply</Button>
                     </li>
                     <li style="margin-left: 10px; margin-top: 7px; ">

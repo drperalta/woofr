@@ -2271,7 +2271,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2386,6 +2385,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2426,7 +2446,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['SelectedWoofData'])
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['SelectedWoofData', 'UserData'])
 });
 
 /***/ }),
@@ -3721,6 +3741,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4601,7 +4622,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.card[data-v-6fe18546]{\r\n    padding: 0px !important;\n}\n.user-comment-avatar[data-v-6fe18546]{\r\n    float: left;\r\n    margin: 5px 10px 10px  0px;\n}\n.user-comment-details[data-v-6fe18546]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.comment-box[data-v-6fe18546]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-6fe18546]{\r\n    padding: 0px !important;\n}\n.comment-textarea[data-v-6fe18546]{\r\n    width: 475px;\n}\n.comment-button[data-v-6fe18546]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n", ""]);
+exports.push([module.i, "\n.card[data-v-6fe18546]{\r\n    padding: 0px !important;\n}\n.user-comment-avatar[data-v-6fe18546]{\r\n    float: left;\r\n    margin: 5px 10px 10px  0px;\n}\n.user-comment-details[data-v-6fe18546]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.comment-box[data-v-6fe18546]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-6fe18546]{\r\n    padding: 0px !important;\n}\n.comment-textarea[data-v-6fe18546]{\r\n    width: 475px;\n}\n.comment-counter[data-v-6fe18546]{\r\n    margin-left: 15px;\n}\n.comment-button[data-v-6fe18546]{\r\n    width: 150px;\r\n    font-weight: 600;\r\n    margin-left: 70%;\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\r\n\r\n    color: #765d69;\n}\r\n", ""]);
 
 // exports
 
@@ -4620,7 +4641,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -4905,7 +4926,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px 10px 10px  0px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-0338a699]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-0338a699]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-0338a699]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px 10px 10px  0px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: auto;\r\n    margin: 5px 10px 0px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-top: 15px;\r\n    margin-left: 50px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-0338a699]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-0338a699]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-0338a699]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -67277,7 +67298,8 @@ var render = function() {
           attrs: {
             title: "Reply to " + _vm.SelectedWoofData.user.fullname,
             "dis-hover": "",
-            bordered: false
+            bordered: false,
+            padding: 25
           }
         },
         [
@@ -67367,7 +67389,7 @@ var render = function() {
                     attrs: {
                       type: "textarea",
                       maxlength: 140,
-                      placeholder: "What's happening...",
+                      placeholder: "Comment Something...",
                       autosize: { minRows: 1, maxRows: 5 }
                     },
                     on: {
@@ -67710,7 +67732,7 @@ var render = function() {
                       attrs: {
                         type: "textarea",
                         maxlength: 145,
-                        placeholder: "Add Comment...",
+                        placeholder: "Comment Something...",
                         autosize: { minRows: 1, maxRows: 5 }
                       },
                       on: {
@@ -67731,30 +67753,7 @@ var render = function() {
                         },
                         expression: "ReWoofDetails.comment"
                       }
-                    }),
-                    _vm._v(" "),
-                    _vm.focused
-                      ? _c(
-                          "Button",
-                          {
-                            staticClass: "comment-button",
-                            attrs: {
-                              shape: "circle",
-                              disabled: _vm.comment_length == 0
-                            },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.send_rewoof(
-                                  _vm.ReWoofData.id,
-                                  _vm.ReWoofData.user.username
-                                )
-                              }
-                            }
-                          },
-                          [_vm._v("ReWoof")]
-                        )
-                      : _vm._e()
+                    })
                   ],
                   1
                 ),
@@ -67780,7 +67779,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("Card", [
+          _c("Card", { attrs: { padding: 25, "dis-hover": "" } }, [
             _c("ul", { staticClass: "row" }, [
               _c(
                 "li",
@@ -67822,7 +67821,25 @@ var render = function() {
                 ])
               ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "Button",
+            {
+              staticClass: "comment-button",
+              attrs: { shape: "circle" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.send_rewoof(
+                    _vm.ReWoofData.id,
+                    _vm.ReWoofData.user.username
+                  )
+                }
+              }
+            },
+            [_vm._v("ReWoof")]
+          )
         ],
         1
       )
@@ -67856,46 +67873,144 @@ var render = function() {
     "div",
     { staticClass: "content" },
     [
-      _c("Card", { staticClass: "card", attrs: { "dis-hover": "" } }, [
-        _c(
-          "div",
-          [
-            _c("Avatar", {
-              staticClass: "left",
-              attrs: { icon: "ios-person", size: "large" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "user-details left" }, [
-              _c(
-                "a",
+      _c(
+        "Card",
+        { staticClass: "card", attrs: { "dis-hover": "" } },
+        [
+          _c(
+            "div",
+            [
+              _c("Avatar", {
+                staticClass: "left",
+                attrs: { icon: "ios-person", size: "large" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "user-details left" }, [
+                _c(
+                  "a",
+                  {
+                    staticStyle: {
+                      "font-size": "16px",
+                      "font-weight": "600",
+                      color: "black",
+                      display: "block"
+                    },
+                    attrs: { href: "/" + _vm.SelectedWoofData.user.username }
+                  },
+                  [_vm._v(_vm._s(_vm.SelectedWoofData.user.fullname))]
+                ),
+                _vm._v(" "),
+                _c("a", { staticStyle: { color: "grey", display: "block" } }, [
+                  _vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "woof-text" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.SelectedWoofData.text) +
+                    "\n                "
+                ),
+                _vm.UserData.username == _vm.SelectedWoofData.user.username &&
+                _vm.SelectedWoofData.text == ""
+                  ? _c(
+                      "span",
+                      { staticStyle: { color: "grey", "font-size": "12px" } },
+                      [
+                        _c("Icon", { attrs: { type: "md-repeat" } }),
+                        _vm._v("You Rewoofed")
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.UserData.username != _vm.SelectedWoofData.user.username
+                  ? _c(
+                      "span",
+                      { staticStyle: { color: "grey", "font-size": "12px" } },
+                      [
+                        _c("Icon", { attrs: { type: "md-repeat" } }),
+                        _vm._v(
+                          _vm._s(_vm.SelectedWoofData.user.fullname) +
+                            " rewoofed"
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.SelectedWoofData.type == "rewoof"
+            ? _c(
+                "Card",
                 {
                   staticStyle: {
-                    "font-size": "16px",
-                    "font-weight": "600",
-                    color: "black",
-                    display: "block"
+                    "margin-bottom": "10px",
+                    "margin-top": "10px"
                   },
-                  attrs: { href: "/" + _vm.SelectedWoofData.user.username }
+                  attrs: { padding: 16 }
                 },
-                [_vm._v(_vm._s(_vm.SelectedWoofData.user.fullname))]
-              ),
-              _vm._v(" "),
-              _c("a", { staticStyle: { color: "grey", display: "block" } }, [
-                _vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "woof-text" }, [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.SelectedWoofData.text) +
-                  "\n            "
+                [
+                  _c("ul", { staticClass: "row" }, [
+                    _c(
+                      "li",
+                      [
+                        _c("Avatar", {
+                          staticClass: "user-avatar",
+                          attrs: { icon: "ios-person", size: "large" }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c("div", { staticClass: "user-woof-details left" }, [
+                        _c(
+                          "a",
+                          {
+                            staticStyle: {
+                              "font-size": "14px",
+                              "font-weight": "600",
+                              color: "black"
+                            },
+                            attrs: {
+                              href:
+                                "/" + _vm.SelectedWoofData.rewoof.user.username
+                            }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.SelectedWoofData.rewoof.user.fullname)
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticStyle: { color: "grey" } }, [
+                          _vm._v(
+                            "@" +
+                              _vm._s(_vm.SelectedWoofData.rewoof.user.username)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { "font-size": "13px" } }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.SelectedWoofData.rewoof.text) +
+                              "\n                        "
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
               )
-            ])
-          ],
-          1
-        )
-      ]),
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -67920,7 +68035,7 @@ var render = function() {
                 "li",
                 [
                   _c("Avatar", {
-                    staticClass: "avatar",
+                    staticClass: "user-avatar",
                     attrs: { icon: "ios-person" }
                   })
                 ],
@@ -68028,7 +68143,7 @@ var render = function() {
                         "li",
                         [
                           _c("Avatar", {
-                            staticClass: "comment-avatar",
+                            staticClass: "avatar",
                             attrs: { icon: "ios-person", size: "large" }
                           })
                         ],
@@ -70289,78 +70404,146 @@ var render = function() {
                             _vm._v("@" + _vm._s(woof.user.username))
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticStyle: { "font-size": "13px" } }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(woof.text) +
-                                "\n                                "
-                            )
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    woof.type == "rewoof"
-                      ? _c("Card", { attrs: { padding: 6 } }, [
-                          _c("ul", { staticClass: "row" }, [
-                            _c(
-                              "li",
-                              [
-                                _c("Avatar", {
-                                  staticClass: "user-woof-avatar",
-                                  attrs: { icon: "ios-person", size: "large" }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c(
-                                "div",
-                                { staticClass: "user-woof-details left" },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticStyle: {
-                                        "font-size": "14px",
-                                        "font-weight": "600",
-                                        color: "black"
-                                      },
-                                      attrs: {
-                                        href: "/" + woof.rewoof.user.username
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(woof.rewoof.user.fullname))]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
+                          _c(
+                            "div",
+                            { staticStyle: { "font-size": "13px" } },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(woof.text) +
+                                  "\n                                    "
+                              ),
+                              _vm.UserData.username == woof.user.username &&
+                              woof.text == ""
+                                ? _c(
                                     "span",
                                     { staticStyle: { color: "grey" } },
                                     [
-                                      _vm._v(
-                                        "@" + _vm._s(woof.rewoof.user.username)
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticStyle: { "font-size": "13px" } },
+                                      _c("Icon", {
+                                        attrs: { type: "md-repeat" }
+                                      }),
+                                      _vm._v("You Rewoofed")
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.UserData.username != woof.user.username
+                                ? _c(
+                                    "span",
+                                    { staticStyle: { color: "grey" } },
                                     [
+                                      _c("Icon", {
+                                        attrs: { type: "md-repeat" }
+                                      }),
                                       _vm._v(
-                                        "\n                                        " +
-                                          _vm._s(woof.rewoof.text) +
-                                          "\n                                    "
+                                        _vm._s(woof.user.fullname) + " rewoofed"
                                       )
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              woof.type == "rewoof"
+                                ? _c(
+                                    "Card",
+                                    {
+                                      staticStyle: {
+                                        "min-width": "474px !important"
+                                      },
+                                      attrs: { padding: 16 }
+                                    },
+                                    [
+                                      _c("ul", { staticClass: "row" }, [
+                                        _c(
+                                          "li",
+                                          [
+                                            _c("Avatar", {
+                                              staticClass: "user-woof-avatar",
+                                              attrs: {
+                                                icon: "ios-person",
+                                                size: "large"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c("li", [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "user-woof-details left"
+                                            },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  staticStyle: {
+                                                    "font-size": "14px",
+                                                    "font-weight": "600",
+                                                    color: "black"
+                                                  },
+                                                  attrs: {
+                                                    href:
+                                                      "/" +
+                                                      woof.rewoof.user.username
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      woof.rewoof.user.fullname
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticStyle: { color: "grey" }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "@" +
+                                                      _vm._s(
+                                                        woof.rewoof.user
+                                                          .username
+                                                      )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticStyle: {
+                                                    "font-size": "13px"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                        " +
+                                                      _vm._s(woof.rewoof.text) +
+                                                      "\n                                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ])
                                     ]
                                   )
-                                ]
-                              )
-                            ])
-                          ])
+                                : _vm._e()
+                            ],
+                            1
+                          )
                         ])
-                      : _vm._e(),
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "woof-actions" }, [
                       _c(
@@ -70412,7 +70595,7 @@ var render = function() {
                               }),
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(woof.re_woof) +
+                                  _vm._s(woof.rewoof_counts) +
                                   "\n                            "
                               )
                             ],
@@ -70478,8 +70661,7 @@ var render = function() {
                         ]
                       )
                     ])
-                  ],
-                  1
+                  ]
                 ),
                 _vm._v(" "),
                 _c("Divider", { staticStyle: { margin: "0" } })

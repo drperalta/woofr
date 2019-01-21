@@ -31,7 +31,7 @@ class Comment{
         return $commentList;
     }
     public function counts($id){
-        $comment = MyComment::where('woof_id', $id)->get();
+        $comment = MyComment::where('woof_id', $id)->where('type', 'comment')->get();
         return $comment->count();
     }
 
