@@ -1917,6 +1917,14 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       Vue.woof.all();
+    },
+    show: function show() {
+      if (this.$root.CommentModal == true || this.$root.ReWoofModal == true) {
+        this.$root.WoofModal = false;
+        return false;
+      } else {
+        return true;
+      }
     }
   },
   mounted: function mounted() {
@@ -1988,11 +1996,12 @@ __webpack_require__.r(__webpack_exports__);
       CommentDetails: {
         woof_id: '',
         reply: '',
-        username: ''
+        username: '',
+        type: 'comment'
       }
     };
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['CommentData']),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['SelectedWoofData']),
   methods: {
     count: function count() {
       var quotient = this.CommentDetails.reply.length / 140;
@@ -2014,7 +2023,7 @@ __webpack_require__.r(__webpack_exports__);
       this.CommentDetails.woof_id = woof_id;
 
       if (this.CommentDetails.username != '' && this.CommentDetails.woof_id != '') {
-        Vue.comment.send(this, this.CommentDetails);
+        Vue.woof.send_comment(this, this.CommentDetails);
       }
     }
   }
@@ -2217,6 +2226,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2225,9 +2235,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      focused: false,
+      percent: 0,
+      comment_length: 0,
+      ReWoofDetails: {
+        woof_id: '',
+        comment: '',
+        username: '',
+        type: 'rewoof'
+      }
+    };
+  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['ReWoofData']),
+  methods: {
+    count: function count() {
+      var quotient = this.ReWoofDetails.comment.length / 140;
+      this.percent = quotient * 100;
+      this.comment_length = this.ReWoofDetails.comment.length;
+    },
+    onFocus: function onFocus() {
+      this.focused = true;
+    },
+    onBlur: function onBlur() {
+      if (this.comment_length != 0) {
+        this.focused = true;
+      } else {
+        this.focused = false;
+      }
+    },
+    send_rewoof: function send_rewoof(woof_id, username) {
+      this.ReWoofDetails.username = username;
+      this.ReWoofDetails.woof_id = woof_id;
+
+      if (this.ReWoofDetails.username != '' && this.ReWoofDetails.woof_id != '') {
+        Vue.woof.send_rewoof(this, this.ReWoofDetails);
+      }
+    }
   }
 });
 
@@ -2311,7 +2395,9 @@ __webpack_require__.r(__webpack_exports__);
       reply_length: 0,
       CommentDetails: {
         woof_id: '',
-        reply: ''
+        reply: '',
+        username: '',
+        type: 'comment'
       }
     };
   },
@@ -2331,9 +2417,13 @@ __webpack_require__.r(__webpack_exports__);
         this.focused = false;
       }
     },
-    send_reply: function send_reply(woof_id) {
+    send_reply: function send_reply(woof_id, username) {
+      this.CommentDetails.username = username;
       this.CommentDetails.woof_id = woof_id;
-      Vue.comment.send(this, this.CommentDetails, true);
+
+      if (this.CommentDetails.username != '' && this.CommentDetails.woof_id != '') {
+        Vue.woof.send_comment(this, this.CommentDetails);
+      }
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['SelectedWoofData'])
@@ -3055,6 +3145,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Trending__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Trending */ "./resources/js/components/Home/Partials/Trending.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Modals_Comments__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Modals/Comments */ "./resources/js/components/Home/Modals/Comments.vue");
+/* harmony import */ var _Modals_ReWoof__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Modals/ReWoof */ "./resources/js/components/Home/Modals/ReWoof.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3122,11 +3216,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Trending: _Trending__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Trending: _Trending__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Comments: _Modals_Comments__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ReWoof: _Modals_ReWoof__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {};
@@ -3134,8 +3260,79 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.$root.profile_active_page = window.location.href.split('/')[3];
   },
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['VisitedData', 'UserWoofs']),
-  mounted: function mounted() {}
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['VisitedData', 'UserWoofs', 'UserData']),
+  mounted: function mounted() {},
+  methods: _defineProperty({
+    //to open the comment box
+    comment: function comment(id) {
+      this.root().CommentModal = false;
+      Vue.comment.set(id); //to set selected woof data
+
+      this.root().CommentModal = true;
+    },
+    //this will call when the comment modal is closed
+    commentCancel: function commentCancel() {
+      this.root().CommentModal = false;
+      Vue.woof.my_woofs(this.VisitedData.id);
+    },
+    //to open the rewoof box
+    reWoof: function reWoof(id) {
+      Vue.rewoof.set(id);
+      this.$root.ReWoofModal = true;
+    },
+    //this will call when the rewoof modal is closed
+    rewoofCancel: function rewoofCancel() {
+      if (this.$root.ReWoofModal) {
+        this.$root.ReWoofModal = false;
+      }
+
+      Vue.woof.my_woofs(this.VisitedData.id);
+    },
+    //to like a woof
+    like: function like(index) {
+      // Check if liked is true
+      if (this.$root.Woofs[index].liked) {
+        // if liked is true, then make it false and minus 1 the counts
+        this.$root.Woofs[index].liked = false;
+        this.$root.Woofs[index].likes -= 1;
+      } else {
+        // if liked is false, then make it true and plus 1 the counts
+        this.$root.Woofs[index].liked = true;
+        this.$root.Woofs[index].likes += 1;
+      }
+    },
+    //Open Woof Modal
+    open: function open(id) {
+      if (this.$root.CommentModal != true) {
+        Vue.woof.selected(id);
+        this.$root.WoofModal = true;
+      } else if (!this.$root.ReWoofModal != true) {
+        Vue.woof.selected(id);
+        this.$root.WoofModal = true;
+      }
+    },
+    //To delete woof
+    delete_woof: function delete_woof(id) {
+      Vue.woof.delete(this, id);
+    },
+    //to show direct message modal
+    direct_message: function direct_message(id) {
+      console.log(id);
+    },
+    root: function root() {
+      if (this.$root != null) {
+        return this.$root;
+      }
+    },
+    //To know if the woof is mine
+    myWoof: function myWoof(user_id) {
+      if (this.UserData.id == user_id) {
+        return true;
+      }
+    }
+  }, "delete_woof", function delete_woof(id) {
+    Vue.woof.delete(this, id);
+  })
 });
 
 /***/ }),
@@ -3505,6 +3702,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3520,7 +3736,8 @@ __webpack_require__.r(__webpack_exports__);
       percent: 0,
       woof_length: 0,
       WoofDetails: {
-        Woof: ''
+        Woof: '',
+        type: 'woof'
       }
     };
   },
@@ -3543,7 +3760,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Sending Woofs
     send: function send() {
-      Vue.woof.send(this, this.WoofDetails);
+      Vue.woof.send_woof(this, this.WoofDetails);
     },
     //to open the comment box
     comment: function comment(id) {
@@ -3558,16 +3775,14 @@ __webpack_require__.r(__webpack_exports__);
       Vue.woof.all();
     },
     //to open the rewoof box
-    reWoof: function reWoof(id) {
+    rewoof: function rewoof(id) {
+      this.root().ReWoofModal = false;
       Vue.rewoof.set(id);
-      this.$root.ReWoofModal = true;
+      this.root().ReWoofModal = true;
     },
     //this will call when the rewoof modal is closed
     rewoofCancel: function rewoofCancel() {
-      if (this.$root.ReWoofModal) {
-        this.$root.ReWoofModal = false;
-      }
-
+      this.root().ReWoofModal = false;
       Vue.woof.all();
     },
     //to like a woof
@@ -3585,13 +3800,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     //Open Woof Modal
     open: function open(id) {
-      if (this.$root.CommentModal != true) {
-        Vue.woof.selected(id);
-        this.$root.WoofModal = true;
-      } else if (!this.$root.ReWoofModal != true) {
-        Vue.woof.selected(id);
-        this.$root.WoofModal = true;
-      }
+      Vue.woof.selected(id, 'woof');
+      this.$root.WoofModal = true;
     },
     //To know if the woof is mine
     myWoof: function myWoof(user_id) {
@@ -4238,7 +4448,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "/*!\n * Hover.css (http://ianlunn.github.io/Hover/)\n * Version: 2.3.2\n * Author: Ian Lunn @IanLunn\n * Author URL: http://ianlunn.co.uk/\n * Github: https://github.com/IanLunn/Hover\n\n * Hover.css Copyright Ian Lunn 2017. Generated with Sass.\n */\n/* 2D TRANSITIONS */\n/* Grow */\n.hvr-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n\n/* Shrink */\n.hvr-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-shrink:hover, .hvr-shrink:focus, .hvr-shrink:active {\n  -webkit-transform: scale(0.9);\n  transform: scale(0.9);\n}\n\n/* Pulse */\n@-webkit-keyframes hvr-pulse {\n  25% {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n  75% {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n@keyframes hvr-pulse {\n  25% {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n  75% {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n.hvr-pulse {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {\n  -webkit-animation-name: hvr-pulse;\n  animation-name: hvr-pulse;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Pulse Grow */\n@-webkit-keyframes hvr-pulse-grow {\n  to {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n}\n@keyframes hvr-pulse-grow {\n  to {\n    -webkit-transform: scale(1.1);\n    transform: scale(1.1);\n  }\n}\n.hvr-pulse-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {\n  -webkit-animation-name: hvr-pulse-grow;\n  animation-name: hvr-pulse-grow;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Pulse Shrink */\n@-webkit-keyframes hvr-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n@keyframes hvr-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.9);\n    transform: scale(0.9);\n  }\n}\n.hvr-pulse-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pulse-shrink:hover, .hvr-pulse-shrink:focus, .hvr-pulse-shrink:active {\n  -webkit-animation-name: hvr-pulse-shrink;\n  animation-name: hvr-pulse-shrink;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Push */\n@-webkit-keyframes hvr-push {\n  50% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n@keyframes hvr-push {\n  50% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n  100% {\n    -webkit-transform: scale(1);\n    transform: scale(1);\n  }\n}\n.hvr-push {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-push:hover, .hvr-push:focus, .hvr-push:active {\n  -webkit-animation-name: hvr-push;\n  animation-name: hvr-push;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Pop */\n@-webkit-keyframes hvr-pop {\n  50% {\n    -webkit-transform: scale(1.2);\n    transform: scale(1.2);\n  }\n}\n@keyframes hvr-pop {\n  50% {\n    -webkit-transform: scale(1.2);\n    transform: scale(1.2);\n  }\n}\n.hvr-pop {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {\n  -webkit-animation-name: hvr-pop;\n  animation-name: hvr-pop;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Bounce In */\n.hvr-bounce-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.5s;\n}\n.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {\n  -webkit-transform: scale(1.2);\n  transform: scale(1.2);\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\n}\n\n/* Bounce Out */\n.hvr-bounce-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.5s;\n}\n.hvr-bounce-out:hover, .hvr-bounce-out:focus, .hvr-bounce-out:active {\n  -webkit-transform: scale(0.8);\n  transform: scale(0.8);\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\n}\n\n/* Rotate */\n.hvr-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-rotate:hover, .hvr-rotate:focus, .hvr-rotate:active {\n  -webkit-transform: rotate(4deg);\n  transform: rotate(4deg);\n}\n\n/* Grow Rotate */\n.hvr-grow-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-grow-rotate:hover, .hvr-grow-rotate:focus, .hvr-grow-rotate:active {\n  -webkit-transform: scale(1.1) rotate(4deg);\n  transform: scale(1.1) rotate(4deg);\n}\n\n/* Float */\n.hvr-float {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-float:hover, .hvr-float:focus, .hvr-float:active {\n  -webkit-transform: translateY(-8px);\n  transform: translateY(-8px);\n}\n\n/* Sink */\n.hvr-sink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {\n  -webkit-transform: translateY(8px);\n  transform: translateY(8px);\n}\n\n/* Bob */\n@-webkit-keyframes hvr-bob {\n  0% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n  50% {\n    -webkit-transform: translateY(-4px);\n    transform: translateY(-4px);\n  }\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n@keyframes hvr-bob {\n  0% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n  50% {\n    -webkit-transform: translateY(-4px);\n    transform: translateY(-4px);\n  }\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n@-webkit-keyframes hvr-bob-float {\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n@keyframes hvr-bob-float {\n  100% {\n    -webkit-transform: translateY(-8px);\n    transform: translateY(-8px);\n  }\n}\n.hvr-bob {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {\n  -webkit-animation-name: hvr-bob-float, hvr-bob;\n  animation-name: hvr-bob-float, hvr-bob;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Hang */\n@-webkit-keyframes hvr-hang {\n  0% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  50% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n@keyframes hvr-hang {\n  0% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  50% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n@-webkit-keyframes hvr-hang-sink {\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n@keyframes hvr-hang-sink {\n  100% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n}\n.hvr-hang {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-hang:hover, .hvr-hang:focus, .hvr-hang:active {\n  -webkit-animation-name: hvr-hang-sink, hvr-hang;\n  animation-name: hvr-hang-sink, hvr-hang;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Skew */\n.hvr-skew {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-skew:hover, .hvr-skew:focus, .hvr-skew:active {\n  -webkit-transform: skew(-10deg);\n  transform: skew(-10deg);\n}\n\n/* Skew Forward */\n.hvr-skew-forward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  -webkit-transform-origin: 0 100%;\n  transform-origin: 0 100%;\n}\n.hvr-skew-forward:hover, .hvr-skew-forward:focus, .hvr-skew-forward:active {\n  -webkit-transform: skew(-10deg);\n  transform: skew(-10deg);\n}\n\n/* Skew Backward */\n.hvr-skew-backward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  -webkit-transform-origin: 0 100%;\n  transform-origin: 0 100%;\n}\n.hvr-skew-backward:hover, .hvr-skew-backward:focus, .hvr-skew-backward:active {\n  -webkit-transform: skew(10deg);\n  transform: skew(10deg);\n}\n\n/* Wobble Vertical */\n@-webkit-keyframes hvr-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n@keyframes hvr-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(8px);\n    transform: translateY(8px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n.hvr-wobble-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-vertical:hover, .hvr-wobble-vertical:focus, .hvr-wobble-vertical:active {\n  -webkit-animation-name: hvr-wobble-vertical;\n  animation-name: hvr-wobble-vertical;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Horizontal */\n@-webkit-keyframes hvr-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(8px);\n    transform: translateX(8px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-6px);\n    transform: translateX(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@keyframes hvr-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(8px);\n    transform: translateX(8px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-6px);\n    transform: translateX(-6px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.hvr-wobble-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-horizontal:hover, .hvr-wobble-horizontal:focus, .hvr-wobble-horizontal:active {\n  -webkit-animation-name: hvr-wobble-horizontal;\n  animation-name: hvr-wobble-horizontal;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble To Bottom Right */\n@-webkit-keyframes hvr-wobble-to-bottom-right {\n  16.65% {\n    -webkit-transform: translate(8px, 8px);\n    transform: translate(8px, 8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, -6px);\n    transform: translate(-6px, -6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, 4px);\n    transform: translate(4px, 4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, -2px);\n    transform: translate(-2px, -2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, 1px);\n    transform: translate(1px, 1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n@keyframes hvr-wobble-to-bottom-right {\n  16.65% {\n    -webkit-transform: translate(8px, 8px);\n    transform: translate(8px, 8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, -6px);\n    transform: translate(-6px, -6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, 4px);\n    transform: translate(4px, 4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, -2px);\n    transform: translate(-2px, -2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, 1px);\n    transform: translate(1px, 1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n.hvr-wobble-to-bottom-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-to-bottom-right:hover, .hvr-wobble-to-bottom-right:focus, .hvr-wobble-to-bottom-right:active {\n  -webkit-animation-name: hvr-wobble-to-bottom-right;\n  animation-name: hvr-wobble-to-bottom-right;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble To Top Right */\n@-webkit-keyframes hvr-wobble-to-top-right {\n  16.65% {\n    -webkit-transform: translate(8px, -8px);\n    transform: translate(8px, -8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, 6px);\n    transform: translate(-6px, 6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, -4px);\n    transform: translate(4px, -4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, 2px);\n    transform: translate(-2px, 2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, -1px);\n    transform: translate(1px, -1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n@keyframes hvr-wobble-to-top-right {\n  16.65% {\n    -webkit-transform: translate(8px, -8px);\n    transform: translate(8px, -8px);\n  }\n  33.3% {\n    -webkit-transform: translate(-6px, 6px);\n    transform: translate(-6px, 6px);\n  }\n  49.95% {\n    -webkit-transform: translate(4px, -4px);\n    transform: translate(4px, -4px);\n  }\n  66.6% {\n    -webkit-transform: translate(-2px, 2px);\n    transform: translate(-2px, 2px);\n  }\n  83.25% {\n    -webkit-transform: translate(1px, -1px);\n    transform: translate(1px, -1px);\n  }\n  100% {\n    -webkit-transform: translate(0, 0);\n    transform: translate(0, 0);\n  }\n}\n.hvr-wobble-to-top-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-to-top-right:hover, .hvr-wobble-to-top-right:focus, .hvr-wobble-to-top-right:active {\n  -webkit-animation-name: hvr-wobble-to-top-right;\n  animation-name: hvr-wobble-to-top-right;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Top */\n@-webkit-keyframes hvr-wobble-top {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n@keyframes hvr-wobble-top {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n.hvr-wobble-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  -webkit-transform-origin: 0 100%;\n  transform-origin: 0 100%;\n}\n.hvr-wobble-top:hover, .hvr-wobble-top:focus, .hvr-wobble-top:active {\n  -webkit-animation-name: hvr-wobble-top;\n  animation-name: hvr-wobble-top;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Bottom */\n@-webkit-keyframes hvr-wobble-bottom {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n@keyframes hvr-wobble-bottom {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n.hvr-wobble-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  -webkit-transform-origin: 100% 0;\n  transform-origin: 100% 0;\n}\n.hvr-wobble-bottom:hover, .hvr-wobble-bottom:focus, .hvr-wobble-bottom:active {\n  -webkit-animation-name: hvr-wobble-bottom;\n  animation-name: hvr-wobble-bottom;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Wobble Skew */\n@-webkit-keyframes hvr-wobble-skew {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n@keyframes hvr-wobble-skew {\n  16.65% {\n    -webkit-transform: skew(-12deg);\n    transform: skew(-12deg);\n  }\n  33.3% {\n    -webkit-transform: skew(10deg);\n    transform: skew(10deg);\n  }\n  49.95% {\n    -webkit-transform: skew(-6deg);\n    transform: skew(-6deg);\n  }\n  66.6% {\n    -webkit-transform: skew(4deg);\n    transform: skew(4deg);\n  }\n  83.25% {\n    -webkit-transform: skew(-2deg);\n    transform: skew(-2deg);\n  }\n  100% {\n    -webkit-transform: skew(0);\n    transform: skew(0);\n  }\n}\n.hvr-wobble-skew {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-wobble-skew:hover, .hvr-wobble-skew:focus, .hvr-wobble-skew:active {\n  -webkit-animation-name: hvr-wobble-skew;\n  animation-name: hvr-wobble-skew;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Buzz */\n@-webkit-keyframes hvr-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n@keyframes hvr-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n.hvr-buzz {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {\n  -webkit-animation-name: hvr-buzz;\n  animation-name: hvr-buzz;\n  -webkit-animation-duration: 0.15s;\n  animation-duration: 0.15s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Buzz Out */\n@-webkit-keyframes hvr-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n@keyframes hvr-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n.hvr-buzz-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {\n  -webkit-animation-name: hvr-buzz-out;\n  animation-name: hvr-buzz-out;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Forward */\n.hvr-forward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {\n  -webkit-transform: translateX(8px);\n  transform: translateX(8px);\n}\n\n/* Backward */\n.hvr-backward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-backward:hover, .hvr-backward:focus, .hvr-backward:active {\n  -webkit-transform: translateX(-8px);\n  transform: translateX(-8px);\n}\n\n/* BACKGROUND TRANSITIONS */\n/* Fade */\n.hvr-fade {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  overflow: hidden;\n  transition-duration: 0.3s;\n  transition-property: color, background-color;\n}\n.hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {\n  background-color: #fffbfb;\n  color: white;\n}\n\n/* Back Pulse */\n@-webkit-keyframes hvr-back-pulse {\n  50% {\n    background-color: rgba(32, 152, 209, 0.75);\n  }\n}\n@keyframes hvr-back-pulse {\n  50% {\n    background-color: rgba(32, 152, 209, 0.75);\n  }\n}\n.hvr-back-pulse {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  overflow: hidden;\n  transition-duration: 0.5s;\n  transition-property: color, background-color;\n}\n.hvr-back-pulse:hover, .hvr-back-pulse:focus, .hvr-back-pulse:active {\n  -webkit-animation-name: hvr-back-pulse;\n  animation-name: hvr-back-pulse;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-delay: 0.5s;\n  animation-delay: 0.5s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  background-color: #fffbfb;\n  background-color: #2098d1;\n  color: white;\n}\n\n/* Sweep To Right */\n.hvr-sweep-to-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 0 50%;\n  transform-origin: 0 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {\n  color: white;\n}\n.hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n}\n\n/* Sweep To Left */\n.hvr-sweep-to-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 100% 50%;\n  transform-origin: 100% 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-left:hover, .hvr-sweep-to-left:focus, .hvr-sweep-to-left:active {\n  color: white;\n}\n.hvr-sweep-to-left:hover:before, .hvr-sweep-to-left:focus:before, .hvr-sweep-to-left:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n}\n\n/* Sweep To Bottom */\n.hvr-sweep-to-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-bottom:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 0;\n  transform-origin: 50% 0;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {\n  color: white;\n}\n.hvr-sweep-to-bottom:hover:before, .hvr-sweep-to-bottom:focus:before, .hvr-sweep-to-bottom:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n}\n\n/* Sweep To Top */\n.hvr-sweep-to-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-sweep-to-top:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 100%;\n  transform-origin: 50% 100%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-sweep-to-top:hover, .hvr-sweep-to-top:focus, .hvr-sweep-to-top:active {\n  color: white;\n}\n.hvr-sweep-to-top:hover:before, .hvr-sweep-to-top:focus:before, .hvr-sweep-to-top:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n}\n\n/* Bounce To Right */\n.hvr-bounce-to-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 0 50%;\n  transform-origin: 0 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {\n  color: white;\n}\n.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Bounce To Left */\n.hvr-bounce-to-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 100% 50%;\n  transform-origin: 100% 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-left:hover, .hvr-bounce-to-left:focus, .hvr-bounce-to-left:active {\n  color: white;\n}\n.hvr-bounce-to-left:hover:before, .hvr-bounce-to-left:focus:before, .hvr-bounce-to-left:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Bounce To Bottom */\n.hvr-bounce-to-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-bottom:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 0;\n  transform-origin: 50% 0;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {\n  color: white;\n}\n.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Bounce To Top */\n.hvr-bounce-to-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-property: color;\n  transition-duration: 0.5s;\n}\n.hvr-bounce-to-top:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50% 100%;\n  transform-origin: 50% 100%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.5s;\n  transition-timing-function: ease-out;\n}\n.hvr-bounce-to-top:hover, .hvr-bounce-to-top:focus, .hvr-bounce-to-top:active {\n  color: white;\n}\n.hvr-bounce-to-top:hover:before, .hvr-bounce-to-top:focus:before, .hvr-bounce-to-top:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Radial Out */\n.hvr-radial-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-radial-out:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  border-radius: 100%;\n  -webkit-transform: scale(0);\n  transform: scale(0);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-radial-out:hover, .hvr-radial-out:focus, .hvr-radial-out:active {\n  color: white;\n}\n.hvr-radial-out:hover:before, .hvr-radial-out:focus:before, .hvr-radial-out:active:before {\n  -webkit-transform: scale(2);\n  transform: scale(2);\n}\n\n/* Radial In */\n.hvr-radial-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-radial-in:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e1e1e1;\n  border-radius: 100%;\n  -webkit-transform: scale(2);\n  transform: scale(2);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-radial-in:hover, .hvr-radial-in:focus, .hvr-radial-in:active {\n  color: white;\n}\n.hvr-radial-in:hover:before, .hvr-radial-in:focus:before, .hvr-radial-in:active:before {\n  -webkit-transform: scale(0);\n  transform: scale(0);\n}\n\n/* Rectangle In */\n.hvr-rectangle-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-rectangle-in:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e1e1e1;\n  -webkit-transform: scale(1);\n  transform: scale(1);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-rectangle-in:hover, .hvr-rectangle-in:focus, .hvr-rectangle-in:active {\n  color: white;\n}\n.hvr-rectangle-in:hover:before, .hvr-rectangle-in:focus:before, .hvr-rectangle-in:active:before {\n  -webkit-transform: scale(0);\n  transform: scale(0);\n}\n\n/* Rectangle Out */\n.hvr-rectangle-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-rectangle-out:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #fffbfb;\n  -webkit-transform: scale(0);\n  transform: scale(0);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-rectangle-out:hover, .hvr-rectangle-out:focus, .hvr-rectangle-out:active {\n  color: white;\n}\n.hvr-rectangle-out:hover:before, .hvr-rectangle-out:focus:before, .hvr-rectangle-out:active:before {\n  -webkit-transform: scale(1);\n  transform: scale(1);\n}\n\n/* Shutter In Horizontal */\n.hvr-shutter-in-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-in-horizontal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #e1e1e1;\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-in-horizontal:hover, .hvr-shutter-in-horizontal:focus, .hvr-shutter-in-horizontal:active {\n  color: white;\n}\n.hvr-shutter-in-horizontal:hover:before, .hvr-shutter-in-horizontal:focus:before, .hvr-shutter-in-horizontal:active:before {\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n}\n\n/* Shutter Out Horizontal */\n.hvr-shutter-out-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-out-horizontal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleX(0);\n  transform: scaleX(0);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-out-horizontal:hover, .hvr-shutter-out-horizontal:focus, .hvr-shutter-out-horizontal:active {\n  color: white;\n}\n.hvr-shutter-out-horizontal:hover:before, .hvr-shutter-out-horizontal:focus:before, .hvr-shutter-out-horizontal:active:before {\n  -webkit-transform: scaleX(1);\n  transform: scaleX(1);\n}\n\n/* Shutter In Vertical */\n.hvr-shutter-in-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #fffbfb;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-in-vertical:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #e1e1e1;\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-in-vertical:hover, .hvr-shutter-in-vertical:focus, .hvr-shutter-in-vertical:active {\n  color: white;\n}\n.hvr-shutter-in-vertical:hover:before, .hvr-shutter-in-vertical:focus:before, .hvr-shutter-in-vertical:active:before {\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n}\n\n/* Shutter Out Vertical */\n.hvr-shutter-out-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  background: #e1e1e1;\n  transition-property: color;\n  transition-duration: 0.3s;\n}\n.hvr-shutter-out-vertical:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: #fffbfb;\n  -webkit-transform: scaleY(0);\n  transform: scaleY(0);\n  -webkit-transform-origin: 50%;\n  transform-origin: 50%;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-shutter-out-vertical:hover, .hvr-shutter-out-vertical:focus, .hvr-shutter-out-vertical:active {\n  color: white;\n}\n.hvr-shutter-out-vertical:hover:before, .hvr-shutter-out-vertical:focus:before, .hvr-shutter-out-vertical:active:before {\n  -webkit-transform: scaleY(1);\n  transform: scaleY(1);\n}\n\n/* BORDER TRANSITIONS */\n/* Border Fade */\n.hvr-border-fade {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n.hvr-border-fade:hover, .hvr-border-fade:focus, .hvr-border-fade:active {\n  box-shadow: inset 0 0 0 4px #2098D1, 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n\n/* Hollow */\n.hvr-hollow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: background;\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n.hvr-hollow:hover, .hvr-hollow:focus, .hvr-hollow:active {\n  background: none;\n}\n\n/* Trim */\n.hvr-trim {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-trim:before {\n  content: '';\n  position: absolute;\n  border: white solid 4px;\n  top: 4px;\n  left: 4px;\n  right: 4px;\n  bottom: 4px;\n  opacity: 0;\n  transition-duration: 0.3s;\n  transition-property: opacity;\n}\n.hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {\n  opacity: 1;\n}\n\n/* Ripple Out */\n@-webkit-keyframes hvr-ripple-out {\n  100% {\n    top: -12px;\n    right: -12px;\n    bottom: -12px;\n    left: -12px;\n    opacity: 0;\n  }\n}\n@keyframes hvr-ripple-out {\n  100% {\n    top: -12px;\n    right: -12px;\n    bottom: -12px;\n    left: -12px;\n    opacity: 0;\n  }\n}\n.hvr-ripple-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-ripple-out:before {\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 6px;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.hvr-ripple-out:hover:before, .hvr-ripple-out:focus:before, .hvr-ripple-out:active:before {\n  -webkit-animation-name: hvr-ripple-out;\n  animation-name: hvr-ripple-out;\n}\n\n/* Ripple In */\n@-webkit-keyframes hvr-ripple-in {\n  100% {\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 1;\n  }\n}\n@keyframes hvr-ripple-in {\n  100% {\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 1;\n  }\n}\n.hvr-ripple-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-ripple-in:before {\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 4px;\n  top: -12px;\n  right: -12px;\n  bottom: -12px;\n  left: -12px;\n  opacity: 0;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.hvr-ripple-in:hover:before, .hvr-ripple-in:focus:before, .hvr-ripple-in:active:before {\n  -webkit-animation-name: hvr-ripple-in;\n  animation-name: hvr-ripple-in;\n}\n\n/* Outline Out */\n.hvr-outline-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-outline-out:before {\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 4px;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  transition-duration: 0.3s;\n  transition-property: top, right, bottom, left;\n}\n.hvr-outline-out:hover:before, .hvr-outline-out:focus:before, .hvr-outline-out:active:before {\n  top: -8px;\n  right: -8px;\n  bottom: -8px;\n  left: -8px;\n}\n\n/* Outline In */\n.hvr-outline-in {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-outline-in:before {\n  pointer-events: none;\n  content: '';\n  position: absolute;\n  border: #e1e1e1 solid 4px;\n  top: -16px;\n  right: -16px;\n  bottom: -16px;\n  left: -16px;\n  opacity: 0;\n  transition-duration: 0.3s;\n  transition-property: top, right, bottom, left;\n}\n.hvr-outline-in:hover:before, .hvr-outline-in:focus:before, .hvr-outline-in:active:before {\n  top: -8px;\n  right: -8px;\n  bottom: -8px;\n  left: -8px;\n  opacity: 1;\n}\n\n/* Round Corners */\n.hvr-round-corners {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: border-radius;\n}\n.hvr-round-corners:hover, .hvr-round-corners:focus, .hvr-round-corners:active {\n  border-radius: 1em;\n}\n\n/* Underline From Left */\n.hvr-underline-from-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-from-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 100%;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {\n  right: 0;\n}\n\n/* Underline From Center */\n.hvr-underline-from-center {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-from-center:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 51%;\n  right: 51%;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left, right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {\n  left: 0;\n  right: 0;\n}\n\n/* Underline From Right */\n.hvr-underline-from-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-from-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 100%;\n  right: 0;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-from-right:hover:before, .hvr-underline-from-right:focus:before, .hvr-underline-from-right:active:before {\n  left: 0;\n}\n\n/* Overline From Left */\n.hvr-overline-from-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-from-left:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 100%;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-from-left:hover:before, .hvr-overline-from-left:focus:before, .hvr-overline-from-left:active:before {\n  right: 0;\n}\n\n/* Overline From Center */\n.hvr-overline-from-center {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-from-center:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 51%;\n  right: 51%;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left, right;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-from-center:hover:before, .hvr-overline-from-center:focus:before, .hvr-overline-from-center:active:before {\n  left: 0;\n  right: 0;\n}\n\n/* Overline From Right */\n.hvr-overline-from-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-from-right:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 100%;\n  right: 0;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  transition-property: left;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-from-right:hover:before, .hvr-overline-from-right:focus:before, .hvr-overline-from-right:active:before {\n  left: 0;\n}\n\n/* Reveal */\n.hvr-reveal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-reveal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  border-color: #2098D1;\n  border-style: solid;\n  border-width: 0;\n  transition-property: border-width;\n  transition-duration: 0.1s;\n  transition-timing-function: ease-out;\n}\n.hvr-reveal:hover:before, .hvr-reveal:focus:before, .hvr-reveal:active:before {\n  -webkit-transform: translateY(0);\n  transform: translateY(0);\n  border-width: 4px;\n}\n\n/* Underline Reveal */\n.hvr-underline-reveal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-underline-reveal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #2098D1;\n  height: 4px;\n  -webkit-transform: translateY(4px);\n  transform: translateY(4px);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {\n  -webkit-transform: translateY(0);\n  transform: translateY(0);\n}\n\n/* Overline Reveal */\n.hvr-overline-reveal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  overflow: hidden;\n}\n.hvr-overline-reveal:before {\n  content: \"\";\n  position: absolute;\n  z-index: -1;\n  left: 0;\n  right: 0;\n  top: 0;\n  background: #2098D1;\n  height: 4px;\n  -webkit-transform: translateY(-4px);\n  transform: translateY(-4px);\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-out;\n}\n.hvr-overline-reveal:hover:before, .hvr-overline-reveal:focus:before, .hvr-overline-reveal:active:before {\n  -webkit-transform: translateY(0);\n  transform: translateY(0);\n}\n\n/* SHADOW/GLOW TRANSITIONS */\n/* Glow */\n.hvr-glow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n}\n.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {\n  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\n}\n\n/* Shadow */\n.hvr-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n}\n.hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\n}\n\n/* Grow Shadow */\n.hvr-grow-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow, -webkit-transform;\n  transition-property: box-shadow, transform;\n  transition-property: box-shadow, transform, -webkit-transform;\n}\n.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n\n/* Box Shadow Outset */\n.hvr-box-shadow-outset {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n}\n.hvr-box-shadow-outset:hover, .hvr-box-shadow-outset:focus, .hvr-box-shadow-outset:active {\n  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);\n}\n\n/* Box Shadow Inset */\n.hvr-box-shadow-inset {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n  transition-property: box-shadow;\n  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n.hvr-box-shadow-inset:hover, .hvr-box-shadow-inset:focus, .hvr-box-shadow-inset:active {\n  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\n  /* Hack to improve aliasing on mobile/tablet devices */\n}\n\n/* Float Shadow */\n.hvr-float-shadow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-float-shadow:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  top: 100%;\n  left: 5%;\n  height: 10px;\n  width: 90%;\n  opacity: 0;\n  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);\n  /* W3C */\n  transition-duration: 0.3s;\n  transition-property: opacity, -webkit-transform;\n  transition-property: transform, opacity;\n  transition-property: transform, opacity, -webkit-transform;\n}\n.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {\n  -webkit-transform: translateY(-5px);\n  transform: translateY(-5px);\n  /* move the element up by 5px */\n}\n.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {\n  opacity: 1;\n  -webkit-transform: translateY(5px);\n  transform: translateY(5px);\n  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */\n}\n\n/* Shadow Radial */\n.hvr-shadow-radial {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-shadow-radial:before, .hvr-shadow-radial:after {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  left: 0;\n  width: 100%;\n  box-sizing: border-box;\n  background-repeat: no-repeat;\n  height: 5px;\n  opacity: 0;\n  transition-duration: 0.3s;\n  transition-property: opacity;\n}\n.hvr-shadow-radial:before {\n  bottom: 100%;\n  background: radial-gradient(ellipse at 50% 150%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\n}\n.hvr-shadow-radial:after {\n  top: 100%;\n  background: radial-gradient(ellipse at 50% -50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\n}\n.hvr-shadow-radial:hover:before, .hvr-shadow-radial:focus:before, .hvr-shadow-radial:active:before, .hvr-shadow-radial:hover:after, .hvr-shadow-radial:focus:after, .hvr-shadow-radial:active:after {\n  opacity: 1;\n}\n\n/* SPEECH BUBBLES */\n/* Bubble Top */\n.hvr-bubble-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-top:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  left: calc(50% - 10px);\n  top: 0;\n  border-width: 0 10px 10px 10px;\n  border-color: transparent transparent #e1e1e1 transparent;\n}\n.hvr-bubble-top:hover:before, .hvr-bubble-top:focus:before, .hvr-bubble-top:active:before {\n  -webkit-transform: translateY(-10px);\n  transform: translateY(-10px);\n}\n\n/* Bubble Right */\n.hvr-bubble-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-right:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  top: calc(50% - 10px);\n  right: 0;\n  border-width: 10px 0 10px 10px;\n  border-color: transparent transparent transparent #e1e1e1;\n}\n.hvr-bubble-right:hover:before, .hvr-bubble-right:focus:before, .hvr-bubble-right:active:before {\n  -webkit-transform: translateX(10px);\n  transform: translateX(10px);\n}\n\n/* Bubble Bottom */\n.hvr-bubble-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-bottom:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  left: calc(50% - 10px);\n  bottom: 0;\n  border-width: 10px 10px 0 10px;\n  border-color: #e1e1e1 transparent transparent transparent;\n}\n.hvr-bubble-bottom:hover:before, .hvr-bubble-bottom:focus:before, .hvr-bubble-bottom:active:before {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px);\n}\n\n/* Bubble Left */\n.hvr-bubble-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-bubble-left:before {\n  pointer-events: none;\n  position: absolute;\n  z-index: -1;\n  content: '';\n  border-style: solid;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  top: calc(50% - 10px);\n  left: 0;\n  border-width: 10px 10px 10px 0;\n  border-color: transparent #e1e1e1 transparent transparent;\n}\n.hvr-bubble-left:hover:before, .hvr-bubble-left:focus:before, .hvr-bubble-left:active:before {\n  -webkit-transform: translateX(-10px);\n  transform: translateX(-10px);\n}\n\n/* Bubble Float Top */\n.hvr-bubble-float-top {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-top:before {\n  position: absolute;\n  z-index: -1;\n  content: '';\n  left: calc(50% - 10px);\n  top: 0;\n  border-style: solid;\n  border-width: 0 10px 10px 10px;\n  border-color: transparent transparent #e1e1e1 transparent;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-top:hover, .hvr-bubble-float-top:focus, .hvr-bubble-float-top:active {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px);\n}\n.hvr-bubble-float-top:hover:before, .hvr-bubble-float-top:focus:before, .hvr-bubble-float-top:active:before {\n  -webkit-transform: translateY(-10px);\n  transform: translateY(-10px);\n}\n\n/* Bubble Float Right */\n.hvr-bubble-float-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-right:before {\n  position: absolute;\n  z-index: -1;\n  top: calc(50% - 10px);\n  right: 0;\n  content: '';\n  border-style: solid;\n  border-width: 10px 0 10px 10px;\n  border-color: transparent transparent transparent #e1e1e1;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-right:hover, .hvr-bubble-float-right:focus, .hvr-bubble-float-right:active {\n  -webkit-transform: translateX(-10px);\n  transform: translateX(-10px);\n}\n.hvr-bubble-float-right:hover:before, .hvr-bubble-float-right:focus:before, .hvr-bubble-float-right:active:before {\n  -webkit-transform: translateX(10px);\n  transform: translateX(10px);\n}\n\n/* Bubble Float Bottom */\n.hvr-bubble-float-bottom {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-bottom:before {\n  position: absolute;\n  z-index: -1;\n  content: '';\n  left: calc(50% - 10px);\n  bottom: 0;\n  border-style: solid;\n  border-width: 10px 10px 0 10px;\n  border-color: #e1e1e1 transparent transparent transparent;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-bottom:hover, .hvr-bubble-float-bottom:focus, .hvr-bubble-float-bottom:active {\n  -webkit-transform: translateY(-10px);\n  transform: translateY(-10px);\n}\n.hvr-bubble-float-bottom:hover:before, .hvr-bubble-float-bottom:focus:before, .hvr-bubble-float-bottom:active:before {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px);\n}\n\n/* Bubble Float Left */\n.hvr-bubble-float-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-left:before {\n  position: absolute;\n  z-index: -1;\n  content: '';\n  top: calc(50% - 10px);\n  left: 0;\n  border-style: solid;\n  border-width: 10px 10px 10px 0;\n  border-color: transparent #e1e1e1 transparent transparent;\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n}\n.hvr-bubble-float-left:hover, .hvr-bubble-float-left:focus, .hvr-bubble-float-left:active {\n  -webkit-transform: translateX(10px);\n  transform: translateX(10px);\n}\n.hvr-bubble-float-left:hover:before, .hvr-bubble-float-left:focus:before, .hvr-bubble-float-left:active:before {\n  -webkit-transform: translateX(-10px);\n  transform: translateX(-10px);\n}\n\n/* ICONS */\n/* Icon Back */\n.hvr-icon-back {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.1s;\n}\n.hvr-icon-back .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.1s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-back:hover .hvr-icon, .hvr-icon-back:focus .hvr-icon, .hvr-icon-back:active .hvr-icon {\n  -webkit-transform: translateX(-4px);\n  transform: translateX(-4px);\n}\n\n/* Icon Forward */\n.hvr-icon-forward {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.1s;\n}\n.hvr-icon-forward .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.1s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-forward:hover .hvr-icon, .hvr-icon-forward:focus .hvr-icon, .hvr-icon-forward:active .hvr-icon {\n  -webkit-transform: translateX(4px);\n  transform: translateX(4px);\n}\n\n/* Icon Down */\n@-webkit-keyframes hvr-icon-down {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@keyframes hvr-icon-down {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n/* Icon Down */\n.hvr-icon-down {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-down .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-down:hover .hvr-icon, .hvr-icon-down:focus .hvr-icon, .hvr-icon-down:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-down;\n  animation-name: hvr-icon-down;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Up */\n@-webkit-keyframes hvr-icon-up {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@keyframes hvr-icon-up {\n  0%,\n\t50%,\n\t100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n  25%,\n\t75% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n/* Icon Up */\n.hvr-icon-up {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-up .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-up:hover .hvr-icon, .hvr-icon-up:focus .hvr-icon, .hvr-icon-up:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-up;\n  animation-name: hvr-icon-up;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Spin */\n.hvr-icon-spin {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-spin .hvr-icon {\n  transition-duration: 1s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-in-out;\n}\n.hvr-icon-spin:hover .hvr-icon, .hvr-icon-spin:focus .hvr-icon, .hvr-icon-spin:active .hvr-icon {\n  -webkit-transform: rotate(360deg);\n  transform: rotate(360deg);\n}\n\n/* Icon Drop */\n@-webkit-keyframes hvr-icon-drop {\n  0% {\n    opacity: 0;\n  }\n  50% {\n    opacity: 0;\n    -webkit-transform: translateY(-100%);\n    transform: translateY(-100%);\n  }\n  51%,\n\t100% {\n    opacity: 1;\n  }\n}\n@keyframes hvr-icon-drop {\n  0% {\n    opacity: 0;\n  }\n  50% {\n    opacity: 0;\n    -webkit-transform: translateY(-100%);\n    transform: translateY(-100%);\n  }\n  51%,\n\t100% {\n    opacity: 1;\n  }\n}\n/* Icon Drop */\n.hvr-icon-drop {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-drop .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-drop:hover .hvr-icon, .hvr-icon-drop:focus .hvr-icon, .hvr-icon-drop:active .hvr-icon {\n  opacity: 0;\n  transition-duration: 0.3s;\n  -webkit-animation-name: hvr-icon-drop;\n  animation-name: hvr-icon-drop;\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-animation-delay: 0.3s;\n  animation-delay: 0.3s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n  animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\n}\n\n/* Icon Fade */\n.hvr-icon-fade {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-fade .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.5s;\n  transition-property: color;\n}\n.hvr-icon-fade:hover .hvr-icon, .hvr-icon-fade:focus .hvr-icon, .hvr-icon-fade:active .hvr-icon {\n  color: #0F9E5E;\n}\n\n/* Icon Float Away */\n@-webkit-keyframes hvr-icon-float-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(-1em);\n    transform: translateY(-1em);\n  }\n}\n@keyframes hvr-icon-float-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(-1em);\n    transform: translateY(-1em);\n  }\n}\n/* Icon Float Away */\n.hvr-icon-float-away {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-float-away .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n}\n.hvr-icon-float-away:hover .hvr-icon, .hvr-icon-float-away:focus .hvr-icon, .hvr-icon-float-away:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-float-away;\n  animation-name: hvr-icon-float-away;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Sink Away */\n@-webkit-keyframes hvr-icon-sink-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(1em);\n    transform: translateY(1em);\n  }\n}\n@keyframes hvr-icon-sink-away {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n    -webkit-transform: translateY(1em);\n    transform: translateY(1em);\n  }\n}\n/* Icon Sink Away */\n.hvr-icon-sink-away {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-sink-away .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-duration: 0.5s;\n  animation-duration: 0.5s;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n}\n.hvr-icon-sink-away:hover .hvr-icon, .hvr-icon-sink-away:focus .hvr-icon, .hvr-icon-sink-away:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-sink-away;\n  animation-name: hvr-icon-sink-away;\n  -webkit-animation-timing-function: ease-out;\n  animation-timing-function: ease-out;\n}\n\n/* Icon Grow */\n.hvr-icon-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-grow .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-grow:hover .hvr-icon, .hvr-icon-grow:focus .hvr-icon, .hvr-icon-grow:active .hvr-icon {\n  -webkit-transform: scale(1.3) translateZ(0);\n  transform: scale(1.3) translateZ(0);\n}\n\n/* Icon Shrink */\n.hvr-icon-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-shrink .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-shrink:hover .hvr-icon, .hvr-icon-shrink:focus .hvr-icon, .hvr-icon-shrink:active .hvr-icon {\n  -webkit-transform: scale(0.8);\n  transform: scale(0.8);\n}\n\n/* Icon Pulse */\n@-webkit-keyframes hvr-icon-pulse {\n  25% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n  75% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n@keyframes hvr-icon-pulse {\n  25% {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n  75% {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n.hvr-icon-pulse {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-pulse .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pulse:hover .hvr-icon, .hvr-icon-pulse:focus .hvr-icon, .hvr-icon-pulse:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pulse;\n  animation-name: hvr-icon-pulse;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Icon Pulse Grow */\n@-webkit-keyframes hvr-icon-pulse-grow {\n  to {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n}\n@keyframes hvr-icon-pulse-grow {\n  to {\n    -webkit-transform: scale(1.3);\n    transform: scale(1.3);\n  }\n}\n.hvr-icon-pulse-grow {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-pulse-grow .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pulse-grow:hover .hvr-icon, .hvr-icon-pulse-grow:focus .hvr-icon, .hvr-icon-pulse-grow:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pulse-grow;\n  animation-name: hvr-icon-pulse-grow;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Icon Pulse Shrink */\n@-webkit-keyframes hvr-icon-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n@keyframes hvr-icon-pulse-shrink {\n  to {\n    -webkit-transform: scale(0.8);\n    transform: scale(0.8);\n  }\n}\n.hvr-icon-pulse-shrink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n}\n.hvr-icon-pulse-shrink .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pulse-shrink:hover .hvr-icon, .hvr-icon-pulse-shrink:focus .hvr-icon, .hvr-icon-pulse-shrink:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pulse-shrink;\n  animation-name: hvr-icon-pulse-shrink;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n  -webkit-animation-direction: alternate;\n  animation-direction: alternate;\n}\n\n/* Icon Push */\n@-webkit-keyframes hvr-icon-push {\n  50% {\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n  }\n}\n@keyframes hvr-icon-push {\n  50% {\n    -webkit-transform: scale(0.5);\n    transform: scale(0.5);\n  }\n}\n.hvr-icon-push {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-push .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-push:hover .hvr-icon, .hvr-icon-push:focus .hvr-icon, .hvr-icon-push:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-push;\n  animation-name: hvr-icon-push;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Pop */\n@-webkit-keyframes hvr-icon-pop {\n  50% {\n    -webkit-transform: scale(1.5);\n    transform: scale(1.5);\n  }\n}\n@keyframes hvr-icon-pop {\n  50% {\n    -webkit-transform: scale(1.5);\n    transform: scale(1.5);\n  }\n}\n.hvr-icon-pop {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-pop .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-pop:hover .hvr-icon, .hvr-icon-pop:focus .hvr-icon, .hvr-icon-pop:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-pop;\n  animation-name: hvr-icon-pop;\n  -webkit-animation-duration: 0.3s;\n  animation-duration: 0.3s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Bounce */\n.hvr-icon-bounce {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-bounce .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-bounce:hover .hvr-icon, .hvr-icon-bounce:focus .hvr-icon, .hvr-icon-bounce:active .hvr-icon {\n  -webkit-transform: scale(1.5);\n  transform: scale(1.5);\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\n}\n\n/* Icon Rotate */\n.hvr-icon-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-rotate .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-rotate:hover .hvr-icon, .hvr-icon-rotate:focus .hvr-icon, .hvr-icon-rotate:active .hvr-icon {\n  -webkit-transform: rotate(20deg);\n  transform: rotate(20deg);\n}\n\n/* Icon Grow Rotate */\n.hvr-icon-grow-rotate {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-grow-rotate .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-grow-rotate:hover .hvr-icon, .hvr-icon-grow-rotate:focus .hvr-icon, .hvr-icon-grow-rotate:active .hvr-icon {\n  -webkit-transform: scale(1.5) rotate(12deg);\n  transform: scale(1.5) rotate(12deg);\n}\n\n/* Icon Float */\n.hvr-icon-float {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-float .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-float:hover .hvr-icon, .hvr-icon-float:focus .hvr-icon, .hvr-icon-float:active .hvr-icon {\n  -webkit-transform: translateY(-4px);\n  transform: translateY(-4px);\n}\n\n/* Icon Sink */\n.hvr-icon-sink {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-sink .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  transition-duration: 0.3s;\n  transition-property: -webkit-transform;\n  transition-property: transform;\n  transition-property: transform, -webkit-transform;\n  transition-timing-function: ease-out;\n}\n.hvr-icon-sink:hover .hvr-icon, .hvr-icon-sink:focus .hvr-icon, .hvr-icon-sink:active .hvr-icon {\n  -webkit-transform: translateY(4px);\n  transform: translateY(4px);\n}\n\n/* Icon Bob */\n@-webkit-keyframes hvr-icon-bob {\n  0% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  50% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@keyframes hvr-icon-bob {\n  0% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n  50% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@-webkit-keyframes hvr-icon-bob-float {\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n@keyframes hvr-icon-bob-float {\n  100% {\n    -webkit-transform: translateY(-6px);\n    transform: translateY(-6px);\n  }\n}\n.hvr-icon-bob {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-bob .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-bob:hover .hvr-icon, .hvr-icon-bob:focus .hvr-icon, .hvr-icon-bob:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-bob-float, hvr-icon-bob;\n  animation-name: hvr-icon-bob-float, hvr-icon-bob;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Icon Hang */\n@-webkit-keyframes hvr-icon-hang {\n  0% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  50% {\n    -webkit-transform: translateY(2px);\n    transform: translateY(2px);\n  }\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@keyframes hvr-icon-hang {\n  0% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  50% {\n    -webkit-transform: translateY(2px);\n    transform: translateY(2px);\n  }\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@-webkit-keyframes hvr-icon-hang-sink {\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n@keyframes hvr-icon-hang-sink {\n  100% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n}\n.hvr-icon-hang {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-hang .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-hang:hover .hvr-icon, .hvr-icon-hang:focus .hvr-icon, .hvr-icon-hang:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;\n  animation-name: hvr-icon-hang-sink, hvr-icon-hang;\n  -webkit-animation-duration: .3s, 1.5s;\n  animation-duration: .3s, 1.5s;\n  -webkit-animation-delay: 0s, .3s;\n  animation-delay: 0s, .3s;\n  -webkit-animation-timing-function: ease-out, ease-in-out;\n  animation-timing-function: ease-out, ease-in-out;\n  -webkit-animation-iteration-count: 1, infinite;\n  animation-iteration-count: 1, infinite;\n  -webkit-animation-fill-mode: forwards;\n  animation-fill-mode: forwards;\n  -webkit-animation-direction: normal, alternate;\n  animation-direction: normal, alternate;\n}\n\n/* Icon Wobble Horizontal */\n@-webkit-keyframes hvr-icon-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(6px);\n    transform: translateX(6px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-5px);\n    transform: translateX(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n@keyframes hvr-icon-wobble-horizontal {\n  16.65% {\n    -webkit-transform: translateX(6px);\n    transform: translateX(6px);\n  }\n  33.3% {\n    -webkit-transform: translateX(-5px);\n    transform: translateX(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateX(4px);\n    transform: translateX(4px);\n  }\n  66.6% {\n    -webkit-transform: translateX(-2px);\n    transform: translateX(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateX(1px);\n    transform: translateX(1px);\n  }\n  100% {\n    -webkit-transform: translateX(0);\n    transform: translateX(0);\n  }\n}\n.hvr-icon-wobble-horizontal {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-wobble-horizontal .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-wobble-horizontal:hover .hvr-icon, .hvr-icon-wobble-horizontal:focus .hvr-icon, .hvr-icon-wobble-horizontal:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-wobble-horizontal;\n  animation-name: hvr-icon-wobble-horizontal;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Wobble Vertical */\n@-webkit-keyframes hvr-icon-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-5px);\n    transform: translateY(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n@keyframes hvr-icon-wobble-vertical {\n  16.65% {\n    -webkit-transform: translateY(6px);\n    transform: translateY(6px);\n  }\n  33.3% {\n    -webkit-transform: translateY(-5px);\n    transform: translateY(-5px);\n  }\n  49.95% {\n    -webkit-transform: translateY(4px);\n    transform: translateY(4px);\n  }\n  66.6% {\n    -webkit-transform: translateY(-2px);\n    transform: translateY(-2px);\n  }\n  83.25% {\n    -webkit-transform: translateY(1px);\n    transform: translateY(1px);\n  }\n  100% {\n    -webkit-transform: translateY(0);\n    transform: translateY(0);\n  }\n}\n.hvr-icon-wobble-vertical {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-wobble-vertical .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-wobble-vertical:hover .hvr-icon, .hvr-icon-wobble-vertical:focus .hvr-icon, .hvr-icon-wobble-vertical:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-wobble-vertical;\n  animation-name: hvr-icon-wobble-vertical;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-timing-function: ease-in-out;\n  animation-timing-function: ease-in-out;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* Icon Buzz */\n@-webkit-keyframes hvr-icon-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n@keyframes hvr-icon-buzz {\n  50% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  100% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n}\n.hvr-icon-buzz {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-buzz .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-buzz:hover .hvr-icon, .hvr-icon-buzz:focus .hvr-icon, .hvr-icon-buzz:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-buzz;\n  animation-name: hvr-icon-buzz;\n  -webkit-animation-duration: 0.15s;\n  animation-duration: 0.15s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n  animation-iteration-count: infinite;\n}\n\n/* Icon Buzz Out */\n@-webkit-keyframes hvr-icon-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n@keyframes hvr-icon-buzz-out {\n  10% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  20% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  30% {\n    -webkit-transform: translateX(3px) rotate(2deg);\n    transform: translateX(3px) rotate(2deg);\n  }\n  40% {\n    -webkit-transform: translateX(-3px) rotate(-2deg);\n    transform: translateX(-3px) rotate(-2deg);\n  }\n  50% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  60% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  70% {\n    -webkit-transform: translateX(2px) rotate(1deg);\n    transform: translateX(2px) rotate(1deg);\n  }\n  80% {\n    -webkit-transform: translateX(-2px) rotate(-1deg);\n    transform: translateX(-2px) rotate(-1deg);\n  }\n  90% {\n    -webkit-transform: translateX(1px) rotate(0);\n    transform: translateX(1px) rotate(0);\n  }\n  100% {\n    -webkit-transform: translateX(-1px) rotate(0);\n    transform: translateX(-1px) rotate(0);\n  }\n}\n.hvr-icon-buzz-out {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  transition-duration: 0.3s;\n}\n.hvr-icon-buzz-out .hvr-icon {\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n.hvr-icon-buzz-out:hover .hvr-icon, .hvr-icon-buzz-out:focus .hvr-icon, .hvr-icon-buzz-out:active .hvr-icon {\n  -webkit-animation-name: hvr-icon-buzz-out;\n  animation-name: hvr-icon-buzz-out;\n  -webkit-animation-duration: 0.75s;\n  animation-duration: 0.75s;\n  -webkit-animation-timing-function: linear;\n  animation-timing-function: linear;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1;\n}\n\n/* CURLS */\n/* Curl Top Left */\n.hvr-curl-top-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-top-left:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  top: 0;\n  left: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(135deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#000000');\n  /*For IE7-8-9*/\n  z-index: 1000;\n  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-top-left:hover:before, .hvr-curl-top-left:focus:before, .hvr-curl-top-left:active:before {\n  width: 25px;\n  height: 25px;\n}\n\n/* Curl Top Right */\n.hvr-curl-top-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-top-right:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  top: 0;\n  right: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(225deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-top-right:hover:before, .hvr-curl-top-right:focus:before, .hvr-curl-top-right:active:before {\n  width: 25px;\n  height: 25px;\n}\n\n/* Curl Bottom Right */\n.hvr-curl-bottom-right {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-bottom-right:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  bottom: 0;\n  right: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(315deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-bottom-right:hover:before, .hvr-curl-bottom-right:focus:before, .hvr-curl-bottom-right:active:before {\n  width: 25px;\n  height: 25px;\n}\n\n/* Curl Bottom Left */\n.hvr-curl-bottom-left {\n  display: inline-block;\n  vertical-align: middle;\n  -webkit-transform: perspective(1px) translateZ(0);\n  transform: perspective(1px) translateZ(0);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\n  position: relative;\n}\n.hvr-curl-bottom-left:before {\n  pointer-events: none;\n  position: absolute;\n  content: '';\n  height: 0;\n  width: 0;\n  bottom: 0;\n  left: 0;\n  background: white;\n  /* IE9 */\n  background: linear-gradient(45deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\n  box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.4);\n  transition-duration: 0.3s;\n  transition-property: width, height;\n}\n.hvr-curl-bottom-left:hover:before, .hvr-curl-bottom-left:focus:before, .hvr-curl-bottom-left:active:before {\n  width: 25px;\n  height: 25px;\n}\n", ""]);
+exports.push([module.i, "/*!\r\n * Hover.css (http://ianlunn.github.io/Hover/)\r\n * Version: 2.3.2\r\n * Author: Ian Lunn @IanLunn\r\n * Author URL: http://ianlunn.co.uk/\r\n * Github: https://github.com/IanLunn/Hover\r\n\r\n * Hover.css Copyright Ian Lunn 2017. Generated with Sass.\r\n */\r\n/* 2D TRANSITIONS */\r\n/* Grow */\r\n.hvr-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\r\n}\r\n\r\n/* Shrink */\r\n.hvr-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-shrink:hover, .hvr-shrink:focus, .hvr-shrink:active {\r\n  -webkit-transform: scale(0.9);\r\n  transform: scale(0.9);\r\n}\r\n\r\n/* Pulse */\r\n@-webkit-keyframes hvr-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n@keyframes hvr-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n.hvr-pulse {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {\r\n  -webkit-animation-name: hvr-pulse;\r\n  animation-name: hvr-pulse;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Pulse Grow */\r\n@-webkit-keyframes hvr-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n}\r\n@keyframes hvr-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.1);\r\n    transform: scale(1.1);\r\n  }\r\n}\r\n.hvr-pulse-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {\r\n  -webkit-animation-name: hvr-pulse-grow;\r\n  animation-name: hvr-pulse-grow;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Pulse Shrink */\r\n@-webkit-keyframes hvr-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n@keyframes hvr-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.9);\r\n    transform: scale(0.9);\r\n  }\r\n}\r\n.hvr-pulse-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pulse-shrink:hover, .hvr-pulse-shrink:focus, .hvr-pulse-shrink:active {\r\n  -webkit-animation-name: hvr-pulse-shrink;\r\n  animation-name: hvr-pulse-shrink;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Push */\r\n@-webkit-keyframes hvr-push {\r\n  50% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n  100% {\r\n    -webkit-transform: scale(1);\r\n    transform: scale(1);\r\n  }\r\n}\r\n@keyframes hvr-push {\r\n  50% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n  100% {\r\n    -webkit-transform: scale(1);\r\n    transform: scale(1);\r\n  }\r\n}\r\n.hvr-push {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-push:hover, .hvr-push:focus, .hvr-push:active {\r\n  -webkit-animation-name: hvr-push;\r\n  animation-name: hvr-push;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Pop */\r\n@-webkit-keyframes hvr-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.2);\r\n    transform: scale(1.2);\r\n  }\r\n}\r\n@keyframes hvr-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.2);\r\n    transform: scale(1.2);\r\n  }\r\n}\r\n.hvr-pop {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {\r\n  -webkit-animation-name: hvr-pop;\r\n  animation-name: hvr-pop;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Bounce In */\r\n.hvr-bounce-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {\r\n  -webkit-transform: scale(1.2);\r\n  transform: scale(1.2);\r\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\r\n}\r\n\r\n/* Bounce Out */\r\n.hvr-bounce-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-out:hover, .hvr-bounce-out:focus, .hvr-bounce-out:active {\r\n  -webkit-transform: scale(0.8);\r\n  transform: scale(0.8);\r\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\r\n}\r\n\r\n/* Rotate */\r\n.hvr-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-rotate:hover, .hvr-rotate:focus, .hvr-rotate:active {\r\n  -webkit-transform: rotate(4deg);\r\n  transform: rotate(4deg);\r\n}\r\n\r\n/* Grow Rotate */\r\n.hvr-grow-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-grow-rotate:hover, .hvr-grow-rotate:focus, .hvr-grow-rotate:active {\r\n  -webkit-transform: scale(1.1) rotate(4deg);\r\n  transform: scale(1.1) rotate(4deg);\r\n}\r\n\r\n/* Float */\r\n.hvr-float {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-float:hover, .hvr-float:focus, .hvr-float:active {\r\n  -webkit-transform: translateY(-8px);\r\n  transform: translateY(-8px);\r\n}\r\n\r\n/* Sink */\r\n.hvr-sink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sink:hover, .hvr-sink:focus, .hvr-sink:active {\r\n  -webkit-transform: translateY(8px);\r\n  transform: translateY(8px);\r\n}\r\n\r\n/* Bob */\r\n@-webkit-keyframes hvr-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-4px);\r\n    transform: translateY(-4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n@keyframes hvr-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-4px);\r\n    transform: translateY(-4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n@keyframes hvr-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-8px);\r\n    transform: translateY(-8px);\r\n  }\r\n}\r\n.hvr-bob {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {\r\n  -webkit-animation-name: hvr-bob-float, hvr-bob;\r\n  animation-name: hvr-bob-float, hvr-bob;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Hang */\r\n@-webkit-keyframes hvr-hang {\r\n  0% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n@keyframes hvr-hang {\r\n  0% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n@keyframes hvr-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n}\r\n.hvr-hang {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-hang:hover, .hvr-hang:focus, .hvr-hang:active {\r\n  -webkit-animation-name: hvr-hang-sink, hvr-hang;\r\n  animation-name: hvr-hang-sink, hvr-hang;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Skew */\r\n.hvr-skew {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-skew:hover, .hvr-skew:focus, .hvr-skew:active {\r\n  -webkit-transform: skew(-10deg);\r\n  transform: skew(-10deg);\r\n}\r\n\r\n/* Skew Forward */\r\n.hvr-skew-forward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  -webkit-transform-origin: 0 100%;\r\n  transform-origin: 0 100%;\r\n}\r\n.hvr-skew-forward:hover, .hvr-skew-forward:focus, .hvr-skew-forward:active {\r\n  -webkit-transform: skew(-10deg);\r\n  transform: skew(-10deg);\r\n}\r\n\r\n/* Skew Backward */\r\n.hvr-skew-backward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  -webkit-transform-origin: 0 100%;\r\n  transform-origin: 0 100%;\r\n}\r\n.hvr-skew-backward:hover, .hvr-skew-backward:focus, .hvr-skew-backward:active {\r\n  -webkit-transform: skew(10deg);\r\n  transform: skew(10deg);\r\n}\r\n\r\n/* Wobble Vertical */\r\n@-webkit-keyframes hvr-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(8px);\r\n    transform: translateY(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n.hvr-wobble-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-vertical:hover, .hvr-wobble-vertical:focus, .hvr-wobble-vertical:active {\r\n  -webkit-animation-name: hvr-wobble-vertical;\r\n  animation-name: hvr-wobble-vertical;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Horizontal */\r\n@-webkit-keyframes hvr-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(8px);\r\n    transform: translateX(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-6px);\r\n    transform: translateX(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(8px);\r\n    transform: translateX(8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-6px);\r\n    transform: translateX(-6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n.hvr-wobble-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-horizontal:hover, .hvr-wobble-horizontal:focus, .hvr-wobble-horizontal:active {\r\n  -webkit-animation-name: hvr-wobble-horizontal;\r\n  animation-name: hvr-wobble-horizontal;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble To Bottom Right */\r\n@-webkit-keyframes hvr-wobble-to-bottom-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, 8px);\r\n    transform: translate(8px, 8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, -6px);\r\n    transform: translate(-6px, -6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, 4px);\r\n    transform: translate(4px, 4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, -2px);\r\n    transform: translate(-2px, -2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, 1px);\r\n    transform: translate(1px, 1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-to-bottom-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, 8px);\r\n    transform: translate(8px, 8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, -6px);\r\n    transform: translate(-6px, -6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, 4px);\r\n    transform: translate(4px, 4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, -2px);\r\n    transform: translate(-2px, -2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, 1px);\r\n    transform: translate(1px, 1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n.hvr-wobble-to-bottom-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-to-bottom-right:hover, .hvr-wobble-to-bottom-right:focus, .hvr-wobble-to-bottom-right:active {\r\n  -webkit-animation-name: hvr-wobble-to-bottom-right;\r\n  animation-name: hvr-wobble-to-bottom-right;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble To Top Right */\r\n@-webkit-keyframes hvr-wobble-to-top-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, -8px);\r\n    transform: translate(8px, -8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, 6px);\r\n    transform: translate(-6px, 6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, -4px);\r\n    transform: translate(4px, -4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, 2px);\r\n    transform: translate(-2px, 2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, -1px);\r\n    transform: translate(1px, -1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-to-top-right {\r\n  16.65% {\r\n    -webkit-transform: translate(8px, -8px);\r\n    transform: translate(8px, -8px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translate(-6px, 6px);\r\n    transform: translate(-6px, 6px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translate(4px, -4px);\r\n    transform: translate(4px, -4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translate(-2px, 2px);\r\n    transform: translate(-2px, 2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translate(1px, -1px);\r\n    transform: translate(1px, -1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translate(0, 0);\r\n    transform: translate(0, 0);\r\n  }\r\n}\r\n.hvr-wobble-to-top-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-to-top-right:hover, .hvr-wobble-to-top-right:focus, .hvr-wobble-to-top-right:active {\r\n  -webkit-animation-name: hvr-wobble-to-top-right;\r\n  animation-name: hvr-wobble-to-top-right;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Top */\r\n@-webkit-keyframes hvr-wobble-top {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-top {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n.hvr-wobble-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  -webkit-transform-origin: 0 100%;\r\n  transform-origin: 0 100%;\r\n}\r\n.hvr-wobble-top:hover, .hvr-wobble-top:focus, .hvr-wobble-top:active {\r\n  -webkit-animation-name: hvr-wobble-top;\r\n  animation-name: hvr-wobble-top;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Bottom */\r\n@-webkit-keyframes hvr-wobble-bottom {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-bottom {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n.hvr-wobble-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  -webkit-transform-origin: 100% 0;\r\n  transform-origin: 100% 0;\r\n}\r\n.hvr-wobble-bottom:hover, .hvr-wobble-bottom:focus, .hvr-wobble-bottom:active {\r\n  -webkit-animation-name: hvr-wobble-bottom;\r\n  animation-name: hvr-wobble-bottom;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Wobble Skew */\r\n@-webkit-keyframes hvr-wobble-skew {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n@keyframes hvr-wobble-skew {\r\n  16.65% {\r\n    -webkit-transform: skew(-12deg);\r\n    transform: skew(-12deg);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: skew(10deg);\r\n    transform: skew(10deg);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: skew(-6deg);\r\n    transform: skew(-6deg);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: skew(4deg);\r\n    transform: skew(4deg);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: skew(-2deg);\r\n    transform: skew(-2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: skew(0);\r\n    transform: skew(0);\r\n  }\r\n}\r\n.hvr-wobble-skew {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-wobble-skew:hover, .hvr-wobble-skew:focus, .hvr-wobble-skew:active {\r\n  -webkit-animation-name: hvr-wobble-skew;\r\n  animation-name: hvr-wobble-skew;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Buzz */\r\n@-webkit-keyframes hvr-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n@keyframes hvr-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n.hvr-buzz {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {\r\n  -webkit-animation-name: hvr-buzz;\r\n  animation-name: hvr-buzz;\r\n  -webkit-animation-duration: 0.15s;\r\n  animation-duration: 0.15s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Buzz Out */\r\n@-webkit-keyframes hvr-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n@keyframes hvr-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n.hvr-buzz-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {\r\n  -webkit-animation-name: hvr-buzz-out;\r\n  animation-name: hvr-buzz-out;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Forward */\r\n.hvr-forward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {\r\n  -webkit-transform: translateX(8px);\r\n  transform: translateX(8px);\r\n}\r\n\r\n/* Backward */\r\n.hvr-backward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-backward:hover, .hvr-backward:focus, .hvr-backward:active {\r\n  -webkit-transform: translateX(-8px);\r\n  transform: translateX(-8px);\r\n}\r\n\r\n/* BACKGROUND TRANSITIONS */\r\n/* Fade */\r\n.hvr-fade {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  overflow: hidden;\r\n  transition-duration: 0.3s;\r\n  transition-property: color, background-color;\r\n}\r\n.hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {\r\n  background-color: #2098D1;\r\n  color: white;\r\n}\r\n\r\n/* Back Pulse */\r\n@-webkit-keyframes hvr-back-pulse {\r\n  50% {\r\n    background-color: rgba(32, 152, 209, 0.75);\r\n  }\r\n}\r\n@keyframes hvr-back-pulse {\r\n  50% {\r\n    background-color: rgba(32, 152, 209, 0.75);\r\n  }\r\n}\r\n.hvr-back-pulse {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  overflow: hidden;\r\n  transition-duration: 0.5s;\r\n  transition-property: color, background-color;\r\n}\r\n.hvr-back-pulse:hover, .hvr-back-pulse:focus, .hvr-back-pulse:active {\r\n  -webkit-animation-name: hvr-back-pulse;\r\n  animation-name: hvr-back-pulse;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-delay: 0.5s;\r\n  animation-delay: 0.5s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  background-color: #2098D1;\r\n  background-color: #2098d1;\r\n  color: white;\r\n}\r\n\r\n/* Sweep To Right */\r\n.hvr-sweep-to-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 0 50%;\r\n  transform-origin: 0 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n}\r\n\r\n/* Sweep To Left */\r\n.hvr-sweep-to-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 100% 50%;\r\n  transform-origin: 100% 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-left:hover, .hvr-sweep-to-left:focus, .hvr-sweep-to-left:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-left:hover:before, .hvr-sweep-to-left:focus:before, .hvr-sweep-to-left:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n}\r\n\r\n/* Sweep To Bottom */\r\n.hvr-sweep-to-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-bottom:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 0;\r\n  transform-origin: 50% 0;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-bottom:hover:before, .hvr-sweep-to-bottom:focus:before, .hvr-sweep-to-bottom:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n}\r\n\r\n/* Sweep To Top */\r\n.hvr-sweep-to-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-sweep-to-top:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 100%;\r\n  transform-origin: 50% 100%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-sweep-to-top:hover, .hvr-sweep-to-top:focus, .hvr-sweep-to-top:active {\r\n  color: white;\r\n}\r\n.hvr-sweep-to-top:hover:before, .hvr-sweep-to-top:focus:before, .hvr-sweep-to-top:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n}\r\n\r\n/* Bounce To Right */\r\n.hvr-bounce-to-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 0 50%;\r\n  transform-origin: 0 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Bounce To Left */\r\n.hvr-bounce-to-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 100% 50%;\r\n  transform-origin: 100% 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-left:hover, .hvr-bounce-to-left:focus, .hvr-bounce-to-left:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-left:hover:before, .hvr-bounce-to-left:focus:before, .hvr-bounce-to-left:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Bounce To Bottom */\r\n.hvr-bounce-to-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-bottom:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 0;\r\n  transform-origin: 50% 0;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Bounce To Top */\r\n.hvr-bounce-to-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-property: color;\r\n  transition-duration: 0.5s;\r\n}\r\n.hvr-bounce-to-top:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50% 100%;\r\n  transform-origin: 50% 100%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.5s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-bounce-to-top:hover, .hvr-bounce-to-top:focus, .hvr-bounce-to-top:active {\r\n  color: white;\r\n}\r\n.hvr-bounce-to-top:hover:before, .hvr-bounce-to-top:focus:before, .hvr-bounce-to-top:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Radial Out */\r\n.hvr-radial-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-radial-out:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  border-radius: 100%;\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-radial-out:hover, .hvr-radial-out:focus, .hvr-radial-out:active {\r\n  color: white;\r\n}\r\n.hvr-radial-out:hover:before, .hvr-radial-out:focus:before, .hvr-radial-out:active:before {\r\n  -webkit-transform: scale(2);\r\n  transform: scale(2);\r\n}\r\n\r\n/* Radial In */\r\n.hvr-radial-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-radial-in:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #e1e1e1;\r\n  border-radius: 100%;\r\n  -webkit-transform: scale(2);\r\n  transform: scale(2);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-radial-in:hover, .hvr-radial-in:focus, .hvr-radial-in:active {\r\n  color: white;\r\n}\r\n.hvr-radial-in:hover:before, .hvr-radial-in:focus:before, .hvr-radial-in:active:before {\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n}\r\n\r\n/* Rectangle In */\r\n.hvr-rectangle-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-rectangle-in:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #e1e1e1;\r\n  -webkit-transform: scale(1);\r\n  transform: scale(1);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-rectangle-in:hover, .hvr-rectangle-in:focus, .hvr-rectangle-in:active {\r\n  color: white;\r\n}\r\n.hvr-rectangle-in:hover:before, .hvr-rectangle-in:focus:before, .hvr-rectangle-in:active:before {\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n}\r\n\r\n/* Rectangle Out */\r\n.hvr-rectangle-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-rectangle-out:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scale(0);\r\n  transform: scale(0);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-rectangle-out:hover, .hvr-rectangle-out:focus, .hvr-rectangle-out:active {\r\n  color: white;\r\n}\r\n.hvr-rectangle-out:hover:before, .hvr-rectangle-out:focus:before, .hvr-rectangle-out:active:before {\r\n  -webkit-transform: scale(1);\r\n  transform: scale(1);\r\n}\r\n\r\n/* Shutter In Horizontal */\r\n.hvr-shutter-in-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-in-horizontal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #e1e1e1;\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-in-horizontal:hover, .hvr-shutter-in-horizontal:focus, .hvr-shutter-in-horizontal:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-in-horizontal:hover:before, .hvr-shutter-in-horizontal:focus:before, .hvr-shutter-in-horizontal:active:before {\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n}\r\n\r\n/* Shutter Out Horizontal */\r\n.hvr-shutter-out-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-out-horizontal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleX(0);\r\n  transform: scaleX(0);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-out-horizontal:hover, .hvr-shutter-out-horizontal:focus, .hvr-shutter-out-horizontal:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-out-horizontal:hover:before, .hvr-shutter-out-horizontal:focus:before, .hvr-shutter-out-horizontal:active:before {\r\n  -webkit-transform: scaleX(1);\r\n  transform: scaleX(1);\r\n}\r\n\r\n/* Shutter In Vertical */\r\n.hvr-shutter-in-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #2098D1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-in-vertical:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #e1e1e1;\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-in-vertical:hover, .hvr-shutter-in-vertical:focus, .hvr-shutter-in-vertical:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-in-vertical:hover:before, .hvr-shutter-in-vertical:focus:before, .hvr-shutter-in-vertical:active:before {\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n}\r\n\r\n/* Shutter Out Vertical */\r\n.hvr-shutter-out-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  background: #e1e1e1;\r\n  transition-property: color;\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-shutter-out-vertical:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: #2098D1;\r\n  -webkit-transform: scaleY(0);\r\n  transform: scaleY(0);\r\n  -webkit-transform-origin: 50%;\r\n  transform-origin: 50%;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-shutter-out-vertical:hover, .hvr-shutter-out-vertical:focus, .hvr-shutter-out-vertical:active {\r\n  color: white;\r\n}\r\n.hvr-shutter-out-vertical:hover:before, .hvr-shutter-out-vertical:focus:before, .hvr-shutter-out-vertical:active:before {\r\n  -webkit-transform: scaleY(1);\r\n  transform: scaleY(1);\r\n}\r\n\r\n/* BORDER TRANSITIONS */\r\n/* Border Fade */\r\n.hvr-border-fade {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n.hvr-border-fade:hover, .hvr-border-fade:focus, .hvr-border-fade:active {\r\n  box-shadow: inset 0 0 0 4px #2098D1, 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n\r\n/* Hollow */\r\n.hvr-hollow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: background;\r\n  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n.hvr-hollow:hover, .hvr-hollow:focus, .hvr-hollow:active {\r\n  background: none;\r\n}\r\n\r\n/* Trim */\r\n.hvr-trim {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-trim:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: white solid 4px;\r\n  top: 4px;\r\n  left: 4px;\r\n  right: 4px;\r\n  bottom: 4px;\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: opacity;\r\n}\r\n.hvr-trim:hover:before, .hvr-trim:focus:before, .hvr-trim:active:before {\r\n  opacity: 1;\r\n}\r\n\r\n/* Ripple Out */\r\n@-webkit-keyframes hvr-ripple-out {\r\n  100% {\r\n    top: -12px;\r\n    right: -12px;\r\n    bottom: -12px;\r\n    left: -12px;\r\n    opacity: 0;\r\n  }\r\n}\r\n@keyframes hvr-ripple-out {\r\n  100% {\r\n    top: -12px;\r\n    right: -12px;\r\n    bottom: -12px;\r\n    left: -12px;\r\n    opacity: 0;\r\n  }\r\n}\r\n.hvr-ripple-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-ripple-out:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 6px;\r\n  top: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n}\r\n.hvr-ripple-out:hover:before, .hvr-ripple-out:focus:before, .hvr-ripple-out:active:before {\r\n  -webkit-animation-name: hvr-ripple-out;\r\n  animation-name: hvr-ripple-out;\r\n}\r\n\r\n/* Ripple In */\r\n@-webkit-keyframes hvr-ripple-in {\r\n  100% {\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    opacity: 1;\r\n  }\r\n}\r\n@keyframes hvr-ripple-in {\r\n  100% {\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    opacity: 1;\r\n  }\r\n}\r\n.hvr-ripple-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-ripple-in:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 4px;\r\n  top: -12px;\r\n  right: -12px;\r\n  bottom: -12px;\r\n  left: -12px;\r\n  opacity: 0;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n}\r\n.hvr-ripple-in:hover:before, .hvr-ripple-in:focus:before, .hvr-ripple-in:active:before {\r\n  -webkit-animation-name: hvr-ripple-in;\r\n  animation-name: hvr-ripple-in;\r\n}\r\n\r\n/* Outline Out */\r\n.hvr-outline-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-outline-out:before {\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 4px;\r\n  top: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: top, right, bottom, left;\r\n}\r\n.hvr-outline-out:hover:before, .hvr-outline-out:focus:before, .hvr-outline-out:active:before {\r\n  top: -8px;\r\n  right: -8px;\r\n  bottom: -8px;\r\n  left: -8px;\r\n}\r\n\r\n/* Outline In */\r\n.hvr-outline-in {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-outline-in:before {\r\n  pointer-events: none;\r\n  content: '';\r\n  position: absolute;\r\n  border: #e1e1e1 solid 4px;\r\n  top: -16px;\r\n  right: -16px;\r\n  bottom: -16px;\r\n  left: -16px;\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: top, right, bottom, left;\r\n}\r\n.hvr-outline-in:hover:before, .hvr-outline-in:focus:before, .hvr-outline-in:active:before {\r\n  top: -8px;\r\n  right: -8px;\r\n  bottom: -8px;\r\n  left: -8px;\r\n  opacity: 1;\r\n}\r\n\r\n/* Round Corners */\r\n.hvr-round-corners {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: border-radius;\r\n}\r\n.hvr-round-corners:hover, .hvr-round-corners:focus, .hvr-round-corners:active {\r\n  border-radius: 1em;\r\n}\r\n\r\n/* Underline From Left */\r\n.hvr-underline-from-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-from-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 100%;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {\r\n  right: 0;\r\n}\r\n\r\n/* Underline From Center */\r\n.hvr-underline-from-center {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-from-center:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 51%;\r\n  right: 51%;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left, right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n/* Underline From Right */\r\n.hvr-underline-from-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-from-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 100%;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-from-right:hover:before, .hvr-underline-from-right:focus:before, .hvr-underline-from-right:active:before {\r\n  left: 0;\r\n}\r\n\r\n/* Overline From Left */\r\n.hvr-overline-from-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-from-left:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 100%;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-from-left:hover:before, .hvr-overline-from-left:focus:before, .hvr-overline-from-left:active:before {\r\n  right: 0;\r\n}\r\n\r\n/* Overline From Center */\r\n.hvr-overline-from-center {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-from-center:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 51%;\r\n  right: 51%;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left, right;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-from-center:hover:before, .hvr-overline-from-center:focus:before, .hvr-overline-from-center:active:before {\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n/* Overline From Right */\r\n.hvr-overline-from-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-from-right:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 100%;\r\n  right: 0;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  transition-property: left;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-from-right:hover:before, .hvr-overline-from-right:focus:before, .hvr-overline-from-right:active:before {\r\n  left: 0;\r\n}\r\n\r\n/* Reveal */\r\n.hvr-reveal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-reveal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 0;\r\n  top: 0;\r\n  bottom: 0;\r\n  border-color: #2098D1;\r\n  border-style: solid;\r\n  border-width: 0;\r\n  transition-property: border-width;\r\n  transition-duration: 0.1s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-reveal:hover:before, .hvr-reveal:focus:before, .hvr-reveal:active:before {\r\n  -webkit-transform: translateY(0);\r\n  transform: translateY(0);\r\n  border-width: 4px;\r\n}\r\n\r\n/* Underline Reveal */\r\n.hvr-underline-reveal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-underline-reveal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  -webkit-transform: translateY(4px);\r\n  transform: translateY(4px);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-underline-reveal:hover:before, .hvr-underline-reveal:focus:before, .hvr-underline-reveal:active:before {\r\n  -webkit-transform: translateY(0);\r\n  transform: translateY(0);\r\n}\r\n\r\n/* Overline Reveal */\r\n.hvr-overline-reveal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.hvr-overline-reveal:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: -1;\r\n  left: 0;\r\n  right: 0;\r\n  top: 0;\r\n  background: #2098D1;\r\n  height: 4px;\r\n  -webkit-transform: translateY(-4px);\r\n  transform: translateY(-4px);\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-duration: 0.3s;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-overline-reveal:hover:before, .hvr-overline-reveal:focus:before, .hvr-overline-reveal:active:before {\r\n  -webkit-transform: translateY(0);\r\n  transform: translateY(0);\r\n}\r\n\r\n/* SHADOW/GLOW TRANSITIONS */\r\n/* Glow */\r\n.hvr-glow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n}\r\n.hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {\r\n  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);\r\n}\r\n\r\n/* Shadow */\r\n.hvr-shadow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n}\r\n.hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {\r\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n/* Grow Shadow */\r\n.hvr-grow-shadow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow, -webkit-transform;\r\n  transition-property: box-shadow, transform;\r\n  transition-property: box-shadow, transform, -webkit-transform;\r\n}\r\n.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {\r\n  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);\r\n  -webkit-transform: scale(1.1);\r\n  transform: scale(1.1);\r\n}\r\n\r\n/* Box Shadow Outset */\r\n.hvr-box-shadow-outset {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n}\r\n.hvr-box-shadow-outset:hover, .hvr-box-shadow-outset:focus, .hvr-box-shadow-outset:active {\r\n  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);\r\n}\r\n\r\n/* Box Shadow Inset */\r\n.hvr-box-shadow-inset {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n  transition-property: box-shadow;\r\n  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n.hvr-box-shadow-inset:hover, .hvr-box-shadow-inset:focus, .hvr-box-shadow-inset:active {\r\n  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.6), 0 0 1px rgba(0, 0, 0, 0);\r\n  /* Hack to improve aliasing on mobile/tablet devices */\r\n}\r\n\r\n/* Float Shadow */\r\n.hvr-float-shadow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-float-shadow:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  top: 100%;\r\n  left: 5%;\r\n  height: 10px;\r\n  width: 90%;\r\n  opacity: 0;\r\n  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);\r\n  /* W3C */\r\n  transition-duration: 0.3s;\r\n  transition-property: opacity, -webkit-transform;\r\n  transition-property: transform, opacity;\r\n  transition-property: transform, opacity, -webkit-transform;\r\n}\r\n.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {\r\n  -webkit-transform: translateY(-5px);\r\n  transform: translateY(-5px);\r\n  /* move the element up by 5px */\r\n}\r\n.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {\r\n  opacity: 1;\r\n  -webkit-transform: translateY(5px);\r\n  transform: translateY(5px);\r\n  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */\r\n}\r\n\r\n/* Shadow Radial */\r\n.hvr-shadow-radial {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-shadow-radial:before, .hvr-shadow-radial:after {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  left: 0;\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  background-repeat: no-repeat;\r\n  height: 5px;\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  transition-property: opacity;\r\n}\r\n.hvr-shadow-radial:before {\r\n  bottom: 100%;\r\n  background: radial-gradient(ellipse at 50% 150%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\r\n}\r\n.hvr-shadow-radial:after {\r\n  top: 100%;\r\n  background: radial-gradient(ellipse at 50% -50%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 80%);\r\n}\r\n.hvr-shadow-radial:hover:before, .hvr-shadow-radial:focus:before, .hvr-shadow-radial:active:before, .hvr-shadow-radial:hover:after, .hvr-shadow-radial:focus:after, .hvr-shadow-radial:active:after {\r\n  opacity: 1;\r\n}\r\n\r\n/* SPEECH BUBBLES */\r\n/* Bubble Top */\r\n.hvr-bubble-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-top:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  left: calc(50% - 10px);\r\n  top: 0;\r\n  border-width: 0 10px 10px 10px;\r\n  border-color: transparent transparent #e1e1e1 transparent;\r\n}\r\n.hvr-bubble-top:hover:before, .hvr-bubble-top:focus:before, .hvr-bubble-top:active:before {\r\n  -webkit-transform: translateY(-10px);\r\n  transform: translateY(-10px);\r\n}\r\n\r\n/* Bubble Right */\r\n.hvr-bubble-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-right:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  top: calc(50% - 10px);\r\n  right: 0;\r\n  border-width: 10px 0 10px 10px;\r\n  border-color: transparent transparent transparent #e1e1e1;\r\n}\r\n.hvr-bubble-right:hover:before, .hvr-bubble-right:focus:before, .hvr-bubble-right:active:before {\r\n  -webkit-transform: translateX(10px);\r\n  transform: translateX(10px);\r\n}\r\n\r\n/* Bubble Bottom */\r\n.hvr-bubble-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-bottom:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  left: calc(50% - 10px);\r\n  bottom: 0;\r\n  border-width: 10px 10px 0 10px;\r\n  border-color: #e1e1e1 transparent transparent transparent;\r\n}\r\n.hvr-bubble-bottom:hover:before, .hvr-bubble-bottom:focus:before, .hvr-bubble-bottom:active:before {\r\n  -webkit-transform: translateY(10px);\r\n  transform: translateY(10px);\r\n}\r\n\r\n/* Bubble Left */\r\n.hvr-bubble-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-bubble-left:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  border-style: solid;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  top: calc(50% - 10px);\r\n  left: 0;\r\n  border-width: 10px 10px 10px 0;\r\n  border-color: transparent #e1e1e1 transparent transparent;\r\n}\r\n.hvr-bubble-left:hover:before, .hvr-bubble-left:focus:before, .hvr-bubble-left:active:before {\r\n  -webkit-transform: translateX(-10px);\r\n  transform: translateX(-10px);\r\n}\r\n\r\n/* Bubble Float Top */\r\n.hvr-bubble-float-top {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-top:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  left: calc(50% - 10px);\r\n  top: 0;\r\n  border-style: solid;\r\n  border-width: 0 10px 10px 10px;\r\n  border-color: transparent transparent #e1e1e1 transparent;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-top:hover, .hvr-bubble-float-top:focus, .hvr-bubble-float-top:active {\r\n  -webkit-transform: translateY(10px);\r\n  transform: translateY(10px);\r\n}\r\n.hvr-bubble-float-top:hover:before, .hvr-bubble-float-top:focus:before, .hvr-bubble-float-top:active:before {\r\n  -webkit-transform: translateY(-10px);\r\n  transform: translateY(-10px);\r\n}\r\n\r\n/* Bubble Float Right */\r\n.hvr-bubble-float-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-right:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  top: calc(50% - 10px);\r\n  right: 0;\r\n  content: '';\r\n  border-style: solid;\r\n  border-width: 10px 0 10px 10px;\r\n  border-color: transparent transparent transparent #e1e1e1;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-right:hover, .hvr-bubble-float-right:focus, .hvr-bubble-float-right:active {\r\n  -webkit-transform: translateX(-10px);\r\n  transform: translateX(-10px);\r\n}\r\n.hvr-bubble-float-right:hover:before, .hvr-bubble-float-right:focus:before, .hvr-bubble-float-right:active:before {\r\n  -webkit-transform: translateX(10px);\r\n  transform: translateX(10px);\r\n}\r\n\r\n/* Bubble Float Bottom */\r\n.hvr-bubble-float-bottom {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-bottom:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  left: calc(50% - 10px);\r\n  bottom: 0;\r\n  border-style: solid;\r\n  border-width: 10px 10px 0 10px;\r\n  border-color: #e1e1e1 transparent transparent transparent;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-bottom:hover, .hvr-bubble-float-bottom:focus, .hvr-bubble-float-bottom:active {\r\n  -webkit-transform: translateY(-10px);\r\n  transform: translateY(-10px);\r\n}\r\n.hvr-bubble-float-bottom:hover:before, .hvr-bubble-float-bottom:focus:before, .hvr-bubble-float-bottom:active:before {\r\n  -webkit-transform: translateY(10px);\r\n  transform: translateY(10px);\r\n}\r\n\r\n/* Bubble Float Left */\r\n.hvr-bubble-float-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-left:before {\r\n  position: absolute;\r\n  z-index: -1;\r\n  content: '';\r\n  top: calc(50% - 10px);\r\n  left: 0;\r\n  border-style: solid;\r\n  border-width: 10px 10px 10px 0;\r\n  border-color: transparent #e1e1e1 transparent transparent;\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n}\r\n.hvr-bubble-float-left:hover, .hvr-bubble-float-left:focus, .hvr-bubble-float-left:active {\r\n  -webkit-transform: translateX(10px);\r\n  transform: translateX(10px);\r\n}\r\n.hvr-bubble-float-left:hover:before, .hvr-bubble-float-left:focus:before, .hvr-bubble-float-left:active:before {\r\n  -webkit-transform: translateX(-10px);\r\n  transform: translateX(-10px);\r\n}\r\n\r\n/* ICONS */\r\n/* Icon Back */\r\n.hvr-icon-back {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.1s;\r\n}\r\n.hvr-icon-back .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.1s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-back:hover .hvr-icon, .hvr-icon-back:focus .hvr-icon, .hvr-icon-back:active .hvr-icon {\r\n  -webkit-transform: translateX(-4px);\r\n  transform: translateX(-4px);\r\n}\r\n\r\n/* Icon Forward */\r\n.hvr-icon-forward {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.1s;\r\n}\r\n.hvr-icon-forward .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.1s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-forward:hover .hvr-icon, .hvr-icon-forward:focus .hvr-icon, .hvr-icon-forward:active .hvr-icon {\r\n  -webkit-transform: translateX(4px);\r\n  transform: translateX(4px);\r\n}\r\n\r\n/* Icon Down */\r\n@-webkit-keyframes hvr-icon-down {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-down {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n/* Icon Down */\r\n.hvr-icon-down {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-down .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-down:hover .hvr-icon, .hvr-icon-down:focus .hvr-icon, .hvr-icon-down:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-down;\r\n  animation-name: hvr-icon-down;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Up */\r\n@-webkit-keyframes hvr-icon-up {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-up {\r\n  0%,\r\n\t50%,\r\n\t100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n  25%,\r\n\t75% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n/* Icon Up */\r\n.hvr-icon-up {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-up .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-up:hover .hvr-icon, .hvr-icon-up:focus .hvr-icon, .hvr-icon-up:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-up;\r\n  animation-name: hvr-icon-up;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Spin */\r\n.hvr-icon-spin {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-spin .hvr-icon {\r\n  transition-duration: 1s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-in-out;\r\n}\r\n.hvr-icon-spin:hover .hvr-icon, .hvr-icon-spin:focus .hvr-icon, .hvr-icon-spin:active .hvr-icon {\r\n  -webkit-transform: rotate(360deg);\r\n  transform: rotate(360deg);\r\n}\r\n\r\n/* Icon Drop */\r\n@-webkit-keyframes hvr-icon-drop {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  50% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-100%);\r\n    transform: translateY(-100%);\r\n  }\r\n  51%,\r\n\t100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n@keyframes hvr-icon-drop {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  50% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-100%);\r\n    transform: translateY(-100%);\r\n  }\r\n  51%,\r\n\t100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n/* Icon Drop */\r\n.hvr-icon-drop {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-drop .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-drop:hover .hvr-icon, .hvr-icon-drop:focus .hvr-icon, .hvr-icon-drop:active .hvr-icon {\r\n  opacity: 0;\r\n  transition-duration: 0.3s;\r\n  -webkit-animation-name: hvr-icon-drop;\r\n  animation-name: hvr-icon-drop;\r\n  -webkit-animation-duration: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-delay: 0.3s;\r\n  animation-delay: 0.3s;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n  animation-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);\r\n}\r\n\r\n/* Icon Fade */\r\n.hvr-icon-fade {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-fade .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.5s;\r\n  transition-property: color;\r\n}\r\n.hvr-icon-fade:hover .hvr-icon, .hvr-icon-fade:focus .hvr-icon, .hvr-icon-fade:active .hvr-icon {\r\n  color: #0F9E5E;\r\n}\r\n\r\n/* Icon Float Away */\r\n@-webkit-keyframes hvr-icon-float-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-1em);\r\n    transform: translateY(-1em);\r\n  }\r\n}\r\n@keyframes hvr-icon-float-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(-1em);\r\n    transform: translateY(-1em);\r\n  }\r\n}\r\n/* Icon Float Away */\r\n.hvr-icon-float-away {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-float-away .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  -webkit-animation-duration: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n}\r\n.hvr-icon-float-away:hover .hvr-icon, .hvr-icon-float-away:focus .hvr-icon, .hvr-icon-float-away:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-float-away;\r\n  animation-name: hvr-icon-float-away;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Sink Away */\r\n@-webkit-keyframes hvr-icon-sink-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(1em);\r\n    transform: translateY(1em);\r\n  }\r\n}\r\n@keyframes hvr-icon-sink-away {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    -webkit-transform: translateY(1em);\r\n    transform: translateY(1em);\r\n  }\r\n}\r\n/* Icon Sink Away */\r\n.hvr-icon-sink-away {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-sink-away .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  -webkit-animation-duration: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n}\r\n.hvr-icon-sink-away:hover .hvr-icon, .hvr-icon-sink-away:focus .hvr-icon, .hvr-icon-sink-away:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-sink-away;\r\n  animation-name: hvr-icon-sink-away;\r\n  -webkit-animation-timing-function: ease-out;\r\n  animation-timing-function: ease-out;\r\n}\r\n\r\n/* Icon Grow */\r\n.hvr-icon-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-grow .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-grow:hover .hvr-icon, .hvr-icon-grow:focus .hvr-icon, .hvr-icon-grow:active .hvr-icon {\r\n  -webkit-transform: scale(1.3) translateZ(0);\r\n  transform: scale(1.3) translateZ(0);\r\n}\r\n\r\n/* Icon Shrink */\r\n.hvr-icon-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-shrink .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-shrink:hover .hvr-icon, .hvr-icon-shrink:focus .hvr-icon, .hvr-icon-shrink:active .hvr-icon {\r\n  -webkit-transform: scale(0.8);\r\n  transform: scale(0.8);\r\n}\r\n\r\n/* Icon Pulse */\r\n@-webkit-keyframes hvr-icon-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n@keyframes hvr-icon-pulse {\r\n  25% {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n  75% {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n.hvr-icon-pulse {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-pulse .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pulse:hover .hvr-icon, .hvr-icon-pulse:focus .hvr-icon, .hvr-icon-pulse:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pulse;\r\n  animation-name: hvr-icon-pulse;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Icon Pulse Grow */\r\n@-webkit-keyframes hvr-icon-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n}\r\n@keyframes hvr-icon-pulse-grow {\r\n  to {\r\n    -webkit-transform: scale(1.3);\r\n    transform: scale(1.3);\r\n  }\r\n}\r\n.hvr-icon-pulse-grow {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-pulse-grow .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pulse-grow:hover .hvr-icon, .hvr-icon-pulse-grow:focus .hvr-icon, .hvr-icon-pulse-grow:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pulse-grow;\r\n  animation-name: hvr-icon-pulse-grow;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Icon Pulse Shrink */\r\n@-webkit-keyframes hvr-icon-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n@keyframes hvr-icon-pulse-shrink {\r\n  to {\r\n    -webkit-transform: scale(0.8);\r\n    transform: scale(0.8);\r\n  }\r\n}\r\n.hvr-icon-pulse-shrink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n}\r\n.hvr-icon-pulse-shrink .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pulse-shrink:hover .hvr-icon, .hvr-icon-pulse-shrink:focus .hvr-icon, .hvr-icon-pulse-shrink:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pulse-shrink;\r\n  animation-name: hvr-icon-pulse-shrink;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n  -webkit-animation-direction: alternate;\r\n  animation-direction: alternate;\r\n}\r\n\r\n/* Icon Push */\r\n@-webkit-keyframes hvr-icon-push {\r\n  50% {\r\n    -webkit-transform: scale(0.5);\r\n    transform: scale(0.5);\r\n  }\r\n}\r\n@keyframes hvr-icon-push {\r\n  50% {\r\n    -webkit-transform: scale(0.5);\r\n    transform: scale(0.5);\r\n  }\r\n}\r\n.hvr-icon-push {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-push .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-push:hover .hvr-icon, .hvr-icon-push:focus .hvr-icon, .hvr-icon-push:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-push;\r\n  animation-name: hvr-icon-push;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Pop */\r\n@-webkit-keyframes hvr-icon-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.5);\r\n    transform: scale(1.5);\r\n  }\r\n}\r\n@keyframes hvr-icon-pop {\r\n  50% {\r\n    -webkit-transform: scale(1.5);\r\n    transform: scale(1.5);\r\n  }\r\n}\r\n.hvr-icon-pop {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-pop .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-pop:hover .hvr-icon, .hvr-icon-pop:focus .hvr-icon, .hvr-icon-pop:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-pop;\r\n  animation-name: hvr-icon-pop;\r\n  -webkit-animation-duration: 0.3s;\r\n  animation-duration: 0.3s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Bounce */\r\n.hvr-icon-bounce {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-bounce .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-bounce:hover .hvr-icon, .hvr-icon-bounce:focus .hvr-icon, .hvr-icon-bounce:active .hvr-icon {\r\n  -webkit-transform: scale(1.5);\r\n  transform: scale(1.5);\r\n  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);\r\n}\r\n\r\n/* Icon Rotate */\r\n.hvr-icon-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-rotate .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-rotate:hover .hvr-icon, .hvr-icon-rotate:focus .hvr-icon, .hvr-icon-rotate:active .hvr-icon {\r\n  -webkit-transform: rotate(20deg);\r\n  transform: rotate(20deg);\r\n}\r\n\r\n/* Icon Grow Rotate */\r\n.hvr-icon-grow-rotate {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-grow-rotate .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-grow-rotate:hover .hvr-icon, .hvr-icon-grow-rotate:focus .hvr-icon, .hvr-icon-grow-rotate:active .hvr-icon {\r\n  -webkit-transform: scale(1.5) rotate(12deg);\r\n  transform: scale(1.5) rotate(12deg);\r\n}\r\n\r\n/* Icon Float */\r\n.hvr-icon-float {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-float .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-float:hover .hvr-icon, .hvr-icon-float:focus .hvr-icon, .hvr-icon-float:active .hvr-icon {\r\n  -webkit-transform: translateY(-4px);\r\n  transform: translateY(-4px);\r\n}\r\n\r\n/* Icon Sink */\r\n.hvr-icon-sink {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-sink .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  transition-duration: 0.3s;\r\n  transition-property: -webkit-transform;\r\n  transition-property: transform;\r\n  transition-property: transform, -webkit-transform;\r\n  transition-timing-function: ease-out;\r\n}\r\n.hvr-icon-sink:hover .hvr-icon, .hvr-icon-sink:focus .hvr-icon, .hvr-icon-sink:active .hvr-icon {\r\n  -webkit-transform: translateY(4px);\r\n  transform: translateY(4px);\r\n}\r\n\r\n/* Icon Bob */\r\n@-webkit-keyframes hvr-icon-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-bob {\r\n  0% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-icon-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-bob-float {\r\n  100% {\r\n    -webkit-transform: translateY(-6px);\r\n    transform: translateY(-6px);\r\n  }\r\n}\r\n.hvr-icon-bob {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-bob .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-bob:hover .hvr-icon, .hvr-icon-bob:focus .hvr-icon, .hvr-icon-bob:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-bob-float, hvr-icon-bob;\r\n  animation-name: hvr-icon-bob-float, hvr-icon-bob;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Icon Hang */\r\n@-webkit-keyframes hvr-icon-hang {\r\n  0% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(2px);\r\n    transform: translateY(2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-hang {\r\n  0% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateY(2px);\r\n    transform: translateY(2px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@-webkit-keyframes hvr-icon-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n@keyframes hvr-icon-hang-sink {\r\n  100% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n}\r\n.hvr-icon-hang {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-hang .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-hang:hover .hvr-icon, .hvr-icon-hang:focus .hvr-icon, .hvr-icon-hang:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-hang-sink, hvr-icon-hang;\r\n  animation-name: hvr-icon-hang-sink, hvr-icon-hang;\r\n  -webkit-animation-duration: .3s, 1.5s;\r\n  animation-duration: .3s, 1.5s;\r\n  -webkit-animation-delay: 0s, .3s;\r\n  animation-delay: 0s, .3s;\r\n  -webkit-animation-timing-function: ease-out, ease-in-out;\r\n  animation-timing-function: ease-out, ease-in-out;\r\n  -webkit-animation-iteration-count: 1, infinite;\r\n  animation-iteration-count: 1, infinite;\r\n  -webkit-animation-fill-mode: forwards;\r\n  animation-fill-mode: forwards;\r\n  -webkit-animation-direction: normal, alternate;\r\n  animation-direction: normal, alternate;\r\n}\r\n\r\n/* Icon Wobble Horizontal */\r\n@-webkit-keyframes hvr-icon-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(6px);\r\n    transform: translateX(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-5px);\r\n    transform: translateX(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n@keyframes hvr-icon-wobble-horizontal {\r\n  16.65% {\r\n    -webkit-transform: translateX(6px);\r\n    transform: translateX(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateX(-5px);\r\n    transform: translateX(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateX(4px);\r\n    transform: translateX(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateX(-2px);\r\n    transform: translateX(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateX(1px);\r\n    transform: translateX(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(0);\r\n    transform: translateX(0);\r\n  }\r\n}\r\n.hvr-icon-wobble-horizontal {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-wobble-horizontal .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-wobble-horizontal:hover .hvr-icon, .hvr-icon-wobble-horizontal:focus .hvr-icon, .hvr-icon-wobble-horizontal:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-wobble-horizontal;\r\n  animation-name: hvr-icon-wobble-horizontal;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Wobble Vertical */\r\n@-webkit-keyframes hvr-icon-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-5px);\r\n    transform: translateY(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n@keyframes hvr-icon-wobble-vertical {\r\n  16.65% {\r\n    -webkit-transform: translateY(6px);\r\n    transform: translateY(6px);\r\n  }\r\n  33.3% {\r\n    -webkit-transform: translateY(-5px);\r\n    transform: translateY(-5px);\r\n  }\r\n  49.95% {\r\n    -webkit-transform: translateY(4px);\r\n    transform: translateY(4px);\r\n  }\r\n  66.6% {\r\n    -webkit-transform: translateY(-2px);\r\n    transform: translateY(-2px);\r\n  }\r\n  83.25% {\r\n    -webkit-transform: translateY(1px);\r\n    transform: translateY(1px);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateY(0);\r\n    transform: translateY(0);\r\n  }\r\n}\r\n.hvr-icon-wobble-vertical {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-wobble-vertical .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-wobble-vertical:hover .hvr-icon, .hvr-icon-wobble-vertical:focus .hvr-icon, .hvr-icon-wobble-vertical:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-wobble-vertical;\r\n  animation-name: hvr-icon-wobble-vertical;\r\n  -webkit-animation-duration: 1s;\r\n  animation-duration: 1s;\r\n  -webkit-animation-timing-function: ease-in-out;\r\n  animation-timing-function: ease-in-out;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* Icon Buzz */\r\n@-webkit-keyframes hvr-icon-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n@keyframes hvr-icon-buzz {\r\n  50% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n}\r\n.hvr-icon-buzz {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-buzz .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-buzz:hover .hvr-icon, .hvr-icon-buzz:focus .hvr-icon, .hvr-icon-buzz:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-buzz;\r\n  animation-name: hvr-icon-buzz;\r\n  -webkit-animation-duration: 0.15s;\r\n  animation-duration: 0.15s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: infinite;\r\n  animation-iteration-count: infinite;\r\n}\r\n\r\n/* Icon Buzz Out */\r\n@-webkit-keyframes hvr-icon-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n@keyframes hvr-icon-buzz-out {\r\n  10% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  20% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  30% {\r\n    -webkit-transform: translateX(3px) rotate(2deg);\r\n    transform: translateX(3px) rotate(2deg);\r\n  }\r\n  40% {\r\n    -webkit-transform: translateX(-3px) rotate(-2deg);\r\n    transform: translateX(-3px) rotate(-2deg);\r\n  }\r\n  50% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  60% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  70% {\r\n    -webkit-transform: translateX(2px) rotate(1deg);\r\n    transform: translateX(2px) rotate(1deg);\r\n  }\r\n  80% {\r\n    -webkit-transform: translateX(-2px) rotate(-1deg);\r\n    transform: translateX(-2px) rotate(-1deg);\r\n  }\r\n  90% {\r\n    -webkit-transform: translateX(1px) rotate(0);\r\n    transform: translateX(1px) rotate(0);\r\n  }\r\n  100% {\r\n    -webkit-transform: translateX(-1px) rotate(0);\r\n    transform: translateX(-1px) rotate(0);\r\n  }\r\n}\r\n.hvr-icon-buzz-out {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  transition-duration: 0.3s;\r\n}\r\n.hvr-icon-buzz-out .hvr-icon {\r\n  -webkit-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n}\r\n.hvr-icon-buzz-out:hover .hvr-icon, .hvr-icon-buzz-out:focus .hvr-icon, .hvr-icon-buzz-out:active .hvr-icon {\r\n  -webkit-animation-name: hvr-icon-buzz-out;\r\n  animation-name: hvr-icon-buzz-out;\r\n  -webkit-animation-duration: 0.75s;\r\n  animation-duration: 0.75s;\r\n  -webkit-animation-timing-function: linear;\r\n  animation-timing-function: linear;\r\n  -webkit-animation-iteration-count: 1;\r\n  animation-iteration-count: 1;\r\n}\r\n\r\n/* CURLS */\r\n/* Curl Top Left */\r\n.hvr-curl-top-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-top-left:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  top: 0;\r\n  left: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(135deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff', endColorstr='#000000');\r\n  /*For IE7-8-9*/\r\n  z-index: 1000;\r\n  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-top-left:hover:before, .hvr-curl-top-left:focus:before, .hvr-curl-top-left:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n\r\n/* Curl Top Right */\r\n.hvr-curl-top-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-top-right:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  top: 0;\r\n  right: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(225deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-top-right:hover:before, .hvr-curl-top-right:focus:before, .hvr-curl-top-right:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n\r\n/* Curl Bottom Right */\r\n.hvr-curl-bottom-right {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-bottom-right:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  bottom: 0;\r\n  right: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(315deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-bottom-right:hover:before, .hvr-curl-bottom-right:focus:before, .hvr-curl-bottom-right:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n\r\n/* Curl Bottom Left */\r\n.hvr-curl-bottom-left {\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  -webkit-transform: perspective(1px) translateZ(0);\r\n  transform: perspective(1px) translateZ(0);\r\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0);\r\n  position: relative;\r\n}\r\n.hvr-curl-bottom-left:before {\r\n  pointer-events: none;\r\n  position: absolute;\r\n  content: '';\r\n  height: 0;\r\n  width: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  background: white;\r\n  /* IE9 */\r\n  background: linear-gradient(45deg, white 45%, #aaa 50%, #ccc 56%, white 80%);\r\n  box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.4);\r\n  transition-duration: 0.3s;\r\n  transition-property: width, height;\r\n}\r\n.hvr-curl-bottom-left:hover:before, .hvr-curl-bottom-left:focus:before, .hvr-curl-bottom-left:active:before {\r\n  width: 25px;\r\n  height: 25px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -4334,7 +4544,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\n    margin-top: 11px;\n    /* left: 50%;\n    transform: translate(-50%,0%);\n    position: absolute; */\n    float: left;\n    width: 40px;\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\n    position: fixed;\n    width: 100vw;\n\n    background-color: #765d69;\n}\n.navbar-items[data-v-4ec5f2d4]{\n    min-width: 1200px;\n    max-width: 1200px;\n\n    left: 50%;\n    -webkit-transform: translate(-50%,0%);\n            transform: translate(-50%,0%);\n    position: absolute;\n}\n.menu-item[data-v-4ec5f2d4]{\n    font-size: 13px;\n    font-weight: 600;\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\n    width: 210px;\n    margin-right: 20px;\n}\n.user-picture[data-v-4ec5f2d4]{\n    width: 40px;\n    margin-top: 11px;\n    border: 2px solid rgba(58, 58, 58, .2);\n    border-radius: 50%;\n}\n.user-picture-dropdown[data-v-4ec5f2d4]{\n    float: right;\n    margin-right: 20px;\n}\n.body[data-v-4ec5f2d4]{\n    padding-top: 60px;\n\n    min-width: 1200px;\n    max-width: 1200px;\n\n    left: 50%;\n    -webkit-transform: translate(-50%,0%);\n            transform: translate(-50%,0%);\n    position: absolute;\n}\n.fullname[data-v-4ec5f2d4]{\n    font-weight: 700;\n    font-size: 18px;\n}\n.username[data-v-4ec5f2d4]{\n    color: #765d69;\n    font-size: 14px;\n}\n.item[data-v-4ec5f2d4]{\n    font-size: 14px;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-4ec5f2d4]{\n}\n.logo[data-v-4ec5f2d4]{\r\n    margin-top: 11px;\r\n    /* left: 50%;\r\n    transform: translate(-50%,0%);\r\n    position: absolute; */\r\n    float: left;\r\n    width: 40px;\r\n    margin-right: 15px;\n}\n.navbar[data-v-4ec5f2d4]{\r\n    position: fixed;\r\n    width: 100vw;\r\n\r\n    background-color: #765d69;\n}\n.navbar-items[data-v-4ec5f2d4]{\r\n    min-width: 1200px;\r\n    max-width: 1200px;\r\n\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,0%);\r\n            transform: translate(-50%,0%);\r\n    position: absolute;\n}\n.menu-item[data-v-4ec5f2d4]{\r\n    font-size: 13px;\r\n    font-weight: 600;\r\n    padding: 0px 15px !important;\n}\n.nav-right[data-v-4ec5f2d4]{\r\n    float: right;\n}\n.search-bar[data-v-4ec5f2d4]{\r\n    width: 210px;\r\n    margin-right: 20px;\n}\n.user-picture[data-v-4ec5f2d4]{\r\n    width: 40px;\r\n    margin-top: 11px;\r\n    border: 2px solid rgba(58, 58, 58, .2);\r\n    border-radius: 50%;\n}\n.user-picture-dropdown[data-v-4ec5f2d4]{\r\n    float: right;\r\n    margin-right: 20px;\n}\n.body[data-v-4ec5f2d4]{\r\n    padding-top: 60px;\r\n\r\n    min-width: 1200px;\r\n    max-width: 1200px;\r\n\r\n    left: 50%;\r\n    -webkit-transform: translate(-50%,0%);\r\n            transform: translate(-50%,0%);\r\n    position: absolute;\n}\n.fullname[data-v-4ec5f2d4]{\r\n    font-weight: 700;\r\n    font-size: 18px;\n}\n.username[data-v-4ec5f2d4]{\r\n    color: #765d69;\r\n    font-size: 14px;\n}\n.item[data-v-4ec5f2d4]{\r\n    font-size: 14px;\n}\r\n", ""]);
 
 // exports
 
@@ -4353,7 +4563,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.user-reply-avatar[data-v-407187b8]{\n    float: left;\n    margin: 5px 10px 10px  0px;\n}\n.user-reply-details[data-v-407187b8]{\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.comment-box[data-v-407187b8]{\n    padding: 5px 20px 5px 20px;\n    background-color: whitesmoke;\n}\n.comment-list[data-v-407187b8]{\n    padding: 0px !important;\n}\n.reply-box[data-v-407187b8]{\n    padding: 5px;\n}\n.reply-textarea[data-v-407187b8]{\n    width: 475px;\n}\n.reply-button[data-v-407187b8]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n", ""]);
+exports.push([module.i, "\n.user-reply-avatar[data-v-407187b8]{\r\n    float: left;\r\n    margin: 5px 10px 10px  0px;\n}\n.user-reply-details[data-v-407187b8]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.comment-box[data-v-407187b8]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-407187b8]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-407187b8]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-407187b8]{\r\n    width: 475px;\n}\n.reply-button[data-v-407187b8]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n", ""]);
 
 // exports
 
@@ -4391,7 +4601,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.card[data-v-6fe18546]{\r\n    padding: 0px !important;\n}\n.user-comment-avatar[data-v-6fe18546]{\r\n    float: left;\r\n    margin: 5px 10px 10px  0px;\n}\n.user-comment-details[data-v-6fe18546]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.comment-box[data-v-6fe18546]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-6fe18546]{\r\n    padding: 0px !important;\n}\n.comment-textarea[data-v-6fe18546]{\r\n    width: 475px;\n}\n.comment-button[data-v-6fe18546]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n", ""]);
 
 // exports
 
@@ -4410,7 +4620,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\n}\n.user-details[data-v-48d810f3]{\n    display: block;\n    width: auto;\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\n    font-size: 18px;\n    font-weight: 500;\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\n    padding: 5px 20px 5px 20px;\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\n    width: 100%;\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\n    max-width: 300px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -4429,7 +4639,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-b3c25550]{\n    margin-top: 5px;\n}\n.notifications-header[data-v-b3c25550]{\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-b3c25550]{\r\n    margin-top: 5px;\n}\n.notifications-header[data-v-b3c25550]{\r\n    padding: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -4448,7 +4658,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.profile-top[data-v-7448c399]{\n    border-radius: 0px 0px 5px 5px !important;\n\n    background-color: white;\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\n    width: auto;\n    height: 352px;\n    background-color: azure;\n}\n.user-img[data-v-7448c399]{\n    position: absolute;\n    width: 170px;\n\n    margin-top: 295px;\n    margin-left: 60px;\n\n    border: 5px solid white;\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\n    margin-left: 291px;\n    padding-top: 352px;\n}\n.name[data-v-7448c399]{\n    font-size: 26px;\n    font-weight: 600;\n    color: #17233d;\n    display: block;\n}\n.username[data-v-7448c399]{\n    font-size: 16px;\n    color: gray;\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\n    float: right;\n    margin-right: 60px;\n}\n.profile-menu ul li[data-v-7448c399]{\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\n    display: block;\n}\n.menu-title[data-v-7448c399]{\n    font-weight: 600;\n    color: #657786;\n}\n.counts[data-v-7448c399]{\n    color: #765d69;\n    text-align: center;\n    font-size: 20px;\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\n    font-size: 14px;\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.profile-top[data-v-7448c399]{\r\n    border-radius: 0px 0px 5px 5px !important;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 352px;\r\n    background-color: azure;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 295px;\r\n    margin-left: 60px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 352px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -4524,7 +4734,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-63fde0fe]{\nbackground-color: white;\n}\n/* USER BANNER */\n.user-banner[data-v-63fde0fe]{\n    height: 85px;\n    background-color: aquamarine;\n    border: 1px solid white;\n    border-radius: 5px;\n}\n.user-img[data-v-63fde0fe]{\n    position: absolute;\n    width: 70px;\n\n    margin-top: 55px;\n    margin-left: 20px;\n\n    border: 3px solid white;\n    border-radius: 50%;\n}\n.user-field[data-v-63fde0fe]{\n    margin-left: 110px;\n    padding-top: 85px;\n}\n.name[data-v-63fde0fe]{\n    max-width: 200px;\n    max-height: 26px;\n    overflow: hidden !important;\n}\n.name a[data-v-63fde0fe]{\n    font-size: 18px;\n    font-weight: 600;\n    color: #17233d;\n}\n.username[data-v-63fde0fe]{\n    font-size: 13px;\n    color: gray;\n}\n/* USER STATS */\n.user-stats[data-v-63fde0fe]{\n    background-color: white;\n    padding-top: 55px;\n}\n.user-stats ul[data-v-63fde0fe]{\n    margin-left: 15px;\n    margin-top: 5px;\n}\n.user-stats li[data-v-63fde0fe]{\n    margin: 10px;\n    font-weight: 600;\n}\n.span[data-v-63fde0fe]{\n    display:block;\n}\n.stats-name[data-v-63fde0fe]{\n    color: #657786;\n}\n.stats-counts[data-v-63fde0fe]{\n    color: #765d69;\n    text-align: center;\n    font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-63fde0fe]{\r\nbackground-color: white;\n}\r\n/* USER BANNER */\n.user-banner[data-v-63fde0fe]{\r\n    height: 85px;\r\n    background-color: aquamarine;\r\n    border: 1px solid white;\r\n    border-radius: 5px;\n}\n.user-img[data-v-63fde0fe]{\r\n    position: absolute;\r\n    width: 70px;\r\n\r\n    margin-top: 55px;\r\n    margin-left: 20px;\r\n\r\n    border: 3px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-63fde0fe]{\r\n    margin-left: 110px;\r\n    padding-top: 85px;\n}\n.name[data-v-63fde0fe]{\r\n    max-width: 200px;\r\n    max-height: 26px;\r\n    overflow: hidden !important;\n}\n.name a[data-v-63fde0fe]{\r\n    font-size: 18px;\r\n    font-weight: 600;\r\n    color: #17233d;\n}\n.username[data-v-63fde0fe]{\r\n    font-size: 13px;\r\n    color: gray;\n}\r\n/* USER STATS */\n.user-stats[data-v-63fde0fe]{\r\n    background-color: white;\r\n    padding-top: 55px;\n}\n.user-stats ul[data-v-63fde0fe]{\r\n    margin-left: 15px;\r\n    margin-top: 5px;\n}\n.user-stats li[data-v-63fde0fe]{\r\n    margin: 10px;\r\n    font-weight: 600;\n}\n.span[data-v-63fde0fe]{\r\n    display:block;\n}\n.stats-name[data-v-63fde0fe]{\r\n    color: #657786;\n}\n.stats-counts[data-v-63fde0fe]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -4543,7 +4753,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-740e7432]{\n    width: 900px;\n}\n.title[data-v-740e7432]{\n    font-size: 21px;\n    font-weight: 600;\n    margin: 15px;\n}\n.followers-banner[data-v-740e7432]{\n    width: auto;\n    height: 83px;\n    background-color: aliceblue;\n\n    border-width: 5px;\n    border-style: solid;\n    border-color: transparent;\n    border-radius: 5px;\n}\n.followers-img[data-v-740e7432]{\n    width: 65px;\n    border-radius: 50%;\n    border: 3px solid white;\n\n    position: absolute;\n    margin-top: 40px;\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\n    padding-top: 58px;\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\n    font-weight: 600;\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\n    height: 150px;\n    padding: 30px;\n}\n.description[data-v-740e7432]{\n    max-width: 230px;\n    min-width: 230px;\n\n    text-align: center;\n}\n.button[data-v-740e7432]{\n    width: 200px;\n    margin: 13px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-740e7432]{\r\n    width: 900px;\n}\n.title[data-v-740e7432]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.followers-banner[data-v-740e7432]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.followers-img[data-v-740e7432]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n\r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.followers-field[data-v-740e7432]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.followers-field .name[data-v-740e7432]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.followers-field .username[data-v-740e7432]{\r\n    color: grey;\n}\n.followers-body[data-v-740e7432]{\r\n    height: 150px;\r\n    padding: 30px;\n}\n.description[data-v-740e7432]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n\r\n    text-align: center;\n}\n.button[data-v-740e7432]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -4562,7 +4772,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-dbd5933a]{\n    width: 900px;\n}\n.title[data-v-dbd5933a]{\n    font-size: 21px;\n    font-weight: 600;\n    margin: 15px;\n}\n.following-banner[data-v-dbd5933a]{\n    width: auto;\n    height: 83px;\n    background-color: aliceblue;\n\n    border-width: 5px;\n    border-style: solid;\n    border-color: transparent;\n    border-radius: 5px;\n}\n.following-img[data-v-dbd5933a]{\n    width: 65px;\n    border-radius: 50%;\n    border: 3px solid white;\n\n    position: absolute;\n    margin-top: 40px;\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\n    padding-top: 58px;\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\n    font-weight: 600;\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\n    height: 150px;\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\n    max-width: 230px;\n    min-width: 230px;\n\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\n    width: 200px;\n    margin: 13px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-dbd5933a]{\r\n    width: 900px;\n}\n.title[data-v-dbd5933a]{\r\n    font-size: 21px;\r\n    font-weight: 600;\r\n    margin: 15px;\n}\n.following-banner[data-v-dbd5933a]{\r\n    width: auto;\r\n    height: 83px;\r\n    background-color: aliceblue;\r\n\r\n    border-width: 5px;\r\n    border-style: solid;\r\n    border-color: transparent;\r\n    border-radius: 5px;\n}\n.following-img[data-v-dbd5933a]{\r\n    width: 65px;\r\n    border-radius: 50%;\r\n    border: 3px solid white;\r\n\r\n    position: absolute;\r\n    margin-top: 40px;\r\n    margin-left: 10px;\n}\n.following-field[data-v-dbd5933a]{\r\n    padding-top: 58px;\r\n    padding-left: 85px;\n}\n.following-field .name[data-v-dbd5933a]{\r\n    font-weight: 600;\r\n    font-size: 17px;\n}\n.following-field .username[data-v-dbd5933a]{\r\n    color: grey;\n}\n.following-body[data-v-dbd5933a]{\r\n    height: 150px;\r\n    padding: 30px;\n}\n.description[data-v-dbd5933a]{\r\n    max-width: 230px;\r\n    min-width: 230px;\r\n\r\n    text-align: center;\n}\n.button[data-v-dbd5933a]{\r\n    width: 200px;\r\n    margin: 13px;\n}\r\n", ""]);
 
 // exports
 
@@ -4600,7 +4810,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\n    padding: 10px;\n}\n.woof-body[data-v-04ee7ef6]{\n    padding: 5px;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\n    float: left;\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\n    float: left;\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\n    margin-left: 57px;\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\n    margin-right: 20px;\n    color: #808695;\n}\n", ""]);
+exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\n}\n.woof-dropdown[data-v-04ee7ef6]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\n.whole-woof[data-v-04ee7ef6]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n/* WOOF ACTIONS */\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -4619,7 +4829,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-68b0650a]{\n    margin: 5px;\n    width: 100% !important;\n}\n.settings-header[data-v-68b0650a]{\n    padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-68b0650a]{\r\n    margin: 5px;\r\n    width: 100% !important;\n}\n.settings-header[data-v-68b0650a]{\r\n    padding: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -4638,7 +4848,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.user-description[data-v-61a3818b]{\n    padding: 40px 25px 20px 25px;\n    margin-bottom: 10px;\n}\n.description[data-v-61a3818b]{\n    font-size: 13px;\n    margin-bottom: 20px;\n}\n.description-list[data-v-61a3818b]{\n    margin-bottom: 6px;\n}\n.input[data-v-61a3818b]{\n    margin: 5px;\n}\n.button[data-v-61a3818b] {\n    margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.user-description[data-v-61a3818b]{\r\n    padding: 40px 25px 20px 25px;\r\n    margin-bottom: 10px;\n}\n.description[data-v-61a3818b]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\n}\n.description-list[data-v-61a3818b]{\r\n    margin-bottom: 6px;\n}\n.input[data-v-61a3818b]{\r\n    margin: 5px;\n}\n.button[data-v-61a3818b] {\r\n    margin-top: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -4676,7 +4886,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.content[data-v-a0750864]{\n}\n.input[data-v-a0750864]{\n    width: 250px;\n    margin: 5px;\n    display: block;\n}\n.form-item[data-v-a0750864]{\n    margin-bottom: 10px !important;\n}\n.button[data-v-a0750864]{\n    margin-top: 20px;\n    width: 250px;\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-a0750864]{\n}\n.input[data-v-a0750864]{\r\n    width: 250px;\r\n    margin: 5px;\r\n    display: block;\n}\n.form-item[data-v-a0750864]{\r\n    margin-bottom: 10px !important;\n}\n.button[data-v-a0750864]{\r\n    margin-top: 20px;\r\n    width: 250px;\n}\r\n", ""]);
 
 // exports
 
@@ -4695,7 +4905,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\n    background-color: white;\n    padding: 5px;\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\n    float: right;\n    margin-right: 10px;\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\n    margin: 5px;\n    margin-left: 5px !important;\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\n    width: 100%;\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\n    width: 90px;\n    float: right;\n    margin-top: 15px;\n    font-weight: 600;\n\n    color: #765d69;\n}\n\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\n    background: white;\n}\n.woof-body[data-v-0338a699]{\n    padding: 5px;\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\n    float: left;\n    margin: 10px 10px 10px  0px;\n}\n.user-woof-details[data-v-0338a699]{\n    width: 100%;\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\n    margin-left: 50px;\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-0338a699]{\n    color: #808695;\n}\n.woof-actions div[data-v-0338a699]{\n    float: left;\n    width: 70px;\n    height: 23px;\n    display: block;\n}\n.whole-woof[data-v-0338a699]:hover{\n    background-color: rgba(240, 234, 234, 0.20);\n}\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\n    margin-left: 60px;\n}\n\n/* ICON */\n.icon_comment:hover .a[data-v-0338a699]{\n    font-weight: 600;\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-0338a699]{\n    font-weight: 600;\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-0338a699]{\n    font-weight: 600;\n    color: #db5353;\n}\n\n\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\n    transition: opacity .5s;\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px 10px 10px  0px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-0338a699]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-0338a699]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-0338a699]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -4714,7 +4924,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.container[data-v-d71bd506]{\n    padding: 10px 20px;\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\n    color: #765D69;\n    font-size: 14px;\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\n    color: #afb2b8;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-d71bd506]{\r\n    padding: 10px 20px;\r\n    background-color: white;\n}\n.trending-list ul li[data-v-d71bd506]{\r\n    margin-bottom: 10px;\n}\n.trending_title[data-v-d71bd506]{\r\n    color: #765D69;\r\n    font-size: 14px;\r\n    font-weight: 600;\n}\n.trending_tweet_counts[data-v-d71bd506]{\r\n    color: #afb2b8;\n}\r\n", ""]);
 
 // exports
 
@@ -4733,7 +4943,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.user-description[data-v-779775ee]{\n    padding: 40px 25px 20px 25px;\n    margin-bottom: 10px;\n}\n.description[data-v-779775ee]{\n    font-size: 13px;\n    margin-bottom: 20px;\n\n    align-content: center;\n    text-align: center;\n}\n.description-list[data-v-779775ee]{\n    margin-bottom: 6px;\n}\n", ""]);
+exports.push([module.i, "\n.user-description[data-v-779775ee]{\r\n    padding: 40px 25px 20px 25px;\r\n    margin-bottom: 10px;\n}\n.description[data-v-779775ee]{\r\n    font-size: 13px;\r\n    margin-bottom: 20px;\r\n\r\n    align-content: center;\r\n    text-align: center;\n}\n.description-list[data-v-779775ee]{\r\n    margin-bottom: 6px;\n}\r\n", ""]);
 
 // exports
 
@@ -67011,6 +67221,14 @@ var render = function() {
       _c(
         "Modal",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.show(),
+              expression: "show()"
+            }
+          ],
           attrs: { title: "", "footer-hide": "", width: "600" },
           on: { "on-cancel": _vm.woofChange },
           model: {
@@ -67057,7 +67275,7 @@ var render = function() {
         "Card",
         {
           attrs: {
-            title: "Reply to " + _vm.CommentData.user.fullname,
+            title: "Reply to " + _vm.SelectedWoofData.user.fullname,
             "dis-hover": "",
             bordered: false
           }
@@ -67085,19 +67303,19 @@ var render = function() {
                       "font-weight": "600",
                       color: "black"
                     },
-                    attrs: { href: "/" + _vm.CommentData.user.username }
+                    attrs: { href: "/" + _vm.SelectedWoofData.user.username }
                   },
-                  [_vm._v(_vm._s(_vm.CommentData.user.fullname))]
+                  [_vm._v(_vm._s(_vm.SelectedWoofData.user.fullname))]
                 ),
                 _vm._v(" "),
                 _c("span", { staticStyle: { color: "grey" } }, [
-                  _vm._v("@" + _vm._s(_vm.CommentData.user.username))
+                  _vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))
                 ]),
                 _vm._v(" "),
                 _c("div", { staticStyle: { "font-size": "13px" } }, [
                   _vm._v(
                     "\n                        " +
-                      _vm._s(_vm.CommentData.text) +
+                      _vm._s(_vm.SelectedWoofData.text) +
                       "\n                    "
                   )
                 ])
@@ -67117,7 +67335,9 @@ var render = function() {
                 { staticStyle: { "padding-left": "49px", color: "grey" } },
                 [
                   _vm._v("replying to "),
-                  _c("a", [_vm._v("@" + _vm._s(_vm.CommentData.user.username))])
+                  _c("a", [
+                    _vm._v("@" + _vm._s(_vm.SelectedWoofData.user.username))
+                  ])
                 ]
               )
             : _vm._e(),
@@ -67183,8 +67403,8 @@ var render = function() {
                             click: function($event) {
                               $event.preventDefault()
                               _vm.send_reply(
-                                _vm.CommentData.id,
-                                _vm.CommentData.user.username
+                                _vm.SelectedWoofData.id,
+                                _vm.SelectedWoofData.user.username
                               )
                             }
                           }
@@ -67451,7 +67671,162 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("Card", { attrs: { "dis-hover": "", bordered: false } })],
+    [
+      _c(
+        "Card",
+        {
+          staticClass: "card",
+          attrs: {
+            title: "Rewoof " + _vm.ReWoofData.user.fullname + "'s Post",
+            "dis-hover": "",
+            bordered: false,
+            padding: 0
+          }
+        },
+        [
+          _c("div", { staticClass: "comments-box" }, [
+            _c("div", { staticClass: "comment-box" }, [
+              _c("ul", { staticClass: "row" }, [
+                _c(
+                  "li",
+                  [
+                    _c("Avatar", {
+                      staticClass: "avatar",
+                      attrs: { icon: "ios-person" }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "comment-box-middle",
+                    staticStyle: { "margin-left": "10px", "margin-top": "1px" }
+                  },
+                  [
+                    _c("Input", {
+                      staticClass: "comment-textarea",
+                      attrs: {
+                        type: "textarea",
+                        maxlength: 145,
+                        placeholder: "Add Comment...",
+                        autosize: { minRows: 1, maxRows: 5 }
+                      },
+                      on: {
+                        "on-change": function($event) {
+                          _vm.count()
+                        },
+                        "on-blur": function($event) {
+                          _vm.onBlur()
+                        },
+                        "on-focus": function($event) {
+                          _vm.onFocus()
+                        }
+                      },
+                      model: {
+                        value: _vm.ReWoofDetails.comment,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ReWoofDetails, "comment", $$v)
+                        },
+                        expression: "ReWoofDetails.comment"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.focused
+                      ? _c(
+                          "Button",
+                          {
+                            staticClass: "comment-button",
+                            attrs: {
+                              shape: "circle",
+                              disabled: _vm.comment_length == 0
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.send_rewoof(
+                                  _vm.ReWoofData.id,
+                                  _vm.ReWoofData.user.username
+                                )
+                              }
+                            }
+                          },
+                          [_vm._v("ReWoof")]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticStyle: { "margin-right": "10px", "margin-top": "7px" }
+                  },
+                  [
+                    _c("i-circle", {
+                      staticClass: "comment-counter",
+                      attrs: {
+                        percent: _vm.percent,
+                        "stroke-color": "#765d69",
+                        size: 25
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("Card", [
+            _c("ul", { staticClass: "row" }, [
+              _c(
+                "li",
+                [
+                  _c("Avatar", {
+                    staticClass: "user-comment-avatar",
+                    attrs: { icon: "ios-person", size: "large" }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("li", [
+                _c("div", { staticClass: "user-comment-details left" }, [
+                  _c(
+                    "a",
+                    {
+                      staticStyle: {
+                        "font-size": "14px",
+                        "font-weight": "600",
+                        color: "black"
+                      },
+                      attrs: { href: "/" + _vm.ReWoofData.user.username }
+                    },
+                    [_vm._v(_vm._s(_vm.ReWoofData.user.fullname))]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticStyle: { color: "grey" } }, [
+                    _vm._v("@" + _vm._s(_vm.ReWoofData.user.username))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticStyle: { "font-size": "13px" } }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.ReWoofData.text) +
+                        "\n                        "
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ],
+        1
+      )
+    ],
     1
   )
 }
@@ -67599,7 +67974,10 @@ var render = function() {
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              _vm.send_reply(_vm.SelectedWoofData.id)
+                              _vm.send_reply(
+                                _vm.SelectedWoofData.id,
+                                _vm.SelectedWoofData.user.username
+                              )
                             }
                           }
                         },
@@ -67853,7 +68231,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(this.$root.UserDetails.woof_counts))
+                      _vm._v(_vm._s(_vm.data().woof_counts))
                     ])
                   ]
                 )
@@ -68360,7 +68738,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "span stats-counts" }, [
-                    _vm._v("120")
+                    _vm._v(_vm._s(_vm.UserData.woof_counts))
                   ])
                 ]
               )
@@ -68831,207 +69209,363 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c(
-      "div",
-      { staticClass: "box middle-box left white woofr-border" },
-      [
-        _c(
-          "div",
-          { staticClass: "woofs-header" },
-          [
-            _c(
-              "ButtonGroup",
-              [
-                _c("Button", { attrs: { size: "large", to: "#" } }, [
-                  _vm._v("Woofs")
-                ]),
-                _vm._v(" "),
-                _c("Button", { attrs: { size: "large", to: "#" } }, [
-                  _vm._v("Media")
-                ])
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("Divider", { staticStyle: { margin: "5px 0px" } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "woof-list" }, [
+  return _c(
+    "div",
+    { staticClass: "content" },
+    [
+      _c(
+        "div",
+        { staticClass: "box middle-box left white woofr-border" },
+        [
           _c(
-            "ul",
-            _vm._l(_vm.UserWoofs, function(woof, index) {
-              return _c(
-                "li",
-                { key: woof.id },
+            "div",
+            { staticClass: "woofs-header" },
+            [
+              _c(
+                "ButtonGroup",
                 [
-                  _c("div", { staticClass: "woof-body" }, [
-                    _c("ul", { staticClass: "row" }, [
-                      _c(
-                        "li",
-                        [
-                          _c("Avatar", {
-                            staticClass: "user-woof-avatar",
-                            attrs: { icon: "ios-person", size: "large" }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("li", [
+                  _c("Button", { attrs: { size: "large", to: "#" } }, [
+                    _vm._v("Woofs")
+                  ]),
+                  _vm._v(" "),
+                  _c("Button", { attrs: { size: "large", to: "#" } }, [
+                    _vm._v("Comments")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("Divider", { staticStyle: { margin: "5px 0px" } }),
+          _vm._v(" "),
+          _c("div", { staticClass: "woof-list" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.UserWoofs, function(woof) {
+                return _c(
+                  "li",
+                  { key: woof.id, staticClass: "whole-woof" },
+                  [
+                    _c(
+                      "Dropdown",
+                      {
+                        staticClass: "woof-dropdown",
+                        attrs: { trigger: "click", placement: "bottom-end" }
+                      },
+                      [
                         _c(
-                          "div",
-                          { staticClass: "user-woof-details" },
+                          "a",
+                          { attrs: { href: "javascript:void(0)" } },
+                          [
+                            _c("Icon", {
+                              attrs: {
+                                type: "ios-arrow-down",
+                                size: "18",
+                                color: "#765d69"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "DropdownMenu",
+                          { attrs: { slot: "list" }, slot: "list" },
                           [
                             _c(
-                              "router-link",
+                              "a",
                               {
-                                staticStyle: {
-                                  "font-size": "14px",
-                                  "font-weight": "600",
-                                  color: "black"
-                                },
-                                attrs: { to: "/" + woof.user.username }
+                                on: {
+                                  click: function($event) {
+                                    _vm.delete_woof(woof.id)
+                                  }
+                                }
                               },
-                              [_vm._v(_vm._s(woof.user.fullname))]
+                              [
+                                _vm.myWoof(woof.user.id)
+                                  ? _c("DropdownItem", [_vm._v("Delete Woof")])
+                                  : _vm._e()
+                              ],
+                              1
                             ),
                             _vm._v(" "),
-                            _c("span", { staticStyle: { color: "grey" } }, [
-                              _vm._v("@" + _vm._s(woof.user.username))
-                            ]),
+                            !_vm.myWoof(woof.user.id)
+                              ? _c("Divider", {
+                                  staticStyle: { margin: "3px 0px" }
+                                })
+                              : _vm._e(),
                             _vm._v(" "),
                             _c(
-                              "div",
-                              { staticStyle: { "font-size": "13px" } },
+                              "a",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.direct_message(woof.user.id)
+                                  }
+                                }
+                              },
                               [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(woof.text) +
-                                    "\n                                    "
-                                )
-                              ]
+                                !_vm.myWoof(woof.user.id)
+                                  ? _c("DropdownItem", [
+                                      _vm._v("Direct Message "),
+                                      _c("a", [
+                                        _vm._v("@" + _vm._s(woof.user.username))
+                                      ])
+                                    ])
+                                  : _vm._e()
+                              ],
+                              1
                             )
                           ],
                           1
                         )
-                      ])
-                    ]),
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "woof-actions" }, [
-                      _c(
-                        "a",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.comment()
-                            }
+                    _c(
+                      "div",
+                      {
+                        staticClass: "woof-body",
+                        on: {
+                          click: function($event) {
+                            _vm.open(woof.id)
                           }
-                        },
-                        [
-                          _c("Icon", {
-                            attrs: { type: "ios-text-outline", size: "24" }
-                          }),
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(woof.comment_counts) +
-                              "\n                            "
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.reWoof()
-                            }
-                          }
-                        },
-                        [
-                          _c("Icon", {
-                            attrs: { type: "ios-repeat", size: "24" }
-                          }),
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(woof.rewoof_counts) +
-                              "\n                            "
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.like(index)
-                            }
-                          }
-                        },
-                        [
+                        }
+                      },
+                      [
+                        _c("ul", { staticClass: "row" }, [
                           _c(
-                            "transition",
-                            { attrs: { name: "bounce" } },
+                            "li",
                             [
-                              woof.liked
-                                ? _c("Icon", {
-                                    staticStyle: { position: "absolute" },
-                                    attrs: {
-                                      type: "ios-heart",
-                                      size: "24",
-                                      color: "#db5353"
-                                    }
-                                  })
-                                : _vm._e()
+                              _c("Avatar", {
+                                staticClass: "user-woof-avatar",
+                                attrs: { icon: "ios-person", size: "large" }
+                              })
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          !woof.liked
-                            ? _c("Icon", {
-                                attrs: { type: "ios-heart-outline", size: "24" }
-                              })
-                            : _vm._e(),
+                          _c("li", [
+                            _c(
+                              "div",
+                              { staticClass: "user-woof-details" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticStyle: {
+                                      "font-size": "14px",
+                                      "font-weight": "600",
+                                      color: "black"
+                                    },
+                                    attrs: { to: "/" + woof.user.username }
+                                  },
+                                  [_vm._v(_vm._s(woof.user.fullname))]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticStyle: { color: "grey" } }, [
+                                  _vm._v("@" + _vm._s(woof.user.username))
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticStyle: { "font-size": "13px" } },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(woof.text) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "woof-actions" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "icon_comment",
+                              on: {
+                                click: function($event) {
+                                  _vm.comment(woof.id)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                [
+                                  _c("Icon", {
+                                    staticClass: "a",
+                                    attrs: {
+                                      type: "ios-text-outline",
+                                      size: "24"
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(woof.comment_counts) +
+                                      "\n                            "
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
-                          woof.liked
-                            ? _c("span", {
-                                staticStyle: { "margin-left": "28px" }
-                              })
-                            : _vm._e(),
-                          _vm._v(
-                            _vm._s(woof.like_counts) +
-                              "\n                            "
+                          _c(
+                            "div",
+                            {
+                              staticClass: "icon_rewoof",
+                              on: {
+                                click: function($event) {
+                                  _vm.reWoof(_vm.woof_id)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                [
+                                  _c("Icon", {
+                                    staticClass: "b",
+                                    attrs: { type: "ios-repeat", size: "24" }
+                                  }),
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(woof.re_woof) +
+                                      "\n                            "
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "icon_like",
+                              on: {
+                                click: function($event) {
+                                  _vm.like(_vm.index)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                [
+                                  _c(
+                                    "transition",
+                                    { attrs: { name: "bounce" } },
+                                    [
+                                      woof.liked
+                                        ? _c("Icon", {
+                                            staticStyle: {
+                                              position: "absolute"
+                                            },
+                                            attrs: {
+                                              type: "ios-heart",
+                                              size: "24",
+                                              color: "#db5353"
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  !woof.liked
+                                    ? _c("Icon", {
+                                        staticClass: "c",
+                                        attrs: {
+                                          type: "ios-heart-outline",
+                                          size: "24"
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  woof.liked
+                                    ? _c("span", {
+                                        staticStyle: { "margin-left": "28px" }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(
+                                    _vm._s(woof.likes) +
+                                      "\n                            "
+                                  )
+                                ],
+                                1
+                              )
+                            ]
                           )
-                        ],
-                        1
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("Divider", { staticStyle: { margin: "0" } })
-                ],
-                1
-              )
-            }),
-            0
-          )
-        ])
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "box side-box left woofr-border" },
-      [_c("Trending")],
-      1
-    )
-  ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("Divider", { staticStyle: { margin: "0" } })
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "box side-box left woofr-border" },
+        [_c("Trending")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: { "footer-hide": "", width: "600" },
+          on: { "on-cancel": _vm.commentCancel },
+          model: {
+            value: this.root().CommentModal,
+            callback: function($$v) {
+              _vm.$set(this.root(), "CommentModal", $$v)
+            },
+            expression: "this.root().CommentModal"
+          }
+        },
+        [_c("Comments")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "Modal",
+        {
+          attrs: { "footer-hide": "", width: "600" },
+          on: { "on-cancel": _vm.rewoofCancel },
+          model: {
+            value: this.root().ReWoofModal,
+            callback: function($$v) {
+              _vm.$set(this.root(), "ReWoofModal", $$v)
+            },
+            expression: "this.root().ReWoofModal"
+          }
+        },
+        [_c("ReWoof")],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -69717,7 +70251,6 @@ var render = function() {
                   "div",
                   {
                     staticClass: "woof-body",
-                    staticStyle: { padding: "16px !important" },
                     on: {
                       click: function($event) {
                         _vm.open(woof.id)
@@ -69767,6 +70300,68 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
+                    woof.type == "rewoof"
+                      ? _c("Card", { attrs: { padding: 6 } }, [
+                          _c("ul", { staticClass: "row" }, [
+                            _c(
+                              "li",
+                              [
+                                _c("Avatar", {
+                                  staticClass: "user-woof-avatar",
+                                  attrs: { icon: "ios-person", size: "large" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("li", [
+                              _c(
+                                "div",
+                                { staticClass: "user-woof-details left" },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticStyle: {
+                                        "font-size": "14px",
+                                        "font-weight": "600",
+                                        color: "black"
+                                      },
+                                      attrs: {
+                                        href: "/" + woof.rewoof.user.username
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(woof.rewoof.user.fullname))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticStyle: { color: "grey" } },
+                                    [
+                                      _vm._v(
+                                        "@" + _vm._s(woof.rewoof.user.username)
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticStyle: { "font-size": "13px" } },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(woof.rewoof.text) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c("div", { staticClass: "woof-actions" }, [
                       _c(
                         "div",
@@ -69803,7 +70398,7 @@ var render = function() {
                           staticClass: "icon_rewoof",
                           on: {
                             click: function($event) {
-                              _vm.reWoof(_vm.woof_id)
+                              _vm.rewoof(woof.id)
                             }
                           }
                         },
@@ -69883,7 +70478,8 @@ var render = function() {
                         ]
                       )
                     ])
-                  ]
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c("Divider", { staticStyle: { margin: "0" } })
@@ -91431,6 +92027,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/rewoof.js":
+/*!************************************!*\
+  !*** ./resources/js/api/rewoof.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../router/index */ "./resources/js/router/index.js");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
+  Vue.rewoof = {
+    send: function send(context, data) {
+      axios.post('/api/rewoof/send', data, this.auth()).then(function (response) {
+        context.focused = false;
+        context.percent = 0;
+        context.comment_length = 0;
+        context.ReWoofDetails.reply = '', Vue.woof.selected(data.woof_id);
+        context.$Message.success("Successfully Rewoofed @".concat(data.username, "'s Post."));
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    set: function set(id) {
+      axios.get("/api/woof/selected/".concat(id), this.auth()).then(function (response) {
+        _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_REWOOF_DATA', response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    auth: function auth() {
+      return {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      };
+    }
+  };
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/user.js":
 /*!**********************************!*\
   !*** ./resources/js/api/user.js ***!
@@ -91531,10 +92172,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
   Vue.woof = {
     //WOOFS
-    send: function send(context, data) {
+    send_woof: function send_woof(context, data) {
       var _this = this;
 
-      axios.post('/api/woof/send', data, this.auth()).then(function (response) {
+      axios.post('/api/woof/send_woof', data, this.auth()).then(function (response) {
         _this.all();
 
         context.focused = false;
@@ -91545,16 +92186,26 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    delete: function _delete(context, id) {
+    send_rewoof: function send_rewoof(context, data) {
+      axios.post('/api/woof/send_rewoof', data, this.auth()).then(function (response) {
+        context.focused = false;
+        context.percent = 0;
+        context.comment_length = 0;
+        context.ReWoofDetails.reply = '', Vue.woof.selected(data.woof_id);
+        context.$Message.success("Successfully Rewoofed @".concat(data.username, "'s Post."));
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    send_comment: function send_comment(context, data) {
       var _this2 = this;
 
-      axios.post('/api/woof/delete', {
-        id: id
-      }, this.auth()).then(function (response) {
-        _this2.all();
-
-        context.$Message.success('Succefully Deleted!');
-        console.log(response.data);
+      axios.post('/api/woof/send_comment', data, this.auth()).then(function (response) {
+        context.focused = false;
+        context.percent = 0;
+        context.reply_length = 0;
+        context.CommentDetails.reply = '', _this2.selected(data.woof_id);
+        context.$Message.success("You successfully send a reply to @".concat(data.username));
       }).catch(function (error) {
         console.log(error);
       });
@@ -91562,6 +92213,20 @@ __webpack_require__.r(__webpack_exports__);
     selected: function selected(id) {
       axios.get("/api/woof/selected/".concat(id), this.auth()).then(function (response) {
         _store_index__WEBPACK_IMPORTED_MODULE_0__["default"].commit('SET_WOOF_SELECTED', response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    delete: function _delete(context, id) {
+      var _this3 = this;
+
+      axios.post('/api/woof/delete', {
+        id: id
+      }, this.auth()).then(function (response) {
+        _this3.all();
+
+        context.$Message.success('Succefully Deleted!');
+        console.log(response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -91628,6 +92293,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_api_user__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../js/api/user */ "./resources/js/api/user.js");
 /* harmony import */ var _js_api_woof__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../js/api/woof */ "./resources/js/api/woof.js");
 /* harmony import */ var _js_api_comment__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../js/api/comment */ "./resources/js/api/comment.js");
+/* harmony import */ var _js_api_rewoof__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../js/api/rewoof */ "./resources/js/api/rewoof.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
@@ -91669,11 +92335,13 @@ Vue.use(emoji_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
 
 
 
+
 Vue.use(_js_api_auth__WEBPACK_IMPORTED_MODULE_13__["default"]);
 Vue.use(_js_api_reset__WEBPACK_IMPORTED_MODULE_14__["default"]);
 Vue.use(_js_api_user__WEBPACK_IMPORTED_MODULE_15__["default"]);
 Vue.use(_js_api_woof__WEBPACK_IMPORTED_MODULE_16__["default"]);
 Vue.use(_js_api_comment__WEBPACK_IMPORTED_MODULE_17__["default"]);
+Vue.use(_js_api_rewoof__WEBPACK_IMPORTED_MODULE_18__["default"]);
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;
 var app = new Vue({
   el: '#app',
@@ -94787,8 +95455,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\peral\dev\woofr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\peral\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\David Peralta\dev\woofr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

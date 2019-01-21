@@ -35,7 +35,7 @@
                         </DropdownMenu>
                     </Dropdown>
 
-                    <div class="woof-body" @click="open(woof.id)" style="padding: 16px !important;">
+                    <div class="woof-body" @click="open(woof.id)">
                         <ul class="row" >
                             <!-- USER'S AVATAR -->
                             <li>
@@ -52,6 +52,25 @@
                                 </div>
                             </li>
                         </ul>
+                        <!-- REWOOF -->
+                        <Card v-if="woof.type == 'rewoof'" :padding="6">
+                            <ul class="row" >
+                                <!-- USER'S AVATAR -->
+                                <li>
+                                    <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
+                                </li>
+                                <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
+                                <li>
+                                    <div class="user-woof-details left">
+                                        <a :href="'/'+woof.rewoof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.rewoof.user.fullname}}</a>
+                                        <span style="color: grey;">@{{woof.rewoof.user.username}}</span>
+                                        <div style="font-size: 13px; ">
+                                            {{woof.rewoof.text}}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </Card>
 
                         <!-- WOOF ACTIONS -->
                         <div class="woof-actions">
@@ -63,7 +82,7 @@
                                 </a>
                             </div>
                             <!-- RE-WOOF ACTION -->
-                            <div @click="reWoof(woof_id)" class="icon_rewoof">
+                            <div @click="rewoof(woof.id)" class="icon_rewoof">
                                 <a>
                                     <Icon class="b" type="ios-repeat" size="24"/>
                                     {{woof.re_woof}}
@@ -112,6 +131,7 @@ export default {
             woof_length: 0,
             WoofDetails:{
                 Woof: '',
+                type: 'woof'
             },
         }
     },
@@ -136,7 +156,7 @@ export default {
         },
         // Sending Woofs
         send(){
-            Vue.woof.send(this, this.WoofDetails);
+            Vue.woof.send_woof(this, this.WoofDetails);
         },
         //to open the comment box
         comment(id){
@@ -146,19 +166,19 @@ export default {
         },
         //this will call when the comment modal is closed
         commentCancel(){
+            
             this.root().CommentModal = false
             Vue.woof.all();
         },
         //to open the rewoof box
-        reWoof(id){
+        rewoof(id){
+            this.root().ReWoofModal = false
             Vue.rewoof.set(id);
-            this.$root.ReWoofModal = true
+            this.root().ReWoofModal = true
         },
         //this will call when the rewoof modal is closed
         rewoofCancel(){
-            if(this.$root.ReWoofModal){
-                this.$root.ReWoofModal = false
-            }
+            this.root().ReWoofModal = false
             Vue.woof.all();
         },
         //to like a woof
@@ -176,13 +196,8 @@ export default {
         },
         //Open Woof Modal
         open(id){
-            if(this.$root.CommentModal != true){
-                Vue.woof.selected(id);
-                this.$root.WoofModal = true;
-            }else if(!this.$root.ReWoofModal != true){
-                Vue.woof.selected(id);
-                this.$root.WoofModal = true;
-            }
+            Vue.woof.selected(id, 'woof');
+            this.$root.WoofModal = true;
         },
         //To know if the woof is mine
         myWoof(user_id){
@@ -266,7 +281,7 @@ ul{
     background: white;
 }
 .woof-body{
-    padding: 5px;
+    padding: 16px !important;
     cursor: pointer;
 }
 .user-woof-avatar{

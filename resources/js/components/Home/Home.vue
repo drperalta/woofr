@@ -78,7 +78,7 @@
         <Modal v-model="modal" title="Direct Messages" footer-hide width="900">
             <Messages></Messages>
         </Modal>
-        <Modal v-model="this.$root.WoofModal" title="" footer-hide width="600" @on-cancel="woofChange">
+        <Modal v-model="this.$root.WoofModal" v-show="show()" title="" footer-hide width="600" @on-cancel="woofChange">
             <Woof></Woof>
         </Modal>
     </div>
@@ -126,6 +126,14 @@ export default {
                 this.$root.WoofModal = false
             }
             Vue.woof.all();
+        },
+        show(){
+            if(this.$root.CommentModal == true || this.$root.ReWoofModal == true){
+                this.$root.WoofModal = false
+                return false;
+            }else{
+                return true;
+            }
         }
     },
 

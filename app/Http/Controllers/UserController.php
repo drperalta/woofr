@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Woof;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -14,6 +15,7 @@ class UserController extends Controller
     protected function visited($username){
 
         $user = User::where('username', $username)->first();
+        $woof_counts = Woof::where('user_id', $user->id)->count();
 
         return response()->json([
             'id' => $user->id,
@@ -25,6 +27,7 @@ class UserController extends Controller
             'website' => $user->website,
             'birthdate' => $user->birthdate,
             'created_at' => $user->created_at,
+            'woof_counts' => $woof_counts
         ]);
     }
     protected function password(Request $request){

@@ -6,25 +6,48 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Woof;
 use App\User;
+use App\Comment;
 use App\Library\Comment as MyComment;
 use App\Library\User as MyUser;
+use App\Library\Woof as MyWoof;
 
 class WoofController extends Controller
 {
-    protected function send(Request $request){
+    protected function send_woof(Request $request){
 
         $user = $this->guard()->user();
 
-        $woof = Woof::create([
+        Woof::create([
             'user_id' => $user->id,
-            'text' => $request->Woof
+            'woof_id' => '',
+            'text' => $request->Woof,
+            'type' => $request->type
+        ]);
+    }
+    protected function send_rewoof(Request $request){
+
+        $user = $this->guard()->user();
+
+        Woof::create([
+            'user_id' => $user->id,
+            'woof_id' => $request->woof_id,
+            'text' => $request->comment,
+            'type' => $request->type
+        ]);
+    }
+    protected function send_comment(Request $request){
+
+        $user = $this->guard()->user();
+
+        Woof::create([
+            'user_id' => $user->id,
+            'woof_id' => $request->woof_id,
+            'text' => $request->reply,
+            'type' => $request->type
         ]);
 
-        return response()->json([
-            'message' => 'Woof posted!'
-        ], 201);
-
     }
+
     protected function delete(Request $request){
         $woof = Woof::where('id', $request->id);
         $woof->delete();
@@ -35,11 +58,13 @@ class WoofController extends Controller
 
     }
     protected function selected($woof_id){
+
         $user = new MyUser();
+        $rewoof = new MyWoof();
         $comments = new MyComment();
 
         $woof = Woof::where('id', $woof_id)->first();
-
+        
         $arr = array(
             'id' => $woof->id,
             'user_id' => $woof->user_id,
@@ -50,6 +75,8 @@ class WoofController extends Controller
             'created_at' => $woof->created_at,
             'updated_at' => $woof->updated_at,
             'user' => $user->all($woof->user_id),
+            'type' => $woof->type,
+            'rewoof' => $rewoof->get_rewoof($woof->woof_id),
             'comments' => $comments->all($woof->id,$woof->user_id)
         );
         return $arr;
@@ -58,10 +85,14 @@ class WoofController extends Controller
     protected function all(){
 
         $user = new MyUser();
-        $comments = new MyComment();
-        $woofs = Woof::orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
+        $rewoof = new MyWoof();
+
+        //$comments = new MyComment();
+
+        $woofs = Woof::where('type', 'woof')->orWhere('type', 'rewoof')->orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
 
         //$arrWoof = array($woofs);
+
         $woofList = array();
 
         foreach ($woofs as $woof) {
@@ -70,12 +101,14 @@ class WoofController extends Controller
                 'id' => $woof->id,
                 'user_id' => $woof->user_id,
                 'text' => $woof->text,
-                'comment_counts' => $comments->counts($woof->id),
+                'type' => $woof->type,
+                //'comment_counts' => $comments->counts($woof->id),
                 // 'rewoof_counts' =>
                 // 'like_counts' =>
                 'created_at' => $woof->created_at,
                 'updated_at' => $woof->updated_at,
                 'user' => $user->all($woof->user_id),
+                'rewoof' => $rewoof->get_rewoof($woof->woof_id),
 
             );
 

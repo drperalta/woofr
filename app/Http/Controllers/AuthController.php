@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Woof;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Hash;
 
@@ -128,6 +129,7 @@ class AuthController extends Controller
     public function user()
     {
         $user = $this->guard()->user();
+        $woof_counts = Woof::where('user_id', $user->id)->where('type', 'woof')->count();
 
         return response()->json([
             'id' => $user->id,
@@ -139,6 +141,7 @@ class AuthController extends Controller
             'website' => $user->website,
             'birthdate' => $user->birthdate,
             'created_at' => $user->created_at,
+            'woof_counts' => $woof_counts
         ]);
     }
 

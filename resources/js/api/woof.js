@@ -5,14 +5,52 @@ export default function(Vue){
     Vue.woof = {
 
         //WOOFS
-        send(context, data){
-            axios.post('/api/woof/send', data, this.auth())
+        send_woof(context, data){
+            axios.post('/api/woof/send_woof', data, this.auth())
             .then(response => {
                 this.all()
                 context.focused = false;
                 context.percent = 0;
                 context.woof_length = 0;
                 context.WoofDetails.Woof = '';
+
+                
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        send_rewoof(context, data){
+            axios.post('/api/woof/send_rewoof', data, this.auth())
+            .then(response => {
+                context.focused = false;
+                context.percent = 0;
+                context.comment_length = 0;
+                context.ReWoofDetails.reply = '',
+                
+                Vue.woof.selected(data.woof_id)
+                context.$Message.success(`Successfully Rewoofed @${data.username}'s Post.`)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        send_comment(context, data){
+            axios.post('/api/woof/send_comment', data, this.auth())
+            .then(response => {
+                context.focused = false;
+                context.percent = 0;
+                context.reply_length = 0;
+                context.CommentDetails.reply = '',
+                
+                this.selected(data.woof_id)
+                context.$Message.success(`You successfully send a reply to @${data.username}`)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        selected(id){
+            axios.get(`/api/woof/selected/${id}`, this.auth())
+            .then(response => {
+                store.commit('SET_WOOF_SELECTED', response.data)
             }).catch(error => {
                 console.log(error)
             })
@@ -27,14 +65,7 @@ export default function(Vue){
                 console.log(error)
             })
         },
-        selected(id){
-            axios.get(`/api/woof/selected/${id}`, this.auth())
-            .then(response => {
-                store.commit('SET_WOOF_SELECTED', response.data)
-            }).catch(error => {
-                console.log(error)
-            })
-        },
+        
         all(){
             axios.get(`/api/woof/all`, this.auth())
             .then(response => {

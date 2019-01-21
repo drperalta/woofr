@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Card :title="'Reply to '+ CommentData.user.fullname" dis-hover :bordered="false">
+        <Card :title="'Reply to '+ SelectedWoofData.user.fullname" dis-hover :bordered="false">
             <ul class="row" >
                 <!-- USER'S AVATAR -->
                 <li>
@@ -9,10 +9,10 @@
                 <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                 <li>
                     <div class="user-reply-details left">
-                        <a :href="'/'+CommentData.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{CommentData.user.fullname}}</a>
-                        <span style="color: grey;">@{{CommentData.user.username}}</span>
+                        <a :href="'/'+SelectedWoofData.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{SelectedWoofData.user.fullname}}</a>
+                        <span style="color: grey;">@{{SelectedWoofData.user.username}}</span>
                         <div style="font-size: 13px; ">
-                            {{CommentData.text}}
+                            {{SelectedWoofData.text}}
                         </div>
                     </div>
                 </li>
@@ -20,7 +20,7 @@
         </Card>
         <!-- COMMENT BOX -->
         <div class="comment-box" style="padding-top: 8px;">
-            <span v-if="focused" style="padding-left: 49px; color: grey;">replying to <a>@{{CommentData.user.username}}</a></span>
+            <span v-if="focused" style="padding-left: 49px; color: grey;">replying to <a>@{{SelectedWoofData.user.username}}</a></span>
             <div class="reply-box">
                 <ul class="row">
                     <li>
@@ -28,7 +28,7 @@
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
                         <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
-                        <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(CommentData.id, CommentData.user.username)">Reply</Button>
+                        <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(SelectedWoofData.id, SelectedWoofData.user.username)">Reply</Button>
                     </li>
                     <li style="margin-left: 10px; margin-top: 7px; ">
                         <i-circle class="reply-counter" :percent="percent" stroke-color="#765d69" :size="25"></i-circle>
@@ -51,12 +51,13 @@ export default {
             CommentDetails:{
                 woof_id: '',
                 reply:'',
-                username:''
+                username:'',
+                type: 'comment'
             }
         }
     },
     computed: mapGetters([
-        'CommentData'
+        'SelectedWoofData'
     ]),
     methods:{
         count(){
@@ -82,7 +83,7 @@ export default {
 
 
             if(this.CommentDetails.username != '' && this.CommentDetails.woof_id != ''){
-                Vue.comment.send(this,this.CommentDetails)
+                Vue.woof.send_comment(this,this.CommentDetails)
             }
         }
     }

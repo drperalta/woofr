@@ -24,7 +24,7 @@
                     </li>
                     <li class="reply-box-middle" style="margin-left: 10px; margin-top: 1px; ">
                         <Input class="reply-textarea" v-model="CommentDetails.reply" type="textarea" :maxlength="140" placeholder="What's happening..." @on-change="count()" @on-blur="onBlur()" @on-focus="onFocus()"  :autosize="{minRows: 1,maxRows: 5}"/>
-                        <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(SelectedWoofData.id)">Reply</Button>
+                        <Button class="reply-button" shape="circle" :disabled="reply_length == 0" v-if="focused" @click.prevent="send_reply(SelectedWoofData.id, SelectedWoofData.user.username)">Reply</Button>
                     </li>
                     <li style="margin-left: 10px; margin-top: 7px; ">
                         <i-circle class="reply-counter" :percent="percent" stroke-color="#765d69" :size="25"></i-circle>
@@ -67,7 +67,9 @@ export default {
             reply_length: 0,
             CommentDetails:{
                 woof_id: '',
-                reply:''
+                reply:'',
+                username:'',
+                type: 'comment'
             }
         }
     },
@@ -88,11 +90,15 @@ export default {
                 this.focused = false;
             }
         },
-        send_reply(woof_id){
+        send_reply(woof_id, username){
 
+            this.CommentDetails.username = username;
             this.CommentDetails.woof_id = woof_id;
 
-            Vue.comment.send(this,this.CommentDetails, true)
+
+            if(this.CommentDetails.username != '' && this.CommentDetails.woof_id != ''){
+                Vue.woof.send_comment(this,this.CommentDetails)
+            }
         }
     },
     computed: mapGetters([

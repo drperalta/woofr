@@ -19,7 +19,7 @@
                         <li>
                             <router-link class="item" :to="'/'+data().username">
                                 <span class="span menu-title">Woofs</span>
-                                <span class="span counts">{{this.$root.UserDetails.woof_counts}}</span>
+                                <span class="span counts">{{data().woof_counts}}</span>
                             </router-link>
                         </li>
                         <li>

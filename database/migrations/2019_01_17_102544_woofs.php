@@ -16,7 +16,9 @@ class Woofs extends Migration
         Schema::create('woofs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id'); //->references('id')->on('users')->onDelete('cascade');
+            $table->string('woof_id');
             $table->string('text')->index();
+            $table->string('type');
             $table->timestamps();
             $table->softDeletes();
         });

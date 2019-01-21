@@ -15,6 +15,8 @@ class Woof extends Model
      */
     protected $fillable = [
         'user_id',
+        'woof_id',
         'text',
+        'type'
     ];
 }

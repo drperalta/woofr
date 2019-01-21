@@ -43,12 +43,14 @@ import Reset from '../js/api/reset'
 import User from '../js/api/user'
 import Woof from '../js/api/woof'
 import Comment from '../js/api/comment'
+import ReWoof from '../js/api/rewoof'
 
 Vue.use(Auth)
 Vue.use(Reset)
 Vue.use(User)
 Vue.use(Woof)
 Vue.use(Comment)
+Vue.use(ReWoof)
 
 
 window.axios=axios

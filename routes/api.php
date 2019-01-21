@@ -53,23 +53,22 @@ Route::group([ 'prefix' => 'user' ], function()
 //WOOFS
 Route::group(['middleware' => 'auth:api', 'prefix' => 'woof'], function(){
 
-    Route::post('send', 'WoofController@send');
+    Route::post('send_woof', 'WoofController@send_woof');
+    Route::post('send_rewoof', 'WoofController@send_rewoof');
+    Route::post('send_comment', 'WoofController@send_comment');
+
     Route::post('delete', 'WoofController@delete');
+
     Route::get('selected/{woof_id}', 'WoofController@selected');
+
+    Route::get('selected_rewoof/{woof_id}', 'WoofController@selected_rewoof');
+    Route::get('selected_comment/{woof_id}', 'WoofController@selected_comment');
+
     Route::get('all', 'WoofController@all');
+    
     Route::get('my_woofs/{id}', 'WoofController@my_woofs');
 
 });
-//WOOFS
-Route::group(['middleware' => 'auth:api', 'prefix' => 'comment'], function(){
-
-    Route::post('send', 'CommentController@send');
-    Route::post('delete', 'CommentController@delete');
-    Route::get('selected/{woof_id}', 'CommentController@selected');
-    Route::get('all', 'CommentController@all');
-
-});
-
 
 // PASSWORD RESET ROUTES
 Route::group([ 'middleware' => 'api', 'prefix' => 'password'], function ()

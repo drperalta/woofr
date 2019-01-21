@@ -16,7 +16,9 @@ class WoofSeeder extends Seeder
         $faker = Faker::create();
         DB::table('woofs')->insert([
             'user_id' => $faker->numberBetween($min = 1 , $max = 10),
+            'woof_id' => '',
             'text' => $faker->text($maxNbChars = 140),
+            'type' => 'woof',
             'created_at' => $faker->dateTime($max = 'now', $timezone = null),
             'updated_at' => $faker->dateTime($max = 'now', $timezone = null)
         ]);

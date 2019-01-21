@@ -19,6 +19,7 @@ class Comments extends Migration
             $table->integer('woof_id');
             $table->string('text');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

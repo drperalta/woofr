@@ -23,7 +23,7 @@
                     <li>
                         <router-link :to="'/'+UserData.username">
                             <span class="span stats-name">Woofs</span>
-                            <span class="span stats-counts">120</span>
+                            <span class="span stats-counts">{{UserData.woof_counts}}</span>
                         </router-link>
                     </li>
                     <!-- FOLLOWING -->
