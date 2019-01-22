@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use App\User;
 use App\Woof;
 use Illuminate\Support\Facades\Hash;
+use App\Library\Following as MyFollowing;
+use App\Following;
+use App\Like;
 
 class UserController extends Controller
 {
@@ -16,7 +19,11 @@ class UserController extends Controller
 
         $user = User::where('username', $username)->first();
         $woof_counts = Woof::where('user_id', $user->id)->count();
-
+        $following = new MyFollowing();
+        $following_counts = Following::where('following_id', $user->id)->count();
+        $followers_counts = Following::where('user_id', $user->id)->count();
+        $like_counts = Like::where('user_id', $user->id)->count();
+        
         return response()->json([
             'id' => $user->id,
             'fullname' => $user->fullname,
@@ -27,7 +34,11 @@ class UserController extends Controller
             'website' => $user->website,
             'birthdate' => $user->birthdate,
             'created_at' => $user->created_at,
-            'woof_counts' => $woof_counts
+            'woof_counts' => $woof_counts,
+            'following_counts' => $following_counts,
+            'follower_counts' => $followers_counts,
+            'like_counts' => $like_counts,
+            'following' => $following->check($this->guard()->user()->id, $user->id),
         ]);
     }
     protected function password(Request $request){

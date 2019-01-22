@@ -30,14 +30,14 @@
                     <li>
                         <router-link :to="'/'+UserData.username+'/following'">
                             <span class="span stats-name">Following</span>
-                            <span class="span stats-counts">210</span>
+                            <span class="span stats-counts">{{UserData.following_counts}}</span>
                         </router-link>
                     </li>
                     <!-- FOLLOWERS -->
                     <li>
                         <router-link :to="'/'+UserData.username+'/followers'">
                             <span class="span stats-name">Followers</span>
-                            <span class="span stats-counts">400</span>
+                            <span class="span stats-counts">{{UserData.follower_counts}}</span>
                         </router-link>
                     </li>
                 </ul>

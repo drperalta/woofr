@@ -68,6 +68,22 @@ export default function(Vue){
                 context.disabled = true;
             })
         },
+        follow(data){
+            axios.post('/api/user/follow',data, this.auth())
+            .then(response => {
+                this.setVisitedUser(data.username)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        unfollow(data){
+            axios.post('/api/user/unfollow',data, this.auth())
+            .then(response => {
+                this.setVisitedUser(data.username)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
 
         auth(){
             return { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } }

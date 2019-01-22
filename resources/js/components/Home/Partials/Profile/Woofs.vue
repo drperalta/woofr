@@ -40,6 +40,27 @@
                                         <span style="color: grey;">@{{woof.user.username}}</span>
                                         <div style="font-size: 13px; ">
                                             {{woof.text}}
+                                            <span v-if="(UserData.username == woof.user.username) && (woof.text == '') " style="color: grey;"><Icon type="md-repeat" />You Rewoofed</span>
+                                            <span v-if="(UserData.username != woof.user.username) && (woof.rewoof != null)" style="color: grey;"><Icon type="md-repeat" />{{ woof.user.fullname }} rewoofed</span>
+                                            <!-- REWOOF -->
+                                            <Card v-if="woof.type == 'rewoof'" :padding="16" style="min-width: 474px !important;">
+                                                <ul class="row" >
+                                                    <!-- USER'S AVATAR -->
+                                                    <li>
+                                                        <Avatar class="user-woof-avatar" icon="ios-person" size="large"/>
+                                                    </li>
+                                                    <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
+                                                    <li>
+                                                        <div class="user-woof-details left">
+                                                            <a :href="'/'+woof.rewoof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.rewoof.user.fullname}}</a>
+                                                            <span style="color: grey;">@{{woof.rewoof.user.username}}</span>
+                                                            <div style="font-size: 13px; ">
+                                                                {{woof.rewoof.text}}
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </Card>
                                         </div>
                                     </div>
                                 </li>
@@ -118,7 +139,7 @@ export default {
         'UserData'
     ]),
     mounted(){
-
+        Vue.woof.my_woofs(this.VisitedData.id)
     },
     methods:{
         //to open the comment box

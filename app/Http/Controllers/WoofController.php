@@ -139,10 +139,11 @@ class WoofController extends Controller
 
         $user = User::where('id', $id)->first();
         $comments = new MyComment();
+        $rewoof = new MyWoof();
         $rewoof_counts = new MyRewoof();
         $like = new MyLike();
 
-        $woofs = Woof::where('user_id',$id)->where('type', 'woof')->orWhere('type', 'rewoof')->orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
+        $woofs = Woof::where('user_id',$user->id)->orderBy('created_at', 'DESC')->whereNull('deleted_at')->get();
 
         //$arrWoof = array($woofs);
         $woofList = array();
@@ -153,12 +154,14 @@ class WoofController extends Controller
                 'id' => $woof->id,
                 'user_id' => $woof->user_id,
                 'text' => $woof->text,
+                'type' => $woof->type,
                 'comment_counts' => $comments->counts($woof->id),
                 'rewoof_counts' => $rewoof_counts->counts($woof->id),
                 'like_counts' => $like->counts($woof->id),
                 'created_at' => $woof->created_at,
                 'updated_at' => $woof->updated_at,
                 'user' => $user,
+                'rewoof' => $rewoof->get_rewoof($woof->woof_id),
                 'liked' => $like->check($woof->id,$this->guard()->user()->id)
             );
 

@@ -10,6 +10,8 @@ use App\User;
 use App\Woof;
 use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Hash;
+use App\Following;
+use App\Like;
 
 class AuthController extends Controller
 {
@@ -130,6 +132,9 @@ class AuthController extends Controller
     {
         $user = $this->guard()->user();
         $woof_counts = Woof::where('user_id', $user->id)->where('type', 'woof')->orWhere('type', 'rewoof')->count();
+        $following_counts = Following::where('following_id', $user->id)->count();
+        $followers_counts = Following::where('user_id', $user->id)->count();
+        $like_counts = Like::where('user_id', $user->id)->count();
 
         return response()->json([
             'id' => $user->id,
@@ -141,7 +146,10 @@ class AuthController extends Controller
             'website' => $user->website,
             'birthdate' => $user->birthdate,
             'created_at' => $user->created_at,
-            'woof_counts' => $woof_counts
+            'woof_counts' => $woof_counts,
+            'following_counts' => $following_counts,
+            'follower_counts' => $followers_counts,
+            'like_counts' => $like_counts,
         ]);
     }
 

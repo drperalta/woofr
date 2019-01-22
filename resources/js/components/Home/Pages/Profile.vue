@@ -16,6 +16,10 @@
             <div class="profile-menu">
                 <div class="profile-menu-items">
                     <ul class="row">
+                        <li style="margin-top: 15px">
+                            <Button shape="circle" v-if="(data().following == false)" @click="follow(data().id)" >FOLLOW</Button>
+                            <Button shape="circle" v-if="(data().following == true)" @click="unfollow(data().id)" style="background-color: #765d69; color: rgba(240, 234, 234, 1)">FOLLOWING</Button>
+                        </li>
                         <li>
                             <router-link class="item" :to="'/'+data().username">
                                 <span class="span menu-title">Woofs</span>
@@ -25,19 +29,19 @@
                         <li>
                             <router-link class="item" :to="'/'+data().username+'/following'">
                                 <span class="span menu-title">Following</span>
-                                <span class="span counts">000</span>
+                                <span class="span counts">{{data().follower_counts}}</span>
                             </router-link>
                         </li>
                         <li>
                             <router-link class="item" :to="'/'+data().username+'/followers'">
                                 <span class="span menu-title">Followers</span>
-                                <span class="span counts">000</span>
+                                <span class="span counts">{{data().following_counts}}</span>
                             </router-link>
                         </li>
                         <li>
                             <router-link class="item" :to="'/'+data().username+'/likes'">
                                 <span class="span menu-title">Likes</span>
-                                <span class="span counts">000</span>
+                                <span class="span counts">{{data().like_counts}}</span>
                             </router-link>
                         </li>
                     </ul>
@@ -76,6 +80,11 @@ export default {
                 like_counts: '390'
             },
             page: this.$root.profile_active_page ,
+            FollowDetails: {
+                user_id: '',
+                following_id: '',
+                username: ''
+            }
         }
     },
     watch:{
@@ -96,6 +105,20 @@ export default {
             }else{
                 return this.UserData;
             }
+        },
+        follow(id){
+            this.FollowDetails.user_id = this.UserData.id;
+            this.FollowDetails.following_id = id;
+            this.FollowDetails.username = this.$route.params.username;
+
+            Vue.user.follow(this.FollowDetails)
+        },
+        unfollow(id){
+            this.FollowDetails.user_id = this.UserData.id;
+            this.FollowDetails.following_id = id;
+            this.FollowDetails.username = this.$route.params.username;
+
+            Vue.user.unfollow(this.FollowDetails)
         }
     },
     computed: mapGetters([
@@ -104,6 +127,7 @@ export default {
     ]),
     created(){
         Vue.user.setVisitedUser(this.$route.params.username);
+        
     }
 }
 </script>
@@ -150,7 +174,7 @@ export default {
 }
 .profile-menu-items{
     float: right;
-    margin-right: 60px;
+    margin-right: 10px;
 }
 .profile-menu ul li{
     margin: 10px 15px;

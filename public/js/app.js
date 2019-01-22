@@ -2686,6 +2686,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2704,7 +2708,12 @@ __webpack_require__.r(__webpack_exports__);
         following_counts: '400',
         like_counts: '390'
       },
-      page: this.$root.profile_active_page
+      page: this.$root.profile_active_page,
+      FollowDetails: {
+        user_id: '',
+        following_id: '',
+        username: ''
+      }
     };
   },
   watch: {
@@ -2727,6 +2736,18 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return this.UserData;
       }
+    },
+    follow: function follow(id) {
+      this.FollowDetails.user_id = this.UserData.id;
+      this.FollowDetails.following_id = id;
+      this.FollowDetails.username = this.$route.params.username;
+      Vue.user.follow(this.FollowDetails);
+    },
+    unfollow: function unfollow(id) {
+      this.FollowDetails.user_id = this.UserData.id;
+      this.FollowDetails.following_id = id;
+      this.FollowDetails.username = this.$route.params.username;
+      Vue.user.unfollow(this.FollowDetails);
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['UserData', 'VisitedData']),
@@ -3377,6 +3398,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3399,7 +3441,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$root.profile_active_page = window.location.href.split('/')[3];
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['VisitedData', 'UserWoofs', 'UserData']),
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    Vue.woof.my_woofs(this.VisitedData.id);
+  },
   methods: (_methods = {
     //to open the comment box
     comment: function comment(id) {
@@ -4841,7 +4885,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.profile-top[data-v-7448c399]{\r\n    border-radius: 0px 0px 5px 5px !important;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 352px;\r\n    background-color: azure;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 295px;\r\n    margin-left: 60px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 352px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 60px;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.profile-top[data-v-7448c399]{\r\n    border-radius: 0px 0px 5px 5px !important;\r\n\r\n    background-color: white;\r\n    margin: 0px 5px 5px 5px;\n}\n.profile-banner[data-v-7448c399]{\r\n    width: auto;\r\n    height: 352px;\r\n    background-color: azure;\n}\n.user-img[data-v-7448c399]{\r\n    position: absolute;\r\n    width: 170px;\r\n\r\n    margin-top: 295px;\r\n    margin-left: 60px;\r\n\r\n    border: 5px solid white;\r\n    border-radius: 50%;\n}\n.user-field[data-v-7448c399]{\r\n    margin-left: 291px;\r\n    padding-top: 352px;\n}\n.name[data-v-7448c399]{\r\n    font-size: 26px;\r\n    font-weight: 600;\r\n    color: #17233d;\r\n    display: block;\n}\n.username[data-v-7448c399]{\r\n    font-size: 16px;\r\n    color: gray;\r\n    display: block;\n}\n.profile-menu[data-v-7448c399]{\r\n    height: 60px;\n}\n.profile-menu-items[data-v-7448c399]{\r\n    float: right;\r\n    margin-right: 10px;\n}\n.profile-menu ul li[data-v-7448c399]{\r\n    margin: 10px 15px;\n}\n.profile-menu .span[data-v-7448c399]{\r\n    display: block;\n}\n.menu-title[data-v-7448c399]{\r\n    font-weight: 600;\r\n    color: #657786;\n}\n.counts[data-v-7448c399]{\r\n    color: #765d69;\r\n    text-align: center;\r\n    font-size: 20px;\r\n    font-weight: 600;\n}\n.item[data-v-7448c399]{\r\n    font-size: 14px;\r\n    text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -68633,6 +68677,47 @@ var render = function() {
           _c("ul", { staticClass: "row" }, [
             _c(
               "li",
+              { staticStyle: { "margin-top": "15px" } },
+              [
+                _vm.data().following == false
+                  ? _c(
+                      "Button",
+                      {
+                        attrs: { shape: "circle" },
+                        on: {
+                          click: function($event) {
+                            _vm.follow(_vm.data().id)
+                          }
+                        }
+                      },
+                      [_vm._v("FOLLOW")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.data().following == true
+                  ? _c(
+                      "Button",
+                      {
+                        staticStyle: {
+                          "background-color": "#765d69",
+                          color: "rgba(240, 234, 234, 1)"
+                        },
+                        attrs: { shape: "circle" },
+                        on: {
+                          click: function($event) {
+                            _vm.unfollow(_vm.data().id)
+                          }
+                        }
+                      },
+                      [_vm._v("FOLLOWING")]
+                    )
+                  : _vm._e()
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
               [
                 _c(
                   "router-link",
@@ -68668,7 +68753,9 @@ var render = function() {
                       _vm._v("Following")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [_vm._v("000")])
+                    _c("span", { staticClass: "span counts" }, [
+                      _vm._v(_vm._s(_vm.data().follower_counts))
+                    ])
                   ]
                 )
               ],
@@ -68689,7 +68776,9 @@ var render = function() {
                       _vm._v("Followers")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [_vm._v("000")])
+                    _c("span", { staticClass: "span counts" }, [
+                      _vm._v(_vm._s(_vm.data().following_counts))
+                    ])
                   ]
                 )
               ],
@@ -68710,7 +68799,9 @@ var render = function() {
                       _vm._v("Likes")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [_vm._v("000")])
+                    _c("span", { staticClass: "span counts" }, [
+                      _vm._v(_vm._s(_vm.data().like_counts))
+                    ])
                   ]
                 )
               ],
@@ -69167,7 +69258,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "span stats-counts" }, [
-                    _vm._v("210")
+                    _vm._v(_vm._s(_vm.UserData.following_counts))
                   ])
                 ]
               )
@@ -69187,7 +69278,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "span stats-counts" }, [
-                    _vm._v("400")
+                    _vm._v(_vm._s(_vm.UserData.follower_counts))
                   ])
                 ]
               )
@@ -69790,9 +69881,144 @@ var render = function() {
                                     _vm._v(
                                       "\n                                        " +
                                         _vm._s(woof.text) +
-                                        "\n                                    "
-                                    )
-                                  ]
+                                        "\n                                        "
+                                    ),
+                                    _vm.UserData.username ==
+                                      woof.user.username && woof.text == ""
+                                      ? _c(
+                                          "span",
+                                          { staticStyle: { color: "grey" } },
+                                          [
+                                            _c("Icon", {
+                                              attrs: { type: "md-repeat" }
+                                            }),
+                                            _vm._v("You Rewoofed")
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.UserData.username !=
+                                      woof.user.username && woof.rewoof != null
+                                      ? _c(
+                                          "span",
+                                          { staticStyle: { color: "grey" } },
+                                          [
+                                            _c("Icon", {
+                                              attrs: { type: "md-repeat" }
+                                            }),
+                                            _vm._v(
+                                              _vm._s(woof.user.fullname) +
+                                                " rewoofed"
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    woof.type == "rewoof"
+                                      ? _c(
+                                          "Card",
+                                          {
+                                            staticStyle: {
+                                              "min-width": "474px !important"
+                                            },
+                                            attrs: { padding: 16 }
+                                          },
+                                          [
+                                            _c("ul", { staticClass: "row" }, [
+                                              _c(
+                                                "li",
+                                                [
+                                                  _c("Avatar", {
+                                                    staticClass:
+                                                      "user-woof-avatar",
+                                                    attrs: {
+                                                      icon: "ios-person",
+                                                      size: "large"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c("li", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "user-woof-details left"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "a",
+                                                      {
+                                                        staticStyle: {
+                                                          "font-size": "14px",
+                                                          "font-weight": "600",
+                                                          color: "black"
+                                                        },
+                                                        attrs: {
+                                                          href:
+                                                            "/" +
+                                                            woof.rewoof.user
+                                                              .username
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            woof.rewoof.user
+                                                              .fullname
+                                                          )
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticStyle: {
+                                                          color: "grey"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "@" +
+                                                            _vm._s(
+                                                              woof.rewoof.user
+                                                                .username
+                                                            )
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticStyle: {
+                                                          "font-size": "13px"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                            " +
+                                                            _vm._s(
+                                                              woof.rewoof.text
+                                                            ) +
+                                                            "\n                                                        "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
                                 )
                               ],
                               1
@@ -92641,6 +92867,24 @@ __webpack_require__.r(__webpack_exports__);
         context.disabled = true;
       });
     },
+    follow: function follow(data) {
+      var _this = this;
+
+      axios.post('/api/user/follow', data, this.auth()).then(function (response) {
+        _this.setVisitedUser(data.username);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
+    unfollow: function unfollow(data) {
+      var _this2 = this;
+
+      axios.post('/api/user/unfollow', data, this.auth()).then(function (response) {
+        _this2.setVisitedUser(data.username);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
     auth: function auth() {
       return {
         headers: {
@@ -92708,38 +92952,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     like: function like(context, data, component) {
-      var _this3 = this;
-
-      axios.post('/api/woof/like', data, this.auth()).then(function (response) {
-        if (component == 'timeline') {
-          _this3.all();
-        }
-
-        if (component == 'modal') {
-          _this3.selected(data.woof_id);
-
-          _this3.all();
-        }
-      }).catch(function (error) {
+      axios.post('/api/woof/like', data, this.auth()).then(function (response) {}).catch(function (error) {
         console.log(error);
       });
     },
     dislike: function dislike(context, data) {
-      var _this4 = this;
-
-      axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {
-        if (component == 'timeline') {
-          _this4.all();
-        }
-
-        if (component == 'modal') {
-          _this4.selected(data.woof_id);
-
-          _this4.all();
-
-          _this4.my_woofs(data.user_id);
-        }
-      }).catch(function (error) {
+      axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {}).catch(function (error) {
         console.log(error);
       });
     },
@@ -92751,14 +92969,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     delete: function _delete(context, id, user_id) {
-      var _this5 = this;
+      var _this3 = this;
 
       axios.post('/api/woof/delete', {
         id: id
       }, this.auth()).then(function (response) {
-        _this5.my_woofs(user_id);
+        _this3.my_woofs(user_id);
 
-        _this5.all();
+        _this3.all();
 
         context.$Message.success('Succefully Deleted!');
         console.log(response.data);
@@ -94210,14 +94428,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************************!*\
   !*** ./resources/js/components/Home/Partials/Profile/Woofs.vue ***!
   \*****************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Woofs_vue_vue_type_template_id_04ee7ef6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Woofs.vue?vue&type=template&id=04ee7ef6&scoped=true& */ "./resources/js/components/Home/Partials/Profile/Woofs.vue?vue&type=template&id=04ee7ef6&scoped=true&");
 /* harmony import */ var _Woofs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Woofs.vue?vue&type=script&lang=js& */ "./resources/js/components/Home/Partials/Profile/Woofs.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Woofs_vue_vue_type_style_index_0_id_04ee7ef6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Woofs.vue?vue&type=style&index=0&id=04ee7ef6&scoped=true&lang=css& */ "./resources/js/components/Home/Partials/Profile/Woofs.vue?vue&type=style&index=0&id=04ee7ef6&scoped=true&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Woofs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Woofs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _Woofs_vue_vue_type_style_index_0_id_04ee7ef6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Woofs.vue?vue&type=style&index=0&id=04ee7ef6&scoped=true&lang=css& */ "./resources/js/components/Home/Partials/Profile/Woofs.vue?vue&type=style&index=0&id=04ee7ef6&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -94249,7 +94468,7 @@ component.options.__file = "resources/js/components/Home/Partials/Profile/Woofs.
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/Home/Partials/Profile/Woofs.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -50,13 +50,7 @@ export default function(Vue){
         like(context,data,component){
             axios.post('/api/woof/like',data, this.auth())
             .then(response => {
-                if(component == 'timeline'){
-                    this.all();
-                }
-                if(component == 'modal'){
-                    this.selected(data.woof_id);
-                    this.all();
-                }
+
             }).catch(error => {
                 console.log(error)
             })
@@ -64,14 +58,7 @@ export default function(Vue){
         dislike(context, data){
             axios.post('/api/woof/dislike',data, this.auth())
             .then(response => {
-                if(component == 'timeline'){
-                    this.all();
-                }
-                if(component == 'modal'){
-                    this.selected(data.woof_id);
-                    this.all();
-                    this.my_woofs(data.user_id);
-                }
+
             }).catch(error => {
                 console.log(error)
             })

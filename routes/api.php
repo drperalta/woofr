@@ -48,6 +48,9 @@ Route::group([ 'prefix' => 'user' ], function()
         Route::post('primary', 'UserController@primary');
         Route::post('primary_onchange', 'UserController@primary_onchange');
     });
+
+    Route::post('follow', 'FollowingController@follow');
+    Route::post('unfollow', 'FollowingController@unfollow');
 });
 
 //WOOFS
