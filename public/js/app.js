@@ -2446,6 +2446,10 @@ __webpack_require__.r(__webpack_exports__);
         reply: '',
         username: '',
         type: 'comment'
+      },
+      LikeDetails: {
+        user_id: '',
+        woof_id: ''
       }
     };
   },
@@ -2498,17 +2502,24 @@ __webpack_require__.r(__webpack_exports__);
       Vue.woof.all();
     },
     //to like a woof
-    like: function like(index) {
-      // Check if liked is true
-      if (this.$root.Woofs[index].liked) {
-        // if liked is true, then make it false and minus 1 the counts
-        this.$root.Woofs[index].liked = false;
-        this.$root.Woofs[index].likes -= 1;
-      } else {
+    like: function like(id) {
+      this.LikeDetails.user_id = this.UserData.id;
+      this.LikeDetails.woof_id = id; // Check if liked is true
+
+      if (this.SelectedWoofData.liked == true) {
+        // // if liked is true, then make it false and minus 1 the counts
+        //this.WoofList[index].liked = false;
+        //this.WoofList[index].like_counts -= 1;
+        Vue.woof.dislike(this, this.LikeDetails);
+        console.log('DISLIKED');
+      } else if (this.SelectedWoofData.liked == false) {
         // if liked is false, then make it true and plus 1 the counts
-        this.$root.Woofs[index].liked = true;
-        this.$root.Woofs[index].likes += 1;
-      }
+        //this.WoofList[index].liked = true;
+        //this.WoofList[index].like_counts += 1;
+        Vue.woof.like(this, this.LikeDetails);
+        console.log('LIKED');
+      } //console.log(this.LikeDetails)
+
     },
     //Open Woof Modal
     open: function open(id) {
@@ -3364,7 +3375,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ReWoof: _Modals_ReWoof__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      LikeDetails: {
+        user_id: '',
+        woof_id: ''
+      }
+    };
   },
   created: function created() {
     this.$root.profile_active_page = window.location.href.split('/')[3];
@@ -3398,17 +3414,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       Vue.woof.my_woofs(this.VisitedData.id);
     },
     //to like a woof
-    like: function like(index) {
-      // Check if liked is true
-      if (this.$root.Woofs[index].liked) {
-        // if liked is true, then make it false and minus 1 the counts
-        this.$root.Woofs[index].liked = false;
-        this.$root.Woofs[index].likes -= 1;
-      } else {
+    like: function like(index, id) {
+      this.LikeDetails.user_id = this.UserData.id;
+      this.LikeDetails.woof_id = id; // Check if liked is true
+
+      if (this.WoofList[index].liked == true) {
+        // // if liked is true, then make it false and minus 1 the counts
+        //this.WoofList[index].liked = false;
+        //this.WoofList[index].like_counts -= 1;
+        Vue.woof.dislike(this, this.LikeDetails);
+        console.log('DISLIKED');
+      } else if (this.WoofList[index].liked == false) {
         // if liked is false, then make it true and plus 1 the counts
-        this.$root.Woofs[index].liked = true;
-        this.$root.Woofs[index].likes += 1;
-      }
+        //this.WoofList[index].liked = true;
+        //this.WoofList[index].like_counts += 1;
+        Vue.woof.like(this, this.LikeDetails);
+        console.log('LIKED');
+      } //console.log(this.LikeDetails)
+
     },
     //Open Woof Modal
     open: function open(id) {
@@ -3904,22 +3927,25 @@ __webpack_require__.r(__webpack_exports__);
       this.LikeDetails.user_id = this.UserData.id;
       this.LikeDetails.woof_id = id; // Check if liked is true
 
-      if (this.WoofList[index].liked) {
-        // if liked is true, then make it false and minus 1 the counts
-        this.WoofList[index].liked = false;
-        this.WoofList[index].likes -= 1;
+      if (this.WoofList[index].liked == true) {
+        // // if liked is true, then make it false and minus 1 the counts
+        //this.WoofList[index].liked = false;
+        //this.WoofList[index].like_counts -= 1;
         Vue.woof.dislike(this, this.LikeDetails);
-      } else {
+        console.log('DISLIKED');
+      } else if (this.WoofList[index].liked == false) {
         // if liked is false, then make it true and plus 1 the counts
-        this.WoofList[index].liked = true;
-        this.WoofList[index].likes += 1;
+        //this.WoofList[index].liked = true;
+        //this.WoofList[index].like_counts += 1;
         Vue.woof.like(this, this.LikeDetails);
+        console.log('LIKED');
       } //console.log(this.LikeDetails)
 
     },
     //Open Woof Modal
-    open: function open(id) {// Vue.woof.selected(id, 'woof');
-      // this.$root.WoofModal = true;
+    open: function open(id, index) {
+      Vue.woof.selected(id, index, 'woof');
+      this.$root.WoofModal = true;
     },
     //To know if the woof is mine
     myWoof: function myWoof(user_id) {
@@ -3938,6 +3964,13 @@ __webpack_require__.r(__webpack_exports__);
     root: function root() {
       if (this.$root != null) {
         return this.$root;
+      }
+    },
+    over: function over(msg) {
+      if (msg == 'ENTER') {
+        this.$root.Liked = true;
+      } else {
+        this.$root.Liked = false;
       }
     }
   },
@@ -68225,7 +68258,8 @@ var render = function() {
                       ? _c("span", { staticStyle: { "margin-left": "28px" } })
                       : _vm._e(),
                     _vm._v(
-                      _vm._s(_vm.SelectedWoofData.likes) + "\n                "
+                      _vm._s(_vm.SelectedWoofData.like_counts) +
+                        "\n                "
                     )
                   ],
                   1
@@ -69767,7 +69801,7 @@ var render = function() {
                               staticClass: "icon_rewoof",
                               on: {
                                 click: function($event) {
-                                  _vm.reWoof(_vm.woof_id)
+                                  _vm.reWoof(woof.id)
                                 }
                               }
                             },
@@ -69796,7 +69830,7 @@ var render = function() {
                               staticClass: "icon_like",
                               on: {
                                 click: function($event) {
-                                  _vm.like(_vm.index)
+                                  _vm.like(_vm.index, woof.id)
                                 }
                               }
                             },
@@ -69840,7 +69874,7 @@ var render = function() {
                                       })
                                     : _vm._e(),
                                   _vm._v(
-                                    _vm._s(woof.likes) +
+                                    _vm._s(woof.like_counts) +
                                       "\n                            "
                                   )
                                 ],
@@ -70594,7 +70628,7 @@ var render = function() {
                     staticClass: "woof-body",
                     on: {
                       click: function($event) {
-                        _vm.open(woof.id)
+                        _vm.open(woof.id, index)
                       }
                     }
                   },
@@ -70838,6 +70872,12 @@ var render = function() {
                           on: {
                             click: function($event) {
                               _vm.like(index, woof.id)
+                            },
+                            mouseenter: function($event) {
+                              _vm.over("ENTER")
+                            },
+                            mouseleave: function($event) {
+                              _vm.over("LEAVE")
                             }
                           }
                         },
@@ -92624,6 +92664,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/woof/like', data, this.auth()).then(function (response) {
         _this3.all();
+
+        _this3.selected(data.woof_id);
       }).catch(function (error) {
         console.log(error);
       });
@@ -92633,6 +92675,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {
         _this4.all();
+
+        _this4.selected(data.woof_id);
       }).catch(function (error) {
         console.log(error);
       });

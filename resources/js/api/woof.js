@@ -51,6 +51,7 @@ export default function(Vue){
             axios.post('/api/woof/like',data, this.auth())
             .then(response => {
                 this.all();
+                this.selected(data.woof_id);
             }).catch(error => {
                 console.log(error)
             })
@@ -59,6 +60,7 @@ export default function(Vue){
             axios.post('/api/woof/dislike',data, this.auth())
             .then(response => {
                 this.all();
+                this.selected(data.woof_id);
             }).catch(error => {
                 console.log(error)
             })

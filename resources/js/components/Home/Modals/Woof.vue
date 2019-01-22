@@ -58,7 +58,7 @@
                         <Icon class="c" type="ios-heart-outline" v-if="!SelectedWoofData.liked" size="24" />
 
                         <!-- this span is to add margin left when liking because the solid icon is absolute  -->
-                        <span style="margin-left: 28px;" v-if="SelectedWoofData.liked"></span>{{SelectedWoofData.likes}}
+                        <span style="margin-left: 28px;" v-if="SelectedWoofData.liked"></span>{{SelectedWoofData.like_counts}}
                     </a>
                 </div>
             </div>
@@ -119,6 +119,10 @@ export default {
                 reply:'',
                 username:'',
                 type: 'comment'
+            },
+            LikeDetails: {
+                user_id: '',
+                woof_id: ''
             }
         }
     },
@@ -175,17 +179,28 @@ export default {
             Vue.woof.all();
         },
         //to like a woof
-        like(index){
+        like(id){
+
+            this.LikeDetails.user_id = this.UserData.id;
+            this.LikeDetails.woof_id = id;
             // Check if liked is true
-            if(this.$root.Woofs[index].liked){
-                // if liked is true, then make it false and minus 1 the counts
-                this.$root.Woofs[index].liked = false;
-                this.$root.Woofs[index].likes -= 1;
-            }else{
+            if(this.SelectedWoofData.liked == true){
+                // // if liked is true, then make it false and minus 1 the counts
+                //this.WoofList[index].liked = false;
+                //this.WoofList[index].like_counts -= 1;
+                Vue.woof.dislike(this, this.LikeDetails)
+
+                console.log('DISLIKED')
+            }else if(this.SelectedWoofData.liked == false){
                 // if liked is false, then make it true and plus 1 the counts
-                this.$root.Woofs[index].liked = true;
-                this.$root.Woofs[index].likes += 1;
+                //this.WoofList[index].liked = true;
+                //this.WoofList[index].like_counts += 1;
+                Vue.woof.like(this, this.LikeDetails)
+
+                console.log('LIKED')
             }
+            //console.log(this.LikeDetails)
+            
         },
         //Open Woof Modal
         open(id){

@@ -35,7 +35,7 @@
                         </DropdownMenu>
                     </Dropdown>
 
-                    <div class="woof-body" @click="open(woof.id)">
+                    <div class="woof-body" @click="open(woof.id, index)">
                         <ul class="row" >
                             <!-- USER'S AVATAR -->
                             <li>
@@ -90,7 +90,7 @@
                                 </a>
                             </div>
                             <!-- LIKE ACTION -->
-                            <div @click="like(index, woof.id)" class="icon_like">
+                            <div @click="like(index, woof.id)" class="icon_like" @mouseenter="over('ENTER')" @mouseleave="over('LEAVE')">
                                 <a>
                                     <transition name="bounce">
                                         <Icon  type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;" color="#db5353"/>
@@ -192,24 +192,28 @@ export default {
             this.LikeDetails.user_id = this.UserData.id;
             this.LikeDetails.woof_id = id;
             // Check if liked is true
-            if(this.WoofList[index].liked){
-                // if liked is true, then make it false and minus 1 the counts
-                this.WoofList[index].liked = false;
-                this.WoofList[index].likes -= 1;
+            if(this.WoofList[index].liked == true){
+                // // if liked is true, then make it false and minus 1 the counts
+                //this.WoofList[index].liked = false;
+                //this.WoofList[index].like_counts -= 1;
                 Vue.woof.dislike(this, this.LikeDetails)
-            }else{
+
+                console.log('DISLIKED')
+            }else if(this.WoofList[index].liked == false){
                 // if liked is false, then make it true and plus 1 the counts
-                this.WoofList[index].liked = true;
-                this.WoofList[index].likes += 1;
+                //this.WoofList[index].liked = true;
+                //this.WoofList[index].like_counts += 1;
                 Vue.woof.like(this, this.LikeDetails)
+
+                console.log('LIKED')
             }
             //console.log(this.LikeDetails)
             
         },
         //Open Woof Modal
-        open(id){
-            // Vue.woof.selected(id, 'woof');
-            // this.$root.WoofModal = true;
+        open(id,index){
+            Vue.woof.selected(id,index, 'woof');
+            this.$root.WoofModal = true;
         },
         //To know if the woof is mine
         myWoof(user_id){
@@ -229,6 +233,13 @@ export default {
         root(){
             if(this.$root != null){
                 return this.$root
+            }
+        },
+        over(msg){
+            if(msg == 'ENTER'){
+                this.$root.Liked = true;
+            }else{
+                this.$root.Liked = false;
             }
         }
     },

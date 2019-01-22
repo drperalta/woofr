@@ -29,6 +29,9 @@ class LikeController extends Controller
             'message' => 'Successfully Deleted!'
         ], 201);
     }
+    protected function check(){
+        
+    }
     public function guard(){
         return \Auth::Guard('api');
     }

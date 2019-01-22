@@ -55,14 +55,14 @@
                                 </a>
                             </div>
                             <!-- RE-WOOF ACTION -->
-                            <div @click="reWoof(woof_id)" class="icon_rewoof">
+                            <div @click="reWoof(woof.id)" class="icon_rewoof">
                                 <a>
                                     <Icon class="b" type="ios-repeat" size="24"/>
                                     {{woof.re_woof}}
                                 </a>
                             </div>
                             <!-- LIKE ACTION -->
-                            <div @click="like(index)" class="icon_like">
+                            <div @click="like(index, woof.id)" class="icon_like">
                                 <a>
                                     <transition name="bounce">
                                         <Icon  type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;" color="#db5353"/>
@@ -70,7 +70,7 @@
                                     <Icon class="c" type="ios-heart-outline" v-if="!woof.liked" size="24" />
 
                                     <!-- this span is to add margin left when liking because the solid icon is absolute  -->
-                                    <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.likes}}
+                                    <span style="margin-left: 28px;" v-if="woof.liked"></span>{{woof.like_counts}}
                                 </a>
                             </div>
                         </div>
@@ -103,7 +103,10 @@ export default {
     components: {Trending, Comments, ReWoof},
     data(){
         return{
-
+            LikeDetails: {
+                user_id: '',
+                woof_id: ''
+            }
         }
     },
     created(){
@@ -142,17 +145,28 @@ export default {
             Vue.woof.my_woofs(this.VisitedData.id);
         },
         //to like a woof
-        like(index){
+        like(index, id){
+
+            this.LikeDetails.user_id = this.UserData.id;
+            this.LikeDetails.woof_id = id;
             // Check if liked is true
-            if(this.$root.Woofs[index].liked){
-                // if liked is true, then make it false and minus 1 the counts
-                this.$root.Woofs[index].liked = false;
-                this.$root.Woofs[index].likes -= 1;
-            }else{
+            if(this.WoofList[index].liked == true){
+                // // if liked is true, then make it false and minus 1 the counts
+                //this.WoofList[index].liked = false;
+                //this.WoofList[index].like_counts -= 1;
+                Vue.woof.dislike(this, this.LikeDetails)
+
+                console.log('DISLIKED')
+            }else if(this.WoofList[index].liked == false){
                 // if liked is false, then make it true and plus 1 the counts
-                this.$root.Woofs[index].liked = true;
-                this.$root.Woofs[index].likes += 1;
+                //this.WoofList[index].liked = true;
+                //this.WoofList[index].like_counts += 1;
+                Vue.woof.like(this, this.LikeDetails)
+
+                console.log('LIKED')
             }
+            //console.log(this.LikeDetails)
+            
         },
         //Open Woof Modal
         open(id){
