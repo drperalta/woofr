@@ -11,7 +11,7 @@
             <!-- LIST OF ALL WOOFS -->
             <div class="woof-list">
                 <ul>
-                    <li class="whole-woof" v-for="woof in UserWoofs" :key="woof.id">
+                    <li class="whole-woof" v-for="(woof, index) in UserWoofs" :key="woof.id">
                         <Dropdown class="woof-dropdown" trigger="click" placement="bottom-end">
                             <a href="javascript:void(0)">
                                 <Icon type="ios-arrow-down" size="18" color="#765d69"/>
@@ -62,7 +62,7 @@
                                 </a>
                             </div>
                             <!-- LIKE ACTION -->
-                            <div @click="like(index, woof.id)" class="icon_like">
+                            <div @click="like(index, woof.id)" class="icon_like" @mouseenter="over('ENTER')" @mouseleave="over('LEAVE')">
                                 <a>
                                     <transition name="bounce">
                                         <Icon  type="ios-heart" v-if="woof.liked" size="24" style="position: absolute;" color="#db5353"/>
@@ -150,18 +150,18 @@ export default {
             this.LikeDetails.user_id = this.UserData.id;
             this.LikeDetails.woof_id = id;
             // Check if liked is true
-            if(this.WoofList[index].liked == true){
+            if(this.UserWoofs[index].liked == true){
                 // // if liked is true, then make it false and minus 1 the counts
-                //this.WoofList[index].liked = false;
-                //this.WoofList[index].like_counts -= 1;
-                Vue.woof.dislike(this, this.LikeDetails)
+                this.UserWoofs[index].liked = false;
+                this.UserWoofs[index].like_counts -= 1;
+                Vue.woof.dislike(this, this.LikeDetails, 'profile')
 
                 console.log('DISLIKED')
-            }else if(this.WoofList[index].liked == false){
+            }else if(this.UserWoofs[index].liked == false){
                 // if liked is false, then make it true and plus 1 the counts
-                //this.WoofList[index].liked = true;
-                //this.WoofList[index].like_counts += 1;
-                Vue.woof.like(this, this.LikeDetails)
+                this.UserWoofs[index].liked = true;
+                this.UserWoofs[index].like_counts += 1;
+                Vue.woof.like(this, this.LikeDetails, 'profile')
 
                 console.log('LIKED')
             }
@@ -201,6 +201,13 @@ export default {
         delete_woof(id){
             Vue.woof.delete(this,id);
         },
+        over(msg){
+            if(msg == 'ENTER'){
+                this.$root.Liked = true;
+            }else{
+                this.$root.Liked = false;
+            }
+        }
     }
 }
 </script>
@@ -268,4 +275,25 @@ export default {
     display: block;
 }
 
+
+
+/* TRANSITION ANIMATION */
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active{
+    transition: opacity .5s;
+    opacity: 0;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>

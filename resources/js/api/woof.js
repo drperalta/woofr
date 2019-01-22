@@ -47,11 +47,21 @@ export default function(Vue){
                 console.log(error)
             })
         },
-        like(context,data){
+        like(context,data,component){
             axios.post('/api/woof/like',data, this.auth())
             .then(response => {
-                this.all();
-                this.selected(data.woof_id);
+                if(component == 'timeline'){
+                    this.all();
+                }
+                if(component == 'modal'){
+                    this.selected(data.woof_id);
+                    this.all();
+                    this.my_woofs(data.user_id);
+                }
+                if(component == 'profile'){
+                    this.my_woofs(data.user_id);
+                }
+                
             }).catch(error => {
                 console.log(error)
             })
@@ -59,8 +69,17 @@ export default function(Vue){
         dislike(context, data){
             axios.post('/api/woof/dislike',data, this.auth())
             .then(response => {
-                this.all();
-                this.selected(data.woof_id);
+                if(component == 'timeline'){
+                    this.all();
+                }
+                if(component == 'modal'){
+                    this.selected(data.woof_id);
+                    this.all();
+                    this.my_woofs(data.user_id);
+                }
+                if(component == 'profile'){
+                    this.my_woofs(data.user_id);
+                }
             }).catch(error => {
                 console.log(error)
             })

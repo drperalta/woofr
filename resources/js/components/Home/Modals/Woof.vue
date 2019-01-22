@@ -186,16 +186,16 @@ export default {
             // Check if liked is true
             if(this.SelectedWoofData.liked == true){
                 // // if liked is true, then make it false and minus 1 the counts
-                //this.WoofList[index].liked = false;
-                //this.WoofList[index].like_counts -= 1;
-                Vue.woof.dislike(this, this.LikeDetails)
+                this.SelectedWoofData.liked = false;
+                this.SelectedWoofData.like_counts -= 1;
+                Vue.woof.dislike(this, this.LikeDetails, 'modal')
 
                 console.log('DISLIKED')
             }else if(this.SelectedWoofData.liked == false){
                 // if liked is false, then make it true and plus 1 the counts
-                //this.WoofList[index].liked = true;
-                //this.WoofList[index].like_counts += 1;
-                Vue.woof.like(this, this.LikeDetails)
+                this.SelectedWoofData.liked = true;
+                this.SelectedWoofData.like_counts += 1;
+                Vue.woof.like(this, this.LikeDetails, 'modal')
 
                 console.log('LIKED')
             }
@@ -321,5 +321,27 @@ li{
 .icon_like:hover .c{
     font-weight: 600;
     color: #db5353;
+}
+
+
+
+/* TRANSITION ANIMATION */
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active{
+    transition: opacity .5s;
+    opacity: 0;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

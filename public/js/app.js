@@ -2508,15 +2508,15 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.SelectedWoofData.liked == true) {
         // // if liked is true, then make it false and minus 1 the counts
-        //this.WoofList[index].liked = false;
-        //this.WoofList[index].like_counts -= 1;
-        Vue.woof.dislike(this, this.LikeDetails);
+        this.SelectedWoofData.liked = false;
+        this.SelectedWoofData.like_counts -= 1;
+        Vue.woof.dislike(this, this.LikeDetails, 'modal');
         console.log('DISLIKED');
       } else if (this.SelectedWoofData.liked == false) {
         // if liked is false, then make it true and plus 1 the counts
-        //this.WoofList[index].liked = true;
-        //this.WoofList[index].like_counts += 1;
-        Vue.woof.like(this, this.LikeDetails);
+        this.SelectedWoofData.liked = true;
+        this.SelectedWoofData.like_counts += 1;
+        Vue.woof.like(this, this.LikeDetails, 'modal');
         console.log('LIKED');
       } //console.log(this.LikeDetails)
 
@@ -3267,6 +3267,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Modals_Comments__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Modals/Comments */ "./resources/js/components/Home/Modals/Comments.vue");
 /* harmony import */ var _Modals_ReWoof__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Modals/ReWoof */ "./resources/js/components/Home/Modals/ReWoof.vue");
+var _methods;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
@@ -3387,7 +3389,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['VisitedData', 'UserWoofs', 'UserData']),
   mounted: function mounted() {},
-  methods: _defineProperty({
+  methods: (_methods = {
     //to open the comment box
     comment: function comment(id) {
       this.root().CommentModal = false;
@@ -3418,17 +3420,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.LikeDetails.user_id = this.UserData.id;
       this.LikeDetails.woof_id = id; // Check if liked is true
 
-      if (this.WoofList[index].liked == true) {
+      if (this.UserWoofs[index].liked == true) {
         // // if liked is true, then make it false and minus 1 the counts
-        //this.WoofList[index].liked = false;
-        //this.WoofList[index].like_counts -= 1;
-        Vue.woof.dislike(this, this.LikeDetails);
+        this.UserWoofs[index].liked = false;
+        this.UserWoofs[index].like_counts -= 1;
+        Vue.woof.dislike(this, this.LikeDetails, 'profile');
         console.log('DISLIKED');
-      } else if (this.WoofList[index].liked == false) {
+      } else if (this.UserWoofs[index].liked == false) {
         // if liked is false, then make it true and plus 1 the counts
-        //this.WoofList[index].liked = true;
-        //this.WoofList[index].like_counts += 1;
-        Vue.woof.like(this, this.LikeDetails);
+        this.UserWoofs[index].liked = true;
+        this.UserWoofs[index].like_counts += 1;
+        Vue.woof.like(this, this.LikeDetails, 'profile');
         console.log('LIKED');
       } //console.log(this.LikeDetails)
 
@@ -3462,9 +3464,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return true;
       }
     }
-  }, "delete_woof", function delete_woof(id) {
+  }, _defineProperty(_methods, "delete_woof", function delete_woof(id) {
     Vue.woof.delete(this, id);
-  })
+  }), _defineProperty(_methods, "over", function over(msg) {
+    if (msg == 'ENTER') {
+      this.$root.Liked = true;
+    } else {
+      this.$root.Liked = false;
+    }
+  }), _methods)
 });
 
 /***/ }),
@@ -3929,15 +3937,15 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.WoofList[index].liked == true) {
         // // if liked is true, then make it false and minus 1 the counts
-        //this.WoofList[index].liked = false;
-        //this.WoofList[index].like_counts -= 1;
-        Vue.woof.dislike(this, this.LikeDetails);
+        this.WoofList[index].liked = false;
+        this.WoofList[index].like_counts -= 1;
+        Vue.woof.dislike(this, this.LikeDetails, 'timeline');
         console.log('DISLIKED');
       } else if (this.WoofList[index].liked == false) {
         // if liked is false, then make it true and plus 1 the counts
-        //this.WoofList[index].liked = true;
-        //this.WoofList[index].like_counts += 1;
-        Vue.woof.like(this, this.LikeDetails);
+        this.WoofList[index].liked = true;
+        this.WoofList[index].like_counts += 1;
+        Vue.woof.like(this, this.LikeDetails, 'timeline');
         console.log('LIKED');
       } //console.log(this.LikeDetails)
 
@@ -4771,7 +4779,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\n.woof-actions[data-v-48d810f3]{\r\n    margin-top: 15px;\r\n    margin-left: 10px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-48d810f3]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-48d810f3]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-48d810f3]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-48d810f3]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\n.woof-actions[data-v-48d810f3]{\r\n    margin-top: 15px;\r\n    margin-left: 10px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-48d810f3]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-48d810f3]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-48d810f3]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-48d810f3]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-48d810f3] {\r\n  -webkit-animation: bounce-in-data-v-48d810f3 .5s;\r\n          animation: bounce-in-data-v-48d810f3 .5s;\n}\n.bounce-leave-active[data-v-48d810f3]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-48d810f3 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-48d810f3 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -4961,7 +4969,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\n}\n.woof-dropdown[data-v-04ee7ef6]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\n.whole-woof[data-v-04ee7ef6]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n/* WOOF ACTIONS */\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\n}\n.woof-dropdown[data-v-04ee7ef6]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\n.whole-woof[data-v-04ee7ef6]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n/* WOOF ACTIONS */\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-04ee7ef6] {\r\n  -webkit-animation: bounce-in-data-v-04ee7ef6 .5s;\r\n          animation: bounce-in-data-v-04ee7ef6 .5s;\n}\n.bounce-leave-active[data-v-04ee7ef6]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-04ee7ef6 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-04ee7ef6 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -69618,7 +69626,7 @@ var render = function() {
           _c("div", { staticClass: "woof-list" }, [
             _c(
               "ul",
-              _vm._l(_vm.UserWoofs, function(woof) {
+              _vm._l(_vm.UserWoofs, function(woof, index) {
                 return _c(
                   "li",
                   { key: woof.id, staticClass: "whole-woof" },
@@ -69830,7 +69838,13 @@ var render = function() {
                               staticClass: "icon_like",
                               on: {
                                 click: function($event) {
-                                  _vm.like(_vm.index, woof.id)
+                                  _vm.like(index, woof.id)
+                                },
+                                mouseenter: function($event) {
+                                  _vm.over("ENTER")
+                                },
+                                mouseleave: function($event) {
+                                  _vm.over("LEAVE")
                                 }
                               }
                             },
@@ -92659,13 +92673,25 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    like: function like(context, data) {
+    like: function like(context, data, component) {
       var _this3 = this;
 
       axios.post('/api/woof/like', data, this.auth()).then(function (response) {
-        _this3.all();
+        if (component == 'timeline') {
+          _this3.all();
+        }
 
-        _this3.selected(data.woof_id);
+        if (component == 'modal') {
+          _this3.selected(data.woof_id);
+
+          _this3.all();
+
+          _this3.my_woofs(data.user_id);
+        }
+
+        if (component == 'profile') {
+          _this3.my_woofs(data.user_id);
+        }
       }).catch(function (error) {
         console.log(error);
       });
@@ -92674,9 +92700,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {
-        _this4.all();
+        if (component == 'timeline') {
+          _this4.all();
+        }
 
-        _this4.selected(data.woof_id);
+        if (component == 'modal') {
+          _this4.selected(data.woof_id);
+
+          _this4.all();
+
+          _this4.my_woofs(data.user_id);
+        }
+
+        if (component == 'profile') {
+          _this4.my_woofs(data.user_id);
+        }
       }).catch(function (error) {
         console.log(error);
       });

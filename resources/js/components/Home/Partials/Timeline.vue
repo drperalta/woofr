@@ -194,16 +194,16 @@ export default {
             // Check if liked is true
             if(this.WoofList[index].liked == true){
                 // // if liked is true, then make it false and minus 1 the counts
-                //this.WoofList[index].liked = false;
-                //this.WoofList[index].like_counts -= 1;
-                Vue.woof.dislike(this, this.LikeDetails)
+                this.WoofList[index].liked = false;
+                this.WoofList[index].like_counts -= 1;
+                Vue.woof.dislike(this, this.LikeDetails, 'timeline')
 
                 console.log('DISLIKED')
             }else if(this.WoofList[index].liked == false){
                 // if liked is false, then make it true and plus 1 the counts
-                //this.WoofList[index].liked = true;
-                //this.WoofList[index].like_counts += 1;
-                Vue.woof.like(this, this.LikeDetails)
+                this.WoofList[index].liked = true;
+                this.WoofList[index].like_counts += 1;
+                Vue.woof.like(this, this.LikeDetails,'timeline')
 
                 console.log('LIKED')
             }
