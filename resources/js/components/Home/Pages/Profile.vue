@@ -25,19 +25,19 @@
                         <li>
                             <router-link class="item" :to="'/'+data().username+'/following'">
                                 <span class="span menu-title">Following</span>
-                                <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
+                                <span class="span counts">000</span>
                             </router-link>
                         </li>
                         <li>
                             <router-link class="item" :to="'/'+data().username+'/followers'">
                                 <span class="span menu-title">Followers</span>
-                                <span class="span counts">{{this.$root.UserDetails.follower_counts}}</span>
+                                <span class="span counts">000</span>
                             </router-link>
                         </li>
                         <li>
                             <router-link class="item" :to="'/'+data().username+'/likes'">
                                 <span class="span menu-title">Likes</span>
-                                <span class="span counts">{{this.$root.UserDetails.like_counts}}</span>
+                                <span class="span counts">000</span>
                             </router-link>
                         </li>
                     </ul>

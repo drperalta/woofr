@@ -1916,10 +1916,14 @@ __webpack_require__.r(__webpack_exports__);
         this.$root.WoofModal = false;
       }
 
+      if (this.$route.params.username != '') {
+        Vue.user.setVisitedUser(this.$route.params.username);
+      }
+
       Vue.woof.all();
     },
     show: function show() {
-      if (this.$root.CommentModal == true || this.$root.ReWoofModal == true || this.$root.Liked == true) {
+      if (this.$root.CommentModal == true || this.$root.ReWoofModal == true || this.$root.Liked == true || this.$root.fullname_hover == true) {
         this.$root.WoofModal = false;
         return false;
       } else {
@@ -2543,6 +2547,13 @@ __webpack_require__.r(__webpack_exports__);
     root: function root() {
       if (this.$root != null) {
         return this.$root;
+      }
+    },
+    fullname_hover: function fullname_hover(msg) {
+      if (msg == 'ENTER') {
+        this.$root.fullname_hover = true;
+      } else {
+        this.$root.fullname_hover = false;
       }
     }
   },
@@ -3472,6 +3483,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     } else {
       this.$root.Liked = false;
     }
+  }), _defineProperty(_methods, "fullname_hover", function fullname_hover(msg) {
+    if (msg == 'ENTER') {
+      this.$root.fullname_hover = true;
+    } else {
+      this.$root.fullname_hover = false;
+    }
   }), _methods)
 });
 
@@ -3979,6 +3996,13 @@ __webpack_require__.r(__webpack_exports__);
         this.$root.Liked = true;
       } else {
         this.$root.Liked = false;
+      }
+    },
+    fullname_hover: function fullname_hover(msg) {
+      if (msg == 'ENTER') {
+        this.$root.fullname_hover = true;
+      } else {
+        this.$root.fullname_hover = false;
       }
     }
   },
@@ -4779,7 +4803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\n.woof-actions[data-v-48d810f3]{\r\n    margin-top: 15px;\r\n    margin-left: 10px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-48d810f3]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-48d810f3]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-48d810f3]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-48d810f3]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-48d810f3] {\r\n  -webkit-animation: bounce-in-data-v-48d810f3 .5s;\r\n          animation: bounce-in-data-v-48d810f3 .5s;\n}\n.bounce-leave-active[data-v-48d810f3]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-48d810f3 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-48d810f3 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.content[data-v-48d810f3]{\n}\n.card[data-v-48d810f3]{\r\n    padding: 20px !important;\n}\n.user-avatar[data-v-48d810f3]{\r\n    margin-right: 10px;\n}\n.fullname[data-v-48d810f3]{\r\n    font-size: 14px; \r\n    font-weight: 600; \r\n    color: black;\n}\n.fullname[data-v-48d810f3]:hover{\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\r\n    color: #765d69;\n}\n.user-details[data-v-48d810f3]{\r\n    display: block;\r\n    width: auto;\r\n    margin-left: 10px;\n}\n.woof-text[data-v-48d810f3]{\r\n    font-size: 18px;\r\n    font-weight: 500;\r\n    padding-top: 55px;\n}\n.comment-box[data-v-48d810f3]{\r\n    padding: 5px 20px 5px 20px;\r\n    background-color: whitesmoke;\n}\n.comment-list[data-v-48d810f3]{\r\n    padding: 0px !important;\n}\n.reply-box[data-v-48d810f3]{\r\n    padding: 5px;\n}\n.reply-textarea[data-v-48d810f3]{\r\n    width: 475px;\n}\n.reply-button[data-v-48d810f3]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\n.comment-details[data-v-48d810f3]{\r\n    width: 100%;\r\n    margin-left: 10px;\n}\nli[data-v-48d810f3]{\r\n    list-style: none;\n}\n.comment[data-v-48d810f3]{\r\n    max-width: 300px;\n}\n.woof-actions[data-v-48d810f3]{\r\n    margin-top: 15px;\r\n    margin-left: 10px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-48d810f3]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-48d810f3]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-48d810f3]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-48d810f3]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-48d810f3]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-48d810f3] {\r\n  -webkit-animation: bounce-in-data-v-48d810f3 .5s;\r\n          animation: bounce-in-data-v-48d810f3 .5s;\n}\n.bounce-leave-active[data-v-48d810f3]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-48d810f3 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-48d810f3 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -4969,7 +4993,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\n}\n.woof-dropdown[data-v-04ee7ef6]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\n.whole-woof[data-v-04ee7ef6]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n/* WOOF ACTIONS */\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-04ee7ef6] {\r\n  -webkit-animation: bounce-in-data-v-04ee7ef6 .5s;\r\n          animation: bounce-in-data-v-04ee7ef6 .5s;\n}\n.bounce-leave-active[data-v-04ee7ef6]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-04ee7ef6 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-04ee7ef6 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.woofs-header[data-v-04ee7ef6]{\r\n    padding: 10px;\n}\n.woof-dropdown[data-v-04ee7ef6]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-body[data-v-04ee7ef6]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-04ee7ef6]{\r\n    float: left;\r\n    margin: 10px;\n}\n.fullname[data-v-04ee7ef6]{\r\n    font-size: 14px; \r\n    font-weight: 600; \r\n    color: black;\n}\n.fullname[data-v-04ee7ef6]:hover{\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\r\n    color: #765d69;\n}\n.user-woof-details[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 100%;\r\n    margin: 5px 10px 15px 0px ;\n}\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 57px;\r\n    margin-bottom: 10px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    margin-right: 20px;\r\n    color: #808695;\n}\n.whole-woof[data-v-04ee7ef6]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-04ee7ef6]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n/* WOOF ACTIONS */\n.woof-actions[data-v-04ee7ef6]{\r\n    margin-left: 50px;\r\n    margin-bottom: 20px;\n}\n.woof-actions a[data-v-04ee7ef6]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-04ee7ef6]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\r\n\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-04ee7ef6] {\r\n  -webkit-animation: bounce-in-data-v-04ee7ef6 .5s;\r\n          animation: bounce-in-data-v-04ee7ef6 .5s;\n}\n.bounce-leave-active[data-v-04ee7ef6]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-04ee7ef6 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-04ee7ef6 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -5064,7 +5088,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px 10px 10px  0px;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: auto;\r\n    margin: 5px 10px 0px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-top: 15px;\r\n    margin-left: 50px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-0338a699]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-0338a699]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-0338a699]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
+exports.push([module.i, "\nul[data-v-0338a699]{\r\n    list-style: none;\n}\n.container[data-v-0338a699]{\n}\r\n/* WOOF BOX */\n.woof-box[data-v-0338a699]{\r\n    background-color: white;\r\n    padding: 5px;\r\n    margin-bottom: 10px;\n}\n.woof-dropdown[data-v-0338a699]{\r\n    float: right;\r\n    margin-right: 10px;\r\n    margin-top: 18px;\n}\n.woof-box-middle[data-v-0338a699]{\r\n    width: 100%;\n}\n.user-avatar[data-v-0338a699]{\r\n    margin: 5px;\r\n    margin-left: 5px !important;\r\n    margin-right: 10px !important;\n}\n.woof-textarea[data-v-0338a699]{\r\n    width: 100%;\r\n    top: 5px;\n}\n.woof-counter[data-v-0338a699]{\r\n    margin: 7px 0px 0px 10px;\n}\n.woof-button[data-v-0338a699]{\r\n    width: 90px;\r\n    float: right;\r\n    margin-top: 15px;\r\n    font-weight: 600;\r\n\r\n    color: #765d69;\n}\r\n\r\n/* WOOF TIMELINE BOX */\n.woof-list[data-v-0338a699]{\r\n    background: white;\n}\n.woof-body[data-v-0338a699]{\r\n    padding: 16px !important;\r\n    cursor: pointer;\n}\n.user-woof-avatar[data-v-0338a699]{\r\n    float: left;\r\n    margin: 10px 10px 10px  0px;\n}\n.fullname[data-v-0338a699]{\r\n    font-size: 14px; \r\n    font-weight: 600; \r\n    color: black;\n}\n.fullname[data-v-0338a699]:hover{\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\r\n    color: #765d69;\n}\n.user-woof-details[data-v-0338a699]{\r\n    width: auto;\r\n    margin: 5px 10px 0px 0px ;\n}\n.woof-actions[data-v-0338a699]{\r\n    margin-top: 15px;\r\n    margin-left: 50px;\r\n    margin-bottom: 30px !important;\n}\n.woof-actions a[data-v-0338a699]{\r\n    color: #808695;\n}\n.woof-actions div[data-v-0338a699]{\r\n    float: left;\r\n    width: 70px;\r\n    height: 23px;\r\n    display: block;\n}\n.whole-woof[data-v-0338a699]:hover{\r\n    background-color: rgba(240, 234, 234, 0.20);\n}\r\n/* COMMENTS */\n.woof-comments[data-v-0338a699]{\r\n    margin-left: 60px;\n}\r\n\r\n/* ICON */\n.icon_comment:hover .a[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color:  #45B1F3;\n}\n.icon_rewoof:hover .b[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #23C26B;\n}\n.icon_like:hover .c[data-v-0338a699]{\r\n    font-weight: 600;\r\n    color: #db5353;\n}\r\n\r\n\r\n/* TRANSITION ANIMATION */\n.bounce-enter-active[data-v-0338a699] {\r\n  -webkit-animation: bounce-in-data-v-0338a699 .5s;\r\n          animation: bounce-in-data-v-0338a699 .5s;\n}\n.bounce-leave-active[data-v-0338a699]{\r\n    transition: opacity .5s;\r\n    opacity: 0;\n}\n@-webkit-keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-0338a699 {\n0% {\r\n    -webkit-transform: scale(0);\r\n            transform: scale(0);\n}\n50% {\r\n    -webkit-transform: scale(1.5);\r\n            transform: scale(1.5);\n}\n100% {\r\n    -webkit-transform: scale(1);\r\n            transform: scale(1);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -68027,13 +68051,17 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticStyle: {
-                      "font-size": "16px",
-                      "font-weight": "600",
-                      color: "black",
-                      display: "block"
-                    },
-                    attrs: { href: "/" + _vm.SelectedWoofData.user.username }
+                    staticClass: "fullname",
+                    staticStyle: { "font-size": "16px", "font-weight": "600" },
+                    attrs: { href: "/" + _vm.SelectedWoofData.user.username },
+                    on: {
+                      mouseenter: function($event) {
+                        _vm.fullname_hover("ENTER")
+                      },
+                      mouseleave: function($event) {
+                        _vm.fullname_hover("LEAVE")
+                      }
+                    }
                   },
                   [_vm._v(_vm._s(_vm.SelectedWoofData.user.fullname))]
                 ),
@@ -68120,15 +68148,19 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              staticStyle: {
-                                "font-size": "14px",
-                                "font-weight": "600",
-                                color: "black"
-                              },
+                              staticClass: "fullname",
                               attrs: {
                                 href:
                                   "/" +
                                   _vm.SelectedWoofData.rewoof.user.username
+                              },
+                              on: {
+                                mouseenter: function($event) {
+                                  _vm.fullname_hover("ENTER")
+                                },
+                                mouseleave: function($event) {
+                                  _vm.fullname_hover("LEAVE")
+                                }
                               }
                             },
                             [
@@ -68636,9 +68668,7 @@ var render = function() {
                       _vm._v("Following")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(this.$root.UserDetails.follower_counts))
-                    ])
+                    _c("span", { staticClass: "span counts" }, [_vm._v("000")])
                   ]
                 )
               ],
@@ -68659,9 +68689,7 @@ var render = function() {
                       _vm._v("Followers")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(this.$root.UserDetails.follower_counts))
-                    ])
+                    _c("span", { staticClass: "span counts" }, [_vm._v("000")])
                   ]
                 )
               ],
@@ -68682,9 +68710,7 @@ var render = function() {
                       _vm._v("Likes")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "span counts" }, [
-                      _vm._v(_vm._s(this.$root.UserDetails.like_counts))
-                    ])
+                    _c("span", { staticClass: "span counts" }, [_vm._v("000")])
                   ]
                 )
               ],
@@ -69739,12 +69765,16 @@ var render = function() {
                                 _c(
                                   "router-link",
                                   {
-                                    staticStyle: {
-                                      "font-size": "14px",
-                                      "font-weight": "600",
-                                      color: "black"
-                                    },
-                                    attrs: { to: "/" + woof.user.username }
+                                    staticClass: "fullname",
+                                    attrs: { to: "/" + woof.user.username },
+                                    on: {
+                                      mouseenter: function($event) {
+                                        _vm.fullname_hover("ENTER")
+                                      },
+                                      mouseleave: function($event) {
+                                        _vm.fullname_hover("LEAVE")
+                                      }
+                                    }
                                   },
                                   [_vm._v(_vm._s(woof.user.fullname))]
                                 ),
@@ -70664,14 +70694,18 @@ var render = function() {
                           _c(
                             "a",
                             {
-                              staticStyle: {
-                                "font-size": "14px",
-                                "font-weight": "600",
-                                color: "black"
-                              },
-                              attrs: { href: "/" + woof.user.username }
+                              staticClass: "fullname",
+                              attrs: { href: "/" + woof.user.username },
+                              on: {
+                                mouseenter: function($event) {
+                                  _vm.fullname_hover("ENTER")
+                                },
+                                mouseleave: function($event) {
+                                  _vm.fullname_hover("LEAVE")
+                                }
+                              }
                             },
-                            [_vm._v(_vm._s(woof.user.fullname))]
+                            [_vm._v("  " + _vm._s(woof.user.fullname))]
                           ),
                           _vm._v(" "),
                           _c("span", { staticStyle: { color: "grey" } }, [
@@ -92685,12 +92719,6 @@ __webpack_require__.r(__webpack_exports__);
           _this3.selected(data.woof_id);
 
           _this3.all();
-
-          _this3.my_woofs(data.user_id);
-        }
-
-        if (component == 'profile') {
-          _this3.my_woofs(data.user_id);
         }
       }).catch(function (error) {
         console.log(error);
@@ -92709,10 +92737,6 @@ __webpack_require__.r(__webpack_exports__);
 
           _this4.all();
 
-          _this4.my_woofs(data.user_id);
-        }
-
-        if (component == 'profile') {
           _this4.my_woofs(data.user_id);
         }
       }).catch(function (error) {
@@ -92865,205 +92889,12 @@ var app = new Vue({
     return {
       active_name: 'timeline',
       profile_active_page: 'woofs',
-      users: [{
-        id: 1,
-        full_name: 'Bea Amor',
-        user_name: 'beaamor0212',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 2,
-        full_name: 'David Peralta',
-        user_name: 'iamdavidme',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 3,
-        full_name: 'Nikki',
-        user_name: 'iAmNikkiME',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 4,
-        full_name: 'Rica Camiguing',
-        user_name: 'ricamiguing_',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 5,
-        full_name: 'Jan Raphael',
-        user_name: 'janraphael11',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 6,
-        full_name: 'Tacs',
-        user_name: 'xtephaein',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 7,
-        full_name: 'Lizzy',
-        user_name: 'heyitsmelizzy',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 8,
-        full_name: 'Deysi',
-        user_name: 'aisybomi',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }, {
-        id: 9,
-        full_name: 'L i a n',
-        user_name: 'cstrlian',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        following: true
-      }],
-      Woofs: [{
-        id: 1,
-        user_id: 1,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamDavidMe',
-        full_name: 'David Peralta',
-        comments: 5,
-        re_woof: 2,
-        likes: 7,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 2,
-        user_id: 2,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamNikkiMe',
-        full_name: 'Mary Nicole',
-        comments: 12,
-        re_woof: 2,
-        likes: 5,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 3,
-        user_id: 3,
-        woof_text: 'is simply dummy text of the printing and typesetting industry.',
-        user_name: 'beaamor0212',
-        full_name: 'Bea Amor',
-        comments: 5,
-        re_woof: 1,
-        likes: 2,
-        re_woofed: true,
-        liked: true
-      }, {
-        id: 4,
-        user_id: 2,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamNikkiMe',
-        full_name: 'Mary Nicole',
-        comments: 1,
-        re_woof: 5,
-        likes: 5,
-        re_woofed: false,
-        liked: false
-      }, {
-        id: 5,
-        user_id: 4,
-        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        user_name: 'ricamiguing_',
-        full_name: 'Rice Lois',
-        comments: 0,
-        re_woof: 2,
-        likes: 4,
-        re_woofed: false,
-        liked: true
-      }, {
-        id: 6,
-        user_id: 3,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        user_name: 'beaamor0212',
-        full_name: 'Bea Amor',
-        comments: 22,
-        re_woof: 12,
-        likes: 26,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 7,
-        user_id: 3,
-        woof_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-        user_name: 'beaamor0212',
-        full_name: 'Bea Amor',
-        comments: 6,
-        re_woof: 9,
-        likes: 15,
-        re_woofed: true,
-        liked: true
-      }, {
-        id: 8,
-        user_id: 1,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamDavidMe',
-        full_name: 'David Peralta',
-        comments: 5,
-        re_woof: 2,
-        likes: 7,
-        re_woofed: true,
-        liked: false
-      }, {
-        id: 9,
-        user_id: 2,
-        woof_text: 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        user_name: 'IamNikkiMe',
-        full_name: 'Mary Nicole',
-        comments: 12,
-        re_woof: 2,
-        likes: 5,
-        re_woofed: true,
-        liked: false
-      }],
-      Comments: [{
-        id: 1,
-        woof_id: 1,
-        user_id: 1,
-        comment_text: 'asd'
-      }, {
-        id: 1,
-        woof_id: 1,
-        user_id: 2,
-        comment_text: 'asd'
-      }, {
-        id: 1,
-        woof_id: 1,
-        user_id: 2,
-        comment_text: 'asd'
-      }, {
-        id: 1,
-        woof_id: 1,
-        user_id: 3,
-        comment_text: 'asd'
-      }, {
-        id: 1,
-        woof_id: 1,
-        user_id: 4,
-        comment_text: 'asd'
-      }],
-      UserDetails: {
-        full_name: 'David Peralta',
-        user_name: 'IamDavidMe',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s',
-        country: 'Philippines',
-        created_at: 'January 2019',
-        website: 'facebook.com/peraltadavidr',
-        birthdate: 'April 20 1998',
-        woof_counts: '120',
-        follower_counts: '210',
-        following_counts: '400',
-        like_counts: '390'
-      },
       toggleEditProfile: false,
       WoofModal: false,
       CommentModal: false,
       ReWoofModal: false,
-      Liked: false
+      Liked: false,
+      fullname_hover: false
     };
   }
 });

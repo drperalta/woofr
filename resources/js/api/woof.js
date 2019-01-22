@@ -56,12 +56,7 @@ export default function(Vue){
                 if(component == 'modal'){
                     this.selected(data.woof_id);
                     this.all();
-                    this.my_woofs(data.user_id);
                 }
-                if(component == 'profile'){
-                    this.my_woofs(data.user_id);
-                }
-                
             }).catch(error => {
                 console.log(error)
             })
@@ -75,9 +70,6 @@ export default function(Vue){
                 if(component == 'modal'){
                     this.selected(data.woof_id);
                     this.all();
-                    this.my_woofs(data.user_id);
-                }
-                if(component == 'profile'){
                     this.my_woofs(data.user_id);
                 }
             }).catch(error => {

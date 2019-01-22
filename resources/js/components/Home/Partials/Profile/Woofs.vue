@@ -36,7 +36,7 @@
                                 <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                                 <li>
                                     <div class="user-woof-details">
-                                        <router-link :to="'/'+woof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.user.fullname}}</router-link>
+                                        <router-link :to="'/'+woof.user.username" class="fullname" @mouseenter="fullname_hover('ENTER')" @mouseleave="fullname_hover('LEAVE')">{{woof.user.fullname}}</router-link>
                                         <span style="color: grey;">@{{woof.user.username}}</span>
                                         <div style="font-size: 13px; ">
                                             {{woof.text}}
@@ -207,6 +207,13 @@ export default {
             }else{
                 this.$root.Liked = false;
             }
+        },
+        fullname_hover(msg){
+            if(msg == 'ENTER'){
+                this.$root.fullname_hover = true;
+            }else{
+                this.$root.fullname_hover = false;
+            }
         }
     }
 }
@@ -228,6 +235,15 @@ export default {
 .user-woof-avatar{
     float: left;
     margin: 10px;
+}
+.fullname{
+    font-size: 14px; 
+    font-weight: 600; 
+    color: black;
+}
+.fullname:hover{
+    text-decoration-line: underline;
+    color: #765d69;
 }
 .user-woof-details{
     float: left;

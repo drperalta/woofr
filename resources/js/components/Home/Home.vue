@@ -125,10 +125,13 @@ export default {
             if(this.$root.WoofModal){
                 this.$root.WoofModal = false
             }
+            if(this.$route.params.username != ''){
+                Vue.user.setVisitedUser(this.$route.params.username)
+            }
             Vue.woof.all();
         },
         show(){
-            if(this.$root.CommentModal == true || this.$root.ReWoofModal == true || this.$root.Liked == true){
+            if(this.$root.CommentModal == true || this.$root.ReWoofModal == true || this.$root.Liked == true || this.$root.fullname_hover == true){
                 this.$root.WoofModal = false
                 return false;
             }else{

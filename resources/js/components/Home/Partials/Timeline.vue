@@ -44,7 +44,7 @@
                             <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                             <li>
                                 <div class="user-woof-details left">
-                                    <a :href="'/'+woof.user.username" style="font-size: 14px; font-weight: 600; color: black" >{{woof.user.fullname}}</a>
+                                    <a class="fullname" :href="'/'+woof.user.username" @mouseenter="fullname_hover('ENTER')" @mouseleave="fullname_hover('LEAVE')">  {{woof.user.fullname}}</a>
                                     <span style="color: grey;">@{{woof.user.username}}</span>
                                     <div style="font-size: 13px; ">
                                         {{woof.text}}
@@ -241,6 +241,13 @@ export default {
             }else{
                 this.$root.Liked = false;
             }
+        },
+        fullname_hover(msg){
+            if(msg == 'ENTER'){
+                this.$root.fullname_hover = true;
+            }else{
+                this.$root.fullname_hover = false;
+            }
         }
     },
     computed: mapGetters([
@@ -310,6 +317,15 @@ ul{
 .user-woof-avatar{
     float: left;
     margin: 10px 10px 10px  0px;
+}
+.fullname{
+    font-size: 14px; 
+    font-weight: 600; 
+    color: black;
+}
+.fullname:hover{
+    text-decoration-line: underline;
+    color: #765d69;
 }
 .user-woof-details{
     width: auto;
