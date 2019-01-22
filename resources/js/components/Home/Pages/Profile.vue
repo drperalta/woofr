@@ -98,6 +98,7 @@ export default {
         },
         username(){
             Vue.user.setVisitedUser(this.$route.params.username);
+            Vue.auth.setUser();
         },
         data(){
             if(this.$route.params.username != this.UserData.username){

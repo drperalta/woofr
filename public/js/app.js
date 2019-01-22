@@ -2548,13 +2548,6 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$root != null) {
         return this.$root;
       }
-    },
-    fullname_hover: function fullname_hover(msg) {
-      if (msg == 'ENTER') {
-        this.$root.fullname_hover = true;
-      } else {
-        this.$root.fullname_hover = false;
-      }
     }
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['SelectedWoofData', 'UserData'])
@@ -2729,6 +2722,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     username: function username() {
       Vue.user.setVisitedUser(this.$route.params.username);
+      Vue.auth.setUser();
     },
     data: function data() {
       if (this.$route.params.username != this.UserData.username) {
@@ -68097,15 +68091,7 @@ var render = function() {
                   {
                     staticClass: "fullname",
                     staticStyle: { "font-size": "16px", "font-weight": "600" },
-                    attrs: { href: "/" + _vm.SelectedWoofData.user.username },
-                    on: {
-                      mouseenter: function($event) {
-                        _vm.fullname_hover("ENTER")
-                      },
-                      mouseleave: function($event) {
-                        _vm.fullname_hover("LEAVE")
-                      }
-                    }
+                    attrs: { href: "/" + _vm.SelectedWoofData.user.username }
                   },
                   [_vm._v(_vm._s(_vm.SelectedWoofData.user.fullname))]
                 ),
@@ -68197,14 +68183,6 @@ var render = function() {
                                 href:
                                   "/" +
                                   _vm.SelectedWoofData.rewoof.user.username
-                              },
-                              on: {
-                                mouseenter: function($event) {
-                                  _vm.fullname_hover("ENTER")
-                                },
-                                mouseleave: function($event) {
-                                  _vm.fullname_hover("LEAVE")
-                                }
                               }
                             },
                             [
@@ -92923,6 +92901,7 @@ __webpack_require__.r(__webpack_exports__);
         context.percent = 0;
         context.woof_length = 0;
         context.WoofDetails.Woof = '';
+        Vue.auth.setUser();
       }).catch(function (error) {
         console.log(error);
       });
@@ -92933,6 +92912,7 @@ __webpack_require__.r(__webpack_exports__);
         context.percent = 0;
         context.comment_length = 0;
         context.ReWoofDetails.reply = '', Vue.woof.selected(data.woof_id);
+        Vue.auth.setUser();
         context.$Message.success("Successfully Rewoofed @".concat(data.username, "'s Post."));
       }).catch(function (error) {
         console.log(error);
@@ -92946,18 +92926,23 @@ __webpack_require__.r(__webpack_exports__);
         context.percent = 0;
         context.reply_length = 0;
         context.CommentDetails.reply = '', _this2.selected(data.woof_id);
+        Vue.auth.setUser();
         context.$Message.success("You successfully send a reply to @".concat(data.username));
       }).catch(function (error) {
         console.log(error);
       });
     },
     like: function like(context, data, component) {
-      axios.post('/api/woof/like', data, this.auth()).then(function (response) {}).catch(function (error) {
+      axios.post('/api/woof/like', data, this.auth()).then(function (response) {
+        Vue.auth.setUser();
+      }).catch(function (error) {
         console.log(error);
       });
     },
     dislike: function dislike(context, data) {
-      axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {}).catch(function (error) {
+      axios.post('/api/woof/dislike', data, this.auth()).then(function (response) {
+        Vue.auth.setUser();
+      }).catch(function (error) {
         console.log(error);
       });
     },
@@ -92979,6 +92964,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.all();
 
         context.$Message.success('Succefully Deleted!');
+        Vue.auth.setUser();
         console.log(response.data);
       }).catch(function (error) {
         console.log(error);

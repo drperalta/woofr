@@ -5,7 +5,7 @@
             <div>
                 <Avatar class="left" icon="ios-person" size="large"/>
                 <div class="user-details left">
-                    <a :href="'/'+SelectedWoofData.user.username" style="font-size: 16px; font-weight: 600;" class="fullname" @mouseenter="fullname_hover('ENTER')" @mouseleave="fullname_hover('LEAVE')" >{{SelectedWoofData.user.fullname}}</a>
+                    <a :href="'/'+SelectedWoofData.user.username" style="font-size: 16px; font-weight: 600;" class="fullname">{{SelectedWoofData.user.fullname}}</a>
                     <a style="color: grey; display: block">@{{SelectedWoofData.user.username}}</a>
                 </div>
                 <div class="woof-text">
@@ -24,7 +24,7 @@
                     <!-- WOOFS DETAILS. FULLNAME WITH USERNAME AND WOOF POST -->
                     <li>
                         <div class="user-woof-details left">
-                            <a :href="'/'+SelectedWoofData.rewoof.user.username" class="fullname" @mouseenter="fullname_hover('ENTER')" @mouseleave="fullname_hover('LEAVE')">{{SelectedWoofData.rewoof.user.fullname}}</a>
+                            <a :href="'/'+SelectedWoofData.rewoof.user.username" class="fullname">{{SelectedWoofData.rewoof.user.fullname}}</a>
                             <span style="color: grey;">@{{SelectedWoofData.rewoof.user.username}}</span>
                             <div style="font-size: 13px; ">
                                 {{SelectedWoofData.rewoof.text}}
@@ -227,13 +227,6 @@ export default {
                 return this.$root
             }
         },
-        fullname_hover(msg){
-            if(msg == 'ENTER'){
-                this.$root.fullname_hover = true;
-            }else{
-                this.$root.fullname_hover = false;
-            }
-        }
     },
     computed: mapGetters([
         'SelectedWoofData',

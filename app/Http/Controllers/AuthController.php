@@ -132,8 +132,8 @@ class AuthController extends Controller
     {
         $user = $this->guard()->user();
         $woof_counts = Woof::where('user_id', $user->id)->where('type', 'woof')->orWhere('type', 'rewoof')->count();
-        $following_counts = Following::where('following_id', $user->id)->count();
-        $followers_counts = Following::where('user_id', $user->id)->count();
+        $following_counts = Following::where('user_id', $user->id)->count();
+        $followers_counts = Following::where('following_id', $user->id)->count();
         $like_counts = Like::where('user_id', $user->id)->count();
 
         return response()->json([

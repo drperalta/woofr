@@ -14,7 +14,7 @@ export default function(Vue){
                 context.woof_length = 0;
                 context.WoofDetails.Woof = '';
 
-                
+                Vue.auth.setUser();
             }).catch(error => {
                 console.log(error)
             })
@@ -28,6 +28,7 @@ export default function(Vue){
                 context.ReWoofDetails.reply = '',
                 
                 Vue.woof.selected(data.woof_id)
+                Vue.auth.setUser();
                 context.$Message.success(`Successfully Rewoofed @${data.username}'s Post.`)
             }).catch(error => {
                 console.log(error)
@@ -42,6 +43,7 @@ export default function(Vue){
                 context.CommentDetails.reply = '',
                 
                 this.selected(data.woof_id)
+                Vue.auth.setUser();
                 context.$Message.success(`You successfully send a reply to @${data.username}`)
             }).catch(error => {
                 console.log(error)
@@ -50,7 +52,7 @@ export default function(Vue){
         like(context,data,component){
             axios.post('/api/woof/like',data, this.auth())
             .then(response => {
-
+                Vue.auth.setUser();
             }).catch(error => {
                 console.log(error)
             })
@@ -58,7 +60,7 @@ export default function(Vue){
         dislike(context, data){
             axios.post('/api/woof/dislike',data, this.auth())
             .then(response => {
-
+                Vue.auth.setUser();
             }).catch(error => {
                 console.log(error)
             })
@@ -78,6 +80,7 @@ export default function(Vue){
                 this.my_woofs(user_id)
                 this.all();
                 context.$Message.success('Succefully Deleted!');
+                Vue.auth.setUser();
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)
