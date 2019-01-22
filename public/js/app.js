@@ -1931,7 +1931,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     Vue.auth.setUser();
   },
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['UserData', 'UserList'])

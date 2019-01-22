@@ -140,7 +140,7 @@ export default {
         }
     },
 
-    mounted() {
+    created() {
         Vue.auth.setUser();
     },
 
