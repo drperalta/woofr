@@ -39,7 +39,7 @@ class UserController extends Controller
             'follower_counts' => $followers_counts,
             'like_counts' => $like_counts,
             'following' => $following->check($this->guard()->user()->id, $user->id),
-        ]);
+        ], 200);
     }
     protected function password(Request $request){
 
